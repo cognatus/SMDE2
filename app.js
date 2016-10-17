@@ -3,6 +3,7 @@ var path = require('path');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var favicon = require('serve-favicon')
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -16,6 +17,7 @@ app.use(cookieParser());
 
 //this is like the public stuff, all about views
 app.use(express.static(path.join(__dirname, 'angular')));
+app.use(favicon(__dirname + '/icon.png'));
 
 app.use('/', routes);
 app.use('/users', users);
