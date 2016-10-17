@@ -4,7 +4,7 @@ Nuevo SMDE con angular y lo más actual pro shido de hoy en día, una casi MEAN 
 ## Instalacion de weas
 Se debe de tener instalado una version de 4 en adelante de node y de 3 en adelante de npm.
 
-Dentro del origen y dentro de la carpta angular poner en consola (para gente como Villa que usa Windows no ejecute el primer comando :v)
+Dentro del origen y dentro de la carpeta angular poner en consola lo de abajo (para gente como Villa que usa Windows no ejecute el primer comando ni el sudo del segundo :v)
 ```bash
 $ sudo apt-get update
 $ sudo npm install
