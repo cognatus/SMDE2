@@ -24,7 +24,7 @@ var mensajes = require('./api/mensajes');
 var foro = require('./api/foro');
 
 app.use(logger('dev'));
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 

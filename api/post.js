@@ -13,13 +13,13 @@ exports.constructor = function (basee) {
 
  //FUNCION DE LOGIN GENERAL
 exports.login = function(req, res){
-	var database = new base();
+	
 	var userNameLogin = req.body.sign_user;
 	var userPassLogin = req.body.sign_key;
 	var i = 0;
 
 	var consulta = function(){
-		database.query(stringQuery, function(error, result, row){
+		base.query(stringQuery, function(error, result, row){
 			if(!error && result.length > 0) {
 				res.redirect('/main');
 				req.session.datos = result;
@@ -82,7 +82,7 @@ exports.logout = function(req,res){
 
 //AGREGAR UN NUEVO ALUMNO
 exports.insertStudent = function(req, res){
-	var database = new base();
+	
 	var userEmail = req.body.insertStudentEmail ;
 	var userName = req.body.insertStudentName ;
 	var userLastName = req.body.insertStudentLastName ;
@@ -110,7 +110,7 @@ exports.insertStudent = function(req, res){
 
 	stringQuery += 'COMMIT;';
 
-	database.query(stringQuery, function(error, result, row){
+	base.query(stringQuery, function(error, result, row){
 		if(!error) {
 			var stringQuery2 = 'SELECT s.idStudent, u.photoName ' 
 							+ ' FROM Student AS s '
@@ -118,7 +118,7 @@ exports.insertStudent = function(req, res){
 							+ ' 	ON u.userEmail = s.User_userEmail '
 							+ ' WHERE u.userEmail = "' + userEmail + '";';
 
-			database.query(stringQuery2, function(error, result, row){
+			base.query(stringQuery2, function(error, result, row){
 				if(!error) {
 					//CREAR UN NUEVO DIRECTORIO EN EL SERVIDOR PARA GUARDAR LOS ARCHIVOS QUE SUBAN LOS ALUMNOS
 					/*var dir = './public/publications/' + result[0].idStudent;
@@ -164,7 +164,7 @@ exports.insertStudent = function(req, res){
 
 //AGREGAR UN NUEVO PROFESOR
 exports.insertTeacher = function(req, res){
-	var database = new base();
+	
 	var userEmail = req.body.insertTeacherEmail ;
 	var userName = req.body.insertTeacherName ;
 	var userLastName = req.body.insertTeacherLastName ;
@@ -192,7 +192,7 @@ exports.insertTeacher = function(req, res){
 
 	stringQuery += 'COMMIT;';
 
-	database.query(stringQuery, function(error, result, row){
+	base.query(stringQuery, function(error, result, row){
 		if(!error) {
 
 			var stringQuery2 = 'SELECT t.idTeacher, u.photoName ' 
@@ -201,7 +201,7 @@ exports.insertTeacher = function(req, res){
 							+ ' 	ON u.userEmail = t.User_userEmail '
 							+ ' WHERE u.userEmail = "' + userEmail + '";';
 
-			database.query(stringQuery2, function(error, result, row){
+			base.query(stringQuery2, function(error, result, row){
 				if(!error) {
 					//CREAR UN NUEVO DIRECTORIO EN EL SERVIDOR PARA GUARDAR LOS ARCHIVOS QUE SUBAN LOS PROFESORES
 					var dir = './public/publications/' + result[0].idTeacher;
@@ -248,7 +248,7 @@ exports.insertTeacher = function(req, res){
 
 //AGREGAR UN NUEVO DEPARTAMENTO
 exports.insertDept = function(req, res){
-	var database = new base();
+	
 	var deptIdKey = req.body.insertDeptIdKey ;
 	var deptName  = req.body.insertDeptName ;
 	var deptInstitute = req.session.datos[0].Institute_idInstitute ;
@@ -259,7 +259,7 @@ exports.insertDept = function(req, res){
 					+ ' "' + deptName + '",'
 					+ ' "' + deptInstitute + '");';
 
-	database.query(stringQuery, function(error, result, row){
+	base.query(stringQuery, function(error, result, row){
 		if(!error) {
 			console.log('Furulo el insert');
 			res.redirect('/management');
@@ -278,7 +278,7 @@ exports.insertDept = function(req, res){
 };
 
 exports.insertSubject = function(req, res){
-	var database = new base();
+	
 	var subjectName  = req.body.insertSubjectName ;
 	var subjectLevel  = req.body.insertSubjectLevel ;
 	var subjectInstitute = req.session.datos[0].Institute_idInstitute ;
@@ -292,7 +292,7 @@ exports.insertSubject = function(req, res){
 					+ ' "' + subjectInstitute + '",'
 					+ ' "' + subjectDept + '");';
 
-	database.query(stringQuery, function(error, result, row){
+	base.query(stringQuery, function(error, result, row){
 		if(!error) {
 			console.log('Furulo el insert');
 			res.redirect('/management');
@@ -311,7 +311,7 @@ exports.insertSubject = function(req, res){
 };
 
 exports.insertCourse = function(req, res){
-	var database = new base();
+	
 	var courseName  = req.body.insertCourseName ;
 	var courseLevel = req.body.insertCourseLevel ;
 	var courseInstitute = req.session.datos[0].Institute_idInstitute;
@@ -323,7 +323,7 @@ exports.insertCourse = function(req, res){
 					+ ' "' + courseLevel + '",'
 					+ ' "' + courseInstitute + '");';
 
-	database.query(stringQuery, function(error, result, row){
+	base.query(stringQuery, function(error, result, row){
 		if(!error) {
 			console.log('Furulo el insert');
 			res.redirect('/management');
@@ -342,7 +342,7 @@ exports.insertCourse = function(req, res){
 };
 
 exports.insertSubjectCourse = function(req, res){
-	var database = new base();
+	
 	var subjectId = req.body.insertSubjectCourseSId ;
 	var courseId = req.body.insertSubjectCourseCId ;
 
@@ -351,7 +351,7 @@ exports.insertSubjectCourse = function(req, res){
 					+ ' VALUES ("' + subjectId + '",'
 					+ ' "' + courseId + '");';
 
-	database.query(stringQuery, function(error, result, row){
+	base.query(stringQuery, function(error, result, row){
 		if(!error) {
 			console.log('Furulo el insert');
 			res.redirect('/management');
@@ -370,27 +370,27 @@ exports.insertSubjectCourse = function(req, res){
 
 // FUNCION PARA MOSTRAR TODOS LOS USUARIOS DE LA BASE PAPUH
 exports.getUsers = function(req, res){
-	var database = new base();
+	var retorno = "asd";
 
 	stringQuery = 'SELECT * FROM User;' ;
 				
-	database.query(stringQuery, function(error, result, row){
+	base.query(stringQuery, function(error, result, row){
 		if(!error) {
 			res.json(result);
 		}else{
 			console.log('Error en esta consulta: ' + stringQuery + ' Error: ' + error);
-			res.send('error');
+			res.json('Error en esta consulta: ' + stringQuery + ' Error: ' + error);
 		}
 	});
 };
 
 // FUNCION PARA MOSTRAR TODOS LOS USUARIOS DE LA BASE POR SU ID
 exports.getUserById = function(req, res){
-	var database = new base();
+	
 
 	stringQuery = 'SELECT * FROM User WHERE photoName = "'+ req.params.user_id +'";' ;
 				
-	database.query(stringQuery, function(error, result, row){
+	base.query(stringQuery, function(error, result, row){
 		if(!error) {
 			res.json(result);
 		}else{
@@ -402,14 +402,14 @@ exports.getUserById = function(req, res){
 
 // FUNCION PARA MOSTRAR DATOS DE administradores DE LA BASE DE DATOS
 exports.getAdministratorsDatabase = function(req, res){
-	var database = new base();
+	
 
 	stringQuery = 'SELECT User.*, idAdministrator FROM User INNER JOIN Administrator' 
 				+ ' ON User.userEmail = Administrator.User_userEmail'
 				+ ' WHERE Institute_idInstitute="' + req.session.datos[0].Institute_idInstitute + '"'
 				+ ' ORDER BY userName ASC;' ;
 				
-	database.query(stringQuery, function(error, result, row){
+	base.query(stringQuery, function(error, result, row){
 		if(!error) {
 			res.send(result);
 		}else{
@@ -421,14 +421,14 @@ exports.getAdministratorsDatabase = function(req, res){
 
 // FUNCION PARA MOSTRAR DATOS DE ALUMNOS DE LA BASE DE DATOS
 exports.getStudentsDatabase = function(req, res){
-	var database = new base();
+	
 
 	stringQuery = 'SELECT User.*, idStudent FROM User INNER JOIN Student' 
 				+ ' ON User.userEmail = Student.User_userEmail'
 				+ ' WHERE Institute_idInstitute="' + req.session.datos[0].Institute_idInstitute + '"' 
 				+ ' ORDER BY userName ASC;';
 
-	database.query(stringQuery, function(error, result, row){
+	base.query(stringQuery, function(error, result, row){
 		if(!error) {
 			var stringData = '';
 			for(var i in result){
@@ -486,7 +486,7 @@ exports.getStudentsDatabase = function(req, res){
 
 // FUNCION PARA MOSTRAR MATERIAS DE ALUMNOS DE LA BASE DE DATOS
 exports.getStudentsSubjectsDatabase = function(req, res){
-	var database = new base();
+	
 	var studentEmail = req.query.studentEmail;
 
 	stringQuery = 'SELECT idCourse, idSubject, subjectName, courseName'
@@ -505,7 +505,7 @@ exports.getStudentsSubjectsDatabase = function(req, res){
 				+ ' WHERE su.Department_Institute_idInstitute= "' + req.session.datos[0].Institute_idInstitute + '"' 
 				+ ' AND userEmail= "' + studentEmail + '";' ;
 				
-	database.query(stringQuery, function(error, result, row){
+	base.query(stringQuery, function(error, result, row){
 		if(!error) {
 			var stringData = '';
 			for(var i in result){
@@ -530,14 +530,14 @@ exports.getStudentsSubjectsDatabase = function(req, res){
 
 // FUNCION PARA MOSTRAR DATOS DE PROFESORES DE LA BASE DE DATOS
 exports.getTeachersDatabase = function(req, res){
-	var database = new base();
+	
 
 	stringQuery = 'SELECT User.*, idTeacher FROM User INNER JOIN Teacher'
 				+ ' ON User.userEmail = Teacher.User_userEmail'
 				+ ' WHERE Institute_idInstitute="' + req.session.datos[0].Institute_idInstitute + '"'
 				+ ' ORDER BY userName ASC;';
 
-	database.query(stringQuery, function(error, result, row){
+	base.query(stringQuery, function(error, result, row){
 		if(!error) {
 			var stringData = '';
 			for(var i in result){
@@ -595,7 +595,7 @@ exports.getTeachersDatabase = function(req, res){
 
 // FUNCION PARA MOSTRAR MATERIAS DE PROFESOR DE LA BASE DE DATOS
 exports.getTeachersSubjectsDatabase = function(req, res){
-	var database = new base();
+	
 	var teacherEmail = req.query.teacherEmail;
 
 	stringQuery = 'SELECT idTeacher, idSubject, subjectName, courseName'
@@ -614,7 +614,7 @@ exports.getTeachersSubjectsDatabase = function(req, res){
 					+ ' WHERE su.Department_Institute_idInstitute= "' + req.session.datos[0].Institute_idInstitute + '"' 
 					+ ' AND userEmail= "' + teacherEmail + '";' ;
 
-	database.query(stringQuery, function(error, result, row){
+	base.query(stringQuery, function(error, result, row){
 		if(!error) {
 			var stringData = '';
 			for(var i in result){
@@ -639,12 +639,12 @@ exports.getTeachersSubjectsDatabase = function(req, res){
 
 // FUNCION PARA MOSTRAR DATOS DE DEPARTAMENTOS DE LA BASE DE DATOS
 exports.getDepartmentsDatabase = function(req, res){
-	var database = new base();
+	
 
 	stringQuery = 'SELECT * FROM Department'
 				+ ' WHERE Institute_idInstitute="' + req.session.datos[0].Institute_idInstitute + '";' ;
 
-	database.query(stringQuery, function(error, result, row){
+	base.query(stringQuery, function(error, result, row){
 		if(!error) {
 			var stringData = '';
 			for(var i in result){
@@ -688,12 +688,12 @@ exports.getDepartmentsDatabase = function(req, res){
 
 // FUNCION PARA MOSTRAR DATOS DE ASIGNATURAS DE LA BASE DE DATOS
 exports.getSubjectsDatabase = function(req, res){
-	var database = new base();
+	
 
 	stringQuery = 'SELECT * FROM Subject'
 				+ ' WHERE Department_Institute_idInstitute="' + req.session.datos[0].Institute_idInstitute + '";' ;
 
-	database.query(stringQuery, function(error, result, row){
+	base.query(stringQuery, function(error, result, row){
 		if(!error) {
 			var stringData = '';
 			for(var i in result){
@@ -738,10 +738,10 @@ exports.getSubjectsDatabase = function(req, res){
 
 // FUNCION PARA MOSTRAR DATOS DE CURSOS DE LA BASE DE DATOS
 exports.getCoursesDatabase = function(req, res){
-	var database = new base();
+	
 	stringQuery = 'SELECT * FROM Course'
 				+ ' WHERE Institute_idInstitute="' + req.session.datos[0].Institute_idInstitute + '";' ;
-	database.query(stringQuery, function(error, result, row){
+	base.query(stringQuery, function(error, result, row){
 		if(!error) {
 			var stringData = '';
 			for(var i in result){
