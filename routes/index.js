@@ -19,4 +19,7 @@ router.get('/', function(req, res) {
 router.route('/users')
 	.get(post.getUsers);
 
+router.route('/users/:user_id')
+	.get(post.getUserById);
+
 module.exports = router;

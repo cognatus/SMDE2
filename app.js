@@ -27,6 +27,18 @@ app.use(favicon(__dirname + '/icon.png'));
 app.use('/api', api);
 app.use('/users', users);
 
+/*
+  Esta wea es para poder auntentificar con Angular 2
+*/
+// Authentication middleware provided by express-jwt.
+// This middleware will check incoming requests for a valid
+// JWT on any routes that it is applied to.
+var authCheck = jwt({
+  secret: new Buffer('YOUR_AUTH0_SECRET', 'base64'),
+  audience: 'YOUR_AUTH0_CLIENT_ID'
+});
+
+
 // Detectar error 404 (Esto se hace directamente con Angular 2)
 /*app.use(function(req, res, next) {
   var err = new Error('Not Found');
