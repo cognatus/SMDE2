@@ -376,7 +376,7 @@ exports.getUsers = function(req, res){
 				
 	database.query(stringQuery, function(error, result, row){
 		if(!error) {
-			res.send(result);
+			res.json(result);
 		}else{
 			console.log('Error en esta consulta: ' + stringQuery + ' Error: ' + error);
 			res.send('error');
