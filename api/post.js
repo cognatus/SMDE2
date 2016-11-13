@@ -370,7 +370,6 @@ exports.insertSubjectCourse = function(req, res){
 
 // FUNCION PARA MOSTRAR TODOS LOS USUARIOS DE LA BASE PAPUH
 exports.getUsers = function(req, res){
-	var retorno = "asd";
 
 	stringQuery = 'SELECT * FROM User;' ;
 				
@@ -379,15 +378,14 @@ exports.getUsers = function(req, res){
 			res.json(result);
 		}else{
 			console.log('Error en esta consulta: ' + stringQuery + ' Error: ' + error);
-			res.json('Error en esta consulta: ' + stringQuery + ' Error: ' + error);
 		}
 	});
+
 };
 
 // FUNCION PARA MOSTRAR TODOS LOS USUARIOS DE LA BASE POR SU ID
 exports.getUserById = function(req, res){
 	
-
 	stringQuery = 'SELECT * FROM User WHERE photoName = "'+ req.params.user_id +'";' ;
 				
 	base.query(stringQuery, function(error, result, row){
@@ -398,6 +396,7 @@ exports.getUserById = function(req, res){
 			res.send('error');
 		}
 	});
+
 };
 
 // FUNCION PARA MOSTRAR DATOS DE administradores DE LA BASE DE DATOS
