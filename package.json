@@ -16,6 +16,7 @@
     "serve-favicon": "~2.3.0",
     "mysql": "2.0.0-alpha7",
     "mime": "*",
-    "htmlspecialchars": "*"
+    "htmlspecialchars": "*",
+    "mysql": "2.0.0-alpha7"
   }
 }

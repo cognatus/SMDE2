@@ -36,36 +36,31 @@ app.use('/api', api);
 app.use('/users', users);
 
 // Conecta a la DB MySQL
-function databaseInstance(){
-  var connection = mysql.createConnection({
-    multipleStatements: true,
-    host: 'localhost',
-    password: 'n0m3l0',
-    user: 'root',
-    database: 'smdedbv1',
-    port: 3306
-  });
-  return connection;
-};
+//de ahora en adelante para todo jalas la variable connection
+var connection = mysql.createConnection({
+  multipleStatements: true,
+  host: 'localhost',
+  password: 'n0m3l0',
+  user: 'root',
+  database: 'smdedbv1',
+  port: 3306
+});
+//con esto conectas y lo ahce de manera asincrona
+connection.connect(function(error){
+  if(error){
+    throw error;
+  }else{
+    console.log('Conexion correcta.');
+  }
+});
 
-// Este es el fucking constructor xD
-
-/*function(){
-  var base = new databaseInstance();
-  base.connect(function(error){
-    if(error){
-      throw error;
-    }else{
-      console.log('Conexion correcta.');
-    }
-  });
-  post.constructor(databaseInstance);
-  perfil.constructor(databaseInstance);
-  agenda.constructor(databaseInstance);
-  asignaturas.constructor(databaseInstance);
-  mensajes.constructor(databaseInstance);
-  foro.constructor(databaseInstance);
-}*/
+//por el momento dejalo así, sin embargo se va a remover ya que no es buena practica
+post.constructor(connection);
+perfil.constructor(connection);
+agenda.constructor(connection);
+asignaturas.constructor(connection);
+mensajes.constructor(connection);
+foro.constructor(connection);
 
 /*
   Esta wea es para poder auntentificar con Angular 2
