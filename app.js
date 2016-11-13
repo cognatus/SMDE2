@@ -5,29 +5,34 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var favicon = require('serve-favicon')
 
-var routes = require('./routes/index');
-var users = require('./routes/users');
-
 var app = express();
 
+var jwt = require('express-jwt');
+var cors = require('cors');
+
+app.use(cors());
+
+var api = require('./routes/index');
+var users = require('./routes/users');
+
 app.use(logger('dev'));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 //this is like the public stuff, all about views
 app.use(express.static(path.join(__dirname, 'angular')));
 app.use(favicon(__dirname + '/icon.png'));
 
-app.use('/', routes);
+app.use('/api', api);
 app.use('/users', users);
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
+// Detectar error 404 (Esto se hace directamente con Angular 2)
+/*app.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
-});
+});*/
 
 // error handlers
 
@@ -52,6 +57,5 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-
 
 module.exports = app;
