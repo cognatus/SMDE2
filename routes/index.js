@@ -16,10 +16,8 @@ router.get('/', function(req, res) {
     res.json({ message: 'Bienvenido a SMDE prro' });   
 });
 
-router.route('/users')
-	.get(post.getUsers);
+router.get('/users',post.getUsers);
 
-router.route('/users/:user_id')
-	.get(post.getUserById);
+router.get('/users/:user_id', post.getUserById);
 
 module.exports = router;
