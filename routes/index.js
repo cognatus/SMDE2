@@ -22,4 +22,10 @@ router.route('/users')
 router.route('/users/:user_id')
 	.get(post.getUserById);
 
+router.route('/institute/:institute_id/subjects')
+	.get(post.getSubjects);
+
+router.route('/institute/:institute_id/admins')
+	.get(post.getAdministrators);
+
 module.exports = router;

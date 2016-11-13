@@ -378,6 +378,7 @@ exports.getUsers = function(req, res){
 			res.json(result);
 		}else{
 			console.log('Error en esta consulta: ' + stringQuery + ' Error: ' + error);
+			res.send('Error: post/getUsers');
 		}
 	});
 
@@ -393,35 +394,33 @@ exports.getUserById = function(req, res){
 			res.json(result);
 		}else{
 			console.log('Error en esta consulta: ' + stringQuery + ' Error: ' + error);
-			res.send('error');
+			res.send('Error: post/getUserById');
 		}
 	});
 
 };
 
 // FUNCION PARA MOSTRAR DATOS DE administradores DE LA BASE DE DATOS
-exports.getAdministratorsDatabase = function(req, res){
+exports.getAdministrators = function(req, res){
 	
-
 	stringQuery = 'SELECT User.*, idAdministrator FROM User INNER JOIN Administrator' 
 				+ ' ON User.userEmail = Administrator.User_userEmail'
-				+ ' WHERE Institute_idInstitute="' + req.session.datos[0].Institute_idInstitute + '"'
+				+ ' WHERE Institute_idInstitute="' + req.params.institute_id + '"'
 				+ ' ORDER BY userName ASC;' ;
 				
 	base.query(stringQuery, function(error, result, row){
 		if(!error) {
-			res.send(result);
+			res.json(result);
 		}else{
 			console.log('Error en esta consulta: ' + stringQuery + ' Error: ' + error);
-			res.send('error');
+			res.send('Error: post/getAdministrators');
 		}
 	});
 };
 
 // FUNCION PARA MOSTRAR DATOS DE ALUMNOS DE LA BASE DE DATOS
-exports.getStudentsDatabase = function(req, res){
+exports.getStudents = function(req, res){
 	
-
 	stringQuery = 'SELECT User.*, idStudent FROM User INNER JOIN Student' 
 				+ ' ON User.userEmail = Student.User_userEmail'
 				+ ' WHERE Institute_idInstitute="' + req.session.datos[0].Institute_idInstitute + '"' 
@@ -429,62 +428,17 @@ exports.getStudentsDatabase = function(req, res){
 
 	base.query(stringQuery, function(error, result, row){
 		if(!error) {
-			var stringData = '';
-			for(var i in result){
-                var item = result[i];
-                stringData += '<div class="colhh1 block_container bg_white" data-name="' + item.userName + ' ' + item.userLastName + ' ' + item.userSecondLastName + '">' 
-                            +   '<div class="colhh1 listitem rel_pos">'
-                            +       '<div class="listitem_img"><img src="profile_photos/' + item.photoName + '.png"></img></div>'
-                            +       '<div class="listitem_info">'
-                            +			'<div title="Opciones" class="minimenu_container">'
-							+				'<div class="minimenu"><span></span><span></span><span></span></div>'
-							+				'<div class="minimenu_hidden">'
-							+					'<div class="pd_16 hover">Editar</div>'
-							+					'<div class="pd_16 hover" onclick="deleteUser(&quot;' + item.userEmail + '&quot;)">Eliminar</div>'
-							+				'</div>'
-							+			'</div>'
-                            +           '<div class="listitem_title"><b>' + item.userName + ' ' + item.userLastName + ' ' + item.userSecondLastName + '</b></div>'
-                            +           '<div class="listitem_bottomdata">Alumno'
-                            +           '</div>'
-                            +       '</div>'
-                            +   '</div>'
-                            +   '<div class="colhh1">'
-                            +       '<div class="list_borderleft">'
-                            +           '<div class="pd_llist">'
-                            +               '<div class="sl_title">Información</div>'
-                            +           '</div>'
-                            +           '<div class="pd_llist">'
-                            +               '<div class="colhh1 pd_l12 sl_title">Correo: <span class="margin_l normal_txt">' + item.userEmail + '</span></div>'
-                            +               '<div class="pd_4"></div>'
-                            +               '<div class="colhh1 pd_l12 sl_title">Id: <span class="margin_l normal_txt">' + item.idStudent + '</span></div>'
-                            +               '<div class="pd_4"></div>'
-                            +               '<div class="colhh1 pd_l12 sl_title">Sexo: <span class="margin_l normal_txt">' + item.userSex + '</span></div>'
-                            +           '</div>'
-                    		+       	'<div class="pd_8"></div>'
-                            +       	'<div class="colhh1">'
-                            +           	'<div class="pd_llist">'
-                            +               	'<div class="sl_title">Cursos Inscritos</div>'
-                            +           	'</div>'
-                            +           	'<div class="pd_llist hidecontent_button"  data-id="' + item.userEmail + '">'
-                            +               	'<span class="txtprimary_color sl_title">Mostrar Cursos</span>'
-                            +           	'</div>'
-                            +           	'<div class="person_subjectslist"></div>'
-                            +       	'</div>'
-                            +       '</div>'
-                            +   '</div>'
-                            + '</div>';
-            }
-			res.send(stringData);
-
+			res.json(result);
 		}else{
 			console.log('Error en esta consulta: ' + stringQuery + ' Error: ' + error);
-			res.send('error');
+			res.send('Error: post/getStudents');
 		}
 	});
+
 };
 
 // FUNCION PARA MOSTRAR MATERIAS DE ALUMNOS DE LA BASE DE DATOS
-exports.getStudentsSubjectsDatabase = function(req, res){
+exports.getStudentSubjects = function(req, res){
 	
 	var studentEmail = req.query.studentEmail;
 
@@ -506,31 +460,18 @@ exports.getStudentsSubjectsDatabase = function(req, res){
 				
 	base.query(stringQuery, function(error, result, row){
 		if(!error) {
-			var stringData = '';
-			for(var i in result){
-                var item = result[i];
-                    stringData += '<div class="colhh1 pd_l12 hover">'
-                            	+ 	'<div class="listitem_img"><span>B</span></div>'
-                            	+ 	'<div class="listitem_info">'
-                            	+ 		'<div class="listitem_title"><b>' + item.subjectName + '</b></div>'
-                            	+ 		'<div class="listitem_bottomdata">Grupo: ' + item.courseName + '</div>'
-                            	+ 	'</div>'
-                            	+ '</div>';
-                        }
-			res.send(stringData);
-
+			res.json(result);
 		}else{
 			console.log('Error en esta consulta: ' + stringQuery + ' Error: ' + error);
-			res.send('error');
+			res.send('Error: post/getStudentSubjects');
 		}
 	});
 
 };
 
 // FUNCION PARA MOSTRAR DATOS DE PROFESORES DE LA BASE DE DATOS
-exports.getTeachersDatabase = function(req, res){
+exports.getTeachers = function(req, res){
 	
-
 	stringQuery = 'SELECT User.*, idTeacher FROM User INNER JOIN Teacher'
 				+ ' ON User.userEmail = Teacher.User_userEmail'
 				+ ' WHERE Institute_idInstitute="' + req.session.datos[0].Institute_idInstitute + '"'
@@ -538,62 +479,16 @@ exports.getTeachersDatabase = function(req, res){
 
 	base.query(stringQuery, function(error, result, row){
 		if(!error) {
-			var stringData = '';
-			for(var i in result){
-                var item = result[i];
-                stringData += '<div class="colhh1 block_container bg_white" data-name="' + item.userName + ' ' + item.userLastName + ' ' + item.userSecondLastName + '">' 
-                            +   '<div class="colhh1 listitem rel_pos">'
-                            +       '<div class="listitem_img"><img src="profile_photos/' + item.photoName + '.png"></img></div>'
-                            +       '<div class="listitem_info">'
-                            +			'<div title="Opciones" class="minimenu_container">'
-							+				'<div class="minimenu"><span></span><span></span><span></span></div>'
-							+				'<div class="minimenu_hidden">'
-							+					'<div class="pd_16 hover">Editar</div>'
-							+					'<div class="pd_16 hover" onclick="deleteUser(&quot;' + item.userEmail + '&quot;)">Eliminar</div>'
-							+				'</div>'
-							+			'</div>'
-                            +           '<div class="listitem_title"><b>' + item.userName + ' ' + item.userLastName + ' ' + item.userSecondLastName + '</b></div>'
-                            +           '<div class="listitem_bottomdata">Profesor'
-                            +           '</div>'
-                            +       '</div>'
-                            +   '</div>'
-                            +   '<div class="colhh1">'
-                            +       '<div class="list_borderleft">'
-                            +           '<div class="pd_llist">'
-                            +               '<div class="sl_title">Información</div>'
-                            +           '</div>'
-                            +           '<div class="pd_llist">'
-                            +               '<div class="colhh1 pd_l12 sl_title">Correo: <span class="margin_l normal_txt">' + item.userEmail + '</span></div>'
-                            +               '<div class="pd_4"></div>'
-                            +               '<div class="colhh1 pd_l12 sl_title">Id: <span class="margin_l normal_txt">' + item.idTeacher + '</span></div>'
-                            +               '<div class="pd_4"></div>'
-                            +               '<div class="colhh1 pd_l12 sl_title">Sexo: <span class="margin_l normal_txt">' + item.userSex + '</span></div>'
-                            +           '</div>'
-                    		+       	'<div class="pd_8"></div>'
-                            +       	'<div class="colhh1">'
-                            +           	'<div class="pd_llist">'
-                            +               	'<div class="sl_title">Cursos Inscritos</div>'
-                            +           	'</div>'
-                            +           	'<div class="pd_llist hidecontent_button" data-id="' + item.userEmail + '">'
-                            +               	'<span class="txtprimary_color sl_title">Mostrar Cursos</span>'
-                            +           	'</div>'
-                            +           	'<div class="person_subjectslist"></div>'
-                            +       	'</div>'
-                            +       '</div>'
-                            +   '</div>'
-                            + '</div>';
-            }
-			res.send(stringData);
-
+			res.json(result);
 		}else{
 			console.log('Error en esta consulta: ' + stringQuery + ' Error: ' + error);
-			res.send('error');
+			res.send('Error: post/getTeachers');
 		}
 	});
 };
 
 // FUNCION PARA MOSTRAR MATERIAS DE PROFESOR DE LA BASE DE DATOS
-exports.getTeachersSubjectsDatabase = function(req, res){
+exports.getTeacherSubjects = function(req, res){
 	
 	var teacherEmail = req.query.teacherEmail;
 
@@ -615,171 +510,59 @@ exports.getTeachersSubjectsDatabase = function(req, res){
 
 	base.query(stringQuery, function(error, result, row){
 		if(!error) {
-			var stringData = '';
-			for(var i in result){
-                var item = result[i];
-                    stringData += '<div class="colhh1 pd_l12 hover">'
-                            	+ 	'<div class="listitem_img"><span>B</span></div>'
-                            	+ 	'<div class="listitem_info">'
-                            	+ 		'<div class="listitem_title"><b>' + item.subjectName + '</b></div>'
-                            	+ 		'<div class="listitem_bottomdata">Grupo: ' + item.courseName + '</div>'
-                            	+ 	'</div>'
-                            	+ '</div>';
-                        }
-			res.send(stringData);
-
+			res.json(result);
 		}else{
 			console.log('Error en esta consulta: ' + stringQuery + ' Error: ' + error);
-			res.send('error');
+			res.send('Error: post/getTeacherSubjects');
 		}
 	});
 
 };
 
 // FUNCION PARA MOSTRAR DATOS DE DEPARTAMENTOS DE LA BASE DE DATOS
-exports.getDepartmentsDatabase = function(req, res){
+exports.getDepartments = function(req, res){
 	
-
 	stringQuery = 'SELECT * FROM Department'
 				+ ' WHERE Institute_idInstitute="' + req.session.datos[0].Institute_idInstitute + '";' ;
 
 	base.query(stringQuery, function(error, result, row){
 		if(!error) {
-			var stringData = '';
-			for(var i in result){
-                var item = result[i];
-                stringData += '<div class="colhh1 block_container bg_white" data-name="' +item.departmentName + '">' 
-                            +   '<div class="colhh1 listitem rel_pos">'
-                            +       '<div class="listitem_img"><span></span></div>'
-                            +       '<div class="listitem_info">'
-                            +			'<div title="Opciones" class="minimenu_container">'
-							+				'<div class="minimenu"><span></span><span></span><span></span></div>'
-							+				'<div class="minimenu_hidden">'
-							+					'<div class="pd_16 hover">Editar</div>'
-							+					'<div class="pd_16 hover" onclick="deleteItem(&quot;' + item.idDepartment + '&quot;)">Eliminar</div>'
-							+				'</div>'
-							+			'</div>'
-                            +           '<div class="listitem_title"><b>' + item.departmentName + '</b></div>'
-                            +           '<div class="listitem_bottomdata">Academia'
-                            +           '</div>'
-                            +       '</div>'
-                            +   '</div>'
-                            +   '<div class="colhh1">'
-                            +       '<div class="list_borderleft">'
-                            +           '<div class="pd_llist">'
-                            +               '<div class="sl_title">Información</div>'
-                            +           '</div>'
-                            +           '<div class="pd_llist">'
-                            +               '<div class="colhh1 pd_l12 sl_title">Id: <span class="margin_l normal_txt">' + item.idDepartment + '</span></div>'
-                            +           '</div>'
-                            +       '</div>'
-                            +   '</div>'
-                            + '</div>';
-            }
-			res.send(stringData);
-
+			res.json(result);
 		}else{
 			console.log('Error en esta consulta: ' + stringQuery + ' Error: ' + error);
-			res.send('error');
+			res.send('Error: post/getDepartments');
 		}
 	});
 };
 
 // FUNCION PARA MOSTRAR DATOS DE ASIGNATURAS DE LA BASE DE DATOS
-exports.getSubjectsDatabase = function(req, res){
+exports.getSubjects = function(req, res){
 	
-
 	stringQuery = 'SELECT * FROM Subject'
-				+ ' WHERE Department_Institute_idInstitute="' + req.session.datos[0].Institute_idInstitute + '";' ;
+				+ ' WHERE Department_Institute_idInstitute="' + req.params.institute_id + '";' ;
 
 	base.query(stringQuery, function(error, result, row){
 		if(!error) {
-			var stringData = '';
-			for(var i in result){
-                var item = result[i];
-                stringData += '<div class="colhh1 block_container bg_white" data-name="' +item.subjectName + '">' 
-                            +   '<div class="colhh1 listitem rel_pos">'
-                            +       '<div class="listitem_img"><span></span></div>'
-                            +       '<div class="listitem_info">'
-                            +			'<div title="Opciones" class="minimenu_container">'
-							+				'<div class="minimenu"><span></span><span></span><span></span></div>'
-							+				'<div class="minimenu_hidden">'
-							+					'<div class="pd_16 hover">Editar</div>'
-							+					'<div class="pd_16 hover" onclick="deleteItem(&quot;' + item.idSubject + '&quot;)">Eliminar</div>'
-							+				'</div>'
-							+			'</div>'
-                            +           '<div class="listitem_title"><b>' + item.subjectName + '</b></div>'
-                            +           '<div class="listitem_bottomdata">Asignatura'
-                            +           '</div>'
-                            +       '</div>'
-                            +   '</div>'
-                            +   '<div class="colhh1">'
-                            +       '<div class="list_borderleft">'
-                            +           '<div class="pd_llist">'
-                            +               '<div class="sl_title">Información</div>'
-                            +           '</div>'
-                            +           '<div class="pd_llist">'
-                            +               '<div class="colhh1 pd_l12 sl_title">Id: <span class="margin_l normal_txt">' + item.idSubject + '</span></div>'
-                            +				'<div class="pd_4"></div>'
-                            +               '<div class="colhh1 pd_l12 sl_title">Nivel: <span class="margin_l normal_txt">' + item.subjectLevel + '</span></div>'
-                            +           '</div>'
-                            +       '</div>'
-                            +   '</div>'
-                            + '</div>';
-            }
-			res.send(stringData);
+			res.json(result);
 		}else{
 			console.log('Error en esta consulta: ' + stringQuery + ' Error: ' + error);
-			res.send('error');
+			res.send('Error: post/getSubjects');
 		}
 	});
 };
 
 // FUNCION PARA MOSTRAR DATOS DE CURSOS DE LA BASE DE DATOS
-exports.getCoursesDatabase = function(req, res){
+exports.getCourses = function(req, res){
 	
 	stringQuery = 'SELECT * FROM Course'
 				+ ' WHERE Institute_idInstitute="' + req.session.datos[0].Institute_idInstitute + '";' ;
+
 	base.query(stringQuery, function(error, result, row){
 		if(!error) {
-			var stringData = '';
-			for(var i in result){
-                var item = result[i];
-                stringData += '<div class="colhh1 block_container bg_white" data-name="' +item.courseName + '">' 
-                            +   '<div class="colhh1 listitem rel_pos">'
-                            +       '<div class="listitem_img"><span></span></div>'
-                            +       '<div class="listitem_info">'
-                            +			'<div title="Opciones" class="minimenu_container">'
-							+				'<div class="minimenu"><span></span><span></span><span></span></div>'
-							+				'<div class="minimenu_hidden">'
-							+					'<div class="pd_16 hover">Editar</div>'
-							+					'<div class="pd_16 hover" onclick="deleteItem(&quot;' + item.idCourse + '&quot;)">Eliminar</div>'
-							+				'</div>'
-							+			'</div>'
-                            +           '<div class="listitem_title"><b>' + item.courseName + '</b></div>'
-                            +           '<div class="listitem_bottomdata">Grupo'
-                            +           '</div>'
-                            +       '</div>'
-                            +   '</div>'
-                            +   '<div class="colhh1">'
-                            +       '<div class="list_borderleft">'
-                            +           '<div class="pd_llist">'
-                            +               '<div class="sl_title">Información</div>'
-                            +           '</div>'
-                            +           '<div class="pd_llist">'
-                            +               '<div class="colhh1 pd_l12 sl_title">Id: <span class="margin_l normal_txt">' + item.idCourse + '</span></div>'
-                            +				'<div class="pd_4"></div>'
-                            +               '<div class="colhh1 pd_l12 sl_title">Nivel: <span class="margin_l normal_txt">' + item.courseLevel + '</span></div>'
-                            +           '</div>'
-                            +       '</div>'
-                            +   '</div>'
-                            + '</div>';
-            }
-			res.send(stringData);
-			
+			res.json(result);
 		}else{
 			console.log('Error en esta consulta: ' + stringQuery + ' Error: ' + error);
-			res.send('error');
+			res.send('Error: post/getCourses');
 		}
 	});
 
