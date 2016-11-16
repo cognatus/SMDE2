@@ -9,17 +9,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var AppComponent = (function () {
-    function AppComponent() {
+var NotFoundComponent = (function () {
+    function NotFoundComponent() {
     }
-    AppComponent = __decorate([
+    NotFoundComponent = __decorate([
         core_1.Component({
-            selector: 'my-app',
-            template: "\n    \t<router-outlet></router-outlet>\n    "
+            moduleId: module.id,
+            selector: 'not-found',
+            templateUrl: 'notfound.component.html',
+            styleUrls: ['notfound.component.css']
         }), 
         __metadata('design:paramtypes', [])
-    ], AppComponent);
-    return AppComponent;
+    ], NotFoundComponent);
+    return NotFoundComponent;
 }());
-exports.AppComponent = AppComponent;
-//# sourceMappingURL=app.component.js.map
+exports.NotFoundComponent = NotFoundComponent;
+//# sourceMappingURL=notfound.component.js.map

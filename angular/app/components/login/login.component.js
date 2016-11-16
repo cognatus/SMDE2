@@ -9,17 +9,21 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var AppComponent = (function () {
-    function AppComponent() {
+var app_constants_1 = require('./../../app.constants');
+var LoginComponent = (function () {
+    function LoginComponent(config) {
+        this.config = config;
     }
-    AppComponent = __decorate([
+    LoginComponent = __decorate([
         core_1.Component({
-            selector: 'my-app',
-            template: "\n    \t<router-outlet></router-outlet>\n    "
+            moduleId: module.id,
+            selector: 'login-component',
+            templateUrl: 'login.component.html',
+            styleUrls: ['login.component.css']
         }), 
-        __metadata('design:paramtypes', [])
-    ], AppComponent);
-    return AppComponent;
+        __metadata('design:paramtypes', [app_constants_1.Configuration])
+    ], LoginComponent);
+    return LoginComponent;
 }());
-exports.AppComponent = AppComponent;
-//# sourceMappingURL=app.component.js.map
+exports.LoginComponent = LoginComponent;
+//# sourceMappingURL=login.component.js.map

@@ -9,17 +9,21 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var AppComponent = (function () {
-    function AppComponent() {
+var app_constants_1 = require('./../../app.constants');
+var MainPageComponent = (function () {
+    function MainPageComponent(config) {
+        this.config = config;
     }
-    AppComponent = __decorate([
+    MainPageComponent = __decorate([
         core_1.Component({
-            selector: 'my-app',
-            template: "\n    \t<router-outlet></router-outlet>\n    "
+            moduleId: module.id,
+            selector: 'main-page',
+            templateUrl: 'mainpage.component.html',
+            styleUrls: ['mainpage.component.css']
         }), 
-        __metadata('design:paramtypes', [])
-    ], AppComponent);
-    return AppComponent;
+        __metadata('design:paramtypes', [app_constants_1.Configuration])
+    ], MainPageComponent);
+    return MainPageComponent;
 }());
-exports.AppComponent = AppComponent;
-//# sourceMappingURL=app.component.js.map
+exports.MainPageComponent = MainPageComponent;
+//# sourceMappingURL=mainpage.component.js.map
