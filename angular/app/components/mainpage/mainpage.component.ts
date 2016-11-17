@@ -16,7 +16,6 @@ export class MainPageComponent implements OnInit{
 	constructor(private config: Configuration, private usersService: UsersService){}
 
 	ngOnInit() {
-		console.log(this.usersService.getUsers());
 		this.usersService.getUsers()
       		.subscribe(users => this.users = users);
 	}

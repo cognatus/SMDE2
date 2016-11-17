@@ -18,7 +18,6 @@ var MainPageComponent = (function () {
     }
     MainPageComponent.prototype.ngOnInit = function () {
         var _this = this;
-        console.log(this.usersService.getUsers());
         this.usersService.getUsers()
             .subscribe(function (users) { return _this.users = users; });
     };
