@@ -10,18 +10,27 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var app_constants_1 = require('./../../app.constants');
+var users_service_1 = require('./users.service');
 var MainPageComponent = (function () {
-    function MainPageComponent(config) {
+    function MainPageComponent(config, usersService) {
         this.config = config;
+        this.usersService = usersService;
     }
+    MainPageComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        console.log(this.usersService.getUsers());
+        this.usersService.getUsers()
+            .subscribe(function (users) { return _this.users = users; });
+    };
     MainPageComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
             selector: 'main-page',
             templateUrl: 'mainpage.component.html',
-            styleUrls: ['mainpage.component.css']
+            styleUrls: ['mainpage.component.css'],
+            providers: [users_service_1.UsersService]
         }), 
-        __metadata('design:paramtypes', [app_constants_1.Configuration])
+        __metadata('design:paramtypes', [app_constants_1.Configuration, users_service_1.UsersService])
     ], MainPageComponent);
     return MainPageComponent;
 }());

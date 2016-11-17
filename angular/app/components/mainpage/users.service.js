@@ -8,18 +8,24 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var app_constants_1 = require('../../app.constants');
 var core_1 = require('@angular/core');
-var Configuration = (function () {
-    function Configuration() {
-        this.Server = 'http://localhost:3000/';
-        this.ApiUrl = 'api/';
-        this.ApiRest = this.Server + this.ApiUrl;
+var http_1 = require('@angular/http');
+require('rxjs/add/operator/map');
+var UsersService = (function () {
+    function UsersService(http, config) {
+        this.http = http;
+        this.config = config;
     }
-    Configuration = __decorate([
+    UsersService.prototype.getUsers = function () {
+        return this.http.get(this.config.ApiRest + 'users')
+            .map(function (response) { return response.json(); });
+    };
+    UsersService = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [])
-    ], Configuration);
-    return Configuration;
+        __metadata('design:paramtypes', [http_1.Http, app_constants_1.Configuration])
+    ], UsersService);
+    return UsersService;
 }());
-exports.Configuration = Configuration;
-//# sourceMappingURL=app.constants.js.map
+exports.UsersService = UsersService;
+//# sourceMappingURL=users.service.js.map

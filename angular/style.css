@@ -1,8 +1,8 @@
-@import 'https://fonts.googleapis.com/css?family=Open+Sans:300,400,700';
+@import url('https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900');
 
 /* Master Styles */
 * {
-  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+  font-family: 'Roboto', Helvetica, Arial, sans-serif;
 }
 
 html{
@@ -72,7 +72,6 @@ login-component{
 }
 
 .shadow{
-  z-index: 2;
   box-shadow: 0 2px 2px rgba(0, 0, 0, 0.24);
 }
 
@@ -125,39 +124,63 @@ img.adjustable{
   float: right;
 }
 
-.bg_black{background-color: #000 !important;}
+.hover_item{
+  cursor: pointer;
+}
+
+.hover_item:hover{
+  background-color: rgba(0, 0, 0, 0.06);
+}
+
 .bg_white{background-color: #fff !important;}
-.bg_lightgray{background-color: #eeeeee !important;}
-.bg_gray{background-color: #424242 !important;}
+.bg_darkblue{background-color: #0D47A1 !important;}
+.bg_blue{background-color: #2196F3 !important;}
+.bg_lightblue{background-color: #03A9F4 !important;}
+.bg_cyan{background-color: #00BCD4 !important;}
+.bg_indigo{background-color: #3F51B5 !important;}
+.bg_teal{background-color: #009688 !important;}
+.bg_green{background-color: #4CAF50 !important;}
+.bg_lightgreen{background-color: #8BC34A !important;}
+.bg_lime{background-color: #CDDC39 !important;}
+.bg_orange{background-color: #FF9800 !important;}
+.bg_darkorange{background-color: #FF5722 !important;}
+.bg_red{background-color: #F44336 !important;}
+.bg_purple{background-color: #9C27B0 !important;}
+.bg_darkpurple{background-color: #673AB7 !important;}
+.bg_pink{background-color: #E91E63 !important;}
+.bg_lightpink{background-color: #FF4081 !important;}
+.bg_yellow{background-color: #FFEB3B !important;}
+.bg_amber{background-color: #FFC107 !important;}
+.bg_brown{background-color: #795548 !important;}
+.bg_bluegray{background-color: #607D8B !important;}
+.bg_lightgray{background-color: #f6f6f6 !important;}
+.bg_gray{background-color: #616161 !important;}
 .bg_darkgray{background-color: #212121 !important;}
-.bg_trans_dark{background-color: rgba(0, 0, 0, 0.9);}
-.bg_trans_medium{background-color: rgba(0, 0, 0, 0.5);}
-.bg_trans_light{background-color: rgba(0, 0, 0, 0.2);}
-.bg_trans_white{background-color: rgba(255, 255, 255, 0.3)}
-.bg_pink{background-color: rgb(181, 30, 75);}
-.bg_red{background-color: rgb(237, 38, 71);}
-.bg_purple{background-color: rgb(70, 54, 129);}
-.bg_green{background-color: rgb(3, 87, 53);}
-.bg_orange{background-color: rgb(243, 111, 62);}
-.bg_lightpink{background-color: rgb(239, 75, 117);}
-.bg_blue{background-color: rgb(79, 138, 202);}
-.bg_lightgreen{background-color: rgb(138, 197, 113);}
-.bg_yellow{background-color: rgb(231, 207, 47);}
-.bg_lighterpink{background-color: rgb(242, 151, 184);}
-.bg_lightblue{background-color: rgb(153, 208, 238);}
-.bg_teal{background-color: rgb(50, 173, 163);}
 
 .font_color_white{color: #fff !important;}
-.font_color_dark{color: #212121 !important;}
-.font_color_gray{color: rgba(0, 0, 0, 0.4); !important;}
-.font_color_red{color: rgb(237, 38, 71) !important;}
-.font_color_green{color: rgb(138, 197, 113) !important;}
-.font_color_lightgreen{color: rgb(138, 197, 113); !important;}
-.font_color_blue{color: rgb(79, 138, 202) !important;}
-.font_color_lightblue{color: rgb(153, 208, 238) !important;}
-.font_color_purple{color: rgb(70, 54, 129) !important;}
-.font_color_lighrgreen{color: rgb(138, 197, 113) !important;}
-.font_color_orange{color: rgb(243, 111, 62) !important;}
+.font_color_darkblue{color: #0D47A1 !important;}
+.font_color_blue{color: #2196F3 !important;}
+.font_color_lightblue{color: #03A9F4 !important;}
+.font_color_cyan{color: #00BCD4 !important;}
+.font_color_indigo{color: #3F51B5 !important;}
+.font_color_teal{color: #009688 !important;}
+.font_color_green{color: #4CAF50 !important;}
+.font_color_lightgreen{color: #8BC34A !important;}
+.font_color_lime{color: #CDDC39 !important;}
+.font_color_orange{color: #FF9800 !important;}
+.font_color_darkorange{color: #FF5722 !important;}
+.font_color_red{color: #F44336 !important;}
+.font_color_purple{color: #9C27B0 !important;}
+.font_color_darkpurple{color: #673AB7 !important;}
+.font_color_pink{color: #E91E63 !important;}
+.font_color_lightpink{color: #FF4081 !important;}
+.font_color_yellow{color: #FFEB3B !important;}
+.font_color_amber{color: #FFC107 !important;}
+.font_color_brown{color: #795548 !important;}
+.font_color_bluegray{color: #607D8B !important;}
+.font_color_lightgray{color: #f6f6f6 !important;}
+.font_color_gray{color: #616161 !important;}
+.font_color_darkgray{color: #212121 !important;}
 
 .circle_trans{
   border-radius: 200px;
