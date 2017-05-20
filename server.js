@@ -3,9 +3,10 @@ const express = require('express');
 const path = require('path');
 const http = require('http');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 
 // Get our API routes
-const api = require('./server/routes/api');
+const api = require('./server/routes/index');
 
 const app = express();
 
@@ -15,6 +16,15 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // Point static path to dist
 app.use(express.static(path.join(__dirname, 'dist')));
+
+//conexion con mongo
+mongoose.connect('mongodb://localhost/smde2', (error) => {
+  if (error) {
+    throw error;
+  }else{
+    console.log('CONECTADO A MONGO');
+  }
+});
 
 // Set our api routes
 app.use('/api', api);
