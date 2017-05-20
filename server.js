@@ -2,6 +2,7 @@
 const express = require('express');
 const path = require('path');
 const http = require('http');
+const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
@@ -13,6 +14,7 @@ const app = express();
 // Parsers for POST data
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
 
 // Point static path to dist
 app.use(express.static(path.join(__dirname, 'dist')));
