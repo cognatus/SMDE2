@@ -2,7 +2,7 @@ var express = require('express');
 var app = express();
 var router = express.Router();
 
-var post = require('../app_api/api/post');
+var post = require('../app_api/api/admin');
 
 /* GET home page. */
 

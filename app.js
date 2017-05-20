@@ -16,7 +16,7 @@ app.use(cors());
 var api = require('./routes/index');
 var users = require('./routes/users');
 
-var post = require('./app_api/api/post');
+var admin = require('./app_api/api/admin');
 var agenda = require('./app_api/api/agenda');
 var perfil = require('./app_api/api/perfil');
 var asignaturas = require('./app_api/api/asignaturas');
@@ -55,7 +55,7 @@ connection.connect(function(error){
 });
 
 //por el momento dejalo así, sin embargo se va a remover ya que no es buena practica
-post.constructor(connection);
+admin.constructor(connection);
 perfil.constructor(connection);
 agenda.constructor(connection);
 asignaturas.constructor(connection);
