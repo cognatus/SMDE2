@@ -8,7 +8,7 @@
 			<div class="title_container text_align_center">
 				<h2 class="title_big pd_top_8 font_primary">Registrarse</h2>
 			</div>
-			<form>
+			<form (submit)="signup()">
 				<div class="pd_top_32 pd_bottom_32">
 					<div class="icon_field mr_top_12">
 						<img src="assets/icons/account_black.png" class="icon opacity"><div class="field_container">
@@ -80,7 +80,7 @@
 				</div>
 				<div class="field_container">
 					<div class="field">
-						<input type="submit" value="Registrarse" class="bg_secondary shadow_raised w_100 font_white border_radius" (click)="signup()">
+						<input type="submit" value="Registrarse" class="bg_secondary shadow_raised w_100 font_white border_radius">
 					</div>
 				</div>
 			</form>

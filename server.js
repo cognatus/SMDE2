@@ -5,11 +5,14 @@ const http = require('http');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+var jwt = require('jsonwebtoken');
+
+const app = express();
 
 // Get our API routes
 const api = require('./server/routes/index');
 
-const app = express();
+process.env.SECRET_KEY = "cl4v3bi3nch1ng0n4c41n4l";
 
 // Parsers for POST data
 app.use(bodyParser.json());

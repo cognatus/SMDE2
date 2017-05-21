@@ -1,32 +1,33 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Http } from '@angular/http';
-import { ContentHeaders } from '../common/headers';
-import { ApiUrl } from '../app.constants';
+import { AuthGuard } from '../auth/auth.guard';
+
+import { LoginService } from './login.service';
+import { User } from '../models/user';
 
 @Component({
 	selector: 'app-login',
 	templateUrl: './login.component.html',
-	styleUrls: ['./login.component.css']
+	styleUrls: ['./login.component.css'],
+	providers: [LoginService]
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit{
+	user = new User;
+	
+	constructor(private router: Router, private loginService: LoginService, private auth: AuthGuard) {}
 
-	constructor(public router: Router, public http: Http) {}
+	login(): void {
+		this.loginService.loginUser(this.user)
+	    	.subscribe( user => {
+	    			localStorage.setItem('current_user', user._id);
+	    			this.router.navigate(['home']);
+				}, error => {
+            		console.log(error.text());
+            	});
+	}
 
-	login(event, username, password) {
-		event.preventDefault();
-		let body = JSON.stringify({ username, password });
-		this.http.post(ApiUrl + 'login', body, { headers: ContentHeaders })
-			.subscribe(
-				response => {
-					localStorage.setItem('id_token', response.json().id_token);
-					this.router.navigate(['home']);
-				},
-				error => {
-					alert(error.text());
-					console.log(error.text());
-				}
-			);
+	ngOnInit() {
+		console.log(localStorage.getItem('current_user'));
 	}
 
 }

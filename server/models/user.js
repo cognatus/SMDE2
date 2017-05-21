@@ -9,6 +9,7 @@ var UserSchema = new Schema({
 	phone: {type: Number, required: true},
 	birthDay: {type: Date, required: true},
 	type: {type: Number, required: true}, // Privilegio
+	createDate: {type: Date, required: true, default: new Date()},
 	sex: Number,
 	institute: [{
 		_id: {type: String, required: true},

@@ -1,3 +1,4 @@
+const jwt = require('jsonwebtoken');
 const User = require('../../models/User');
 
 exports.login = (req, res) => {
@@ -10,12 +11,19 @@ exports.login = (req, res) => {
 			res.send(err);
 		} else {
 			let userCookie = {
+				_id: doc[0]._id,
 				mail: doc[0].mail,
 				password: doc[0].password,
 				type: doc[0].type
 			}
+			let token = jwt.sign(userCookie._id, process.env.SECRET_KEY, {
+				expiresIn: 400000
+			})
 			res.cookie('login', userCookie);
-			res.json(doc);
+			res.json({
+				token: token,
+				user: doc
+			});
 		}
 	});
 };
@@ -27,13 +35,18 @@ exports.logout = (req, res) => {
 }
 
 exports.signup = (req, res) => {
-	var data = new User({
+	let birthDay = {
+		day: req.body.birthDay.split('/')[0], 
+		month: req.body.birthDay.split('/')[1], 
+		year: req.body.birthDay.split('/')[2]
+	}
+	let data = new User({
 		mail: req.body.mail,
 		password: req.body.password,
 		name: req.body.name,
 		lastName: req.body.lastName,
 		phone: req.body.phone,
-		birthDay: req.body.birthDay,
+		birthDay: new Date(birthDay.year + '-' + birthDay.month + '-' + birthDay.day),
 		type: req.body.userType
 	});
 

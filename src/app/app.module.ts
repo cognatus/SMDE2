@@ -5,7 +5,7 @@ import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 
 import { AUTH_PROVIDERS } from 'angular2-jwt';
-import { AuthGuard } from './common/auth.guard';
+import { AuthGuard } from './auth/auth.guard';
 
 import { routes } from './app.routes';
 import { AppComponent } from './app.component';
@@ -24,7 +24,9 @@ import { SignupComponent } from './signup/signup.component';
     BrowserModule,
     FormsModule,
     HttpModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes, {
+      useHash: true
+    })
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent]

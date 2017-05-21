@@ -8,13 +8,17 @@ export class AuthGuard implements CanActivate {
 
 	canActivate() {
 		// Check to see if a user has a valid JWT
-		if (tokenNotExpired()) {
+		if (this.loggedIn()) {
 			// If they do, return true and allow the user to load the home component
 			return true;
+		} else {
+			// If not, they redirect them to the login page
+			this.router.navigate(['/login']);
+			return false;
 		}
+	}
 
-		// If not, they redirect them to the login page
-		this.router.navigate(['/login']);
-		return false;
+	loggedIn() {
+		return localStorage.getItem('current_user') !== undefined && localStorage.getItem('current_user') !== null;
 	}
 }

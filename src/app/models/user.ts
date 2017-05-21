@@ -1,12 +1,13 @@
 export class User {
-	id: string;
+	_id: string;
 	mail: string;
 	password: string;
 	name: string;
 	lastName: string;
 	phone: number;
-	birthDay: string;
+	birthDay: Date;
 	userType: number;
+	createdDate: Date;
 	sex: number;
 	courses: [{
 		subject: {
