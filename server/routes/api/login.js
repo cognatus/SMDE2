@@ -25,3 +25,24 @@ exports.logout = (req, res) => {
 	req.session.destroy();
 	res.redirect('/');
 }
+
+exports.signup = (req, res) => {
+	var data = new User({
+		mail: req.body.mail,
+		password: req.body.password,
+		name: req.body.name,
+		lastName: req.body.lastName,
+		phone: req.body.phone,
+		birthDay: req.body.birthDay,
+		type: req.body.type
+	});
+
+	data.save( (err, doc) => {
+		if (err) {
+			console.log(err);
+			res.send(err);
+		} else {
+			res.send('Usuario registrado con exito');
+		}
+	});
+};

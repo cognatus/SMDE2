@@ -1,0 +1,89 @@
+<div class="login_bg bg_primary"></div>
+<section style="max-width: 580px;" class="login_container">
+	<div class="logo_container text_align_center">
+		<img src="assets/icons/logo_white.png" class="icon_big v_align_middle mr_right_16"><span class="v_align_middle">
+			<h1 class="font_white title_big font_normal">SMDE</h1></span></div>
+	<div class="bg_white shadow_flat mr_12 mr_top_24">
+		<div class="pd_24">
+			<div class="title_container text_align_center">
+				<h2 class="title_big pd_top_8 font_primary">Registrarse</h2>
+			</div>
+			<form (submit)="addUser($event)">
+				<div class="pd_top_32 pd_bottom_32">
+					<div class="icon_field mr_top_12">
+						<img src="assets/icons/account_black.png" class="icon opacity"><div class="field_container">
+							<label class="opacity font_bold font_small">Nombre(s)</label>
+							<div class="field">
+								<input type="text" [(ngModel)]="user.name" name="name" placeholder="Nombre(s)">
+							</div>
+						</div>
+					</div>
+					<div class="icon_field mr_top_12">
+						<img src="assets/icons/account_black.png" class="icon opacity"><div class="field_container">
+							<label class="opacity font_bold font_small">Apellidos</label>
+							<div class="field">
+								<input type="text" [(ngModel)]="user.lastName" name="lastName" placeholder="Apellidos">
+							</div>
+						</div>
+					</div>
+					<div class="icon_field mr_top_12">
+						<img src="assets/icons/email_black.png" class="icon opacity"><div class="field_container">
+							<label class="opacity font_bold font_small">Correo Electrónico</label>
+							<div class="field">
+								<input type="text" [(ngModel)]="user.mail" name="mail" placeholder="Correo Electrónico">
+							</div>
+						</div>
+					</div>
+					<div class="icon_field mr_top_12">
+						<img src="assets/icons/phone_black.png" class="icon opacity"><div class="field_container">
+							<label class="opacity font_bold font_small">Teléfono</label>
+							<div class="field">
+								<input type="text" [(ngModel)]="user.phone" name="phone" placeholder="Teléfono">
+							</div>
+						</div>
+					</div>
+					<div class="icon_field mr_top_12">
+						<img src="assets/icons/phone_black.png" class="icon opacity"><div class="field_container">
+							<label class="opacity font_bold font_small">Fecha de nacimiento</label>
+							<div class="field">
+								<input type="text" [(ngModel)]="user.birthDay" name="birthDay" placeholder="Fecha (dd/mm/yyyy)">
+							</div>
+						</div>
+					</div>
+					<div class="icon_field mr_top_12">
+						<img src="assets/icons/phone_black.png" class="icon opacity"><div class="field_container">
+							<label class="opacity font_bold font_small">Tipo de Usuario</label>
+							<div class="field">
+								<select [(ngModel)]="user.userType" name="userType">
+									<option value="1" selected="selected">Alumno</option>
+									<option value="2">Profesor</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="icon_field mr_top_12">
+						<img src="assets/icons/lock_black.png" class="icon opacity"><div class="field_container">
+							<label class="opacity font_bold font_small">Contraseña</label>
+							<div class="field">
+								<input type="password" [(ngModel)]="user.password" name="password" placeholder="Contraseña">
+							</div>
+						</div>
+					</div>
+					<div class="icon_field mr_top_12">
+						<img src="assets/icons/lock_black.png" class="icon opacity"><div class="field_container">
+							<label class="opacity font_bold font_small">Confirmar Contraseña</label>
+							<div class="field">
+								<input type="password" [(ngModel)]="passwordConfirm" name="passwordConfirm" placeholder="Contraseña">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="field_container">
+					<div class="field">
+						<input type="submit" value="Registrarse" class="bg_secondary shadow_raised w_100 font_white border_radius">
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</section>

@@ -189,6 +189,11 @@ a { text-decoration: none; }
 	height: 24px;
 }
 
+.icon_big {
+	width: 40px;
+	height: 40px;
+}
+
 .img_container {
 	position: relative;
 	overflow: hidden;
@@ -220,8 +225,8 @@ img.popup_product_img {
 
 /*---- COLORS --------------------------- */
 
-.bg_primary { background-color: #3F51B5 !important; }
-.bg_secondary { background-color: #8BC34A !important; }
+.bg_primary { background-color: #009688 !important; }
+.bg_secondary { background-color: #FFC400 !important; }
 .bg_white { background-color: #FFF !important; }
 .bg_black { background-color: #000 !important; }
 .bg_gray { background-color: #e0e0e0 !important; }
@@ -235,7 +240,8 @@ img.popup_product_img {
 .font_gray { color: #727272 !important; }
 .font_lightgray { color: #bdbdbd !important; }
 .font_red { color: #F44336 !important; }
-.font_primary { color: #3F51B5 !important; }
+.font_primary { color: #009688 !important; }
+.font_secondary { color: #FFC400 !important; }
 
 .border_white { border: 2px solid #fff; }
 .border_bottom { border-bottom: 1px solid rgba(0, 0, 0, 0.1); }

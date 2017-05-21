@@ -1,7 +1,7 @@
 const User = require('../../models/User');
-const Subject = require('../../models/Subject');
+/*const Subject = require('../../models/Subject');
 const Group = require('../../models/Group');
-const Course = require('../../models/Course');
+const Course = require('../../models/Course');*/
 
 // Agregar un nuevo usuario (Admin, Alumno, Profesor)
 exports.insertUser = (req, res) => {
@@ -55,7 +55,13 @@ exports.insertGroup = (req, res) => {
 
 // FUNCION PARA MOSTRAR TODOS LOS USUARIOS DE LA BASE PAPUH
 exports.getUsers = (req, res) => {
-
+	User.find({}, (error, doc) => {
+		if (error) {
+			res.send(error);
+		} else {
+			res.json(doc);
+		}
+	});
 };
 
 // FUNCION PARA MOSTRAR TODOS LOS USUARIOS DE LA BASE POR SU ID
