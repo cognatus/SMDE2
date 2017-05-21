@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
-import { Headers, RequestOptions } from '@angular/http';
+import { Http, Response, RequestOptions } from '@angular/http';
 import { ContentHeaders } from '../common/headers';
 import { Observable } from 'rxjs';
 import { ApiUrl } from '../app.constants';
@@ -15,7 +14,7 @@ export class SignupService {
     signup(user) {
         let body = JSON.stringify({ user });
         let options = new RequestOptions({ headers: ContentHeaders });
-        
+
         return this.http.post(ApiUrl + 'signup', body, options)
             .map(this.extractData)
             .catch(this.handleErrorObservable);

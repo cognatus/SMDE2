@@ -34,10 +34,10 @@ exports.signup = (req, res) => {
 		lastName: req.body.lastName,
 		phone: req.body.phone,
 		birthDay: req.body.birthDay,
-		type: req.body.type
+		type: req.body.userType
 	});
 
-	data.save( (err, doc) => {
+	data.save( (err) => {
 		if (err) {
 			console.log(err);
 			res.send(err);
