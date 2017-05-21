@@ -9,16 +9,10 @@ router.get('/', (req, res) => {
   res.send('api works');
 });
 
-router.post('/login', (req, res) => {
-	login.login;
-});
+router.post('/login', login.login);
 
-router.post('/signup', (req, res) => {
-	login.signup;
-});
+router.post('/signup', login.signup);
 
-router.post('/users', (req, res) => {
-	admin.getUsers;
-});
+router.post('/users', admin.getUsers);
 
 module.exports = router;

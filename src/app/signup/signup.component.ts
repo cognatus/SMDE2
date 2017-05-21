@@ -14,17 +14,22 @@ import { User } from '../models/user';
 
 export class SignupComponent {
 	user = new User;
-	errorMessage: String;
+	errorMessage: string;
 
 	constructor(private router: Router, private signupService: SignupService) {}
 
-	addUser(event): void {
+	signup(): void {
 		event.preventDefault();
-		this.signupService.signup(this.user)
+		console.log(this.user);
+		this.signupService.addUser(this.user)
 	    	.subscribe( user => {
-	    			this.router.navigate(['login']);			   
+	    			this.login();		   
 				},
             	error => this.errorMessage = <any>error);
+	}
+
+	login(): void {
+		this.router.navigate(['login']);
 	}
 
 }
