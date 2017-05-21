@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 import { Router } from '@angular/router';
-import { AuthGuard } from '../auth/auth.guard';
 
 @Component({
 	selector: 'app-home',
@@ -13,7 +12,7 @@ export class HomeComponent implements OnInit {
 	jwt: string;
 	decodedJwt: string;
 
-	constructor(private router: Router, private http: Http, private auth: AuthGuard) {
+	constructor(private router: Router, private http: Http) {
 		this.jwt = this.token;
 		this.decodedJwt = this.jwt;
 	}
