@@ -19,6 +19,7 @@ export class AuthGuard implements CanActivate {
 	}
 
 	loggedIn() {
-		return localStorage.getItem('current_user') !== undefined && localStorage.getItem('current_user') !== null;
+		let token = localStorage.getItem('id_token'); 
+		return token !== undefined && token !== null;
 	}
 }

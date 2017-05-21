@@ -20,10 +20,7 @@ exports.login = (req, res) => {
 				expiresIn: 400000
 			})
 			res.cookie('login', userCookie);
-			res.json({
-				token: token,
-				user: doc
-			});
+			res.json(doc[0]);
 		}
 	});
 };

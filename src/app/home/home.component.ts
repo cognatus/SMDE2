@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 import { Router } from '@angular/router';
-import { AuthHttp } from 'angular2-jwt';
+import { AuthGuard } from '../auth/auth.guard';
 
 @Component({
 	selector: 'app-home',
@@ -9,18 +9,16 @@ import { AuthHttp } from 'angular2-jwt';
 	styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+	token = localStorage.getItem('id_token');
 	jwt: string;
 	decodedJwt: string;
-	response: string;
-	api: string;
 
-	constructor(private router: Router, private http: Http, private authHttp: AuthHttp) {
-		this.jwt = localStorage.getItem('current_user');
+	constructor(private router: Router, private http: Http, private auth: AuthGuard) {
+		this.jwt = this.token;
 		this.decodedJwt = this.jwt;
 	}
 
 	ngOnInit() {
-		console.log(localStorage.getItem('current_user'));
 	}
 
 }

@@ -23,7 +23,7 @@ export class LoginService {
 
 	private extractData(res: Response) {
 		let body = res.json();
-        return body[0] || {};
+        return body || {};
     }
 
     private handleError (error: Response | any) {
