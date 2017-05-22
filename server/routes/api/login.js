@@ -15,12 +15,13 @@ exports.login = (req, res) => {
 				mail: doc[0].mail,
 				password: doc[0].password,
 				type: doc[0].type
-			}
-			let token = jwt.sign(userCookie._id, process.env.SECRET_KEY, {
-				expiresIn: 400000
-			})
+			};
+			
+			let token = jwt.sign(userCookie._id, process.env.SECRET_KEY, { expiresIn: 400000 });
+			let send = { user: doc[0], token: token };
+
 			res.cookie('login', userCookie);
-			res.json(doc[0]);
+			res.json(send);
 		}
 	});
 };

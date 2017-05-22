@@ -1,0 +1,41 @@
+<section class="app_bar_back"></section>
+<section class="app_bar bg_primary shadow_flat">
+	<div class="app_bar_inner font_white">
+		<div class="bar_top">
+			<div class="auto_col logo_container">
+				<img class="size_32 v_align_middle" src="assets/icons/logo_white.png" (click)="logout()">
+			</div>
+			<div class="float_right">
+				<div class="auto_col v_align_top search_bar_container">
+					<button class="pd_left_8 pd_right_8" id="search-icon">
+						<img class="icon v_align_middle mr_left_4 mr_right_4" src="assets/icons/magnify_white.png">
+					</button>
+				</div>
+				<div class="auto_col v_align_top messages_button">
+					<button class="pd_left_8 pd_right_8" id="msm-open-button">
+						<img class="icon v_align_middle mr_left_4 mr_right_4" src="assets/icons/email_white.png">
+					</button>
+				</div>
+				<div class="auto_col v_align_top prof_container pd_left_8 pd_right_16">
+					<div class="img_container circle auto_col size_32 v_align_middle">
+						<img src="assets/icons/default_profile.png">
+					</div>
+					<span class="mr_left_4">{{ user.name }}</span>
+				</div>
+			</div>
+		</div>
+		<div class="bar_bottom">
+			<div class="menu">
+				<nav class="item">
+					<img class="icon" src="assets/icons/book-multiple_white.png">
+				</nav><nav class="item">
+					<img class="icon" src="assets/icons/calendar_white.png">
+				</nav><nav class="item">
+					<img class="icon" src="assets/icons/forum_white.png">
+				</nav><nav class="item">
+					<img class="icon" src="assets/icons/book-open_white.png">
+				</nav>
+			</div>
+		</div>
+	</div>
+</section>

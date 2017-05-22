@@ -23,7 +23,9 @@ export class LoginService {
 
 	private extractData(res: Response) {
 		let body = res.json();
-        return body || {};
+		localStorage.setItem('id_token', body.token);
+		localStorage.setItem('user_profile', JSON.stringify(body.user));
+        return body.user || {};
     }
 
     private handleError (error: Response | any) {

@@ -8,31 +8,25 @@
 	<div class="bg_white shadow_flat mr_12 mr_top_24">
 		<div class="pd_24">
 			<div class="title_container text_align_center">
-				<h2 class="title_big pd_top_8 font_primary">Iniciar Sesión</h2>
+				<h2 class="title_big pd_top_8 font_secondary">Iniciar Sesión</h2>
 			</div>
 			<form (submit)="login()">
-				<div class="pd_top_48 pd_bottom_48">
+				<div class="pd_top_40 pd_bottom_40">
 					<div class="icon_field">
-						<img src="assets/icons/account_black.png" class="icon opacity"><div class="field_container">
+						<div class="field">
 							<label class="opacity font_bold font_small">Usuario</label>
-							<div class="field">
-								<input type="text" [(ngModel)]="user.mail" name="user" id="user" placeholder="Usuario">
-							</div>
+							<img src="assets/icons/account_black.png" class="icon opacity">
+							<input type="text" [(ngModel)]="user.mail" name="user" id="user" placeholder="Usuario">
 						</div>
-					</div>
-					<div class="icon_field mr_top_16">
-						<img src="assets/icons/lock_black.png" class="icon opacity"><div class="field_container">
+						<div class="field mr_top_8">
 							<label class="opacity font_bold font_small">Contraseña</label>
-							<div class="field">
-								<input type="password" [(ngModel)]="user.password" name="password" id="password" placeholder="Contraseña">
-							</div>
+							<img src="assets/icons/lock_black.png" class="icon opacity">
+							<input type="password" [(ngModel)]="user.password" name="password" id="password" placeholder="Contraseña">
 						</div>
 					</div>
 				</div>
-				<div class="field_container">
-					<div class="field">
-						<input type="submit" value="Iniciar" class="bg_secondary shadow_raised w_100 font_white border_radius">
-					</div>
+				<div class="field">
+					<input type="submit" value="Iniciar" class="bg_secondary shadow_raised w_100 font_white border_radius">
 				</div>
 			</form>
 		</div>
