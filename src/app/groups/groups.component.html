@@ -51,7 +51,7 @@
 		</div>
 		<div class="pd_32" *ngIf="groups?.length < 1">
 			<h2 class="title_big font_normal opacity">
-				Ninguna asignatura por el momento
+				Ningun grupo por el momento
 			</h2>
 		</div>
 		<div class="bg_white shadow_flat border_radius mr_bottom_12" *ngFor="let group of groups">
@@ -70,9 +70,6 @@
 								Nivel: <b>{{ group.level }}</b>
 							</p>
 						</div>
-						<p class="mr_bottom_4">
-							Área: {{ group.area }}
-						</p>
 						<p class="font_small opacity">
 							Clave: <b>{{ group.key }}</b>
 						</p>
