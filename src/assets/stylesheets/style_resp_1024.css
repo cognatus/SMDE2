@@ -1,5 +1,4 @@
 @media screen and (min-width: 1024px) {
-
 	.app_bar, .app_bar_back, .app_bar .app_bar_inner .bar_top, .app_bar .app_bar_inner .bar_bottom { height: 56px; }
 
 	.app_bar .app_bar_inner .bar_top { line-height: 54px; }
@@ -20,5 +19,26 @@
 
 	.app_bar .app_bar_inner .bar_bottom .menu .item span {
 		display: inline-block;
+	}
+
+	.pop_up_container .pop_up {
+		margin: 32px auto;
+	}
+
+	.pop_up_container .pop_up.big {
+		max-width: 1080px;
+	}
+
+	.pop_up_container .pop_up .inner .pop_up_title {
+		padding: 24px 32px 24px 32px;
+	}
+
+	.pop_up_container .pop_up .inner .padding_block {
+		padding: 48px;
+	}
+
+	.pop_up_container .pop_up .inner .responsive_col .col_2 {
+		display: inline-block;
+		width: calc(50% - 8px);
 	}
 }

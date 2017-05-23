@@ -1,5 +1,4 @@
 @media screen and (min-width: 425px) {
-
 	.app_bar .app_bar_inner .hidden_block_container.notif .hidden_block {
 		width: 320px;
 		right: -96px; 
@@ -11,4 +10,11 @@
 
 	.app_bar .app_bar_inner .prof_container span { display: inline-block; }
 
+	.pop_up_container .pop_up .inner .pop_up_title {
+		padding: 16px 24px 24px 24px;
+	}
+
+	.pop_up_container .pop_up .inner .padding_block {
+		padding: 24px;
+	}
 }

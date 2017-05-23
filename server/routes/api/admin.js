@@ -39,12 +39,12 @@ exports.insertUser = (req, res) => {
 		sex: req.body.sex
 	});
 
-	data.save( (err, doc) => {
+	data.save( (err) => {
 		if (err) {
 			console.log(err);
 			res.send(err);
 		} else {
-			res.send('Usuario registrado con exito');
+			res.json({ message: 'Usuario registrado con exito' });
 		}
 	});
 };
@@ -101,12 +101,12 @@ exports.insertSubject = (req, res) => {
 		area: req.body.area
 	});
 
-	data.save( (err, doc) => {
+	data.save( (err) => {
 		if (err) {
 			console.log(err);
 			res.send(err);
 		} else {
-			res.send('Asignatura registrada');
+			res.json({ message: 'Asignatura registrada' });
 		}
 	});
 };

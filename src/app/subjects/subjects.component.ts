@@ -15,22 +15,28 @@ export class SubjectsComponent implements OnInit {
 	subjects: Subject[];
 	subject = new Subject;
 
-	constructor(private router: Router, private auth: AuthGuard, private usersService: SubjectsService) { }
+	constructor(private router: Router, private auth: AuthGuard, private subjectsService: SubjectsService) { }
 
 	ngOnInit() {
 		this.fetchSubjects();
 	}
 
 	fetchSubjects(): void {
-		this.usersService.getSubjects()
+		this.subjectsService.getSubjects()
 			.subscribe( subjects => this.subjects = subjects,
 				error => {
 					console.log(error.text());
 				});
 	}
 
-	addSubject():void {
-
+	addSubject(): void {
+		this.subjectsService.addSubject(this.subject)
+			.subscribe( subject => {
+					this.subject = subject
+					this.router.navigate(['admin/asignaturas']);
+				}, error => {
+					console.log(error.text());
+				});
 	}
 
 }

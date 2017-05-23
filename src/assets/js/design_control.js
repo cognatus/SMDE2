@@ -100,12 +100,18 @@ function showSearchBar( status ) {
 function showPopup( status, pop_up_id ) {
 	var selector = $(pop_up_id);
 	if ( status ) {
-		$('.pop_up_container').css('z-index', '98');
-		selector.fadeIn().css('z-index', '99');
-	} else {
-		selector.fadeOut( function() {
-			selector.removeAttr('style');
+		selector.animate({
+			'left': '0'
 		});
+		if ( $(window).width() >= 620 ) {
+			selector.css('background-color', 'rgba(255,255,255,0.7)');
+			selector.find('.pop_up').css('box-shadow', '0 0 6px rgba(0,0,0,0.3)');
+		}
+	} else {
+		selector.animate({
+			'left': '-100%'
+		}).removeAttr('style');
+		selector.find('.pop_up').removeAttr('style');
 	}
 }
 

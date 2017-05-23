@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { AuthGuard } from '../auth/auth.guard';
 import { AdminService } from './admin.service';
 import { User } from '../models/user';
@@ -12,10 +13,22 @@ import { User } from '../models/user';
 })
 export class AdminComponent implements OnInit {
 
-	constructor(private router: Router, private auth: AuthGuard) { }
+	location: Location;
+
+	constructor(private router: Router, private auth: AuthGuard, location: Location) {
+		this.location = location;
+	}
 
 	ngOnInit() {
-		this.router.navigate(['admin/usuarios']);
+		if ( this.location.path() == '/admin' ) {
+			this.router.navigate(['admin/usuarios']);
+		} else if (this.location.path() == '/admin/asignaturas' ) {
+			this.router.navigate(['admin/asignaturas']);
+		} else if (this.location.path() == '/admin/grupos' ) {
+			this.router.navigate(['admin/grupos']);
+		} else if (this.location.path() == '/admin/cursos' ) {
+			this.router.navigate(['admin/cursos']);
+		}
 	}
 
 }
