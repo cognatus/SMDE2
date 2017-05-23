@@ -26,7 +26,8 @@ export const routes: Routes = [
                     { path: 'subjects', component: UserCoursesComponent, canActivate: [AuthGuard] }
                 ]
             },    
-            { path: 'asignaturas', component: SubjectsComponent, canActivate: [AuthGuard] }
+            { path: 'asignaturas', component: SubjectsComponent, canActivate: [AuthGuard] },
+            { path: 'grupos', component: GroupsComponent, canActivate: [AuthGuard] }
     	]
   	},
     { path: 'mensajes', component: MessagesComponent, canActivate: [AuthGuard],
