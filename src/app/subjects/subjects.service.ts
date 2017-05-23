@@ -22,7 +22,7 @@ export class SubjectsService {
 	addSubject(subject:Subject): Observable<Subject> {
         let options = new RequestOptions({ headers: ContentHeaders });
 
-        return this.http.post(this.url, subject, options)
+        return this.http.post(this.urlSp, subject, options)
             .map(this.extractData)
             .catch(this.handleError);
     }
