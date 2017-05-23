@@ -1,3 +1,30 @@
 @media screen and (min-width: 768px) {
+	
+	.app_bar, .app_bar_back, .app_bar .app_bar_inner .bar_top, .app_bar .app_bar_inner .bar_bottom { height: 50px; }
 
+	.app_bar .app_bar_inner .searchbar_container .searchbar .field { margin-bottom: 3px;margin-top: 5px; }
+
+	.app_bar .app_bar_inner .hidden_block_container.notif .hidden_block {
+		right: 0;
+		width: 380px;
+	}
+
+	.app_bar .app_bar_inner .hidden_block_container.notif .hidden_block i.mark {
+		right: 16px;
+	}
+
+	.app_bar .app_bar_inner .bar_bottom {
+		position: relative;
+		float: left;
+		top: -50px;
+		left: 64px;
+		width: auto;
+		display: inline-block;
+	}
+
+	.app_bar .app_bar_inner .bar_bottom .menu .item {
+		width: auto;
+		padding-left: 12px;
+		padding-right: 12px;
+	}
 }

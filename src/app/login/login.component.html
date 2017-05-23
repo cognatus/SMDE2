@@ -5,13 +5,13 @@
 			<h1 class="font_white title_big font_normal">SMDE</h1>
 		</span>
 	</div>
-	<div class="bg_white shadow_flat mr_12 mr_top_24">
+	<div class="bg_white shadow_flat mr_12 mr_top_24 border_radius">
 		<div class="pd_24">
 			<div class="title_container text_align_center">
-				<h2 class="title_big pd_top_8 font_secondary">Iniciar Sesión</h2>
+				<h2 class="title_big pd_top_8 font_secondary font_light">Iniciar Sesión</h2>
 			</div>
 			<form (submit)="login()">
-				<div class="pd_top_40 pd_bottom_40">
+				<div class="pd_top_40 pd_bottom_24">
 					<div class="icon_field">
 						<div class="field">
 							<label class="opacity font_bold font_small">Usuario</label>
@@ -29,6 +29,13 @@
 					<input type="submit" value="Iniciar" class="bg_secondary shadow_raised w_100 font_white border_radius">
 				</div>
 			</form>
+			<div class="pd_top_24 text_align_right">
+				<a routerLink="/registro">
+					<button class="font_secondary font_big">
+						Registrarse
+					</button>
+				</a>
+			</div>
 		</div>
 	</div>
 </section>

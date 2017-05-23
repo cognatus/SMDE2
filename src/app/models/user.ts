@@ -1,3 +1,6 @@
+import { Course } from './course';
+import { Institute } from './institute';
+
 export class User {
 	_id: string;
 	mail: string;
@@ -9,16 +12,12 @@ export class User {
 	userType: number;
 	createdDate: Date;
 	sex: number;
-	courses: [{
-		subject: {
-			id: string;
-			level: number;
-			name: string;
-		};
-		group: {
-			id: string;
-			level: number;
-			name: string;
-		}
-	}];
+	institute: Institute[];
+	setting: {
+		notifEmail: boolean;
+		msmColor: string;
+		primaryColor: string;
+		theme: number;
+	}
+	courses: Course[];
 };

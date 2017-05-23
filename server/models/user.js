@@ -17,8 +17,8 @@ var UserSchema = new Schema({
 	}],
 	setting: {
 		notifEmail: Boolean,
-		notifApp: Boolean,
 		msmColor: String,
+		primaryColor: String,
 		theme: Number
 	},
 	notification: [{
@@ -29,16 +29,16 @@ var UserSchema = new Schema({
 	}],
 	course: [{
 		_id: {type: String, required: true},
-		subject: [{
+		subject: {
 			_id: {type: String, required: true},
 			name: {type: String, required: true},
 			level: {type: Number, required: true}
-		}],
-		group: [{
+		},
+		group: {
 			_id: {type: String, required: true},
 			name: {type: String, required: true},
 			level: {type: Number, required: true}	
-		}]
+		}
 	}]
 });
 

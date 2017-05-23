@@ -24,11 +24,11 @@ app.use(express.static(path.join(__dirname, 'dist')));
 
 //conexion con mongo
 mongoose.connect('mongodb://localhost/smde2', (error) => {
-  if (error) {
-    throw error;
-  }else{
-    console.log('CONECTADO A MONGO');
-  }
+	if (error) {
+		throw error;
+	}else{
+		console.log('CONECTADO A MONGO');
+	}
 });
 
 // Set our api routes
@@ -36,7 +36,7 @@ app.use('/api', api);
 
 // Catch all other routes and return the index file
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'dist/index.html'));
+	res.sendFile(path.join(__dirname, 'dist/index.html'));
 });
 
 /**

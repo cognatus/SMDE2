@@ -1,0 +1,31 @@
+<app-menu *ngIf="auth.loggedIn()"></app-menu>
+<article class="admin_container">
+	<section class="border_bottom">
+		<div class="auto_col">
+			<a [routerLink]="['usuarios']" class="font_secondary">
+				<div class="pd_12 hover_black font_normal">
+					Usuarios
+				</div>
+			</a>
+		</div><div class="auto_col">
+			<a [routerLink]="['asignaturas']" class="font_secondary">
+				<div class="pd_12 hover_black font_normal">
+					Asignaturas
+				</div>
+			</a>
+		</div><div class="auto_col">
+			<a [routerLink]="['grupos']" class="font_secondary">
+				<div class="pd_12 hover_black font_normal">
+					Grupos
+				</div>
+			</a>
+		</div><div class="auto_col">
+			<a [routerLink]="['cursos']" class="font_secondary">
+				<div class="pd_12 hover_black font_normal">
+					Cursos
+				</div>
+			</a>
+		</div>
+	</section>
+	<router-outlet></router-outlet>
+</article>

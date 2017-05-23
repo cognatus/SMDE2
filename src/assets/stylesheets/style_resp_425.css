@@ -1,4 +1,14 @@
 @media screen and (min-width: 425px) {
 
+	.app_bar .app_bar_inner .hidden_block_container.notif .hidden_block {
+		width: 320px;
+		right: -96px; 
+	}
+
+	.app_bar .app_bar_inner .hidden_block_container.notif .hidden_block i.mark {
+		right: 112px;
+	}
+
+	.app_bar .app_bar_inner .prof_container span { display: inline-block; }
 
 }

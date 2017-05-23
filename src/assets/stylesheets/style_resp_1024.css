@@ -1,3 +1,24 @@
 @media screen and (min-width: 1024px) {
 
+	.app_bar, .app_bar_back, .app_bar .app_bar_inner .bar_top, .app_bar .app_bar_inner .bar_bottom { height: 56px; }
+
+	.app_bar .app_bar_inner .bar_top { line-height: 54px; }
+
+	.app_bar .app_bar_inner .searchbar_container { position: relative; }
+
+	.app_bar .app_bar_inner .searchbar_container .searchbar { width: 360px; }
+
+	.app_bar .app_bar_inner .searchbar_container .searchbar .field { margin-top: 8px;margin-bottom: 0; }
+
+	.app_bar .app_bar_inner .hidden_block_container .hidden_block { top: 64px; }
+
+	.app_bar .app_bar_inner .hidden_block_container.notif .hidden_block { width: 400px; }
+
+	.app_bar .app_bar_inner .bar_bottom { top: -56px; }
+
+	.app_bar .app_bar_inner .bar_bottom .menu .item { line-height: 54px; }
+
+	.app_bar .app_bar_inner .bar_bottom .menu .item span {
+		display: inline-block;
+	}
 }

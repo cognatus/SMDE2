@@ -13,6 +13,9 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { SignupComponent } from './signup/signup.component';
 import { MenuComponent } from './menu/menu.component';
+import { MessagesComponent } from './messages/messages.component';
+import { AdminComponent } from './admin/admin.component';
+import { UsersComponent } from './users/users.component';
 
 @NgModule({
   declarations: [
@@ -20,15 +23,16 @@ import { MenuComponent } from './menu/menu.component';
     LoginComponent,
     HomeComponent,
     SignupComponent,
-    MenuComponent
+    MenuComponent,
+    MessagesComponent,
+    AdminComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    RouterModule.forRoot(routes, {
-      useHash: true
-    })
+    RouterModule.forRoot(routes)
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent]

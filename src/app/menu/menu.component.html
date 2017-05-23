@@ -2,38 +2,149 @@
 <section class="app_bar bg_primary shadow_flat">
 	<div class="app_bar_inner font_white">
 		<div class="bar_top">
-			<div class="auto_col logo_container">
-				<img class="size_32 v_align_middle" src="assets/icons/logo_white.png" (click)="logout()">
-			</div>
+			<a routerLink="/">
+				<div class="auto_col logo_container hover_white">
+					<img class="icon v_align_middle" src="assets/icons/logo_flat_white.png">
+				</div>
+			</a>
 			<div class="float_right">
-				<div class="auto_col v_align_top search_bar_container">
-					<button class="pd_left_8 pd_right_8" id="search-icon">
+				<div class="auto_col v_align_top searchbar_container">
+					<button class="action_button pd_left_8 pd_right_8 hover_white" id="search-icon" title="Buscar" onclick="showSearchBar(true)">
 						<img class="icon v_align_middle mr_left_4 mr_right_4" src="assets/icons/magnify_white.png">
 					</button>
-				</div>
-				<div class="auto_col v_align_top messages_button">
-					<button class="pd_left_8 pd_right_8" id="msm-open-button">
-						<img class="icon v_align_middle mr_left_4 mr_right_4" src="assets/icons/email_white.png">
+					<div class="searchbar" id="search-bar">
+						<div class="field">
+							<button>
+								<img class="icon" src="assets/icons/magnify_white.png">
+							</button>
+							<button class="close" onclick="showSearchBar(false)">
+								<img class="icon" src="assets/icons/close_white.png">
+							</button>
+							<input type="text" placeholder="Buscar">
+						</div>
+					</div>
+				</div><div class="auto_col v_align_top messages_button">
+					<a routerLink="/mensajes">
+						<button class="action_button pd_left_8 pd_right_8 hover_white" id="msm-open-button" title="Abrir Mensajes">
+							<img class="icon v_align_middle mr_left_4 mr_right_4" src="assets/icons/email_white.png">
+						</button>
+					</a>
+				</div><div class="auto_col v_align_top hidden_block_container notif">
+					<button class="action_button pd_left_8 pd_right_8 hover_white" id="notif-open-button" title="Ver Notificaciones">
+						<img class="icon v_align_middle mr_left_4 mr_right_4" src="assets/icons/bell_white.png">
 					</button>
-				</div>
-				<div class="auto_col v_align_top prof_container pd_left_8 pd_right_16">
-					<div class="img_container circle auto_col size_32 v_align_middle">
+					<div class="hidden_block" id="notif-mini">
+						<i class="mark bg_white"></i>
+						<div class="bg_white shadow_flat border_radius notif_container">
+							<section class="mm_section border_bottom pd_top_12 pd_bottom_12">
+								<div class="pd_left_16 pd_right_16">
+									<p class="opacity font_small">Notificaciones</p>
+								</div>
+							</section>
+							<section class="mm_section border_bottom">
+								<div class="list">
+									<div class="list_element hover_black">
+										<div class="ref">
+											<span class="circle bg_secondary">
+												<label class="title_smaller font_light font_white size_24">N</label>
+											</span>
+										</div><div class="info">
+											<div class="pd_12 pd_left_16 pd_right_16">
+												<h3 class="font_normal mr_bottom_8">
+													Lorem Ipsum
+												</h3>
+												<p class="opacity">
+													Lorem ipsum dolor sit amet consectetur
+												</p>
+											</div>
+										</div>
+									</div>
+								</div>
+							</section>
+							<section class="mm_section">
+								<button class="w_100 font_red hover_black">
+									<div class="pd_8 font_secondary">Ver todas</div>
+								</button>
+							</section>
+						</div>
+					</div>
+				</div><div class="auto_col v_align_top hidden_block_container prof_container pd_left_16 pd_right_16 hover_white" id="menu-pphoto">
+					<div class="img_container circle auto_col size_32 v_align_middle cursor_pointer">
 						<img src="assets/icons/default_profile.png">
 					</div>
-					<span class="mr_left_4">{{ user.name }}</span>
+					<span class="mr_left_8">{{ user.name }}</span>
+					<div class="hidden_block" id="options-mini">
+						<i class="mark bg_white"></i>
+						<div class="bg_white shadow_flat border_radius">
+							<section class="mm_section border_bottom pd_top_12 pd_bottom_12">
+								<div class="pd_left_16 pd_right_16 opacity">
+									<p class="font_small">Iniciado con:</p>
+									<p class="font_bold mr_top_4">{{ user.mail }}</p>
+								</div>
+							</section>
+							<section class="mm_section border_bottom pd_top_8 pd_bottom_8">
+								<div class="pd_8 pd_left_16 pd_right_16 hover_black">
+									<p>Cuenta</p>
+								</div>
+								<div class="pd_8 pd_left_16 pd_right_16 hover_black">
+									<p>Ayuda</p>
+								</div>
+								<div class="pd_8 pd_left_16 pd_right_16 hover_black">
+									<p>Ajustes</p>
+								</div>
+							</section>
+							<section class="mm_section pd_top_4 pd_bottom_4">
+								<button class="w_100 font_red red_trans" (click)="logout()">
+									<div class="pd_8 font_bold">Cerrar Sesión</div>
+								</button>
+							</section>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 		<div class="bar_bottom">
 			<div class="menu">
-				<nav class="item">
-					<img class="icon" src="assets/icons/book-multiple_white.png">
-				</nav><nav class="item">
-					<img class="icon" src="assets/icons/calendar_white.png">
-				</nav><nav class="item">
-					<img class="icon" src="assets/icons/forum_white.png">
-				</nav><nav class="item">
-					<img class="icon" src="assets/icons/book-open_white.png">
+				<nav class="item hover_white" *ngIf="user.type == 1 || user.type== 2">
+					<a routerLink="/asignaturas" class="font_white">
+						<div class="inner">
+							<img class="icon" src="assets/icons/book-multiple_white.png"><span>
+								Asignaturas
+							</span>
+						</div>
+					</a>
+				</nav><nav class="item hover_white" *ngIf="user.type == 0">
+					<a routerLink="/admin" class="font_white">
+						<div class="inner">
+							<img class="icon" src="assets/icons/edit_white.png"><span>
+								Asministrador
+							</span>
+						</div>
+					</a>
+				</nav><nav class="item hover_white">
+					<a routerLink="/agenda" class="font_white">
+						<div class="inner">
+							<img class="icon" src="assets/icons/calendar_white.png"><span>
+								Agenda
+							</span>
+						</div>
+					</a>
+				</nav><nav class="item hover_white">
+					<a routerLink="/foro" class="font_white">
+						<div class="inner">
+							<img class="icon" src="assets/icons/forum_white.png"><span>
+								Foro
+							</span>
+						</div>
+					</a>
+				</nav><nav class="item hover_white">
+					<a routerLink="/contenidos" class="font_white">
+						<div class="inner">
+							<img class="icon" src="assets/icons/book-open_white.png"><span>
+								Contenidos
+							</span>
+						</div>
+					</a>
 				</nav>
 			</div>
 		</div>

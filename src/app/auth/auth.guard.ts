@@ -1,10 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Router, CanActivate } from '@angular/router';
 import { tokenNotExpired } from 'angular2-jwt';
+import { User } from '../models/user';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-	constructor(private router: Router) {}
+
+	getUser: User;
+	token: string; jwt: string; decodedJwt: string;
+	constructor(private router: Router) {
+		this.getUser = JSON.parse(localStorage.getItem('user_profile'));
+		this.token = localStorage.getItem('id_token');
+		this.jwt = this.token;
+		this.decodedJwt = this.jwt;
+	}
 
 	canActivate() {
 		// Check to see if a user has a valid JWT
@@ -18,8 +27,9 @@ export class AuthGuard implements CanActivate {
 		}
 	}
 
-	loggedIn() {
-		let token = localStorage.getItem('id_token'); 
+	loggedIn(): boolean {
+		let token = localStorage.getItem('id_token');
 		return token !== undefined && token !== null;
 	}
+
 }

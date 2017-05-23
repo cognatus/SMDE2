@@ -1,0 +1,27 @@
+<div class="users_container">
+	<section class="list">
+		<div class="bg_white shadow_flat border_radius mr_bottom_12" *ngFor="let user of users">
+			<div class="list_element">
+				<div class="ref">
+					<span class="circle bg_secondary">
+						<label class="title_smaller font_light font_white size_24">{{ user.name.charAt(0) }}</label>
+					</span>
+				</div><div class="info">
+					<div class="pd_12 pd_left_16 pd_right_16">
+						<div class="mr_bottom_8">
+							<h3 class="font_normal mr_bottom_4">
+								{{ user.name }}
+							</h3>
+							<p class="opacity">
+								<b>{{ user.mail }}</b>
+							</p>
+						</div>
+						<p>
+							{{ userTypes[user.type] }}
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>

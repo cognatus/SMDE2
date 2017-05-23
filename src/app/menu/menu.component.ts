@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthGuard } from '../auth/auth.guard';
 import { User } from '../models/user';
+import { trigger, state, style, animate, transition } from '@angular/core';
 
 @Component({
 	selector: 'app-menu',
@@ -9,13 +10,12 @@ import { User } from '../models/user';
 	styleUrls: ['./menu.component.css']
 })
 export class MenuComponent implements OnInit {
-
 	user: User;
 
 	constructor(private router: Router, private auth: AuthGuard) { }
 
 	ngOnInit() {
-		this.user = JSON.parse(localStorage.getItem('user_profile'));
+		this.user = this.auth.getUser;
 	}
 
 	logout(): void {
