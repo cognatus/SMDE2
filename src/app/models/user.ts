@@ -9,9 +9,12 @@ export class User {
 	lastName: string;
 	phone: number;
 	birthDay: Date;
-	userType: number;
+	privilege: number;
 	createdDate: Date;
+	updateDate: Date;
 	sex: number;
+	profilePhoto: string;
+	backPhoto: string;
 	institute: Institute[];
 	setting: {
 		notifEmail: boolean;

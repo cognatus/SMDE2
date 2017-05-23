@@ -32,7 +32,7 @@ button.bg_white {
 
 button img {vertical-align: middle;}
 
-a { text-decoration: none; }
+a { text-decoration: none;color: #424242; }
 
 /*---- SPACING -------------------------- */
 
@@ -227,14 +227,19 @@ label.size_24 { display: inline-block; }
 .bg_white .border_bottom { border-bottom: 1px solid rgba(0, 0, 0, 0.04); }
 
 .opacity { opacity: 0.5; }
-.hover_black, .hover_white { cursor: pointer; }
+.hover_black, .hover_white, .hover_lightgray, .hover_dark { cursor: pointer; }
 .hover_black:hover { background-color: rgba(0, 0, 0, 0.06) !important; }
 .hover_white:hover { background-color: rgba(255, 255, 255, 0.06) !important; }
 .hover_dark:hover { background-color: #424242 !important; }
+.hover_lightgray:hover { background-color: #f9f9f9 !important; }
 .underline:hover { text-decoration: underline; }
 .cursor_pointer { cursor: pointer; }
 
 /*--------------------------------------- */
+
+.relative_pos {
+	position: relative;
+}
 
 .static_col .col_2 {
 	display: inline-block;
@@ -528,6 +533,26 @@ label.size_24 { display: inline-block; }
 	width: calc(100% - 64px);
 	display: inline-block;
 	vertical-align: top;
+	position: relative;
+}
+
+.list_element .info .options_button, .options_button {
+	position: absolute;
+	top: 6px;
+	right: 4px;
+	z-index: 2;
+	outline: none;
+}
+
+.list_element .info .hidden_options, .hidden_options {
+	position: absolute;
+	width: auto;
+	min-width: 180px;
+	max-width: 300px;
+	top: 12px;
+	right: 36px;
+	z-index: 3;
+	display: none;
 }
 
 .pop_up_container {

@@ -11,6 +11,9 @@ var UserSchema = new Schema({
 	type: {type: Number, required: true}, // Privilegio
 	createDate: {type: Date, required: true, default: new Date()},
 	sex: Number,
+	profilePhoto: String,
+	backPhoto: String,
+	updateDate: {type: Date, default: new Date()},
 	institute: [{
 		_id: {type: String, required: true},
 		name: {type: String, required:true}

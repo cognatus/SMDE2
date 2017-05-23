@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 import { AuthGuard } from '../auth/auth.guard';
 import { UsersService } from './users.service';
-import { User } from '../models/user'; 
+import { User } from '../models/user';
+import { colors, userTypes } from '../app.constants';
 
 @Component({
 	selector: 'app-users',
@@ -11,14 +13,15 @@ import { User } from '../models/user';
 	providers: [UsersService]
 })
 export class UsersComponent implements OnInit {
-
+	user= new User;
 	users: User[];
 	userTypes: string[];
 
-	constructor(private router: Router, private auth: AuthGuard, private usersService: UsersService) { }
+	constructor(private router: Router, private auth: AuthGuard, private usersService: UsersService) {
+		this.userTypes = userTypes;
+	}
 
 	ngOnInit() {
-		this.userTypes = ['Administrador', 'Alumno', 'Profesor'];
 		this.fetchUsers();
 	}
 
@@ -28,6 +31,21 @@ export class UsersComponent implements OnInit {
 				error => {
 					console.log(error.text());
 				});
+	}
+
+	addUser(): void {
+		this.usersService.addUser(this.user)
+			.subscribe( response => {
+					location.reload();
+				}, error => {
+					console.log(error.text());
+				});
+	}
+
+	getRandomColor() {
+		return {
+			"background-color": colors[Math.floor(Math.random()*colors.length)]	
+		};
 	}
 
 }

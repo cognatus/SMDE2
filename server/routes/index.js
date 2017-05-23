@@ -13,7 +13,9 @@ router.post('/login', login.login);
 
 router.post('/signup', login.signup);
 
-router.get('/users', admin.getUsers);
+router.route('/users')
+	.get(admin.getUsers)
+	.post(admin.insertUser);
 
 router.route('/users/:id')
 	.get(admin.getUserById)

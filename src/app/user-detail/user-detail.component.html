@@ -1,3 +1,164 @@
-<p>
-  user-detail works!
-</p>
+<div class="users_container">
+	<div class="pop_up_container" id="user-edit">
+		<div class="pop_up_back" onclick="showPopup(false, '#user-edit')"></div>
+		<div class="pop_up">
+			<div class="inner border_radius">
+				<div class="bg_primary">
+					<div class="text_align_right">
+						<button class="pd_8 circle hover_black" onclick="showPopup(false, '#user-edit')">
+							<img class="icon" src="assets/icons/close_white.png">
+						</button>
+					</div>
+					<div class="pop_up_title font_white">
+						<h1 class="title_big font_lightnormal">
+							Editar Usuario
+						</h1>
+					</div>
+				</div>
+				<form class="pd_16 padding_block" (submit)="updateUser()">
+					<div class="data_container">
+						<div class="pd_left_16 pd_right_16">
+							<div class="img_container size_120 margin_auto circle">
+								<img src="assets/icons/default_profile.png">
+							</div>
+						</div>
+					</div>
+					<div class="data_container">
+						<h2 class="title_medium mr_bottom_24 font_secondary">Datos</h2>
+						<div class="pd_left_8 pd_right_8">
+							<div class="field_container pd_bottom_24">
+								<div class="field mr_top_8">
+									<label class="opacity font_bold font_small">Nombre(s)</label>
+									<input type="text" [(ngModel)]="user.name" name="name" placeholder="Nombre(s)" />
+								</div>
+								<div class="field mr_top_8">
+									<label class="opacity font_bold font_small">Apellidos</label>
+									<input type="text" [(ngModel)]="user.lastName" name="lastName" placeholder="Apellidos"/>
+								</div>
+								<div class="field mr_top_8">
+									<label class="opacity font_bold font_small">Correo</label>
+									<input type="text" [(ngModel)]="user.mail" name="mail" placeholder="Correo Electrónico"/>
+								</div>
+								<div class="field mr_top_8">
+									<label class="opacity font_bold font_small">Télefono</label>
+									<input type="text" [(ngModel)]="user.phone" name="phone" placeholder="Teléfono"/>
+								</div>
+								<div class="field mr_top_8">
+									<label class="opacity font_bold font_small">Fecha de Nacimiento</label>
+									<input type="text" [(ngModel)]="user.birthDay" name="birthDay" placeholder="Fecha (dd/mm/yyyy)"/>
+								</div>
+								<div class="field mr_top_8">
+									<label class="opacity font_bold font_small">Tipo</label>
+									<select [(ngModel)]="user.privilege" name="area">
+										<option value="1" selected="selected">Alumno</option>
+										<option value="2">Profesor</option>
+										<option value="3">Administrador</option>
+									</select>
+								</div>
+								<div class="field mr_top_8">
+									<label class="opacity font_bold font_small">Sexo</label>
+									<select [(ngModel)]="user.sex" name="area">
+										<option value="0" selected="selected">Hombre</option>
+										<option value="1">Mujer</option>
+										<option value="2">Otro</option>
+									</select>
+								</div>
+								<div class="field mr_top_8">
+									<label class="opacity font_bold font_small">Contraseña Nueva</label>
+									<input type="password" [(ngModel)]="user.password" name="password" placeholder="Contraseña Nueva"/>
+								</div>
+							</div>
+							<div class="field text_align_right">
+								<input type="submit" class="bg_secondary font_white shadow_raised" value="Agregar">
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<section class="list">
+		<div class="pd_16">
+			<button class="pd_8 pd_right_12 bg_secondary shadow_raised border_radius" onclick="showPopup(true, '#user-edit')">
+				<img class="v_align_middle icon" src="assets/icons/edit_white.png">
+				<b class="v_align_middle mr_left_4 font_normal">Editar Usuario</b>
+			</button>
+		</div>
+		<div class="bg_white shadow_flat border_radius mr_bottom_12 relative_pos">
+			<button class="options_button hover_lightgray size_32 text_align_center circle">
+				<img class="icon v_align_middle opacity" src="assets/icons/dots-vertical_black.png">
+			</button>
+			<div class="hidden_options">
+				<div class="bg_white pd_bottom_8 pd_top_8 shadow_flat border_radius font_normal">
+					<a>
+						<p class="pd_8 pd_left_16 pd_right_16 hover_black font_red">
+							Eliminar
+						</p>
+					</a>
+				</div>
+			</div>
+			<div class="pd_24 text_align_center">
+				<div class="img_container size_120 margin_auto circle">
+					<img src="assets/icons/default_profile.png">
+				</div>
+				<div class="mr_top_32">
+					<h3 class="title_small font_normal">
+						{{ user.name }} {{ user.lastName }}
+					</h3>
+					<p class="opacity mr_top_8">
+						<b class="font_big">{{ user.mail }}</b>
+					</p>
+					<p class="mr_top_16 opacity font_normal font_big">
+						{{ userTypes[user.privilege] }}
+					</p>
+				</div>
+			</div>
+		</div>
+		<div class="pd_16">
+			<h2 class="title_small font_secondary">
+				Cursos
+			</h2>
+		</div>
+		<div class="bg_white shadow_flat border_radius mr_bottom_12">
+			<div class="list_element">
+				<div class="ref">
+					<span class="circle" [ngStyle]="getRandomColor()">
+						<label class="title_smaller font_light font_white size_24">{{ (user.name).charAt(0) }}</label>
+					</span>
+				</div><div class="info">
+					<button class="options_button hover_lightgray size_32 text_align_center circle">
+						<img class="icon v_align_middle opacity" src="assets/icons/dots-vertical_black.png">
+					</button>
+					<div class="hidden_options">
+						<div class="bg_white pd_bottom_8 pd_top_8 shadow_flat border_radius font_normal">
+							<a>
+								<p class="pd_8 pd_left_16 pd_right_16 hover_black">
+									Editar
+								</p>
+							</a>
+							<a>
+								<p class="pd_8 pd_left_16 pd_right_16 hover_black font_red">
+									Eliminar
+								</p>
+							</a>
+						</div>
+					</div>
+					<div class="pd_12 pd_left_16 pd_right_16">
+						<div class="mr_bottom_8">
+							<h3 class="font_normal mr_bottom_4">
+								{{ user.name }} {{ user.lastName }}
+							</h3>
+							<p class="opacity">
+								<b>{{ user.mail }}</b>
+							</p>
+						</div>
+						<p>
+							{{ userTypes[user.privilege] }}
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
+

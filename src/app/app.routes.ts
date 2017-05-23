@@ -7,7 +7,10 @@ import { MessagesComponent } from './messages/messages.component';
 import { MessageConversationComponent } from './message-conversation/message-conversation.component';
 import { AdminComponent } from './admin/admin.component';
 import { UsersComponent } from './users/users.component';
+import { UserDetailComponent } from './user-detail/user-detail.component';
+import { UserCoursesComponent } from './user-courses/user-courses.component';
 import { SubjectsComponent } from './subjects/subjects.component';
+import { GroupsComponent } from './groups/groups.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -18,6 +21,11 @@ export const routes: Routes = [
     	children: [
     		{ path: '', redirectTo: 'admin/usuarios', pathMatch: 'full' },
     		{ path: 'usuarios', component: UsersComponent, canActivate: [AuthGuard] },
+            { path: 'usuarios/:id', component: UserDetailComponent, canActivate: [AuthGuard],
+                children: [
+                    { path: 'subjects', component: UserCoursesComponent, canActivate: [AuthGuard] }
+                ]
+            },    
             { path: 'asignaturas', component: SubjectsComponent, canActivate: [AuthGuard] }
     	]
   	},

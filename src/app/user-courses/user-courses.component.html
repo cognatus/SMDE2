@@ -1,0 +1,37 @@
+<div class="courses_container">
+	<div class="bg_white shadow_flat border_radius mr_bottom_12" *ngFor="let course of course">
+		<div class="list_element">
+			<div class="ref">
+				<span class="circle" [ngStyle]="getRandomColor()">
+					<label class="title_smaller font_light font_white size_24">{{ course.subject.name.charAt(0) }}</label>
+				</span>
+			</div><div class="info">
+				<button class="options_button hover_lightgray size_32 text_align_center circle">
+					<img class="icon v_align_middle opacity" src="assets/icons/dots-vertical_black.png">
+				</button>
+				<div class="hidden_options">
+					<div class="bg_white pd_bottom_8 pd_top_8 shadow_flat border_radius font_normal">
+						<a>
+							<p class="pd_8 pd_left_16 pd_right_16 hover_black font_red">
+								Eliminar curso para este usuario
+							</p>
+						</a>
+					</div>
+				</div>
+				<div class="pd_12 pd_left_16 pd_right_16">
+					<div class="mr_bottom_8">
+						<h3 class="font_normal mr_bottom_4">
+							{{ course.group.name }}
+						</h3>
+						<p class="opacity">
+							Nivel de Asignatura: <b>{{ course.subject.level }}</b>
+						</p>
+						<p class="opacity mr_top_4">
+							Nivel de Grupo: <b>{{ course.group.level }}</b>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

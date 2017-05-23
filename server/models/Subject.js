@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var SubjectSchema = new Schema({
-	key: {type:String, required:true},
+	key: {type:String, required:true, unique: true},
 	name: {type: String, required: true},
 	level: {type: Number, required: true},
 	area: String

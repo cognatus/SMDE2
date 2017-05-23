@@ -1,31 +1,45 @@
 $(document).ready( function() {
 	$('html, body').click( function() {
-		showHiddenBlock( false, '#notif-mini' );
-		showHiddenBlock( false, '#options-mini' );
+		showHiddenBlock( false, $('#notif-mini') );
+		showHiddenBlock( false, $('#options-mini' ) );
+		showHiddenBlock( false, $('.hidden_options') );
 	}); 
 
-	$('#notif-mini, #options-mini').click( function( event ) {
+	$('#notif-mini, #options-mini, .hidden_options').click( function( event ) {
 		event.stopPropagation();
 	});
 
 	$('#notif-open-button').click( function( event ) {
 		event.stopPropagation();
 		if ( $('#notif-mini').css('display') === 'block' ) {
-			showHiddenBlock( false, '#notif-mini' )
+			showHiddenBlock( false, $('#notif-mini' ))
 		} else {
-			showHiddenBlock( true, '#notif-mini' )
+			showHiddenBlock( true, $('#notif-mini' ))
 		}
-		showHiddenBlock( false, '#options-mini' )
+		showHiddenBlock( false, $('.hidden_options') )
 	});
 
 	$('#menu-pphoto').click( function( event ) {
 		event.stopPropagation();
 		if ( $('#options-mini').css('display') === 'block' ) {
-			showHiddenBlock( false, '#options-mini' )
+			showHiddenBlock( false, $('#options-mini') )
 		} else {
-			showHiddenBlock( true, '#options-mini' )
+			showHiddenBlock( true, $('#options-mini') )
 		}
-		showHiddenBlock( false, '#notif-mini' )
+		showHiddenBlock( false, $('.hidden_options') )
+	});
+
+	$('.options_button').click( function( event ) {
+		event.preventDefault();
+		event.stopPropagation();
+		var sibling = $(this).siblings('.hidden_options');
+		if ( $(this).siblings('.hidden_options').css('display') === 'none' ) {
+			showHiddenBlock(true, sibling);
+		} else {
+			showHiddenBlock(false, sibling);
+		}
+		showHiddenBlock( false, $('#notif-mini') );
+		showHiddenBlock( false, $('#options-mini' ) );
 	});
 
 	var readyStateCheckInterval = setInterval( function() {
@@ -82,9 +96,9 @@ function moveCarousel( carousel_id, indicator_selector, position ) {
 
 function showHiddenBlock( status, selector ) {
 	if ( status ) {
-		$(selector).fadeIn();
+		selector.fadeIn();
 	} else {
-		$(selector).fadeOut();
+		selector.fadeOut();
 	}
 }
 

@@ -6,23 +6,27 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 
 import { ApiUrl } from '../app.constants';
-import { User } from '../models/user';
+import { Course } from '../models/course';
 
 @Injectable()
-export class UsersService {
-	url = ApiUrl + 'users';
+export class UserCoursesService {
+	url = ApiUrl + 'user/courses';
 	constructor(private http: Http ) {}
 
-	getUsers(): Observable<User[]> {
-		return this.http.get(this.url)
+	getCourses(userId): Observable<Course[]> {
+		return this.http.get(this.url + '/' + userId + '/subjects')
 			.map(this.extractData)
 			.catch(this.handleError);
 	}
 
-	addUser(user:User): Observable<User> {
+	addCourses(userId, courses: Course[]): Observable<Course[]> {
         let options = new RequestOptions({ headers: ContentHeaders });
+        let data = {
+        	userId: userId,
+        	courses: courses
+        }
 
-        return this.http.post(this.url, user, options)
+        return this.http.post(this.url + '/' + userId + '/subjects', data, options)
             .map(this.extractData)
             .catch(this.handleError);
     }

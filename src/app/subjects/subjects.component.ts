@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 import { AuthGuard } from '../auth/auth.guard';
 import { SubjectsService } from './subjects.service';
 import { Subject } from '../models/subject'; 
+import { colors } from '../app.constants'; 
 
 @Component({
 	selector: 'app-subjects',
@@ -11,11 +13,10 @@ import { Subject } from '../models/subject';
 	providers: [SubjectsService]
 })
 export class SubjectsComponent implements OnInit {
-
 	subjects: Subject[];
 	subject = new Subject;
 
-	constructor(private router: Router, private auth: AuthGuard, private subjectsService: SubjectsService) { }
+	constructor(private router: Router, private auth: AuthGuard, private subjectsService: SubjectsService) {}
 
 	ngOnInit() {
 		this.fetchSubjects();
@@ -23,8 +24,9 @@ export class SubjectsComponent implements OnInit {
 
 	fetchSubjects(): void {
 		this.subjectsService.getSubjects()
-			.subscribe( subjects => this.subjects = subjects,
-				error => {
+			.subscribe( subjects => {
+					this.subjects = subjects;
+				}, error => {
 					console.log(error.text());
 				});
 	}
@@ -32,11 +34,16 @@ export class SubjectsComponent implements OnInit {
 	addSubject(): void {
 		this.subjectsService.addSubject(this.subject)
 			.subscribe( subject => {
-					this.subject = subject
-					this.router.navigate(['admin/asignaturas']);
+					location.reload();
 				}, error => {
 					console.log(error.text());
 				});
+	}
+
+	getRandomColor() {
+		return {
+			"background-color": colors[Math.floor(Math.random()*colors.length)]	
+		};
 	}
 
 }

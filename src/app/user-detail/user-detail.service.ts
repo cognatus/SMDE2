@@ -9,20 +9,27 @@ import { ApiUrl } from '../app.constants';
 import { User } from '../models/user';
 
 @Injectable()
-export class UsersService {
-	url = ApiUrl + 'users';
-	constructor(private http: Http ) {}
+export class UserDetailService {
+	url = ApiUrl + 'users/';
+	constructor(private http: Http) {}
 
-	getUsers(): Observable<User[]> {
-		return this.http.get(this.url)
+	getUser(id): Observable<User> {
+		return this.http.get(this.url + id)
 			.map(this.extractData)
 			.catch(this.handleError);
 	}
 
-	addUser(user:User): Observable<User> {
+	updateUser(user: User): Observable<User> {
         let options = new RequestOptions({ headers: ContentHeaders });
 
-        return this.http.post(this.url, user, options)
+        return this.http.put(this.url + user._id, user, options)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+
+    deleteUser(id): Observable<User> {
+    	let options = new RequestOptions({ headers: ContentHeaders });
+        return this.http.delete(this.url + id, options)
             .map(this.extractData)
             .catch(this.handleError);
     }

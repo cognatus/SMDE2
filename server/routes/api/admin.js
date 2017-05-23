@@ -22,21 +22,27 @@ exports.getUserById = (req, res) => {
 			console.log(err);
 			res.send(err);
 		} else {
-			res.json(doc);
+			res.json(doc[0]);
 		}
 	});
 };
 
 // Agregar nuevo usuario (Admin, Alumno, Profesor)
 exports.insertUser = (req, res) => {
+	let birthDay = {
+		day: req.body.birthDay.split('/')[0], 
+		month: req.body.birthDay.split('/')[1], 
+		year: req.body.birthDay.split('/')[2]
+	}
 	var data = new User({
 		mail: req.body.mail,
 		password: req.body.password,
 		name: req.body.name,
 		lastName: req.body.lastName,
-		birthDay: req.body.birthDay,
-		type: req.body.type,
-		sex: req.body.sex
+		phone: req.body.phone,
+		birthDay: new Date(birthDay.year + '-' + birthDay.month + '-' + birthDay.day),
+		type: req.body.userType,
+		sex: req.body.sex,
 	});
 
 	data.save( (err) => {
@@ -118,7 +124,7 @@ exports.getSubjectById = (req, res) => {
 			console.log(err);
 			res.send(err);
 		} else {
-			res.json(doc);
+			res.json(doc[0]);
 		}
 	});
 };
