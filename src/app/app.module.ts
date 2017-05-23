@@ -14,8 +14,10 @@ import { HomeComponent } from './home/home.component';
 import { SignupComponent } from './signup/signup.component';
 import { MenuComponent } from './menu/menu.component';
 import { MessagesComponent } from './messages/messages.component';
+import { MessageConversationComponent } from './message-conversation/message-conversation.component';
 import { AdminComponent } from './admin/admin.component';
 import { UsersComponent } from './users/users.component';
+import { SubjectsComponent } from './subjects/subjects.component';
 
 @NgModule({
   declarations: [
@@ -25,8 +27,10 @@ import { UsersComponent } from './users/users.component';
     SignupComponent,
     MenuComponent,
     MessagesComponent,
+    MessageConversationComponent,
     AdminComponent,
-    UsersComponent
+    UsersComponent,
+    SubjectsComponent,
   ],
   imports: [
     BrowserModule,

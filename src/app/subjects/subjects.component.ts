@@ -5,9 +5,9 @@ import { SubjectsService } from './subjects.service';
 import { Subject } from '../models/subject'; 
 
 @Component({
-	selector: 'app-admin',
-	templateUrl: './users.component.html',
-	styleUrls: ['./users.component.css'],
+	selector: 'app-subjects',
+	templateUrl: './subjects.component.html',
+	styleUrls: ['./subjects.component.css'],
 	providers: [SubjectsService]
 })
 export class SubjectsComponent implements OnInit {

@@ -5,7 +5,7 @@ import { UsersService } from './users.service';
 import { User } from '../models/user'; 
 
 @Component({
-	selector: 'app-admin',
+	selector: 'app-users',
 	templateUrl: './users.component.html',
 	styleUrls: ['./users.component.css'],
 	providers: [UsersService]
