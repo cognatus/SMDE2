@@ -17,7 +17,7 @@ router.get('/users', admin.getUsers);
 
 router.route('/users/:id')
 	.get(admin.getUserById)
-	.put(admin.updateUser);
+	.put(admin.updateUser)
 	.delete(admin.deleteUser);
 
 router.route('/subjects')
@@ -26,7 +26,7 @@ router.route('/subjects')
 
 router.route('/subjects/:id')
 	.get(admin.getSubjectById)
-	.put(admin.updateSubject);
+	.put(admin.updateSubject)
 	.delete(admin.deleteSubject);
 
 module.exports = router;
