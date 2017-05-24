@@ -20,7 +20,7 @@ import { UsersComponent } from './users/users.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { UserCoursesComponent } from './user-courses/user-courses.component';
 import { SubjectsComponent } from './subjects/subjects.component';
-import { GroupsComponent } from './group/group.component';
+import { GroupsComponent } from './groups/groups.component';
 
 @NgModule({
   declarations: [

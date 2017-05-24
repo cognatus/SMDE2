@@ -34,6 +34,7 @@ export class GroupsComponent implements OnInit {
 	addGroup(): void {
 		this.groupsService.addGroup(this.group)
 			.subscribe( group => {
+					this.group = group
 					location.reload();
 				}, error => {
 					console.log(error.text());

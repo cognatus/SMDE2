@@ -202,8 +202,9 @@ label.size_24 { display: inline-block; }
 
 /*---- COLORS --------------------------- */
 
-.bg_primary { background-color: #212121 !important; }
-.bg_secondary { background-color: #448AFF !important; }
+.bg_primary { background-color: #3F51B5 !important; }
+.bg_primary_dark { background-color: #303F9F !important; }
+.bg_secondary { background-color: #64DD17 !important; }
 .bg_white { background-color: #FFF !important; }
 .bg_black { background-color: #000 !important; }
 .bg_gray { background-color: #e0e0e0 !important; }
@@ -213,8 +214,8 @@ label.size_24 { display: inline-block; }
 
 .red_trans:hover { background-color: #F44336;color: #fff !important;transition: all 0.3s; }
 
-.font_primary { color: #212121 !important; }
-.font_secondary { color: #448AFF !important; }
+.font_primary { color: #3F51B5 !important; }
+.font_secondary { color: #64DD17 !important; }
 .font_white { color: #FFF !important; }
 .font_black { color: #424242 !important; }
 .font_gray { color: #727272 !important; }
@@ -309,7 +310,7 @@ label.size_24 { display: inline-block; }
 }
 
 .field input:focus, .field select:focus, .field textarea:focus {
-	border-color: #448AFF;
+	border-color: #64DD17;
 }
 
 .field input[type="submit"], .field input[type="button"] {
@@ -434,7 +435,6 @@ label.size_24 { display: inline-block; }
 
 .app_bar .app_bar_inner .searchbar_container .searchbar .field input {
 	height: 100%;
-	background-color: #424242;
 	color: #fff;
 	width: calc(100% - 80px);
 	padding-left: 40px;

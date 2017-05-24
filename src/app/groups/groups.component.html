@@ -22,15 +22,15 @@
 							<div class="field_container pd_bottom_24">
 								<div class="field">
 									<label class="opacity font_bold font_small">Clave</label>
-									<input type="text" [(ngModel)]="group.key" name="key" placeholder="Clave de Asignatura"/>
+									<input type="text" [(ngModel)]="group.key" name="key" placeholder="Clave de Grupo"/>
 								</div>
 								<div class="field mr_top_8">
 									<label class="opacity font_bold font_small">Nombre</label>
-									<input type="text" [(ngModel)]="group.name" name="name" placeholder="Nombre de Asignatura"/>
+									<input type="text" [(ngModel)]="group.name" name="name" placeholder="Nombre de Grupo"/>
 								</div>
 								<div class="field mr_top_8">
 									<label class="opacity font_bold font_small">Nivel</label>
-									<input type="text" [(ngModel)]="group.level" name="nivel" placeholder="Nivel de Asignatura"/>
+									<input type="text" [(ngModel)]="group.level" name="nivel" placeholder="Nivel de Grupo"/>
 								</div>
 							</div>
 							<div class="field text_align_right">
@@ -46,7 +46,7 @@
 		<div class="pd_16">
 			<button class="pd_8 pd_right_12 bg_secondary shadow_raised border_radius" onclick="showPopup(true, '#group-add')">
 				<img class="v_align_middle icon" src="assets/icons/plus_white.png">
-				<b class="v_align_middle mr_left_4 font_normal">Nueva Asignatura</b>
+				<b class="v_align_middle mr_left_4 font_normal">Nuevo Grupo</b>
 			</button>
 		</div>
 		<div class="pd_32" *ngIf="groups?.length < 1">
@@ -57,10 +57,29 @@
 		<div class="bg_white shadow_flat border_radius mr_bottom_12" *ngFor="let group of groups">
 			<div class="list_element">
 				<div class="ref">
-					<span class="circle" [ngStyle]=" getRandomColor() ">
-						<label class="title_smaller font_light font_white size_24">{{ group.name.charAt(0) }}</label>
-					</span>
+					<a href="/admin/grupos/{{ group._id }}">
+						<span class="circle" [ngStyle]=" getRandomColor() ">
+							<label class="title_smaller font_light font_white size_24">{{ group.name.charAt(0) }}</label>
+						</span>
+					</a>
 				</div><div class="info">
+					<button class="options_button hover_lightgray size_32 text_align_center circle">
+						<img class="icon v_align_middle opacity" src="assets/icons/dots-vertical_black.png">
+					</button>
+					<div class="hidden_options">
+						<div class="bg_white pd_bottom_8 pd_top_8 shadow_flat border_radius font_normal">
+							<a href="/admin/grupos/{{ group._id }}">
+								<p class="pd_8 pd_left_16 pd_right_16 hover_black">
+									Ver
+								</p>
+							</a>
+							<a href="/admin/grupos/{{ group._id }}?edit=true">
+								<p class="pd_8 pd_left_16 pd_right_16 hover_black">
+									Editar
+								</p>
+							</a>
+						</div>
+					</div>
 					<div class="pd_12 pd_left_16 pd_right_16">
 						<div class="mr_bottom_8">
 							<h3 class="font_normal mr_bottom_4">

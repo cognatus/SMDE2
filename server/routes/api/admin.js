@@ -1,7 +1,7 @@
 const User = require('../../models/User');
 const Subject = require('../../models/Subject');
-/*const Group = require('../../models/Group');
-const Course = require('../../models/Course');*/
+const Group = require('../../models/Group');
+/*const Course = require('../../models/Course');*/
 
 // Obtener usuarios
 exports.getUsers = (req, res) => {
@@ -140,7 +140,7 @@ exports.updateSubject = (req, res) => {
 		if (err) {
 			res.send(err);
 		}else{
-			res.send('Asignatura modificada');
+			res.send({ message: 'Asignatura modificada' });
 		}
 	});
 };
@@ -151,22 +151,76 @@ exports.deleteSubject = (req, res) => {
 		if (err) {
 			res.send(err);
 		}else{
-			res.send('Asignatura eliminada');
+			res.send({ message: 'Asignatura eliminada' });
 		}
 	});
 };
 
-// Agregar nuevo Curso
-exports.insertCourse = (req, res) => {
-	
+// Obtener asignaturas
+exports.getGroups = (req, res) => {
+	Group.find({}, (err, doc) => {
+		if (err) {
+			console.log(err);
+			res.send(err);
+		} else {
+			res.json(doc);
+		}
+	});
 };
 
-// Agregar nuevo Grupo
+// Agregar nueva asignatura
 exports.insertGroup = (req, res) => {
-		
+	var data = new Group({
+		key: req.body.key,
+		name: req.body.name,
+		level: req.body.level,
+		area: req.body.area
+	});
+
+	data.save( (err) => {
+		if (err) {
+			console.log(err);
+			res.send(err);
+		} else {
+			res.json({ message: 'Grupo registrada' });
+		}
+	});
 };
 
-// FUNCION PARA MOSTRAR DATOS DE CURSOS DE LA BASE DE DATOS
-exports.getCourses = (req, res) => {
+// Obtener asignatura por id
+exports.getGroupById = (req, res) => {
+	Group.find({_id: req.params.id}, (err, doc) => {
+		if (err) {
+			console.log(err);
+			res.send(err);
+		} else {
+			res.json(doc[0]);
+		}
+	});
+};
 
+// Modificar asignatura
+exports.updateGroup = (req, res) => {
+	Group.findOneAndUpdate({_id: req.params.id}, {$set: {
+		key: req.body.key,
+		name: req.body.name,
+		level: req.body.level
+	}}, {new: false}, (err, doc) => {
+		if (err) {
+			res.send(err);
+		}else{
+			res.send({ message: 'Grupo modificada' });
+		}
+	});
+};
+
+// Eliminar asignatura
+exports.deleteGroup = (req, res) => {
+	Group.remove({_id: req.params.id}, (err, doc) => {
+		if (err) {
+			res.send(err);
+		}else{
+			res.send({ message: 'Grupo eliminado' });
+		}
+	});
 };

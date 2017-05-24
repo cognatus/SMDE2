@@ -31,4 +31,13 @@ router.route('/subjects/:id')
 	.put(admin.updateSubject)
 	.delete(admin.deleteSubject);
 
+router.route('/groups')
+	.get(admin.getGroups)
+	.post(admin.insertGroup);
+
+router.route('/groups/:id')
+	.get(admin.getGroupById)
+	.put(admin.updateGroup)
+	.delete(admin.deleteGroup);
+
 module.exports = router;

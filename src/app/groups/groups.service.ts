@@ -19,7 +19,7 @@ export class GroupsService {
 			.catch(this.handleError);
 	}
 
-	addGroup(group:Group): Observable<Group> {
+	addGroup(group: Group): Observable<Group> {
         let options = new RequestOptions({ headers: ContentHeaders });
 
         return this.http.post(this.url, group, options)
