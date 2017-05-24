@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { AuthGuard } from '../auth/auth.guard';
 import { User } from '../models/user';
 import { trigger, state, style, animate, transition } from '@angular/core';
@@ -12,7 +13,7 @@ import { trigger, state, style, animate, transition } from '@angular/core';
 export class MenuComponent implements OnInit {
 	user: User;
 
-	constructor(private router: Router, private auth: AuthGuard) { }
+	constructor(private router: Router, private auth: AuthGuard, private location: Location) {}
 
 	ngOnInit() {
 		this.user = this.auth.getUser;
@@ -22,6 +23,12 @@ export class MenuComponent implements OnInit {
 		localStorage.removeItem('id_token');
 		localStorage.removeItem('user_profile');
 		this.router.navigate(['/login']);
+	}
+
+	getActive(parameter): boolean {
+		let locationMenu = this.location.path().normalize();
+		let active = locationMenu.split('/')[1];
+		return parameter === active;
 	}
 
 }

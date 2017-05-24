@@ -508,17 +508,24 @@ label.size_24 { display: inline-block; }
 
 .app_bar .app_bar_inner .bar_bottom .menu .item img {
 	vertical-align: middle;
-	opacity: 0.8;
 }
 
 .app_bar .app_bar_inner .bar_bottom .menu .item span {
 	display: none;
 	vertical-align: middle;
-	opacity: 0.8;
 	font-weight: 500;
 	font-size: 14px;
 	margin-left: 10px;
 }
+
+.app_bar .app_bar_inner .bar_bottom .menu .item img, .app_bar .app_bar_inner .bar_bottom .menu .item span {
+	opacity: 0.4;
+}
+
+.app_bar .app_bar_inner .bar_bottom .menu .item.active img, .app_bar .app_bar_inner .bar_bottom .menu .item.active span {
+	opacity: 1;
+}
+
 
 .list_element .ref {
 	width: 64px;
