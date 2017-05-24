@@ -18,7 +18,6 @@ import { MessageConversationComponent } from './message-conversation/message-con
 import { AdminComponent } from './admin/admin.component';
 import { UsersComponent } from './users/users.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
-import { UserCoursesComponent } from './user-courses/user-courses.component';
 import { SubjectsComponent } from './subjects/subjects.component';
 import { GroupsComponent } from './groups/groups.component';
 
@@ -34,7 +33,6 @@ import { GroupsComponent } from './groups/groups.component';
     AdminComponent,
     UsersComponent,
     UserDetailComponent,
-    UserCoursesComponent,
     SubjectsComponent,
     GroupsComponent
   ],
