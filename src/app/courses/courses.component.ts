@@ -24,7 +24,7 @@ export class CoursesComponent implements OnInit {
 	groups: Group[];
 	addedCourses: Course[] = [];
 
-	constructor(private coursesService: CoursesService,private subjectsService: SubjectsService, private groupsService: GroupsService, private location: Location) {
+	constructor(private coursesService: CoursesService,private subjectsService: SubjectsService, private groupsService: GroupsService, private location: Location, private router: Router) {
 		this.groupActive = false;
 	}
 
@@ -59,10 +59,11 @@ export class CoursesComponent implements OnInit {
 				});
 	}
 
-	addCourses() {
+	addCourses(event) {
+		event.preventDefault();
 		this.coursesService.addCourses(this.addedCourses)
 			.subscribe( response => {
-				location.reload()
+				location.reload();
 			}, error => {
 				console.log(error.text());
 			});

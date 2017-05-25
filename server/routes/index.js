@@ -35,13 +35,13 @@ router.route('/groups')
 	.get(admin.getGroups)
 	.post(admin.insertGroup);
 
-router.route('/courses')
-	.get(admin.getCourses)
-	.post(admin.insertCourses);
-
 router.route('/groups/:id')
 	.get(admin.getGroupById)
 	.put(admin.updateGroup)
 	.delete(admin.deleteGroup);
+
+router.route('/courses')
+	.get(admin.getCourses)
+	.post(admin.insertCourses);
 
 module.exports = router;

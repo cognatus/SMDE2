@@ -22,12 +22,18 @@ export class CoursesService {
 	addCourses(courses: Course[]): Observable<Course[]> {
         let options = new RequestOptions({ headers: ContentHeaders });
         let dataArray = [];
-        for ( let item in courses ) {
+        let data = '';
+
+        dataArray = courses;
+        dataArray.forEach( (item) => {
+        	delete item._id;
         	delete item.subject._id;
         	delete item.group._id;
-        }
+        });
+      
+        data = JSON.stringify(dataArray);
 
-        return this.http.post(this.url, dataArray, options)
+        return this.http.post(this.url, data, options)
             .map(this.extractData)
             .catch(this.handleError);
     }

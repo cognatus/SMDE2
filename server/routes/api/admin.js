@@ -1,14 +1,14 @@
 const User = require('../../models/User');
 const Subject = require('../../models/Subject');
 const Group = require('../../models/Group');
-/*const Course = require('../../models/Course');*/
+const Course = require('../../models/Course');
 
 // Obtener usuarios
 exports.getUsers = (req, res) => {
 	User.find({}, (err, doc) => {
 		if (err) {
 			console.log(err);
-			res.send(err);
+			res.json({ message: err });
 		} else {
 			res.json(doc);
 		}
@@ -20,7 +20,7 @@ exports.getUserById = (req, res) => {
 	User.find({_id: req.params.id}, (err, doc) => {
 		if (err) {
 			console.log(err);
-			res.send(err);
+			res.json({ message: err });
 		} else {
 			res.json(doc[0]);
 		}
@@ -48,7 +48,7 @@ exports.insertUser = (req, res) => {
 	data.save( (err) => {
 		if (err) {
 			console.log(err);
-			res.send(err);
+			res.json({ message: err });
 		} else {
 			res.json({ message: 'Usuario registrado con exito' });
 		}
@@ -68,7 +68,7 @@ exports.updateUser = (req, res) => {
 		sex: req.body.sex
 	}}, {new: false}, (err, doc) => {
 		if (err) {
-			res.send(err);
+			res.json({ message: err });
 		}else{
 			res.send('Usuario modificado');
 		}
@@ -79,7 +79,7 @@ exports.updateUser = (req, res) => {
 exports.deleteUser = (req, res) => {
 	User.remove({_id: req.params.id}, (err, doc) => {
 		if (err) {
-			res.send(err);
+			res.json({ message: err });
 		}else{
 			res.send('Usuario eliminado');
 		}
@@ -91,7 +91,7 @@ exports.getSubjects = (req, res) => {
 	Subject.find({}, (err, doc) => {
 		if (err) {
 			console.log(err);
-			res.send(err);
+			res.json({ message: err });
 		} else {
 			res.json(doc);
 		}
@@ -110,7 +110,7 @@ exports.insertSubject = (req, res) => {
 	data.save( (err) => {
 		if (err) {
 			console.log(err);
-			res.send(err);
+			res.json({ message: err });
 		} else {
 			res.json({ message: 'Asignatura registrada' });
 		}
@@ -122,7 +122,7 @@ exports.getSubjectById = (req, res) => {
 	Subject.find({_id: req.params.id}, (err, doc) => {
 		if (err) {
 			console.log(err);
-			res.send(err);
+			res.json({ message: err });
 		} else {
 			res.json(doc[0]);
 		}
@@ -138,7 +138,7 @@ exports.updateSubject = (req, res) => {
 		area: req.body.area
 	}}, {new: false}, (err, doc) => {
 		if (err) {
-			res.send(err);
+			res.json({ message: err });
 		}else{
 			res.send({ message: 'Asignatura modificada' });
 		}
@@ -149,7 +149,7 @@ exports.updateSubject = (req, res) => {
 exports.deleteSubject = (req, res) => {
 	Subject.remove({_id: req.params.id}, (err, doc) => {
 		if (err) {
-			res.send(err);
+			res.json({ message: err });
 		}else{
 			res.send({ message: 'Asignatura eliminada' });
 		}
@@ -161,7 +161,7 @@ exports.getGroups = (req, res) => {
 	Group.find({}, (err, doc) => {
 		if (err) {
 			console.log(err);
-			res.send(err);
+			res.json({ message: err });
 		} else {
 			res.json(doc);
 		}
@@ -180,7 +180,7 @@ exports.insertGroup = (req, res) => {
 	data.save( (err) => {
 		if (err) {
 			console.log(err);
-			res.send(err);
+			res.json({ message: err });
 		} else {
 			res.json({ message: 'Grupo registrada' });
 		}
@@ -192,7 +192,7 @@ exports.getGroupById = (req, res) => {
 	Group.find({_id: req.params.id}, (err, doc) => {
 		if (err) {
 			console.log(err);
-			res.send(err);
+			res.json({ message: err });
 		} else {
 			res.json(doc[0]);
 		}
@@ -207,7 +207,7 @@ exports.updateGroup = (req, res) => {
 		level: req.body.level
 	}}, {new: false}, (err, doc) => {
 		if (err) {
-			res.send(err);
+			res.json({ message: err });
 		}else{
 			res.send({ message: 'Grupo modificada' });
 		}
@@ -218,7 +218,7 @@ exports.updateGroup = (req, res) => {
 exports.deleteGroup = (req, res) => {
 	Group.remove({_id: req.params.id}, (err, doc) => {
 		if (err) {
-			res.send(err);
+			res.json({ message: err });
 		}else{
 			res.send({ message: 'Grupo eliminado' });
 		}
@@ -230,7 +230,7 @@ exports.getCourses = (req, res) => {
 	Course.find({}, (err, doc) => {
 		if (err) {
 			console.log(err);
-			res.send(err);
+			res.json({ message: err });
 		} else {
 			res.json(doc);
 		}
@@ -239,17 +239,15 @@ exports.getCourses = (req, res) => {
 
 // Agregar nuevos cursos
 exports.insertCourses = (req, res) => {
-	var data = req.body.courses;
+	var data = req.body;
 
-	data.forEach( (item) => {
-		item.save( (err) => {
-			if (err) {
-				console.log(err);
-				res.send(err);
-			} else {
-				res.json({ message: 'Curso registrado' });
-			}
-		});
+	Course.create(data, (err) => {
+		if (err) {
+			console.log(err);
+			res.json({ message: err });
+		} else {
+			res.json({ message: 'Cursos registrado' });
+		}
 	});
 		
 };
