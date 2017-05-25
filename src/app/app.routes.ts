@@ -10,6 +10,7 @@ import { UsersComponent } from './users/users.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { SubjectsComponent } from './subjects/subjects.component';
 import { GroupsComponent } from './groups/groups.component';
+import { CoursesComponent } from './courses/courses.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -22,7 +23,8 @@ export const routes: Routes = [
     		{ path: 'usuarios', component: UsersComponent, canActivate: [AuthGuard] },
             { path: 'usuarios/:id', component: UserDetailComponent, canActivate: [AuthGuard] },    
             { path: 'asignaturas', component: SubjectsComponent, canActivate: [AuthGuard] },
-            { path: 'grupos', component: GroupsComponent, canActivate: [AuthGuard] }
+            { path: 'grupos', component: GroupsComponent, canActivate: [AuthGuard] },
+            { path: 'cursos', component: CoursesComponent, canActivate: [AuthGuard] }
     	]
   	},
     { path: 'mensajes', component: MessagesComponent, canActivate: [AuthGuard],

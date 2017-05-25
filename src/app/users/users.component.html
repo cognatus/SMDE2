@@ -77,6 +77,11 @@
 				<b class="v_align_middle mr_left_4 font_normal">Nuevo Usuario</b>
 			</button>
 		</div>
+		<div class="pd_32" *ngIf="users?.length < 1">
+			<h2 class="title_big font_light opacity">
+				Ningun usuario por el momento
+			</h2>
+		</div>
 		<div class="bg_white shadow_flat border_radius mr_bottom_12" *ngFor="let user of users">
 			<div class="list_element">
 				<div class="ref">
@@ -109,10 +114,10 @@
 								{{ user.name }}
 							</h3>
 							<p class="opacity">
-								<b>{{ user.mail }}</b>
+								<b class="font_normal">{{ user.mail }}</b>
 							</p>
 						</div>
-						<p>
+						<p class="font_normal">
 							{{ userTypes[user.privilege] }}
 						</p>
 					</div>

@@ -50,7 +50,7 @@
 			</button>
 		</div>
 		<div class="pd_32" *ngIf="groups?.length < 1">
-			<h2 class="title_big font_normal opacity">
+			<h2 class="title_big font_light opacity">
 				Ningun grupo por el momento
 			</h2>
 		</div>
@@ -86,11 +86,11 @@
 								{{ group.name }}
 							</h3>
 							<p class="opacity">
-								Nivel: <b>{{ group.level }}</b>
+								Nivel: <b class="font_normal">{{ group.level }}</b>
 							</p>
 						</div>
 						<p class="font_small opacity">
-							Clave: <b>{{ group.key }}</b>
+							Clave: <b class="font_normal">{{ group.key }}</b>
 						</p>
 					</div>
 				</div>

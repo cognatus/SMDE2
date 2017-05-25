@@ -20,29 +20,31 @@ import { UsersComponent } from './users/users.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { SubjectsComponent } from './subjects/subjects.component';
 import { GroupsComponent } from './groups/groups.component';
+import { CoursesComponent } from './courses/courses.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    HomeComponent,
-    SignupComponent,
-    MenuComponent,
-    MessagesComponent,
-    MessageConversationComponent,
-    AdminComponent,
-    UsersComponent,
-    UserDetailComponent,
-    SubjectsComponent,
-    GroupsComponent
-  ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    HttpModule,
-    RouterModule.forRoot(routes)
-  ],
-  providers: [AuthGuard],
-  bootstrap: [AppComponent]
+	declarations: [
+		AppComponent,
+		LoginComponent,
+		HomeComponent,
+		SignupComponent,
+		MenuComponent,
+		MessagesComponent,
+		MessageConversationComponent,
+		AdminComponent,
+		UsersComponent,
+		UserDetailComponent,
+		SubjectsComponent,
+		GroupsComponent,
+		CoursesComponent
+	],
+	imports: [
+		BrowserModule,
+		FormsModule,
+		HttpModule,
+		RouterModule.forRoot(routes)
+	],
+	providers: [AuthGuard],
+	bootstrap: [AppComponent]
 })
 export class AppModule { }

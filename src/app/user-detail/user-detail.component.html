@@ -119,11 +119,16 @@
 				Cursos
 			</h2>
 		</div>
-		<div class="bg_white shadow_flat border_radius mr_bottom_12">
+		<div class="pd_32" *ngIf="user.courses?.length < 1">
+			<h2 class="title_big font_light opacity">
+				Ningun curso por el momento
+			</h2>
+		</div>
+		<div class="bg_white shadow_flat border_radius mr_bottom_12" *ngFor="let course of user.courses">
 			<div class="list_element">
 				<div class="ref">
 					<span class="circle" [ngStyle]="getRandomColor()">
-						<label class="title_smaller font_light font_white size_24">{{ (user.name).charAt(0) }}</label>
+						<label class="title_smaller font_light font_white size_24">{{ (course.name).charAt(0) }}</label>
 					</span>
 				</div><div class="info">
 					<button class="options_button hover_lightgray size_32 text_align_center circle">
@@ -131,11 +136,6 @@
 					</button>
 					<div class="hidden_options">
 						<div class="bg_white pd_bottom_8 pd_top_8 shadow_flat border_radius font_normal">
-							<a>
-								<p class="pd_8 pd_left_16 pd_right_16 hover_black">
-									Editar
-								</p>
-							</a>
 							<a>
 								<p class="pd_8 pd_left_16 pd_right_16 hover_black font_red">
 									Eliminar
@@ -146,15 +146,20 @@
 					<div class="pd_12 pd_left_16 pd_right_16">
 						<div class="mr_bottom_8">
 							<h3 class="font_normal mr_bottom_4">
-								{{ user.name }} {{ user.lastName }}
+								{{ course.subject.name }}
 							</h3>
 							<p class="opacity">
-								<b>{{ user.mail }}</b>
+								<b>{{ course.group.name }}</b>
 							</p>
+							<div class="mr_top_8">
+								<p class="opacity">
+									Nivel Asignatura: <b>{{ course.subject.level }}</b>
+								</p>
+								<p class="opacity">
+									Nivel Grupo: <b>{{ course.group.level }}</b>
+								</p>
+							</div>
 						</div>
-						<p>
-							{{ userTypes[user.privilege] }}
-						</p>
 					</div>
 				</div>
 			</div>

@@ -16,7 +16,7 @@ export class SubjectsComponent implements OnInit {
 	subjects: Subject[];
 	subject = new Subject;
 
-	constructor(private router: Router, private auth: AuthGuard, private subjectsService: SubjectsService) {}
+	constructor(private router: Router, private auth: AuthGuard, private subjectsService: SubjectsService, private location: Location) {}
 
 	ngOnInit() {
 		this.fetchSubjects();

@@ -54,7 +54,7 @@
 			</button>
 		</div>
 		<div class="pd_32" *ngIf="subjects?.length < 1">
-			<h2 class="title_big font_normal opacity">
+			<h2 class="title_big font_light opacity">
 				Ninguna asignatura por el momento
 			</h2>
 		</div>
@@ -94,10 +94,10 @@
 							</p>
 						</div>
 						<p class="mr_bottom_4">
-							Área: {{ subject.area }}
+							Área: <b class="font_normal">{{ subject.area }}</b>
 						</p>
 						<p class="font_small opacity">
-							Clave: <b>{{ subject.key }}</b>
+							Clave: <b class="font_normal">{{ subject.key }}</b>
 						</p>
 					</div>
 				</div>

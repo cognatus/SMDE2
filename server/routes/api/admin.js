@@ -156,7 +156,7 @@ exports.deleteSubject = (req, res) => {
 	});
 };
 
-// Obtener asignaturas
+// Obtener grupos
 exports.getGroups = (req, res) => {
 	Group.find({}, (err, doc) => {
 		if (err) {
@@ -168,7 +168,7 @@ exports.getGroups = (req, res) => {
 	});
 };
 
-// Agregar nueva asignatura
+// Agregar nueva grupo
 exports.insertGroup = (req, res) => {
 	var data = new Group({
 		key: req.body.key,
@@ -187,7 +187,7 @@ exports.insertGroup = (req, res) => {
 	});
 };
 
-// Obtener asignatura por id
+// Obtener grupo por id
 exports.getGroupById = (req, res) => {
 	Group.find({_id: req.params.id}, (err, doc) => {
 		if (err) {
@@ -199,7 +199,7 @@ exports.getGroupById = (req, res) => {
 	});
 };
 
-// Modificar asignatura
+// Modificar grupo
 exports.updateGroup = (req, res) => {
 	Group.findOneAndUpdate({_id: req.params.id}, {$set: {
 		key: req.body.key,
@@ -214,7 +214,7 @@ exports.updateGroup = (req, res) => {
 	});
 };
 
-// Eliminar asignatura
+// Eliminar grupo
 exports.deleteGroup = (req, res) => {
 	Group.remove({_id: req.params.id}, (err, doc) => {
 		if (err) {
@@ -223,4 +223,33 @@ exports.deleteGroup = (req, res) => {
 			res.send({ message: 'Grupo eliminado' });
 		}
 	});
+};
+
+// Obtener cursos
+exports.getCourses = (req, res) => {
+	Course.find({}, (err, doc) => {
+		if (err) {
+			console.log(err);
+			res.send(err);
+		} else {
+			res.json(doc);
+		}
+	});
+};
+
+// Agregar nuevos cursos
+exports.insertCourses = (req, res) => {
+	var data = req.body.courses;
+
+	data.forEach( (item) => {
+		item.save( (err) => {
+			if (err) {
+				console.log(err);
+				res.send(err);
+			} else {
+				res.json({ message: 'Curso registrado' });
+			}
+		});
+	});
+		
 };
