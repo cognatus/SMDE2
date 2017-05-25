@@ -31,7 +31,7 @@ export class UserDetailComponent implements OnInit {
 		this.userDetailService.getUser(this.userId)
 			.subscribe( user => this.user = user,
 				error => {
-					console.log(error.text());
+					console.log(error);
 				});
 	}
 
@@ -40,7 +40,7 @@ export class UserDetailComponent implements OnInit {
 			.subscribe( response => {
 					location.reload();
 				}, error => {
-					console.log(error.text());
+					console.log(error);
 				});
 	}
 
@@ -49,7 +49,7 @@ export class UserDetailComponent implements OnInit {
 			.subscribe( response => {
 					location.reload();
 				}, error => {
-					console.log(error.text());
+					console.log(error);
 				});
 	}
 

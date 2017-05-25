@@ -19,6 +19,9 @@
 					<div class="data_container">
 						<h2 class="title_medium mr_bottom_24 font_secondary">Datos</h2>
 						<div class="pd_left_8 pd_right_8">
+							<div class="pd_bottom_12" *ngIf="error !== ''">
+								<h4 class="font_red font_normal">{{ error }}</h4>
+							</div>
 							<div class="field_container pd_bottom_24">
 								<div class="field">
 									<label class="opacity font_bold font_small">Clave</label>

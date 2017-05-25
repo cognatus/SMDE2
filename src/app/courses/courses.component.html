@@ -16,12 +16,15 @@
 					</div>
 				</div>
 				<form class="pd_16 padding_block" (submit)="addCourses($event)">
-					<div class="data_container list_scroll" *ngIf="!groupActive">
+					<div class="data_container" *ngIf="!groupActive" [ngClass]="{'list_scroll': addedCourses?.length > 0 }">
 						<h2 class="title_smaller mr_bottom_12 font_secondary">Selecciona una asignatura</h2>
 						<div class="pd_8" *ngIf="subjects?.length < 1">
 							<h2 class="title_smaller font_light font_gray mr_bottom_8">
 								Ninguna asignatura agrega una aqui <a href="/admin/asignaturas" class="font_secondary underline">/admin/asignaturas</a>
 							</h2>
+						</div>
+						<div class="pd_bottom_12" *ngIf="error !== ''">
+							<h4 class="font_red font_normal">{{ error }}</h4>
 						</div>
 						<div class="hover_black" *ngFor="let subject of subjects; let index = index" [ngClass]="{ 'border_top': index != 0 }">
 							<div class="list_element" (click)="addSubject(subject)">
@@ -79,9 +82,14 @@
 						<div class="data_container mr_top_16">
 							<h2 class="title_medium mr_bottom_12 font_secondary">Cursos Agregados ( {{ addedCourses?.length }} )</h2>
 							<div *ngFor="let course of addedCourses; let index = index" [ngClass]="{ 'mr_top_16': index != 0 }">
-								<h4 class="mr_bottom_8 font_normal opacity">Curso {{ index + 1 }}</h4>
-								<div class="shadow_flat mr_bottom_8">
-									<div class="list_element bg_lightgray mr_bottom_12">
+								<h4 class="mr_bottom_8 font_normal">
+									<span class="opacity">Curso {{ index + 1 }}</span>
+									<span class="float_right font_red" (click)="deleteCourse(course)">
+										Eliminar
+									</span>
+								</h4>
+								<div class="shadow_flat bg_lightgray mr_bottom_8">
+									<div class="list_element border_bottom">
 										<div class="ref">
 											<span class="circle" [ngStyle]=" getRandomColor() ">
 												<label class="title_smaller font_light font_white size_24">{{ (course.subject.name).charAt(0) }}</label>
@@ -102,9 +110,7 @@
 											</div>
 										</div>
 									</div>
-								</div>
-								<div class="shadow_flat">
-									<div class="list_element bg_lightgray mr_bottom_8" *ngIf="course.group != undefined">
+									<div class="list_element bg_lightgray" *ngIf="course.group != undefined">
 										<div class="ref">
 											<span class="circle" [ngStyle]=" getRandomColor() ">
 												<label class="title_smaller font_light font_white size_24">{{ (course.group.name).charAt(0) }}</label>
@@ -149,44 +155,55 @@
 				Ningun curso por el momento
 			</h2>
 		</div>
-		<div class="bg_white shadow_flat border_radius mr_bottom_12" *ngFor="let course of courses">
-			<div class="list_element">
-				<div class="ref">
-					<a href="/admin/asignaturas/{{ course._id }}">
+		<div *ngFor="let course of courses; let index = index" [ngClass]="{ 'mr_top_16': index != 0 }">
+			<h4 class="mr_bottom_8 font_normal opacity pd_left_8 pd_right_16">Clave: {{ course._id }}</h4>
+			<div class="shadow_flat bg_white mr_bottom_8">
+				<div class="list_element border_bottom">
+					<div class="ref">
 						<span class="circle" [ngStyle]=" getRandomColor() ">
-							<label class="title_smaller font_light font_white size_24">{{ course.subject.name.charAt(0) }}</label>
+							<label class="title_smaller font_light font_white size_24">{{ (course.subject.name).charAt(0) }}</label>
 						</span>
-					</a>
-				</div><div class="info">
-					<button class="options_button hover_lightgray size_32 text_align_center circle">
-						<img class="icon v_align_middle opacity" src="assets/icons/dots-vertical_black.png">
-					</button>
-					<div class="hidden_options">
-						<div class="bg_white pd_bottom_8 pd_top_8 shadow_flat border_radius font_normal">
-							<a href="/admin/cursos/{{ course._id }}">
-								<p class="pd_8 pd_left_16 pd_right_16 hover_black">
-									Ver
+					</div><div class="info">
+						<div class="pd_12 pd_left_16 pd_right_16">
+							<div class="mr_bottom_8">
+								<h3 class="font_normal">
+									{{ course.subject.name }}
+								</h3>
+								<p class="mr_top_4 opacity">
+									Nivel: <b class="font_normal">{{ course.subject.level }}</b>
 								</p>
-							</a>
-							<a href="/admin/cursos/{{ course._id }}?edit=true">
-								<p class="pd_8 pd_left_16 pd_right_16 hover_black">
-									Editar
-								</p>
-							</a>
-						</div>
-					</div>
-					<div class="pd_12 pd_left_16 pd_right_16">
-						<div class="mr_bottom_8">
-							<h3 class="font_normal mr_bottom_4">
-								{{ course.subject.name }}
-							</h3>
-							<p>
-								Grupo: <b class="font_normal">{{ course.group.name }}</b>
+							</div>
+							<p class="opacity font_small">
+								Clave: <b class="font_normal">{{ course.subject.key }}</b>
+							</p>
+							<p class="font_normal mr_top_8">
+								Asignatura
 							</p>
 						</div>
-						<p class="opacity">
-							Clave: <b class="font_normal">{{ course.key }}</b>
-						</p>
+					</div>
+				</div>
+				<div class="list_element bg_white mr_bottom_8" *ngIf="course.group != undefined">
+					<div class="ref">
+						<span class="circle" [ngStyle]=" getRandomColor() ">
+							<label class="title_smaller font_light font_white size_24">{{ (course.group.name).charAt(0) }}</label>
+						</span>
+					</div><div class="info">
+						<div class="pd_12 pd_left_16 pd_right_16">
+							<div class="mr_bottom_8">
+								<h3 class="font_normal">
+									{{ course.group.name }}
+								</h3>
+								<p class="mr_top_4 opacity">
+									Nivel: <b class="font_normal" >{{ course.group.level }}</b>
+								</p>
+							</div>
+							<p class="opacity font_small">
+								Clave: <b class="font_normal">{{ course.group.key }}</b>
+							</p>
+							<p class="font_normal mr_top_8">
+								Grupo
+							</p>
+						</div>
 					</div>
 				</div>
 			</div>

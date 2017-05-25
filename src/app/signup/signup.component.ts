@@ -22,7 +22,7 @@ export class SignupComponent {
 	    	.subscribe( user => {
 	    			this.login();  
 				}, error => {
-					console.log(error.text());
+					console.log(error);
             	});
 	}
 

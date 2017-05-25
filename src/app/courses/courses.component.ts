@@ -23,6 +23,7 @@ export class CoursesComponent implements OnInit {
 	subjects: Subject[];
 	groups: Group[];
 	addedCourses: Course[] = [];
+	error: string = '';
 
 	constructor(private coursesService: CoursesService,private subjectsService: SubjectsService, private groupsService: GroupsService, private location: Location, private router: Router) {
 		this.groupActive = false;
@@ -37,7 +38,7 @@ export class CoursesComponent implements OnInit {
 			.subscribe( courses => {
 					this.courses = courses;
 				}, error => {
-					console.log(error.text());
+					console.log(error);
 				});
 	}
 
@@ -46,7 +47,7 @@ export class CoursesComponent implements OnInit {
 			.subscribe( subjects => {
 					this.subjects = subjects;
 				}, error => {
-					console.log(error.text());
+					console.log(error);
 				});
 	}
 
@@ -55,7 +56,7 @@ export class CoursesComponent implements OnInit {
 			.subscribe( groups => {
 					this.groups = groups;
 				}, error => {
-					console.log(error.text());
+					console.log(error);
 				});
 	}
 
@@ -65,7 +66,9 @@ export class CoursesComponent implements OnInit {
 			.subscribe( response => {
 				location.reload();
 			}, error => {
-				console.log(error.text());
+				console.log(error);
+				console.log(JSON.parse(error._body).message);
+				this.error = JSON.parse(error._body).message;
 			});
 	}
 
@@ -77,6 +80,13 @@ export class CoursesComponent implements OnInit {
 	addGroup(group: Group): void {
 		this.addedCourses[this.addedCourses.length - 1].group = group;
 		this.groupActive = false;
+	}
+
+	deleteCourse(course: Course) {
+		let index = this.addedCourses.indexOf(course);
+		if ( index > -1 ) {
+			this.addedCourses.splice(index, 1);
+		}
 	}
 
 	getRandomColor() {

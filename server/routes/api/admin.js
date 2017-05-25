@@ -8,7 +8,7 @@ exports.getUsers = (req, res) => {
 	User.find({}, (err, doc) => {
 		if (err) {
 			console.log(err);
-			res.json({ message: err });
+			res.status(500).send({ message: err });
 		} else {
 			res.json(doc);
 		}
@@ -20,7 +20,7 @@ exports.getUserById = (req, res) => {
 	User.find({_id: req.params.id}, (err, doc) => {
 		if (err) {
 			console.log(err);
-			res.json({ message: err });
+			res.status(500).send({ message: err });
 		} else {
 			res.json(doc[0]);
 		}
@@ -48,7 +48,7 @@ exports.insertUser = (req, res) => {
 	data.save( (err) => {
 		if (err) {
 			console.log(err);
-			res.json({ message: err });
+			res.status(500).send({ message: err });
 		} else {
 			res.json({ message: 'Usuario registrado con exito' });
 		}
@@ -68,7 +68,7 @@ exports.updateUser = (req, res) => {
 		sex: req.body.sex
 	}}, {new: false}, (err, doc) => {
 		if (err) {
-			res.json({ message: err });
+			res.status(500).send({ message: err });
 		}else{
 			res.send('Usuario modificado');
 		}
@@ -79,7 +79,7 @@ exports.updateUser = (req, res) => {
 exports.deleteUser = (req, res) => {
 	User.remove({_id: req.params.id}, (err, doc) => {
 		if (err) {
-			res.json({ message: err });
+			res.status(500).send({ message: err });
 		}else{
 			res.send('Usuario eliminado');
 		}
@@ -91,7 +91,7 @@ exports.getSubjects = (req, res) => {
 	Subject.find({}, (err, doc) => {
 		if (err) {
 			console.log(err);
-			res.json({ message: err });
+			res.status(500).send({ message: err });
 		} else {
 			res.json(doc);
 		}
@@ -100,19 +100,31 @@ exports.getSubjects = (req, res) => {
 
 // Agregar nueva asignatura
 exports.insertSubject = (req, res) => {
-	var data = new Subject({
-		key: req.body.key,
-		name: req.body.name,
-		level: req.body.level,
-		area: req.body.area
-	});
+	var data = {
+		'key': req.body.key,
+		'name': req.body.name,
+		'level': req.body.level,
+		'area': req.body.area
+	};
 
-	data.save( (err) => {
+	Subject.findOne({ key: data.key }, (err, doc) => {
 		if (err) {
 			console.log(err);
-			res.json({ message: err });
+			res.status(500).send({ message: err });
 		} else {
-			res.json({ message: 'Asignatura registrada' });
+			if ( doc ) {
+				res.status(500).send({ message: 'Clave ya utilizada' });
+			} else {
+				let subject = new Subject(data);
+				subject.save( (err) => {
+					if (err) {
+						console.log(err);
+						res.status(500).send({ message: err });	
+					} else {
+						res.json({ message: 'Asignatura registrada' });
+					}
+				});
+			}
 		}
 	});
 };
@@ -122,7 +134,7 @@ exports.getSubjectById = (req, res) => {
 	Subject.find({_id: req.params.id}, (err, doc) => {
 		if (err) {
 			console.log(err);
-			res.json({ message: err });
+			res.status(500).send({ message: err });
 		} else {
 			res.json(doc[0]);
 		}
@@ -138,7 +150,7 @@ exports.updateSubject = (req, res) => {
 		area: req.body.area
 	}}, {new: false}, (err, doc) => {
 		if (err) {
-			res.json({ message: err });
+			res.status(500).send({ message: err });
 		}else{
 			res.send({ message: 'Asignatura modificada' });
 		}
@@ -149,7 +161,7 @@ exports.updateSubject = (req, res) => {
 exports.deleteSubject = (req, res) => {
 	Subject.remove({_id: req.params.id}, (err, doc) => {
 		if (err) {
-			res.json({ message: err });
+			res.status(500).send({ message: err });
 		}else{
 			res.send({ message: 'Asignatura eliminada' });
 		}
@@ -161,7 +173,7 @@ exports.getGroups = (req, res) => {
 	Group.find({}, (err, doc) => {
 		if (err) {
 			console.log(err);
-			res.json({ message: err });
+			res.status(500).send({ message: err });
 		} else {
 			res.json(doc);
 		}
@@ -170,19 +182,31 @@ exports.getGroups = (req, res) => {
 
 // Agregar nueva grupo
 exports.insertGroup = (req, res) => {
-	var data = new Group({
-		key: req.body.key,
-		name: req.body.name,
-		level: req.body.level,
-		area: req.body.area
-	});
+	var data = {
+		'key': req.body.key,
+		'name': req.body.name,
+		'level': req.body.level,
+		'area': req.body.area
+	};
 
-	data.save( (err) => {
+	Group.findOne({ key: data.key }, (err, doc) => {
 		if (err) {
 			console.log(err);
-			res.json({ message: err });
+			res.status(500).send({ message: err });
 		} else {
-			res.json({ message: 'Grupo registrada' });
+			if ( doc ) {
+				res.status(500).send({ message: 'Clave ya utilizada' });
+			} else {
+				let group = new Group(data);
+				group.save( (err) => {
+					if (err) {
+						console.log(err);
+						res.status(500).send({ message: err });
+					} else {
+						res.json({ message: 'Grupo registrada' });
+					}
+				});
+			}
 		}
 	});
 };
@@ -192,7 +216,7 @@ exports.getGroupById = (req, res) => {
 	Group.find({_id: req.params.id}, (err, doc) => {
 		if (err) {
 			console.log(err);
-			res.json({ message: err });
+			res.status(500).send({ message: err });
 		} else {
 			res.json(doc[0]);
 		}
@@ -207,7 +231,7 @@ exports.updateGroup = (req, res) => {
 		level: req.body.level
 	}}, {new: false}, (err, doc) => {
 		if (err) {
-			res.json({ message: err });
+			res.status(500).send({ message: err });
 		}else{
 			res.send({ message: 'Grupo modificada' });
 		}
@@ -218,7 +242,7 @@ exports.updateGroup = (req, res) => {
 exports.deleteGroup = (req, res) => {
 	Group.remove({_id: req.params.id}, (err, doc) => {
 		if (err) {
-			res.json({ message: err });
+			res.status(500).send({ message: err });
 		}else{
 			res.send({ message: 'Grupo eliminado' });
 		}
@@ -230,7 +254,7 @@ exports.getCourses = (req, res) => {
 	Course.find({}, (err, doc) => {
 		if (err) {
 			console.log(err);
-			res.json({ message: err });
+			res.status(500).send({ message: err });
 		} else {
 			res.json(doc);
 		}
@@ -244,7 +268,7 @@ exports.insertCourses = (req, res) => {
 	Course.create(data, (err) => {
 		if (err) {
 			console.log(err);
-			res.json({ message: err });
+			res.status(500).send({ message: err });
 		} else {
 			res.json({ message: 'Cursos registrado' });
 		}

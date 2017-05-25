@@ -15,6 +15,7 @@ import { colors } from '../app.constants';
 export class SubjectsComponent implements OnInit {
 	subjects: Subject[];
 	subject = new Subject;
+	error: string = '';
 
 	constructor(private router: Router, private auth: AuthGuard, private subjectsService: SubjectsService, private location: Location) {}
 
@@ -27,7 +28,7 @@ export class SubjectsComponent implements OnInit {
 			.subscribe( subjects => {
 					this.subjects = subjects;
 				}, error => {
-					console.log(error.text());
+					console.log(error);
 				});
 	}
 
@@ -36,7 +37,8 @@ export class SubjectsComponent implements OnInit {
 			.subscribe( subject => {
 					location.reload();
 				}, error => {
-					console.log(error.text());
+					console.log(JSON.parse(error._body).message);
+					this.error = JSON.parse(error._body).message;
 				});
 	}
 

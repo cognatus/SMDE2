@@ -29,7 +29,7 @@ export class UsersComponent implements OnInit {
 		this.usersService.getUsers()
 			.subscribe( users => this.users = users,
 				error => {
-					console.log(error.text());
+					console.log(error);
 				});
 	}
 
@@ -38,7 +38,7 @@ export class UsersComponent implements OnInit {
 			.subscribe( response => {
 					location.reload();
 				}, error => {
-					console.log(error.text());
+					console.log(error);
 				});
 	}
 

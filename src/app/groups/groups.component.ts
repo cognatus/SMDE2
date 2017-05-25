@@ -15,6 +15,7 @@ import { colors } from '../app.constants';
 export class GroupsComponent implements OnInit {
 	groups: Group[];
 	group = new Group;
+	error: string = '';
 
 	constructor(private router: Router, private auth: AuthGuard, private groupsService: GroupsService) {}
 
@@ -27,7 +28,7 @@ export class GroupsComponent implements OnInit {
 			.subscribe( groups => {
 					this.groups = groups;
 				}, error => {
-					console.log(error.text());
+					console.log(error);
 				});
 	}
 
@@ -37,7 +38,8 @@ export class GroupsComponent implements OnInit {
 					this.group = group
 					location.reload();
 				}, error => {
-					console.log(error.text());
+					console.log(JSON.parse(error._body).message);
+					this.error = JSON.parse(error._body).message;
 				});
 	}
 
