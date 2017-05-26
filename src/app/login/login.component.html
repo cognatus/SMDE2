@@ -12,6 +12,9 @@
 			</div>
 			<form (submit)="login()">
 				<div class="pd_top_40 pd_bottom_24">
+					<div class="mr_bottom_16" *ngIf="error != ''">
+						{{ error }}
+					</div>
 					<div class="icon_field">
 						<div class="field">
 							<label class="opacity font_bold font_small">Usuario</label>

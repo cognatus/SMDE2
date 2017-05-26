@@ -675,6 +675,10 @@ img.opacity { opacity: 0.4; }
 	background-color: #fff;
 }
 
+.pop_up_container .pop_up .inner {
+	overflow: hidden;
+}
+
 .pop_up_container .pop_up .inner .pop_up_title, .pop_up_title {
 	padding: 16px 24px 16px 24px;
 }

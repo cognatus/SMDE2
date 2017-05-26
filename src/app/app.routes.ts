@@ -12,6 +12,7 @@ import { SubjectsComponent } from './subjects/subjects.component';
 import { GroupsComponent } from './groups/groups.component';
 import { CoursesComponent } from './courses/courses.component';
 import { ProfileComponent } from './profile/profile.component';
+import { UserCoursesComponent } from './user-courses/user-courses.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -29,7 +30,8 @@ export const routes: Routes = [
     	]
   	},
     { path: 'perfil', component: ProfileComponent, canActivate: [AuthGuard] },
-    { path: 'perfil/:id', component: ProfileComponent, canActivate: [AuthGuard] },
+    { path: 'perfil/:id', component: ProfileComponent },
+    { path: 'cursos', component: UserCoursesComponent, canActivate: [AuthGuard] },
     { path: 'mensajes', component: MessagesComponent, canActivate: [AuthGuard],
         children: [
             { path: ':id', component: MessageConversationComponent }

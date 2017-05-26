@@ -23,6 +23,7 @@ import { SubjectsComponent } from './subjects/subjects.component';
 import { GroupsComponent } from './groups/groups.component';
 import { CoursesComponent } from './courses/courses.component';
 import { ProfileComponent } from './profile/profile.component';
+import { UserCoursesComponent } from './user-courses/user-courses.component';
 
 @NgModule({
 	declarations: [
@@ -39,7 +40,8 @@ import { ProfileComponent } from './profile/profile.component';
 		SubjectsComponent,
 		GroupsComponent,
 		CoursesComponent,
-		ProfileComponent
+		ProfileComponent,
+		UserCoursesComponent
 	],
 	imports: [
 		BrowserModule,

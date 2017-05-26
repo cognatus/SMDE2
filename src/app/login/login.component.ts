@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 import { LoginService } from './login.service';
 import { User } from '../models/user';
@@ -12,15 +13,17 @@ import { User } from '../models/user';
 })
 export class LoginComponent implements OnInit{
 	user = new User;
+	error: string = '';
 	
-	constructor(private router: Router, private loginService: LoginService) {}
+	constructor(private router: Router, private loginService: LoginService, private location: Location) {}
 
 	login(): void {
 		this.loginService.loginUser(this.user)
 	    	.subscribe( user => {
-	    			this.router.navigate(['home']);
+	    			this.router.navigateByUrl('/home');
 				}, error => {
             		console.log(error);
+            		this.error = 'Usuario o contraseña incorrectos';
             	});
 	}
 

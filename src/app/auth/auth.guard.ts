@@ -32,4 +32,9 @@ export class AuthGuard implements CanActivate {
 		return token !== undefined && token !== null;
 	}
 
+	deleteUser(): void {
+		localStorage.removeItem('id_token');
+		localStorage.removeItem('user_profile');
+	}
+
 }
