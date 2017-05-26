@@ -2,9 +2,9 @@ const express = require('express');
 const router = express.Router();
 const multer = require('multer');
 
-const _media =  '../src/assets/media/';
+const _media =  'src/media/';
 
-let upload = multer({ dest: _media + 'upload/' });
+let upload = multer();
 
 const login = require('./api/login');
 const admin = require('./api/admin');
