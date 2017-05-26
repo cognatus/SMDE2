@@ -221,13 +221,22 @@
 					Cursos
 				</h2>
 			</div>
-			<div class="pd_32" *ngIf="user.courses?.length < 1">
+			<div class="pd_32 text_align_center" *ngIf="user.courses?.length < 1">
 				<h2 class="title_big font_light opacity" *ngIf="!privateUser">
-					Este usuario no cuenta con cursos aun
+					Este usuario no esta inscrito a ningun curso por el momento
 				</h2>
-				<h2 class="title_big font_light opacity" *ngIf="privateUser">
-					Ningun curso por el momento
-				</h2>
+				<div *ngIf="privateUser">
+					<h2 class="title_big font_light opacity">
+						No estas inscrito a ningun curso por el momento
+					</h2>
+					<div class="field">
+						<a href="/asignaturas" class="font_white">
+							<button class="bg_secondary shadow_raised border_radius font_white">
+								Agregar Curso(s)
+							</button>
+						</a>
+					</div>
+				</div>
 			</div>
 			<div class="bg_white shadow_flat border_radius mr_bottom_12" *ngFor="let course of user.courses">
 				<div class="list_element">
