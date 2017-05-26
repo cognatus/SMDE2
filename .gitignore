@@ -7,6 +7,9 @@
 # dependencies
 /node_modules
 
+# uploaded fields
+/assets/media
+
 # IDEs and editors
 /.idea
 .project

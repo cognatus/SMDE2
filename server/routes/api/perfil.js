@@ -1,23 +1,30 @@
-var fs = require('fs');
+const fs = require('fs');
+const User = require('../../models/User');
 
-exports.updateProfilePhotos = function(req, res){
-	var userId = req.body.userId;
-	var backImage = req.files.updateProfileBack;
-	var profileImage = req.files.updateProfilePhoto;
+exports.updateProfilePhotos = (req, res) => {
+	let userId = req.body.userId;
+	let background = req.files.profileBackground;
+	let profile = req.files.profilePhoto;
 
-	if ( backImage.originalFilename != '' ) {
-		var readableStream = fs.createReadStream(backImage.path);
-		var writableStream = fs.createWriteStream(__media + "/backgrounds/" + userId + ".jpg");
+	User.findOneAndUpdate({ _id: userId }, { $set: { profilePhoto: userId, backPhoto: userId } }, { new: false }, (err, doc) => {
+		if (err) {
+			res.status(500).send({ message: 'Hubo un error al encontrar o al modificar al usuario' });
+		} else {
+			if ( background.originalname != '' ) {
+				let readableStream = fs.createReadStream(background.path);
+				let writableStream = fs.createWriteStream(__media + "background/" + userId + ".jpg");
 
-		readableStream.pipe(writableStream, {end: false});
-	}
+				readableStream.pipe(writableStream, {end: false});
+			}
 
-	if ( profileImage.originalFilename != '' ) {
-		var readableStream = fs.createReadStream(profileImage.path);
-		var writableStream = fs.createWriteStream(__media + "/photos/" + userId + ".jpg");
+			if ( profile.originalname != '' ) {
+				let readableStream = fs.createReadStream(profile.path);
+				let writableStream = fs.createWriteStream(__media + "profile/" + userId + ".jpg");
 
-		readableStream.pipe(writableStream, {end: false});
-	}
-	res.json({ message: 'Fotos actualizadas con exito'});
+				readableStream.pipe(writableStream, {end: false});
+			}
+			res.json({ message: 'Fotos actualizadas con exito'});
+		}
+	});
 
  };

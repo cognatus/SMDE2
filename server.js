@@ -23,8 +23,6 @@ app.use(cookieParser());
 // Point static path to dist
 app.use(express.static(path.join(__dirname, 'dist')));
 
-global.__media = __dirname + 'media';
-
 //conexion con mongo
 mongoose.connect('mongodb://localhost/smde2', (error) => {
 	if (error) {

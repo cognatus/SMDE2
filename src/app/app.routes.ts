@@ -11,6 +11,7 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
 import { SubjectsComponent } from './subjects/subjects.component';
 import { GroupsComponent } from './groups/groups.component';
 import { CoursesComponent } from './courses/courses.component';
+import { ProfileComponent } from './profile/profile.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -27,6 +28,8 @@ export const routes: Routes = [
             { path: 'cursos', component: CoursesComponent, canActivate: [AuthGuard] }
     	]
   	},
+    { path: 'perfil', component: ProfileComponent, canActivate: [AuthGuard] },
+    { path: 'perfil/:id', component: ProfileComponent, canActivate: [AuthGuard] },
     { path: 'mensajes', component: MessagesComponent, canActivate: [AuthGuard],
         children: [
             { path: ':id', component: MessageConversationComponent }

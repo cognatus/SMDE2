@@ -1,8 +1,14 @@
 const express = require('express');
 const router = express.Router();
+const multer = require('multer');
+
+const _media =  '../src/assets/media/';
+
+let upload = multer({ dest: _media + 'upload/' });
 
 const login = require('./api/login');
 const admin = require('./api/admin');
+const profile = require('./api/perfil');
 
 /* GET api listing. */
 router.get('/', (req, res) => {
@@ -43,5 +49,7 @@ router.route('/groups/:id')
 router.route('/courses')
 	.get(admin.getCourses)
 	.post(admin.insertCourses);
+
+router.post('/updateProfilePhotos', upload.fields([{ name: 'profilePhoto', maxCount: 1 }, { name: 'profileBackground', maxCount: 1 }]), profile.updateProfilePhotos);
 
 module.exports = router;

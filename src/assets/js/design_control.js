@@ -32,6 +32,7 @@ $(document).ready( function() {
 	$('.options_button').click( function( event ) {
 		event.preventDefault();
 		event.stopPropagation();
+		showHiddenBlock( false, $('.hidden_options') );
 		var sibling = $(this).siblings('.hidden_options');
 		if ( $(this).siblings('.hidden_options').css('display') === 'none' ) {
 			showHiddenBlock(true, sibling);
@@ -132,25 +133,43 @@ function showPopup( status, pop_up_id ) {
 	}
 }
 
-function resizeImg() {
-	$('img[adjustable], video[adjustable]').each( function() {
+function resizeImg( selector ) {
+	if ( typeof selector === undefined ) {
+		$('img[adjustable], video[adjustable]').each( function() {
+			var imgWidth = parseFloat( $(this).get(0).naturalWidth );
+			var imgHeight = parseFloat( $(this).get(0).naturalHeight );
+			var width = parseFloat( $(this).parent().css('width') );
+			var height = parseFloat( $(this).parent().css('height') );
+			var parentProp = width / height;
+			var imgProp = imgWidth / imgHeight;
 
-		var imgWidth = parseFloat( $(this).get(0).naturalWidth );
-		var imgHeight = parseFloat( $(this).get(0).naturalHeight );
-		var width = parseFloat( $(this).parent().css('width') );
-		var height = parseFloat( $(this).parent().css('height') );
-		var parentProp = width / height;
-		var imgProp = imgWidth / imgHeight;
+			if ( imgProp > parentProp ) {
+				$(this).removeClass('w_100').addClass('h_100');
+			} else{
+				$(this).removeClass('h_100').addClass('w_100');
+			}
+		});
+	} else {
+		$(selector).each( function() {
+			var imgWidth = parseFloat( $(this).get(0).naturalWidth );
+			var imgHeight = parseFloat( $(this).get(0).naturalHeight );
+			var width = parseFloat( $(this).parent().css('width') );
+			var height = parseFloat( $(this).parent().css('height') );
+			var parentProp = width / height;
+			var imgProp = imgWidth / imgHeight;
 
-		if ( imgProp > parentProp ) {
-			$(this).removeClass('w_100').addClass('h_100');
-		} else{
-			$(this).removeClass('h_100').addClass('w_100');
-		}
-	});
+			if ( imgProp > parentProp ) {
+				$(this).removeClass('w_100').addClass('h_100');
+			} else{
+				$(this).removeClass('h_100').addClass('w_100');
+			}
+		});
+	}
 }
 
 function previewPhoto( input, img_selector ) {
+	console.log(input.value);
+	console.log(input.files);
 	if ( input.files.length > 0 ) {
 	    var reader = new FileReader();
 

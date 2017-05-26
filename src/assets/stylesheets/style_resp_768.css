@@ -1,4 +1,6 @@
 @media screen and (min-width: 768px) {
+	.increment_margin { margin: 16px; }
+
 	.app_bar, .app_bar_back, .app_bar .app_bar_inner .bar_top, .app_bar .app_bar_inner .bar_bottom { height: 50px; }
 
 	.app_bar .app_bar_inner .searchbar_container .searchbar .field { margin-bottom: 3px;margin-top: 5px; }
@@ -50,7 +52,7 @@
 		vertical-align: top;
 	}
 
-	.admin_container {
+	.admin_container, .profile_container {
 		width: calc(100% - 48px);
 	}
 
@@ -62,7 +64,7 @@
 	}
 
 	.profile_display {
-		height: 260px;
+		height: 320px;
 	}
 
 	.profile_display .profile_photo .inner {
@@ -72,5 +74,10 @@
 	.profile_display .profile_photo .img_container {
 		width: 96px;
 		height: 96px;
+	}
+
+	.profile_display .background .editable {
+		top: 24px;
+		left: 24px;
 	}
 }

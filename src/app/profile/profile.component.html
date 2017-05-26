@@ -1,5 +1,6 @@
-<div class="users_container">
-	<div class="pop_up_container" id="user-edit">
+<app-menu *ngIf="auth.loggedIn()"></app-menu>
+<div class="profile_container">
+	<div class="pop_up_container" id="user-edit" *ngIf="privateUser">
 		<div class="pop_up_back" onclick="showPopup(false, '#user-edit')"></div>
 		<div class="pop_up">
 			<div class="inner border_radius">
@@ -70,36 +71,90 @@
 			</div>
 		</div>
 	</div>
-	<article class="list mr_bottom_24">
-		<div class="pd_16 resp_title">
-			<button class="pd_8 pd_right_12 bg_secondary shadow_raised border_radius" onclick="showPopup(true, '#user-edit')">
-				<img class="v_align_middle icon" src="assets/icons/edit_white.png">
-				<b class="v_align_middle mr_left_4 font_normal">Editar Usuario</b>
-			</button>
+	<div class="pop_up_container" id="user-editphotos" *ngIf="privateUser">
+		<div class="pop_up_back" onclick="showPopup(false, '#user-editphotos')"></div>
+		<div class="pop_up">
+			<div class="inner border_radius">
+				<div class="bg_primary">
+					<div class="text_align_right">
+						<button class="pd_8 hover_black" onclick="showPopup(false, '#user-editphotos')">
+							<img class="icon" src="assets/icons/close_white.png">
+						</button>
+					</div>
+					<div class="pop_up_title font_white">
+						<h1 class="title_big font_lightnormal">
+							Actualizar Fotos
+						</h1>
+					</div>
+				</div>
+				<div class="update_photos_container">
+					<div class="profile_display small">
+						<div class="background bg_primary_dark">
+							<div class="editable">
+								<span class="size_48 circle hover_black text_align_center" onclick="triggerClick('#back-img-file')">
+									<img class="icon mr_top_12" src="assets/icons/camera_white.png">
+								</span>
+							</div>
+							<div class="img_container bg_primary_dark">
+								<img src="media/background/{{ user.backPhoto }}.png" id="profile-back" *ngIf="user.backPhoto != undefined && user.profilePhoto != ''" adjustable>
+								<img src="" id="profile-back" *ngIf="user.backPhoto == undefined || user.profilePhoto != ''" adjustable>
+							</div>
+						</div>
+						<div class="profile_photo font_white">
+							<div class="inner">
+								<div class="img_container circle shadow_flat">
+									<img src="assets/icons/default_profile.png" *ngIf="user.profilePhoto == undefined || user.profilePhoto == ''" id="profile-photo">
+									<img src="media/profile/{{ user.profilePhoto }}.png" *ngIf="user.profilePhoto != undefined && user.profilePhoto != ''" id="profile-photo">
+									<div class="editable" onclick="triggerClick('#profile-img-file')">
+										<img src="assets/icons/camera_white.png">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<form id="formUpload" class="field pd_16 text_align_right" action="api/updateProfilePhotos/" method="post" enctype="multipart/form-data">
+						<div class="hidden_input">
+							<input type="hidden" name="userId" value="{{ user._id }}">
+							<input type="file" name="profilePhoto" id="profile-img-file" onchange="previewPhoto(this, '#profile-photo')">
+							<input type="file" name="profileBackground" id="back-img-file" onchange="previewPhoto(this, '#profile-back');resizeImg('#profile-back');">
+						</div>
+						<input type="submit" class="bg_secondary shadow_raised border_radius font_white" name="" value="Actualizar" onclick="$('#formUpload').submit();">
+					</form>
+				</div>
+			</div>
 		</div>
+	</div>
+	<article class="mr_bottom_24">
 		<section class="bg_white shadow_flat border_radius mr_bottom_12 relative_pos">
-			<div class="tr_0 h_32">
+			<div class="tr_0 h_32" *ngIf="privateUser">
 				<div class="increment_margin size_32 relative_pos">
 					<button class="options_button hover_black size_32 text_align_center circle">
 						<img class="icon v_align_middle" src="assets/icons/dots-vertical_white.png">
 					</button>
 					<div class="hidden_options">
 						<div class="bg_white pd_bottom_8 pd_top_8 shadow_flat border_radius font_normal">
-							<a>
-								<p class="pd_8 pd_left_16 pd_right_16 hover_black font_red">
-									Eliminar
-								</p>
-							</a>
+							<p class="pd_8 pd_left_16 pd_right_16 hover_black" onclick="showPopup(true, '#user-edit')">
+								Editar
+							</p>
+							<p class="pd_8 pd_left_16 pd_right_16 hover_black" onclick="showPopup(true, '#user-editphotos')">
+								Actualizar Fotos
+							</p>
 						</div>
 					</div>
 				</div>
 			</div>
 			<div class="profile_display">
-				<div class="background bg_primary_dark"></div>
+				<div class="background bg_primary_dark">
+					<div class="img_container" *ngIf="user.backPhoto != undefined && user.profilePhoto != ''">
+						<img src="">
+					</div>
+					<div class="bg_opacity" *ngIf="user.backPhoto != undefined && user.profilePhoto != ''"></div>
+				</div>
 				<div class="profile_photo font_white">
 					<div class="inner">
 						<div class="img_container circle shadow_flat">
-							<img src="assets/icons/default_profile.png">
+							<img src="assets/icons/default_profile.png" *ngIf="user.profilePhoto == undefined || user.profilePhoto == ''">
+							<img src="media/profile/{{ user.profilePhoto }}.png" *ngIf="user.profilePhoto != undefined && user.profilePhoto != ''">
 						</div><div class="info">
 							<h3 class="title_smaller">
 								{{ user.name }} {{ user.lastName }}
@@ -140,15 +195,6 @@
 			<div class="bg_white shadow_flat mr_bottom_8">
 				<div class="pd_16">
 					<div class="mr_bottom_12">
-						<p class="opacity font_bold mr_bottom_4">Clave de Usuario</p>
-						<p class="font_big">
-							<img class="icon opacity v_align_middle mr_8" src="assets/icons/lock_black.png">
-							<span class=" v_align_middle mr_left_8">
-								{{ user._id }}
-							</span>
-						</p>
-					</div>
-					<div class="mr_bottom_12">
 						<p class="opacity font_bold mr_bottom_4">Teléfono</p>
 						<p class="font_big">
 							<img class="icon opacity v_align_middle mr_8" src="assets/icons/phone_black.png">
@@ -176,7 +222,10 @@
 				</h2>
 			</div>
 			<div class="pd_32" *ngIf="user.courses?.length < 1">
-				<h2 class="title_big font_light opacity">
+				<h2 class="title_big font_light opacity" *ngIf="!privateUser">
+					Este usuario no cuenta con cursos aun
+				</h2>
+				<h2 class="title_big font_light opacity" *ngIf="privateUser">
 					Ningun curso por el momento
 				</h2>
 			</div>
@@ -223,4 +272,5 @@
 		</section>
 	</article>
 </div>
+
 

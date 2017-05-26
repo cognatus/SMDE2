@@ -82,16 +82,22 @@
 									<p class="font_bold mr_top_4">{{ user.mail }}</p>
 								</div>
 							</section>
-							<section class="mm_section border_bottom pd_top_8 pd_bottom_8 font_normal">
-								<div class="pd_8 pd_left_16 pd_right_16 hover_black">
-									<p>Cuenta</p>
-								</div>
-								<div class="pd_8 pd_left_16 pd_right_16 hover_black">
-									<p>Ayuda</p>
-								</div>
-								<div class="pd_8 pd_left_16 pd_right_16 hover_black">
-									<p>Ajustes</p>
-								</div>
+							<section class="mm_section border_bottom pd_top_8 pd_bottom_8 font_normal font_color_normal">
+								<a href="/perfil">
+									<div class="pd_8 pd_left_16 pd_right_16 hover_black">
+										<p>Cuenta</p>
+									</div>
+								</a>
+								<a href="/ayuda">
+									<div class="pd_8 pd_left_16 pd_right_16 hover_black">
+										<p>Ayuda</p>
+									</div>
+								</a>
+								<a href="/ajustes">
+									<div class="pd_8 pd_left_16 pd_right_16 hover_black">
+										<p>Ajustes</p>
+									</div>
+								</a>
 							</section>
 							<section class="mm_section pd_top_4 pd_bottom_4">
 								<button class="w_100 font_red red_trans" (click)="logout()">
@@ -105,11 +111,11 @@
 		</div>
 		<div class="bar_bottom">
 			<div class="menu font_black">
-				<nav class="item hover_white" *ngIf="user.privilege == 1 || user.privilege == 2" [ngClass]="{'active font_white': getActive('asignaturas')}">
+				<nav class="item hover_white" *ngIf="user.privilege != 0" [ngClass]="{'active font_white': getActive('asignaturas')}">
 					<a href="/asignaturas">
 						<div class="inner">
 							<img class="icon" src="assets/icons/book-multiple_white.png" *ngIf=" getActive('asignaturas') "><img class="icon" src="assets/icons/book-multiple_black.png" *ngIf=" !getActive('asignaturas') "><span>
-								Asignaturas
+								Mis Cursos
 							</span>
 						</div>
 					</a>

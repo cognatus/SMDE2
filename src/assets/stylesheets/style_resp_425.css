@@ -1,4 +1,6 @@
 @media screen and (min-width: 425px) {
+	.increment_margin { margin: 12px; }
+
 	.app_bar .app_bar_inner .hidden_block_container.notif .hidden_block {
 		width: 320px;
 		right: -96px; 
@@ -25,11 +27,16 @@
 	}
 
 	.profile_display {
-		height: 240px;
+		height: 260px;
 	}
 
 	.profile_display .profile_photo .inner {
 		padding: 16px 24px 24px 24px;
+	}
+
+	.profile_display .background .editable {
+		top: 16px;
+		left: 16px;
 	}
 
 }
