@@ -15,6 +15,7 @@ export class UserDetailComponent implements OnInit {
 	userTypes: string[];
 	userId: string;
 	user= new User;
+	formatedUserBirth: string;
 
 	constructor(private router: Router, private auth: AuthGuard, private activatedRoute: ActivatedRoute, private userDetailService: UserDetailService) {
 		this.userTypes = userTypes;
@@ -29,13 +30,20 @@ export class UserDetailComponent implements OnInit {
 
 	fetchUser(): void {
 		this.userDetailService.getUser(this.userId)
-			.subscribe( user => this.user = user,
-				error => {
+			.subscribe( user => { 
+					this.user = user;
+					let userBirthDay = new Date(this.user.birthDay);
+					this.formatedUserBirth = 
+						((userBirthDay.getDate() + 1 < 10) ? '0' + (userBirthDay.getDate() + 1).toString() : (userBirthDay.getDate() + 1).toString()) + '/'
+						+ ((userBirthDay.getMonth() + 1 < 10) ? '0' + (userBirthDay.getMonth() + 1).toString() : (userBirthDay.getMonth() + 1).toString()) + '/'
+						+ (userBirthDay.getFullYear()).toString();
+				}, error => {
 					console.log(error);
 				});
 	}
 
 	updateUser(): void {
+		this.user.birthDay = new Date(this.formatedUserBirth);
 		this.userDetailService.updateUser(this.user)
 			.subscribe( response => {
 					location.reload();

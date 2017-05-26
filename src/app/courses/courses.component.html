@@ -16,35 +16,37 @@
 					</div>
 				</div>
 				<form class="pd_16 padding_block" (submit)="addCourses($event)">
-					<div class="data_container" *ngIf="!groupActive" [ngClass]="{'list_scroll': addedCourses?.length > 0 }">
+					<div class="pd_bottom_12" *ngIf="error !== ''">
+						<h4 class="font_red font_normal">{{ error }}</h4>
+					</div>
+					<div class="data_container" *ngIf="!groupActive">
 						<h2 class="title_smaller mr_bottom_12 font_secondary">Selecciona una asignatura</h2>
 						<div class="pd_8" *ngIf="subjects?.length < 1">
 							<h2 class="title_smaller font_light font_gray mr_bottom_8">
 								Ninguna asignatura agrega una aqui <a href="/admin/asignaturas" class="font_secondary underline">/admin/asignaturas</a>
 							</h2>
 						</div>
-						<div class="pd_bottom_12" *ngIf="error !== ''">
-							<h4 class="font_red font_normal">{{ error }}</h4>
-						</div>
-						<div class="hover_black" *ngFor="let subject of subjects; let index = index" [ngClass]="{ 'border_top': index != 0 }">
-							<div class="list_element" (click)="addSubject(subject)">
-								<div class="ref">
-									<span class="circle" [ngStyle]=" getRandomColor() ">
-										<label class="title_smaller font_light font_white size_24">{{ subject.name.charAt(0) }}</label>
-									</span>
-								</div><div class="info">
-									<div class="pd_12 pd_left_16 pd_right_16">
-										<div class="mr_bottom_8">
-											<h3 class="font_normal mr_bottom_4">
-												{{ subject.name }}
-											</h3>
-											<p class="opacity">
-												Nivel: <b class="font_normal">{{ subject.level }}</b>
+						<div [ngClass]="{'list_scroll': addedCourses?.length > 0 }">
+							<div class="hover_black" *ngFor="let subject of subjects; let index = index" [ngClass]="{ 'border_top': index != 0 }">
+								<div class="list_element" (click)="addSubject(subject)">
+									<div class="ref">
+										<span class="circle" [ngStyle]=" getRandomColor() ">
+											<label class="title_smaller font_light font_white size_24">{{ subject.name.charAt(0) }}</label>
+										</span>
+									</div><div class="info">
+										<div class="pd_12 pd_left_16 pd_right_16">
+											<div class="mr_bottom_8">
+												<h3 class="font_normal mr_bottom_4">
+													{{ subject.name }}
+												</h3>
+												<p class="opacity">
+													Nivel: <b class="font_normal">{{ subject.level }}</b>
+												</p>
+											</div>
+											<p>
+												Área: <b class="font_normal">{{ subject.area }}</b>
 											</p>
 										</div>
-										<p>
-											Área: <b class="font_normal">{{ subject.area }}</b>
-										</p>
 									</div>
 								</div>
 							</div>
@@ -80,11 +82,11 @@
 					</div>
 					<div *ngIf="addedCourses?.length > 0">
 						<div class="data_container mr_top_16">
-							<h2 class="title_medium mr_bottom_12 font_secondary">Cursos Agregados ( {{ addedCourses?.length }} )</h2>
+							<h2 class="title_small mr_bottom_12 font_secondary">Cursos Agregados ( {{ addedCourses?.length }} )</h2>
 							<div *ngFor="let course of addedCourses; let index = index" [ngClass]="{ 'mr_top_16': index != 0 }">
 								<h4 class="mr_bottom_8 font_normal">
 									<span class="opacity">Curso {{ index + 1 }}</span>
-									<span class="float_right font_red" (click)="deleteCourse(course)">
+									<span class="float_right font_red underline hover_black" (click)="deleteCourse(course)">
 										Eliminar
 									</span>
 								</h4>
@@ -144,7 +146,7 @@
 		</div>
 	</div>
 	<section class="list">
-		<div class="pd_16">
+		<div class="pd_16 resp_title">
 			<button class="pd_8 pd_right_12 bg_secondary shadow_raised border_radius" onclick="showPopup(true, '#courses-add')" (click)="fetchSubjects();fetchGroups()">
 				<img class="v_align_middle icon" src="assets/icons/plus_white.png">
 				<b class="v_align_middle mr_left_4 font_normal">Nuevo Curso</b>
@@ -155,54 +157,69 @@
 				Ningun curso por el momento
 			</h2>
 		</div>
-		<div *ngFor="let course of courses; let index = index" [ngClass]="{ 'mr_top_16': index != 0 }">
-			<h4 class="mr_bottom_8 font_normal opacity pd_left_8 pd_right_16">Clave: {{ course._id }}</h4>
-			<div class="shadow_flat bg_white mr_bottom_8">
-				<div class="list_element border_bottom">
-					<div class="ref">
-						<span class="circle" [ngStyle]=" getRandomColor() ">
-							<label class="title_smaller font_light font_white size_24">{{ (course.subject.name).charAt(0) }}</label>
-						</span>
-					</div><div class="info">
-						<div class="pd_12 pd_left_16 pd_right_16">
-							<div class="mr_bottom_8">
-								<h3 class="font_normal">
-									{{ course.subject.name }}
-								</h3>
-								<p class="mr_top_4 opacity">
-									Nivel: <b class="font_normal">{{ course.subject.level }}</b>
-								</p>
-							</div>
-							<p class="opacity font_small">
-								Clave: <b class="font_normal">{{ course.subject.key }}</b>
-							</p>
-							<p class="font_normal mr_top_8">
-								Asignatura
-							</p>
-						</div>
+		<div class="mr_bottom_16" *ngFor="let course of courses; let index = index">
+			<div class="relative_pos mr_8 h_32 resp_title">
+				<h4 class="font_normal opacity mr_top_8 auto_col v_align_middle">Clave: {{ course._id }}</h4>
+				<button class="options_button hover_lightgray size_32 text_align_center circle">
+					<img class="icon v_align_middle opacity" src="assets/icons/dots-vertical_black.png">
+				</button>
+				<div class="hidden_options">
+					<div class="bg_white pd_bottom_8 pd_top_8 shadow_flat border_radius font_normal">
+						<p class="pd_8 pd_left_16 pd_right_16 hover_black font_red">
+							Eliminar
+						</p>
 					</div>
 				</div>
-				<div class="list_element bg_white mr_bottom_8" *ngIf="course.group != undefined">
-					<div class="ref">
-						<span class="circle" [ngStyle]=" getRandomColor() ">
-							<label class="title_smaller font_light font_white size_24">{{ (course.group.name).charAt(0) }}</label>
-						</span>
-					</div><div class="info">
-						<div class="pd_12 pd_left_16 pd_right_16">
-							<div class="mr_bottom_8">
-								<h3 class="font_normal">
-									{{ course.group.name }}
-								</h3>
-								<p class="mr_top_4 opacity">
-									Nivel: <b class="font_normal" >{{ course.group.level }}</b>
+			</div>
+			<div class="shadow_flat bg_white mr_bottom_8 responsive_col">
+				<div class="col_2">
+					<div class="list_element border_bottom">
+						<div class="ref">
+							<span class="circle" [ngStyle]=" getRandomColor() ">
+								<label class="title_smaller font_light font_white size_24">{{ (course.subject.name).charAt(0) }}</label>
+							</span>
+						</div><div class="info">
+							<div class="pd_12 pd_left_16 pd_right_16">
+								<div class="mr_bottom_8">
+									<h3 class="font_normal">
+										{{ course.subject.name }}
+									</h3>
+									<p class="mr_top_4 opacity">
+										Nivel: <b class="font_normal">{{ course.subject.level }}</b>
+									</p>
+								</div>
+								<p class="opacity font_small">
+									Clave: <b class="font_normal">{{ course.subject.key }}</b>
+								</p>
+								<p class="font_normal mr_top_8">
+									Asignatura
 								</p>
 							</div>
-							<p class="opacity font_small">
-								Clave: <b class="font_normal">{{ course.group.key }}</b>
-							</p>
-							<p class="font_normal mr_top_8">
-								Grupo
-							</p>
+						</div>
+					</div>
+				</div><div class="col_2">
+					<div class="list_element bg_white" *ngIf="course.group != undefined">
+						<div class="ref">
+							<span class="circle" [ngStyle]=" getRandomColor() ">
+								<label class="title_smaller font_light font_white size_24">{{ (course.group.name).charAt(0) }}</label>
+							</span>
+						</div><div class="info">
+							<div class="pd_12 pd_left_16 pd_right_16">
+								<div class="mr_bottom_8">
+									<h3 class="font_normal">
+										{{ course.group.name }}
+									</h3>
+									<p class="mr_top_4 opacity">
+										Nivel: <b class="font_normal" >{{ course.group.level }}</b>
+									</p>
+								</div>
+								<p class="opacity font_small">
+									Clave: <b class="font_normal">{{ course.group.key }}</b>
+								</p>
+								<p class="font_normal mr_top_8">
+									Grupo
+								</p>
+							</div>
 						</div>
 					</div>
 				</div>

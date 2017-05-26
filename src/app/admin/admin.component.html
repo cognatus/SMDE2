@@ -1,31 +1,32 @@
 <app-menu *ngIf="auth.loggedIn()"></app-menu>
 <article class="admin_container">
-	<section>
+	<section class="font_big admin_navigation">
 		<div class="auto_col">
 			<a href="/admin/usuarios" class="font_secondary">
-				<div class="pd_12 hover_black font_normal">
+				<nav class="pd_12 hover_black">
 					Usuarios
-				</div>
+				</nav>
 			</a>
 		</div><div class="auto_col">
 			<a href="/admin/asignaturas" class="font_secondary">
-				<div class="pd_12 hover_black font_normal">
+				<nav class="pd_12 hover_black">
 					Asignaturas
-				</div>
+				</nav>
 			</a>
 		</div><div class="auto_col">
 			<a href="/admin/grupos" class="font_secondary">
-				<div class="pd_12 hover_black font_normal">
+				<nav class="pd_12 hover_black">
 					Grupos
-				</div>
+				</nav>
 			</a>
 		</div><div class="auto_col">
 			<a href="/admin/cursos" class="font_secondary">
-				<div class="pd_12 hover_black font_normal">
+				<nav class="pd_12 hover_black">
 					Cursos
-				</div>
+				</nav>
 			</a>
 		</div>
+	</section><section class="admin_page">
+		<router-outlet></router-outlet>
 	</section>
-	<router-outlet></router-outlet>
 </article>

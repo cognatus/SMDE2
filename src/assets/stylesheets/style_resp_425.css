@@ -17,4 +17,19 @@
 	.pop_up_container .pop_up .inner .padding_block {
 		padding: 24px;
 	}
+
+	.responsive_col .col_2 .col_2 {
+		display: inline-block;
+		width: 50%;
+		vertical-align: top;
+	}
+
+	.profile_display {
+		height: 240px;
+	}
+
+	.profile_display .profile_photo .inner {
+		padding: 16px 24px 24px 24px;
+	}
+
 }

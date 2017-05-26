@@ -41,4 +41,44 @@
 		display: inline-block;
 		width: calc(50% - 8px);
 	}
+
+	.admin_container {
+		width: calc(100% - 64px);
+	}
+
+	.admin_container .admin_navigation {
+		width: 240px;
+		margin-right: 16px;
+		display: inline-block;
+		vertical-align: top;
+		margin-top: 32px;
+	}
+
+	.admin_container .admin_page {
+		width: calc(100% - 256px);
+		display: inline-block;
+		vertical-align: top;
+	}
+
+	.admin_container .admin_navigation .auto_col {
+		display: block;
+	}
+
+	.admin_container .admin_navigation .auto_col nav {
+		padding-left: 16px;
+		padding-right: 16px;
+	}
+
+	.profile_display {
+		height: 280px;
+	}
+
+	.profile_display .profile_photo .inner {
+		padding: 16px 48px 24px 48px;
+	}
+
+	.profile_display .profile_photo .img_container {
+		width: 104px;
+		height: 104px;
+	}
 }

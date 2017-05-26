@@ -4,6 +4,7 @@ const path = require('path');
 const http = require('http');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
+const morgan = require('morgan');
 const mongoose = require('mongoose');
 var jwt = require('jsonwebtoken');
 
@@ -22,6 +23,8 @@ app.use(cookieParser());
 // Point static path to dist
 app.use(express.static(path.join(__dirname, 'dist')));
 
+global.__media = __dirname + 'media';
+
 //conexion con mongo
 mongoose.connect('mongodb://localhost/smde2', (error) => {
 	if (error) {
@@ -30,6 +33,8 @@ mongoose.connect('mongodb://localhost/smde2', (error) => {
 		console.log('CONECTADO A MONGO');
 	}
 });
+
+app.use(morgan('tiny'));
 
 // Set our api routes
 app.use('/api', api);

@@ -9,12 +9,26 @@ import { Subject } from '../models/subject';
 import { Group } from '../models/group';
 import { Course } from '../models/course';
 import { colors } from '../app.constants';
+import {
+	trigger,
+	state,
+	style,
+	animate,
+	transition
+} from '@angular/core';
 
 @Component({
 	selector: 'app-courses',
 	templateUrl: './courses.component.html',
 	styleUrls: ['./courses.component.css'],
-	providers: [CoursesService, SubjectsService, GroupsService]
+	providers: [CoursesService, SubjectsService, GroupsService],
+	animations: [
+		trigger('scrollPopup', [
+			transition('* => active', [
+				animate(100, style({ scrollTop: '0' }))
+			])
+		])
+	]
 })
 export class CoursesComponent implements OnInit {
 	groupActive: boolean;
@@ -78,8 +92,21 @@ export class CoursesComponent implements OnInit {
 	}
 
 	addGroup(group: Group): void {
-		this.addedCourses[this.addedCourses.length - 1].group = group;
-		this.groupActive = false;
+		let flagAdd = true;
+		for ( let i = 0 ; i < this.courses.length ; i++ ) {
+			if ( ( this.addedCourses[this.addedCourses.length - 1].subject.key === this.courses[i].subject.key ) && ( group.key === this.courses[i].group.key ) ) {
+				flagAdd = false;
+				break;
+			}
+		}
+
+		if ( !flagAdd ) {
+			this.error = 'Selecciona otro grupo. Ya existe un curso con la asignatura y el grupo seleccionado';
+		} else {
+			this.addedCourses[this.addedCourses.length - 1].group = group;
+			this.error = '';
+			this.groupActive = false;
+		}
 	}
 
 	deleteCourse(course: Course) {

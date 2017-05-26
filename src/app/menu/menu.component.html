@@ -1,6 +1,6 @@
 <section class="app_bar_back"></section>
 <section class="app_bar bg_primary shadow_flat">
-	<div class="app_bar_inner font_white">
+	<div class="app_bar_inner">
 		<div class="bar_top">
 			<a href="/">
 				<div class="auto_col logo_container hover_white">
@@ -72,7 +72,7 @@
 					<div class="img_container circle auto_col size_32 v_align_middle cursor_pointer">
 						<img src="assets/icons/default_profile.png">
 					</div>
-					<span class="mr_left_8">{{ user.name }}</span>
+					<span class="mr_left_8 font_white">{{ user.name }}</span>
 					<div class="hidden_block" id="options-mini">
 						<i class="mark bg_white"></i>
 						<div class="bg_white shadow_flat border_radius">
@@ -104,41 +104,41 @@
 			</div>
 		</div>
 		<div class="bar_bottom">
-			<div class="menu">
-				<nav class="item hover_white" *ngIf="user.privilege == 1 || user.privilege == 2" [ngClass]="{'active': getActive('asignaturas')}">
-					<a href="/asignaturas" class="font_white">
+			<div class="menu font_black">
+				<nav class="item hover_white" *ngIf="user.privilege == 1 || user.privilege == 2" [ngClass]="{'active font_white': getActive('asignaturas')}">
+					<a href="/asignaturas">
 						<div class="inner">
 							<img class="icon" src="assets/icons/book-multiple_white.png" *ngIf=" getActive('asignaturas') "><img class="icon" src="assets/icons/book-multiple_black.png" *ngIf=" !getActive('asignaturas') "><span>
 								Asignaturas
 							</span>
 						</div>
 					</a>
-				</nav><nav class="item hover_white" *ngIf="user.privilege == 0" [ngClass]="{'active': getActive('admin')}">
-					<a href="/admin" class="font_white">
+				</nav><nav class="item hover_white" *ngIf="user.privilege == 0" [ngClass]="{'active font_white': getActive('admin')}">
+					<a href="/admin">
 						<div class="inner">
 							<img class="icon" src="assets/icons/edit_white.png" *ngIf=" getActive('admin') "><img class="icon" src="assets/icons/edit_black.png" *ngIf=" !getActive('admin') "><span>
 								Administrador
 							</span>
 						</div>
 					</a>
-				</nav><nav class="item hover_white" [ngClass]="{'active': getActive('agenda')}">
-					<a href="/agenda" class="font_white">
+				</nav><nav class="item hover_white" [ngClass]="{'active font_white': getActive('agenda')}">
+					<a href="/agenda">
 						<div class="inner">
 							<img class="icon" src="assets/icons/calendar_white.png" *ngIf=" getActive('agenda') "><img class="icon" src="assets/icons/calendar_black.png" *ngIf=" !getActive('agenda') "><span>
 								Agenda
 							</span>
 						</div>
 					</a>
-				</nav><nav class="item hover_white" [ngClass]="{'active': getActive('foro')}">
-					<a href="/foro" class="font_white">
+				</nav><nav class="item hover_white" [ngClass]="{'active font_white': getActive('foro')}">
+					<a href="/foro">
 						<div class="inner">
 							<img class="icon" src="assets/icons/forum_white.png" *ngIf=" getActive('foro') "><img class="icon" src="assets/icons/forum_black.png" *ngIf=" !getActive('foro') "><span>
 								Foro
 							</span>
 						</div>
 					</a>
-				</nav><nav class="item hover_white" [ngClass]="{'active': getActive('contenidos')}">
-					<a href="/contenidos" class="font_white">
+				</nav><nav class="item hover_white" [ngClass]="{'active font_white': getActive('contenidos')}">
+					<a href="/contenidos">
 						<div class="inner">
 							<img class="icon" src="assets/icons/book-open_white.png" *ngIf=" getActive('contenidos') "><img class="icon" src="assets/icons/book-open_black.png" *ngIf=" !getActive('contenidos') "><span>
 								Contenidos

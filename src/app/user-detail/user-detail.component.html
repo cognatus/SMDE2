@@ -17,13 +17,6 @@
 				</div>
 				<form class="pd_16 padding_block" (submit)="updateUser()">
 					<div class="data_container">
-						<div class="pd_left_16 pd_right_16">
-							<div class="img_container size_120 margin_auto circle">
-								<img src="assets/icons/default_profile.png">
-							</div>
-						</div>
-					</div>
-					<div class="data_container">
 						<h2 class="title_medium mr_bottom_24 font_secondary">Datos</h2>
 						<div class="pd_left_8 pd_right_8">
 							<div class="field_container pd_bottom_24">
@@ -45,7 +38,7 @@
 								</div>
 								<div class="field mr_top_8">
 									<label class="opacity font_bold font_small">Fecha de Nacimiento</label>
-									<input type="text" [(ngModel)]="user.birthDay" name="birthDay" placeholder="Fecha (dd/mm/yyyy)"/>
+									<input type="text" [(ngModel)]="formatedUserBirth" name="birthDay" placeholder="Fecha (dd/mm/yyyy)" />
 								</div>
 								<div class="field mr_top_8">
 									<label class="opacity font_bold font_small">Tipo</label>
@@ -77,28 +70,68 @@
 			</div>
 		</div>
 	</div>
-	<section class="list">
-		<div class="pd_16">
+	<article class="list">
+		<div class="pd_16 resp_title">
 			<button class="pd_8 pd_right_12 bg_secondary shadow_raised border_radius" onclick="showPopup(true, '#user-edit')">
 				<img class="v_align_middle icon" src="assets/icons/edit_white.png">
 				<b class="v_align_middle mr_left_4 font_normal">Editar Usuario</b>
 			</button>
 		</div>
-		<div class="bg_white shadow_flat border_radius mr_bottom_12 relative_pos">
-			<button class="options_button hover_lightgray size_32 text_align_center circle">
-				<img class="icon v_align_middle opacity" src="assets/icons/dots-vertical_black.png">
-			</button>
-			<div class="hidden_options">
-				<div class="bg_white pd_bottom_8 pd_top_8 shadow_flat border_radius font_normal">
-					<a>
-						<p class="pd_8 pd_left_16 pd_right_16 hover_black font_red">
-							Eliminar
-						</p>
-					</a>
+		<section class="bg_white shadow_flat border_radius mr_bottom_12 relative_pos">
+			<div class="tr_0 h_32">
+				<div class="mr_8 size_32 relative_pos">
+					<button class="options_button hover_black size_32 text_align_center circle">
+						<img class="icon v_align_middle" src="assets/icons/dots-vertical_white.png">
+					</button>
+					<div class="hidden_options">
+						<div class="bg_white pd_bottom_8 pd_top_8 shadow_flat border_radius font_normal">
+							<a>
+								<p class="pd_8 pd_left_16 pd_right_16 hover_black font_red">
+									Eliminar
+								</p>
+							</a>
+						</div>
+					</div>
 				</div>
 			</div>
-			<div class="pd_24 text_align_center">
-				<div class="img_container size_120 margin_auto circle">
+			<div class="profile_display">
+				<div class="background bg_primary_dark"></div>
+				<div class="profile_photo font_white">
+					<div class="inner">
+						<div class="img_container circle shadow_flat">
+							<img src="assets/icons/default_profile.png">
+						</div><div class="info">
+							<h3 class="title_smaller">
+								{{ user.name }} {{ user.lastName }}
+							</h3>
+							<p class="opacity mr_top_8">
+								<b class="font_big">{{ user.mail }}</b>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="static_col text_align_center">
+				<div class="col_3">
+					<div class="pd_12">
+						<h4 class="font_normal opacity">Tipo</h4>
+						<h2 class="font_normal font_big mr_top_4">{{ userTypes[user.privilege] }}</h2>
+					</div>
+				</div><div class="col_3">
+					<div class="pd_12">
+						<h4 class="font_normal opacity">Cursos</h4>
+						<h2 class="font_normal font_big mr_top_4" *ngIf="user.courses?.length > 0">{{ user.courses?.length }}</h2>
+						<h2 class="font_normal font_big mr_top_4" *ngIf="user.courses?.length < 1 || user.courses == undefined">0</h2>
+					</div>
+				</div><div class="col_3">
+					<div class="pd_12">
+						<h4 class="font_normal opacity">Promedio</h4>
+						<h2 class="font_normal font_big mr_top_4">0.0</h2>
+					</div>
+				</div>
+			</div>
+			<!-- <div class="pd_24 pd_top_32 text_align_center">
+				<div class="img_container size_160 margin_auto circle">
 					<img src="assets/icons/default_profile.png">
 				</div>
 				<div class="mr_top_32">
@@ -112,58 +145,98 @@
 						{{ userTypes[user.privilege] }}
 					</p>
 				</div>
+			</div> -->
+		</section>
+		<section>
+			<div class="pd_16 resp_title">
+				<h2 class="title_small font_secondary">
+					Información
+				</h2>
 			</div>
-		</div>
-		<div class="pd_16">
-			<h2 class="title_small font_secondary">
-				Cursos
-			</h2>
-		</div>
-		<div class="pd_32" *ngIf="user.courses?.length < 1">
-			<h2 class="title_big font_light opacity">
-				Ningun curso por el momento
-			</h2>
-		</div>
-		<div class="bg_white shadow_flat border_radius mr_bottom_12" *ngFor="let course of user.courses">
-			<div class="list_element">
-				<div class="ref">
-					<span class="circle" [ngStyle]="getRandomColor()">
-						<label class="title_smaller font_light font_white size_24">{{ (course.name).charAt(0) }}</label>
-					</span>
-				</div><div class="info">
-					<button class="options_button hover_lightgray size_32 text_align_center circle">
-						<img class="icon v_align_middle opacity" src="assets/icons/dots-vertical_black.png">
-					</button>
-					<div class="hidden_options">
-						<div class="bg_white pd_bottom_8 pd_top_8 shadow_flat border_radius font_normal">
-							<a>
-								<p class="pd_8 pd_left_16 pd_right_16 hover_black font_red">
-									Eliminar
-								</p>
-							</a>
-						</div>
+			<div class="bg_white shadow_flat mr_bottom_8">
+				<div class="pd_16">
+					<div class="mr_bottom_12">
+						<p class="opacity font_bold mr_bottom_4">Clave de Usuario</p>
+						<p class="font_big">
+							<img class="icon opacity v_align_middle mr_8" src="assets/icons/lock_black.png">
+							<span class=" v_align_middle mr_left_8">
+								{{ user._id }}
+							</span>
+						</p>
 					</div>
-					<div class="pd_12 pd_left_16 pd_right_16">
-						<div class="mr_bottom_8">
-							<h3 class="font_normal mr_bottom_4">
-								{{ course.subject.name }}
-							</h3>
-							<p class="opacity">
-								<b>{{ course.group.name }}</b>
-							</p>
-							<div class="mr_top_8">
+					<div class="mr_bottom_12">
+						<p class="opacity font_bold mr_bottom_4">Teléfono</p>
+						<p class="font_big">
+							<img class="icon opacity v_align_middle mr_8" src="assets/icons/phone_black.png">
+							<span class=" v_align_middle mr_left_8">
+								{{ user.phone }}
+							</span>
+						</p>
+					</div>
+					<div>
+						<p class="opacity font_bold mr_bottom_4">Dirección</p>
+						<p class="font_big">
+							<img class="icon opacity v_align_middle mr_8" src="assets/icons/map-marker_black.png">
+							<span class="v_align_middle mr_left_8 opacity">
+								<b>Sin dirección</b>
+							</span>
+						</p>
+					</div>
+				</div>
+			</div>
+		</section>
+		<section>
+			<div class="pd_16 resp_title">
+				<h2 class="title_small font_secondary">
+					Cursos
+				</h2>
+			</div>
+			<div class="pd_32" *ngIf="user.courses?.length < 1">
+				<h2 class="title_big font_light opacity">
+					Ningun curso por el momento
+				</h2>
+			</div>
+			<div class="bg_white shadow_flat border_radius mr_bottom_12" *ngFor="let course of user.courses">
+				<div class="list_element">
+					<div class="ref">
+						<span class="circle" [ngStyle]="getRandomColor()">
+							<label class="title_smaller font_light font_white size_24">{{ (course.name).charAt(0) }}</label>
+						</span>
+					</div><div class="info">
+						<button class="options_button hover_lightgray size_32 text_align_center circle">
+							<img class="icon v_align_middle opacity" src="assets/icons/dots-vertical_black.png">
+						</button>
+						<div class="hidden_options">
+							<div class="bg_white pd_bottom_8 pd_top_8 shadow_flat border_radius font_normal">
+								<a>
+									<p class="pd_8 pd_left_16 pd_right_16 hover_black font_red">
+										Eliminar
+									</p>
+								</a>
+							</div>
+						</div>
+						<div class="pd_12 pd_left_16 pd_right_16">
+							<div class="mr_bottom_8">
+								<h3 class="font_normal mr_bottom_4">
+									{{ course.subject.name }}
+								</h3>
 								<p class="opacity">
-									Nivel Asignatura: <b>{{ course.subject.level }}</b>
+									<b>{{ course.group.name }}</b>
 								</p>
-								<p class="opacity">
-									Nivel Grupo: <b>{{ course.group.level }}</b>
-								</p>
+								<div class="mr_top_8">
+									<p class="opacity">
+										Nivel Asignatura: <b>{{ course.subject.level }}</b>
+									</p>
+									<p class="opacity">
+										Nivel Grupo: <b>{{ course.group.level }}</b>
+									</p>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-	</section>
+		</section>
+	</article>
 </div>
 

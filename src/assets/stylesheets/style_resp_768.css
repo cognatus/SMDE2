@@ -43,4 +43,34 @@
 		width: auto;
 		display: block;
 	}
+
+	.responsive_col .col_2 {
+		width: 50%;
+		display: inline-block;
+		vertical-align: top;
+	}
+
+	.admin_container {
+		width: calc(100% - 48px);
+	}
+
+	.admin_container .resp_title {
+		padding-left: 0;
+		padding-right: 0;
+		margin-left: 0;
+		margin-right: 0;
+	}
+
+	.profile_display {
+		height: 260px;
+	}
+
+	.profile_display .profile_photo .inner {
+		padding: 16px 32px 24px 32px;
+	}
+
+	.profile_display .profile_photo .img_container {
+		width: 96px;
+		height: 96px;
+	}
 }
