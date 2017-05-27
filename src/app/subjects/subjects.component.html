@@ -4,18 +4,18 @@
 		<div class="pop_up">
 			<div class="inner border_radius">
 				<div class="bg_primary">
-					<div class="text_align_right">
-						<button class="pd_8 hover_black" onclick="showPopup(false, '#subjects-add')">
-							<img class="icon" src="assets/icons/close_white.png">
-						</button>
-					</div>
 					<div class="pop_up_title font_white">
-						<h1 class="title_big font_lightnormal">
+						<h1 class="title">
 							Nueva Asignatura
 						</h1>
+						<div class="close_button">
+							<button class="pd_8 hover_black circle" onclick="showPopup(false, '#subjects-add')">
+								<img class="icon" src="assets/icons/arrow-left_white.png">
+							</button>
+						</div>
 					</div>
 				</div>
-				<form class="pd_16 padding_block" (submit)="addSubject()">
+				<form class="padding_block" (submit)="addSubject()">
 					<div class="data_container">
 						<h2 class="title_medium mr_bottom_24 font_secondary">Datos</h2>
 						<div class="pd_left_8 pd_right_8">
@@ -50,7 +50,7 @@
 		</div>
 	</div>
 	<section class="list">
-		<div class="pd_16">
+		<div class="pd_16 resp_title main_action_button">
 			<button class="pd_8 pd_right_12 bg_secondary shadow_raised border_radius" onclick="showPopup(true, '#subjects-add')">
 				<img class="v_align_middle icon" src="assets/icons/plus_white.png">
 				<b class="v_align_middle mr_left_4 font_normal">Nueva Asignatura</b>

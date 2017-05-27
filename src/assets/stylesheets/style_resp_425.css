@@ -12,8 +12,9 @@
 
 	.app_bar .app_bar_inner .prof_container span { display: inline-block; }
 
-	.pop_up_container .pop_up .inner .pop_up_title {
-		padding: 16px 24px 24px 24px;
+	.pop_up_container .pop_up {
+		overflow: hidden;
+		border-radius: 3px;
 	}
 
 	.pop_up_container .pop_up .inner .padding_block {
@@ -24,6 +25,10 @@
 		display: inline-block;
 		width: 50%;
 		vertical-align: top;
+	}
+
+	.main_action_button {
+		margin-bottom: 8px;	
 	}
 
 	.profile_display {

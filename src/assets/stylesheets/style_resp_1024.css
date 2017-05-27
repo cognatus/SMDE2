@@ -28,15 +28,12 @@
 	}
 
 	.pop_up_container .pop_up.big {
+		width: calc(100% - 80px);
 		max-width: 1080px;
 	}
 
-	.pop_up_container .pop_up .inner .pop_up_title {
-		padding: 24px 32px 24px 32px;
-	}
-
 	.pop_up_container .pop_up .inner .padding_block {
-		padding: 48px;
+		padding: 40px;
 	}
 
 	.pop_up_container .pop_up .inner .responsive_col .col_2 {
@@ -45,19 +42,20 @@
 	}
 
 	.admin_container, .profile_container {
-		width: calc(100% - 64px);
+		width: calc(100% - 80px);
 	}
 
 	.admin_container .admin_navigation {
-		width: 240px;
+		width: 220px;
 		margin-right: 16px;
 		display: inline-block;
 		vertical-align: top;
 		margin-top: 32px;
+		padding-top: 0;
 	}
 
 	.admin_container .admin_page {
-		width: calc(100% - 256px);
+		width: calc(100% - 236px);
 		display: inline-block;
 		vertical-align: top;
 	}
@@ -69,6 +67,13 @@
 	.admin_container .admin_navigation .auto_col nav {
 		padding-left: 16px;
 		padding-right: 16px;
+	}
+
+	.main_action_button {
+		margin-top: 0;
+		margin-bottom: 0;
+		padding-top: 24px;
+		padding-bottom: 24px;	
 	}
 
 	.profile_display {

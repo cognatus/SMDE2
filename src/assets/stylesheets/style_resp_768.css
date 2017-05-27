@@ -33,12 +33,13 @@
 		margin: 24px auto;
 	}
 
-	.pop_up_container .pop_up .inner .padding_block {
-		padding: 32px;
+	.pop_up_container .pop_up.big {
+		width: calc(100% - 64px);
+		max-width: 1024px;
 	}
 
-	.pop_up_container .pop_up .inner .pop_up_title {
-		padding: 16px 32px 24px 32px;
+	.pop_up_container .pop_up .inner .padding_block {
+		padding: 32px;
 	}
 
 	.pop_up_container .pop_up .inner .responsive_col .col_2 {
@@ -61,6 +62,15 @@
 		padding-right: 0;
 		margin-left: 0;
 		margin-right: 0;
+	}
+
+	.admin_container .admin_navigation {
+		padding-top: 12px;
+	}
+
+	.main_action_button {
+		margin-bottom: 12px;
+		margin-top: 8px; 	
 	}
 
 	.profile_display {
