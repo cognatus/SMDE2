@@ -13,7 +13,6 @@ exports.login = (req, res) => {
 			let userCookie = {
 				_id: doc[0]._id,
 				mail: doc[0].mail,
-				password: doc[0].password,
 				type: doc[0].type
 			};
 			

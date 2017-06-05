@@ -43,7 +43,6 @@ export class ProfileComponent implements OnInit {
 			+ ((userBirthDay.getDate() + 1 < 10) ? '0' + (userBirthDay.getDate() + 1).toString() : (userBirthDay.getDate() + 1).toString()) + '/'
 			+ ((userBirthDay.getMonth() + 1 < 10) ? '0' + (userBirthDay.getMonth() + 1).toString() : (userBirthDay.getMonth() + 1).toString()) + '/'
 			+ (userBirthDay.getFullYear()).toString();
-		console.log(this.user);
 	}
 
 	fetchUser(): void {

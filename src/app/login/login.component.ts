@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit{
 	login(): void {
 		this.loginService.loginUser(this.user)
 	    	.subscribe( user => {
-	    			this.router.navigateByUrl('/home');
+	    			location.href = '/home';
 				}, error => {
             		console.log(error);
             		this.error = 'Usuario o contraseña incorrectos';

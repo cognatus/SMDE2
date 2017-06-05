@@ -114,9 +114,8 @@
 					</div>
 					<form id="formUpload" class="field pd_16 text_align_right" action="api/updateProfilePhotos/" method="post" enctype="multipart/form-data">
 						<div class="hidden_input">
-							<input type="hidden" name="userId" value="{{ user._id }}">
-							<input type="file" name="profilePhoto" id="profile-img-file" onchange="previewPhoto(this, '#profile-photo')">
-							<input type="file" name="profileBackground" id="back-img-file" onchange="previewPhoto(this, '#profile-back');resizeImg('#profile-back');">
+							<input type="file" accept="image/*" name="profilePhoto" id="profile-img-file" onchange="previewPhoto(this, '#profile-photo')">
+							<input type="file" accept="image/*" name="profileBackground" id="back-img-file" onchange="previewPhoto(this, '#profile-back');resizeImg('#profile-back');">
 						</div>
 						<input type="submit" class="bg_secondary shadow_raised border_radius font_white" name="" value="Actualizar" onclick="$('#formUpload').submit();">
 					</form>
@@ -145,16 +144,16 @@
 			</div>
 			<div class="profile_display">
 				<div class="background bg_primary_dark">
-					<div class="img_container" *ngIf="user.backPhoto != undefined && user.profilePhoto != ''">
-						<img src="media/background/{{ user.backPhoto }}.png">
+					<div class="img_container" *ngIf="user.backPhoto != undefined && user.backPhoto != ''">
+						<img src="media/{{ user._id }}/background/{{ user.backPhoto }}">
 					</div>
-					<div class="bg_opacity" *ngIf="user.backPhoto != undefined && user.profilePhoto != ''"></div>
+					<div class="bg_opacity" *ngIf="user.backPhoto != undefined && user.backPhoto != ''"></div>
 				</div>
 				<div class="profile_photo font_white">
 					<div class="inner">
 						<div class="img_container circle shadow_flat">
 							<img src="assets/icons/default_profile.png" *ngIf="user.profilePhoto == undefined || user.profilePhoto == ''">
-							<img src="media/profile/{{ user.profilePhoto }}.png" *ngIf="user.profilePhoto != undefined && user.profilePhoto != ''">
+							<img src="media/{{ user._id }}/profile/{{ user.profilePhoto }}.png" *ngIf="user.profilePhoto != undefined && user.profilePhoto != ''">
 						</div><div class="info">
 							<h3 class="title_smaller">
 								{{ user.name }} {{ user.lastName }}

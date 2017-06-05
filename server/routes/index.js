@@ -1,10 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const multer = require('multer');
 
 const _media =  'src/media/';
-
-let upload = multer();
 
 const login = require('./api/login');
 const admin = require('./api/admin');
@@ -50,6 +47,6 @@ router.route('/courses')
 	.get(admin.getCourses)
 	.post(admin.insertCourses);
 
-router.post('/updateProfilePhotos', upload.fields([{ name: 'profilePhoto', maxCount: 1 }, { name: 'profileBackground', maxCount: 1 }]), profile.updateProfilePhotos);
+router.post('/updateProfilePhotos', profile.updateProfilePhotos);
 
 module.exports = router;

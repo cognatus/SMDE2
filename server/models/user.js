@@ -15,34 +15,42 @@ var UserSchema = new Schema({
 	backPhoto: String,
 	updateDate: {type: Date, default: new Date()},
 	institute: [{
-		_id: {type: String, required: true},
-		name: {type: String, required:true}
+		name: {type: String, required:true},
+		level: {type: String, required:true}
 	}],
-	setting: {
+	settings: {
 		notifEmail: Boolean,
 		msmColor: String,
 		primaryColor: String,
 		theme: Number
 	},
 	notification: [{
-		_id: {type: String, required: true},
+		id: {type: String, required: true},
 		date: {type: String, required: true},
 		status: {type: Boolean, required: true},
 		user: {type: String, required: true}
 	}],
 	course: [{
-		_id: {type: String, required: true},
 		subject: {
-			_id: {type: String, required: true},
+			id: {type: String, required: true},
 			name: {type: String, required: true},
 			level: {type: Number, required: true}
 		},
 		group: {
-			_id: {type: String, required: true},
+			id: {type: String, required: true},
 			name: {type: String, required: true},
-			level: {type: Number, required: true}	
+			level: {type: Number, required: true}
 		}
-	}]
+	}],
+	photos: [{
+		name: {type: String, required: true},
+		description: {type: String},
+		uploadDate: {type: Date, required: true, default: new Date()},
+		tags: {type: String},
+		album: {type: String},
+	}],
+	profilePhoto: {type: String},
+	backPhoto: {type: String}
 });
 
 module.exports = mongoose.model('User', UserSchema);
