@@ -47,10 +47,14 @@
 		display: block;
 	}
 
-	.responsive_col .col_2 {
+	.responsive_col .col_2, .responsive_col .col_3 {
 		width: 50%;
 		display: inline-block;
 		vertical-align: top;
+	}
+
+	.resp_list .resp_item {
+		margin: 8px;
 	}
 
 	.admin_container, .profile_container {
@@ -65,12 +69,14 @@
 	}
 
 	.admin_container .admin_navigation {
-		padding-top: 12px;
+		padding-left: 8px;
+		padding-top: 8px;
+		padding-bottom: 6px;
 	}
 
 	.main_action_button {
 		margin-bottom: 12px;
-		margin-top: 8px; 	
+		margin-top: 12px; 	
 	}
 
 	.profile_display {

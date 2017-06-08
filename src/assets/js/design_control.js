@@ -115,7 +115,7 @@ function showSearchBar( status ) {
 function showPopup( status, pop_up_id ) {
 	var selector = $(pop_up_id);
 	if ( status ) {
-		selector.fadeIn();
+		selector.css({'left':'0','display':'none'}).fadeIn();
 		if ( $(window).width() >= 620 ) {
 			selector.css('background-color', 'rgba(255,255,255,0.7)');
 			selector.find('.pop_up').css('box-shadow', '0 1px 6px rgba(0,0,0,0.15)');
@@ -134,7 +134,7 @@ function showPopup( status, pop_up_id ) {
 }
 
 function resizeImg( selector ) {
-	if ( typeof selector === undefined ) {
+	if ( typeof selector === typeof undefined ) {
 		$('img[adjustable], video[adjustable]').each( function() {
 			var imgWidth = parseFloat( $(this).get(0).naturalWidth );
 			var imgHeight = parseFloat( $(this).get(0).naturalHeight );

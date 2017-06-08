@@ -1,14 +1,16 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Input } from '@angular/core';
+import { Http, Response, RequestOptions } from '@angular/http';
 import { Router, CanActivate } from '@angular/router';
 import { tokenNotExpired } from 'angular2-jwt';
+
+import { ApiUrl } from '../app.constants';
 import { User } from '../models/user';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-
 	getUser: User;
 	token: string; jwt: string; decodedJwt: string;
-	constructor(private router: Router) {
+	constructor(private router: Router, private http: Http) {
 		this.getUser = JSON.parse(localStorage.getItem('user_profile'));
 		this.token = localStorage.getItem('id_token');
 		this.jwt = this.token;
@@ -30,6 +32,15 @@ export class AuthGuard implements CanActivate {
 	loggedIn(): boolean {
 		let token = localStorage.getItem('id_token');
 		return token !== undefined && token !== null;
+	}
+
+	updateUser(): void {
+		this.http.get(ApiUrl + 'users/' + this.getUser._id)
+			.subscribe( res => {
+					localStorage.setItem('user_profile', JSON.stringify(res.json()))
+				}, error => {
+					console.log(error);
+				});
 	}
 
 	deleteUser(): void {

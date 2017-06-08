@@ -3,6 +3,7 @@ var Schema = mongoose.Schema;
 
 var UserSchema = new Schema({
 	mail: {type: String, required: true, unique: true},
+	nick: {type: String, required: true, unique: true},
 	password: {type: String, required: true},
 	name: {type: String, required: true},
 	lastName: {type: String, required: true},
@@ -28,20 +29,14 @@ var UserSchema = new Schema({
 		id: {type: String, required: true},
 		date: {type: String, required: true},
 		status: {type: Boolean, required: true},
-		user: {type: String, required: true}
+		text: {type: String, required: true}
 	}],
 	course: [{
-		subject: {
-			id: {type: String, required: true},
-			name: {type: String, required: true},
-			level: {type: Number, required: true}
-		},
-		group: {
-			id: {type: String, required: true},
-			name: {type: String, required: true},
-			level: {type: Number, required: true}
-		}
+		name: { type: String, required: true },
+		tags: [String],
+		suscribed: Boolean,
 	}],
+	tags: [String],
 	photos: [{
 		name: {type: String, required: true},
 		description: {type: String},

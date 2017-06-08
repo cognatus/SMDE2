@@ -70,7 +70,8 @@
 					</div>
 				</div><div class="auto_col v_align_top hidden_block_container prof_container pd_left_16 pd_right_16 hover_white" id="menu-pphoto">
 					<div class="img_container circle auto_col size_32 v_align_middle cursor_pointer">
-						<img src="assets/icons/default_profile.png">
+						<img src="assets/icons/default_profile.png" *ngIf="user.profilePhoto == undefined || user.profilePhoto == ''">
+						<img src="/media/{{ user._id }}/profile/{{ user.profilePhoto }}" *ngIf="user.profilePhoto != undefined && user.profilePhoto != ''">
 					</div>
 					<span class="mr_left_8 font_white">{{ user.name }}</span>
 					<div class="hidden_block" id="options-mini">

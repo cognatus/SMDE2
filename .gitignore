@@ -8,7 +8,7 @@
 /node_modules
 
 # uploaded fields
-/src/media
+/assets/media
 
 # IDEs and editors
 /.idea

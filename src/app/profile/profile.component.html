@@ -7,7 +7,7 @@
 				<div class="bg_primary">
 					<div class="pop_up_title font_white">
 						<h1 class="title">
-							Editar Usuario
+							Editar Perfil
 						</h1>
 						<div class="close_button">
 							<button class="pd_8 hover_black circle" onclick="showPopup(false, '#user-edit')">
@@ -96,15 +96,14 @@
 								</span>
 							</div>
 							<div class="img_container bg_primary_dark">
-								<img src="media/background/{{ user.backPhoto }}.png" id="profile-back" *ngIf="user.backPhoto != undefined && user.profilePhoto != ''" adjustable>
-								<img src="" id="profile-back" *ngIf="user.backPhoto == undefined || user.profilePhoto != ''" adjustable>
+								<img src="/media/{{ user._id }}/background/{{ user.backPhoto }}" id="profile-back" *ngIf="user.backPhoto != undefined && user.profilePhoto != ''" adjustable>
 							</div>
 						</div>
 						<div class="profile_photo font_white">
 							<div class="inner">
 								<div class="img_container circle shadow_flat">
 									<img src="assets/icons/default_profile.png" *ngIf="user.profilePhoto == undefined || user.profilePhoto == ''" id="profile-photo">
-									<img src="media/profile/{{ user.profilePhoto }}.png" *ngIf="user.profilePhoto != undefined && user.profilePhoto != ''" id="profile-photo">
+									<img src="/media/{{ user._id }}/profile/{{ user.profilePhoto }}" *ngIf="user.profilePhoto != undefined && user.profilePhoto != ''" id="profile-photo">
 									<div class="editable" onclick="triggerClick('#profile-img-file')">
 										<img src="assets/icons/camera_white.png">
 									</div>
@@ -145,7 +144,7 @@
 			<div class="profile_display">
 				<div class="background bg_primary_dark">
 					<div class="img_container" *ngIf="user.backPhoto != undefined && user.backPhoto != ''">
-						<img src="media/{{ user._id }}/background/{{ user.backPhoto }}">
+						<img src="/media/{{ user._id }}/background/{{ user.backPhoto }}" adjustable>
 					</div>
 					<div class="bg_opacity" *ngIf="user.backPhoto != undefined && user.backPhoto != ''"></div>
 				</div>
@@ -153,7 +152,7 @@
 					<div class="inner">
 						<div class="img_container circle shadow_flat">
 							<img src="assets/icons/default_profile.png" *ngIf="user.profilePhoto == undefined || user.profilePhoto == ''">
-							<img src="media/{{ user._id }}/profile/{{ user.profilePhoto }}.png" *ngIf="user.profilePhoto != undefined && user.profilePhoto != ''">
+							<img src="/media/{{ user._id }}/profile/{{ user.profilePhoto }}"*ngIf="user.profilePhoto != undefined && user.profilePhoto != ''">
 						</div><div class="info">
 							<h3 class="title_smaller">
 								{{ user.name }} {{ user.lastName }}

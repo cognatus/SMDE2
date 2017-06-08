@@ -11,15 +11,23 @@ exports.updateProfilePhotos = (req, res) => {
 	let formatedDate = date.getDate() + '' + date.getMonth() + '' + date.getFullYear() + '' + date.getHours() + '' + date.getMinutes() + '' + date.getSeconds();
 	let randomNumber = Math.floor(Math.random() * 1000) + 1
 	let userId = req.cookies.login._id;
-	/*let background = req.files.profileBackground;
-	let profile = req.files.profilePhoto;*/
 	let nameImage = formatedDate.toString() + '' + randomNumber.toString();
 
-	let dir = _media + userId + '/background';
-	let strPath = _media + userId + '/background/' + nameImage + '.jpg';
+	let userDir = _media + userId;
+	let backDir = _media + userId + '/background';
+	let profDir = _media + userId + '/profile';
+	let flag = false;
 
-	if (!fs.existsSync(dir)){
-		fs.mkdirSync(dir);
+	if (!fs.existsSync(userDir)){
+		fs.mkdirSync(userDir);
+	}
+
+	if (!fs.existsSync(backDir)){
+		fs.mkdirSync(backDir);
+	}
+
+	if (!fs.existsSync(profDir)){
+		fs.mkdirSync(profDir);
 	}
 
 	busboy.on('field', function(fieldname, val) {
@@ -27,37 +35,52 @@ exports.updateProfilePhotos = (req, res) => {
 	});
 
 	busboy.on('file', function(fieldname, file, filename, encoding, mimetype) {
-		console.log(fieldname);
-		if ( fieldname === 'profileBackground' ) {
-			fstream = fs.createWriteStream(strPath);
-			file.pipe(fstream);
-			fstream.on('close', function() {
-				file.resume();
-				let newPhoto = { name: nameImage + '.jpg', album: 'background' };
-				User.update({ _id: userId },
-					{ $push: { photos: newPhoto }, $set: { backPhoto: nameImage + '.jpg' } },
-				(err, doc) => {
-					if (err) {
-						console.log(err);
-						res.status(500).send({ message: 'Hubo un error al agregar la imagen de portada' });
-					} else {	
-						res.redirect('/perfil');
-					}
+		if ( fieldname === 'profileBackground') {
+			if ( filename != '' ) {
+				let strBackPath = _media + userId + '/background/' + nameImage + '.jpg';
+				fstreamBack = fs.createWriteStream(strBackPath);
+				file.pipe(fstreamBack);
+				fstreamBack.on('close', function() {
+					file.resume();
+					let newPhoto = { name: nameImage + '.jpg', album: 'background' };
+					User.update({ _id: userId },
+						{ $push: { photos: newPhoto }, $set: { backPhoto: nameImage + '.jpg' } },
+					(err, doc) => {
+						if (err) {
+							console.log(err);
+							res.status(500).send({ message: 'Hubo un error al agregar la imagen de portada' });
+						}
+					});
 				});
-			});
+			}
+		}
+		if ( fieldname === 'profilePhoto' ) {
+			if ( filename != '' ) {
+				let strProfPath = _media + userId + '/profile/' + nameImage + '.jpg';
+				fstreamProf = fs.createWriteStream(strProfPath);
+				file.pipe(fstreamProf);
+				fstreamProf.on('close', function() {
+					file.resume();
+					let newPhoto = { name: nameImage + '.jpg', album: 'profile' };
+					User.update({ _id: userId },
+						{ $push: { photos: newPhoto }, $set: { profilePhoto: nameImage + '.jpg' } },
+					(err, doc) => {
+						if (err) {
+							console.log(err);
+							res.status(500).send({ message: 'Hubo un error al agregar la foto de perfil' });
+						}
+					});
+				});
+			}
 		}
 	});
 	busboy.on('finish', function() {
-		console.log('Done parsing form!');
-		res.writeHead(303, { Connection: 'close', Location: '/perfil' });
-		res.end();
+		console.log('Finish upload');
+		flag = true;
+		res.status(303).redirect('/perfil');
 	});
 	req.pipe(busboy);
-		
-
-	/*if ( profile.originalname !== '' ) {
-		profile.destination = _media + 'profile/';
-		profile.filename = userId + '.jpg'
-	}*/
-
+	if ( flag ) {
+		res.redirect('/perfil');
+	}
 };

@@ -70,7 +70,7 @@
 			</div>
 		</div>
 	</div>
-	<article class="list mr_bottom_24">
+	<article class="list mr_bottom_24" style="max-width: 1024px;margin: 0 auto;">
 		<div class="pd_16 resp_title main_action_button">
 			<button class="pd_8 pd_right_12 bg_secondary shadow_raised border_radius" onclick="showPopup(true, '#user-edit')">
 				<img class="v_align_middle icon" src="assets/icons/edit_white.png">
@@ -95,11 +95,17 @@
 				</div>
 			</div>
 			<div class="profile_display">
-				<div class="background bg_primary_dark"></div>
+				<div class="background bg_primary_dark">
+					<div class="img_container" *ngIf="user.backPhoto != undefined && user.backPhoto != ''">
+						<img src="/media/{{ user._id }}/background/{{ user.backPhoto }}" adjustable>
+					</div>
+					<div class="bg_opacity" *ngIf="user.backPhoto != undefined && user.backPhoto != ''"></div>
+				</div>
 				<div class="profile_photo font_white">
 					<div class="inner">
 						<div class="img_container circle shadow_flat">
-							<img src="assets/icons/default_profile.png">
+							<img src="assets/icons/default_profile.png" *ngIf="user.profilePhoto == undefined || user.profilePhoto == ''">
+							<img src="/media/{{ user._id }}/profile/{{ user.profilePhoto }}"*ngIf="user.profilePhoto != undefined && user.profilePhoto != ''">
 						</div><div class="info">
 							<h3 class="title_smaller">
 								{{ user.name }} {{ user.lastName }}

@@ -82,46 +82,64 @@
 				Ningun usuario por el momento
 			</h2>
 		</div>
-		<div class="bg_white shadow_flat border_radius mr_bottom_12" *ngFor="let user of users">
-			<div class="list_element">
-				<div class="ref">
-					<a href="/admin/usuarios/{{ user._id }}">
-						<span class="circle" [ngStyle]="getRandomColor()">
-							<label class="title_smaller font_light font_white size_24">{{ user.name.charAt(0) }}</label>
-						</span>
-					</a>
-				</div><div class="info">
-					<button class="options_button hover_lightgray size_32 text_align_center circle">
-						<img class="icon v_align_middle opacity" src="assets/icons/dots-vertical_black.png">
-					</button>
-					<div class="hidden_options">
-						<div class="bg_white pd_bottom_8 pd_top_8 shadow_flat border_radius font_normal">
-							<a href="/admin/usuarios/{{ user._id }}">
-								<p class="pd_8 pd_left_16 pd_right_16 hover_black">
-									Ver
-								</p>
-							</a>
-							<a href="/admin/usuarios/{{ user._id }}?edit=true">
-								<p class="pd_8 pd_left_16 pd_right_16 hover_black">
-									Editar
-								</p>
-							</a>
+		<div class="responsive_col resp_list text_align_center">
+			<div class="col_3 text_align_left" *ngFor="let user of users">
+				<div class="bg_white resp_item shadow_flat border_radius mr_bottom_12 relative_pos">
+					<div class="tr_0 h_32">
+						<div class="mr_12 size_32 relative_pos">
+							<button class="options_button hover_black size_32 text_align_center circle">
+								<img class="icon v_align_middle" src="assets/icons/dots-vertical_white.png">
+							</button>
+							<div class="hidden_options">
+								<div class="bg_white pd_bottom_8 pd_top_8 shadow_flat border_radius font_normal">
+									<a href="/admin/usuarios/{{ user._id }}">
+										<p class="pd_8 pd_left_16 pd_right_16 hover_black">
+											Ver
+										</p>
+									</a>
+									<a href="/admin/usuarios/{{ user._id }}?edit=true">
+										<p class="pd_8 pd_left_16 pd_right_16 hover_black">
+											Editar
+										</p>
+									</a>
+								</div>
+							</div>
 						</div>
 					</div>
-					<div class="pd_12 pd_left_16 pd_right_16">
-						<div class="mr_bottom_8">
-							<h3 class="font_normal mr_bottom_4">
-								{{ user.name }}
-							</h3>
-							<p class="opacity">
-								<b class="font_normal">{{ user.mail }}</b>
+					<div class="profile_display mini">
+						<div class="background bg_primary_dark">
+							<div class="img_container" *ngIf="user.backPhoto != undefined && user.backPhoto != ''">
+								<img src="/media/{{ user._id }}/background/{{ user.backPhoto }}" adjustable>
+							</div>
+							<div class="bg_opacity" *ngIf="user.backPhoto != undefined && user.backPhoto != ''"></div>
+						</div>
+						<div class="profile_photo font_white">
+							<div class="inner">
+								<a href="/admin/usuarios/{{ user._id }}">
+									<div class="img_container circle shadow_flat">
+										<img src="assets/icons/default_profile.png" *ngIf="user.profilePhoto == undefined || user.profilePhoto == ''">
+										<img src="/media/{{ user._id }}/profile/{{ user.profilePhoto }}"*ngIf="user.profilePhoto != undefined && user.profilePhoto != ''">
+									</div>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="info">
+						<div class="pd_16">
+							<div class="mr_bottom_8">
+								<h3 class="font_normal mr_bottom_4">
+									{{ user.name }} {{ user.lastName }}
+								</h3>
+								<p class="opacity">
+									<b class="font_normal">{{ user.mail }}</b>
+								</p>
+							</div>
+							<p class="font_normal">
+								{{ userTypes[user.privilege] }}
 							</p>
 						</div>
-						<p class="font_normal">
-							{{ userTypes[user.privilege] }}
-						</p>
 					</div>
-				</div>
+				</div>	
 			</div>
 		</div>
 	</section>

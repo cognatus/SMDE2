@@ -45,25 +45,6 @@
 		width: calc(100% - 80px);
 	}
 
-	.admin_container .admin_navigation {
-		width: 220px;
-		margin-right: 16px;
-		display: inline-block;
-		vertical-align: top;
-		margin-top: 32px;
-		padding-top: 0;
-	}
-
-	.admin_container .admin_page {
-		width: calc(100% - 236px);
-		display: inline-block;
-		vertical-align: top;
-	}
-
-	.admin_container .admin_navigation .auto_col {
-		display: block;
-	}
-
 	.admin_container .admin_navigation .auto_col nav {
 		padding-left: 16px;
 		padding-right: 16px;
@@ -76,12 +57,16 @@
 		padding-bottom: 24px;	
 	}
 
+	.responsive_col .col_3 {
+		width: 33.3333333%;
+	}
+
 	.profile_display {
 		height: 338px;
 	}
 
 	.admin_container .profile_display {
-		height: 312px;
+		height: 360px;
 	}
 
 	.profile_display .profile_photo .inner {

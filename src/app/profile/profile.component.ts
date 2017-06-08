@@ -35,6 +35,7 @@ export class ProfileComponent implements OnInit {
 				this.privateUser = false;
 			}
 		} else {
+			this.auth.updateUser();
 			this.user = this.auth.getUser;
 		}
 

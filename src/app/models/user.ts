@@ -21,6 +21,13 @@ export class User {
 		msmColor: string;
 		primaryColor: string;
 		theme: number;
-	}
+	};
+	photos: [{
+		name: string,
+		description: string,
+		uploadDate: Date,
+		tags: string[],
+		album: string,
+	}];
 	courses: Course[];
 };
