@@ -27,9 +27,8 @@
 		margin: 32px auto;
 	}
 
-	.pop_up_container .pop_up.big {
-		width: calc(100% - 80px);
-		max-width: 1080px;
+	.pop_up_container.gallery .pop_up {
+		height: calc(100% - 64px);
 	}
 
 	.pop_up_container .pop_up .inner .padding_block {

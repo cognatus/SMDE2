@@ -4,7 +4,7 @@ const User = require('../../models/User');
 
 const _media =	'src/media/';
 
-exports.updateProfilePhotos = (req, res) => {
+exports.uploadProfilePhotos = (req, res) => {
 	var busboy = new Busboy({ headers: req.headers });
 
 	let date = new Date();
@@ -76,11 +76,46 @@ exports.updateProfilePhotos = (req, res) => {
 	});
 	busboy.on('finish', function() {
 		console.log('Finish upload');
-		flag = true;
-		res.status(303).redirect('/perfil');
+		res.redirect('/perfil');
 	});
 	req.pipe(busboy);
-	if ( flag ) {
-		res.redirect('/perfil');
+};
+
+exports.updateProfileName = (req, res) => {
+	User.findOneAndUpdate({_id: req.cookies.login._id}, {$set: {
+		name: req.body.name,
+		lastName: req.body.lastName,
+	}}, {new: false}, (err, doc) => {
+		if (err) {
+			res.status(500).send({ message: err });
+		}else{
+			res.send('Usuario modificado');
+		}
+	});
+};
+
+exports.updatePhoto = (req, res) => {
+	console.log(req.body);
+	var userId = req.cookies.login._id;
+	if ( req.body.album === 'background' ) {
+		User.findOneAndUpdate({_id: userId}, {$set: {
+			backPhoto: req.body.name,
+		}}, {new: false}, (err, doc) => {
+			if (err) {
+				res.status(500).send({ message: err });
+			}else{
+				res.send({ message: 'Foto de portada cambiada' });
+			}
+		});
+	} else if ( req.body.album === 'profile' ) {
+		User.findOneAndUpdate({_id: userId}, {$set: {
+			profilePhoto: req.body.name,
+		}}, {new: false}, (err, doc) => {
+			if (err) {
+				res.status(500).send({ message: err });
+			}else{
+				res.send({ message: 'Foto de perfil cambiada' });
+			}
+		});
 	}
 };

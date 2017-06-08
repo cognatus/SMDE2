@@ -46,4 +46,8 @@
 		left: 16px;
 	}
 
+	.gallery_container .buttons_container button span {
+		display: inline-block;
+	}
+
 }

@@ -47,6 +47,8 @@ router.route('/courses')
 	.get(admin.getCourses)
 	.post(admin.insertCourses);
 
-router.post('/updateProfilePhotos', profile.updateProfilePhotos);
+router.route('/profile')
+	.post(profile.uploadProfilePhotos)
+	.put(profile.updatePhoto);
 
 module.exports = router;

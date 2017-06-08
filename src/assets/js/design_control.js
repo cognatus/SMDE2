@@ -12,10 +12,11 @@ $(document).ready( function() {
 	$('#notif-open-button').click( function( event ) {
 		event.stopPropagation();
 		if ( $('#notif-mini').css('display') === 'block' ) {
-			showHiddenBlock( false, $('#notif-mini' ))
+			showHiddenBlock( false, $('#notif-mini' ) )
 		} else {
-			showHiddenBlock( true, $('#notif-mini' ))
+			showHiddenBlock( true, $('#notif-mini' ) )
 		}
+		showHiddenBlock( false, $('#options-mini') )
 		showHiddenBlock( false, $('.hidden_options') )
 	});
 
@@ -26,6 +27,7 @@ $(document).ready( function() {
 		} else {
 			showHiddenBlock( true, $('#options-mini') )
 		}
+		showHiddenBlock( false, $('#notif-mini' ) )
 		showHiddenBlock( false, $('.hidden_options') )
 	});
 
@@ -43,12 +45,24 @@ $(document).ready( function() {
 		showHiddenBlock( false, $('#options-mini' ) );
 	});
 
+	jQuery(document).keydown(function(e) {
+		if ( jQuery('#profile-gallery').css('left') === '0px' ) {
+			if ( e.which == 37 ) { // keyboard left
+				jQuery('#prof-galbutton-left').trigger('click');
+			} else if ( e.which == 39 ) { // keyboard right
+				jQuery('#prof-galbutton-right').trigger('click');
+			}
+		}
+	});
+
 	var readyStateCheckInterval = setInterval( function() {
-	    if (document.readyState === "complete") {
-	        clearInterval( readyStateCheckInterval );
-	        resizeImg();
-	    }
+		if (document.readyState === "complete") {
+			clearInterval( readyStateCheckInterval );
+			resizeImg();
+		}
 	}, 500);
+
+
 
 });
 
@@ -72,11 +86,11 @@ function moveCarousel( carousel_id, indicator_selector, position ) {
 			'left': indicator.find('span').eq(positioner).position().left,
 		}, 1200);
 	} else {
-		var initialBlock =  parseInt( items.eq(0).attr('data-idposition') );
+		var initialBlock =	parseInt( items.eq(0).attr('data-idposition') );
 
 		if ( initialBlock !== 0 ) {
 			selector.find('.carousel_element').sort( function(a, b) {
-	    		return +a.getAttribute('data-idposition') - +b.getAttribute('data-idposition');
+					return +a.getAttribute('data-idposition') - +b.getAttribute('data-idposition');
 			}).appendTo(selector);
 
 			selector.css({
@@ -171,12 +185,12 @@ function previewPhoto( input, img_selector ) {
 	console.log(input.value);
 	console.log(input.files);
 	if ( input.files.length > 0 ) {
-	    var reader = new FileReader();
+			var reader = new FileReader();
 
-	    reader.onload = function ( event ) {
-	        jQuery(img_selector).attr('src', event.target.result);
-	    }
-	    reader.readAsDataURL( input.files[0] );
+			reader.onload = function ( event ) {
+					jQuery(img_selector).attr('src', event.target.result);
+			}
+			reader.readAsDataURL( input.files[0] );
 	}
 }
 

@@ -1,73 +1,60 @@
 <app-menu *ngIf="auth.loggedIn()"></app-menu>
 <div class="profile_container">
-	<div class="pop_up_container" id="user-edit" *ngIf="privateUser">
-		<div class="pop_up_back" onclick="showPopup(false, '#user-edit')"></div>
+	<div class="pop_up_container gallery" id="profile-gallery" *ngIf="photos[selectedAlbum].array?.length > 0">
+		<div class="pop_up_back" onclick="showPopup(false, '#profile-gallery')"></div>
 		<div class="pop_up">
 			<div class="inner border_radius">
 				<div class="bg_primary">
 					<div class="pop_up_title font_white">
-						<h1 class="title">
-							Editar Perfil
+						<h1 class="title" *ngIf="selectedAlbum == 0">
+							Fotos de Portada
+						</h1>
+						<h1 class="title" *ngIf="selectedAlbum == 1">
+							Fotos de Perfil
 						</h1>
 						<div class="close_button">
-							<button class="pd_8 hover_black circle" onclick="showPopup(false, '#user-edit')">
+							<button class="pd_8 hover_black circle" onclick="showPopup(false, '#profile-gallery')">
 								<img class="icon" src="assets/icons/arrow-left_white.png">
 							</button>
 						</div>
 					</div>
 				</div>
-				<form class="padding_block" (submit)="updateUser()">
-					<div class="data_container">
-						<h2 class="title_medium mr_bottom_24 font_secondary">Datos</h2>
-						<div class="pd_left_8 pd_right_8">
-							<div class="field_container pd_bottom_24">
-								<div class="field mr_top_8">
-									<label class="opacity font_bold font_small">Nombre(s)</label>
-									<input type="text" [(ngModel)]="user.name" name="name" placeholder="Nombre(s)" />
+				<div class="gallery_container">
+					<div class="gal_inner bg_black relative_pos">
+						<div class="img_container ">
+							<img src="{{ photos[selectedAlbum].array[photos[selectedAlbum].selected] }}">
+						</div>
+						<div class="tr_0 h_32" *ngIf="privateUser">
+							<div class="increment_margin size_32 relative_pos">
+								<button class="options_button hover_black size_32 text_align_center circle">
+									<img class="icon v_align_middle" src="assets/icons/dots-vertical_white.png">
+								</button>
+								<div class="hidden_options">
+									<div class="bg_white pd_bottom_8 pd_top_8 shadow_flat border_radius font_normal">
+										<p class="pd_8 pd_left_16 pd_right_16 hover_black" (click)="changePhoto()" *ngIf="selectedAlbum == 0 && photos[selectedAlbum].array[photos[selectedAlbum].selected] !== userSrc + 'background/' + user.backPhoto">
+											<span>Seleccionar como foto de portada</span>
+										</p>
+										<p class="pd_8 pd_left_16 pd_right_16 hover_black" (click)="changePhoto()" *ngIf="selectedAlbum == 1 && photos[selectedAlbum].array[photos[selectedAlbum].selected] !== userSrc + 'profile/' + user.profilePhoto">
+											<span>Seleccionar como foto de Perfil</span>
+										</p>
+										<p class="pd_8 pd_left_16 pd_right_16 hover_black">
+											Eliminar Foto
+										</p>
+									</div>
 								</div>
-								<div class="field mr_top_8">
-									<label class="opacity font_bold font_small">Apellidos</label>
-									<input type="text" [(ngModel)]="user.lastName" name="lastName" placeholder="Apellidos"/>
-								</div>
-								<div class="field mr_top_8">
-									<label class="opacity font_bold font_small">Correo</label>
-									<input type="text" [(ngModel)]="user.mail" name="mail" placeholder="Correo Electrónico"/>
-								</div>
-								<div class="field mr_top_8">
-									<label class="opacity font_bold font_small">Télefono</label>
-									<input type="text" [(ngModel)]="user.phone" name="phone" placeholder="Teléfono"/>
-								</div>
-								<div class="field mr_top_8">
-									<label class="opacity font_bold font_small">Fecha de Nacimiento</label>
-									<input type="text" [(ngModel)]="formatedUserBirth" name="birthDay" placeholder="Fecha (dd/mm/yyyy)" />
-								</div>
-								<div class="field mr_top_8">
-									<label class="opacity font_bold font_small">Tipo</label>
-									<select [(ngModel)]="user.privilege" name="area">
-										<option value="1" selected="selected">Alumno</option>
-										<option value="2">Profesor</option>
-										<option value="3">Administrador</option>
-									</select>
-								</div>
-								<div class="field mr_top_8">
-									<label class="opacity font_bold font_small">Sexo</label>
-									<select [(ngModel)]="user.sex" name="area">
-										<option value="0" selected="selected">Hombre</option>
-										<option value="1">Mujer</option>
-										<option value="2">Otro</option>
-									</select>
-								</div>
-								<div class="field mr_top_8">
-									<label class="opacity font_bold font_small">Contraseña Nueva</label>
-									<input type="password" [(ngModel)]="user.password" name="password" placeholder="Contraseña Nueva"/>
-								</div>
-							</div>
-							<div class="field text_align_right">
-								<input type="submit" class="bg_secondary font_white shadow_raised" value="Agregar">
 							</div>
 						</div>
 					</div>
-				</form>
+					<div class="buttons_container bg_white static_col">
+						<button id="prof-galbutton-left" class="col_3 left hover_black" (click)="passImg(false, photos[selectedAlbum].album)">
+							<img class="icon opacity v_align_middle" src="assets/icons/arrow-left_black.png"><span class="mr_left_16 opacity font_bold v_align_middle">Atras</span>
+						</button><div class="col_3 v_align_middle text_align_center font_big opacity">
+							<b>{{ photos[selectedAlbum].selected + 1 }}</b> de <b>{{ photos[selectedAlbum].array.length }}</b>
+						</div><button id="prof-galbutton-right" class="col_3 right hover_black" (click)="passImg(true, photos[selectedAlbum].album)">
+							<span class="mr_right_16 opacity font_bold v_align_middle">Siguiente</span><img class="icon opacity v_align_middle" src="assets/icons/arrow-right_black.png">
+						</button>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -111,7 +98,7 @@
 							</div>
 						</div>
 					</div>
-					<form id="formUpload" class="field pd_16 text_align_right" action="api/updateProfilePhotos/" method="post" enctype="multipart/form-data">
+					<form id="formUpload" class="field pd_16 text_align_right" action="api/profile/" method="POST" enctype="multipart/form-data">
 						<div class="hidden_input">
 							<input type="file" accept="image/*" name="profilePhoto" id="profile-img-file" onchange="previewPhoto(this, '#profile-photo')">
 							<input type="file" accept="image/*" name="profileBackground" id="back-img-file" onchange="previewPhoto(this, '#profile-back');resizeImg('#profile-back');">
@@ -131,8 +118,8 @@
 					</button>
 					<div class="hidden_options">
 						<div class="bg_white pd_bottom_8 pd_top_8 shadow_flat border_radius font_normal">
-							<p class="pd_8 pd_left_16 pd_right_16 hover_black" onclick="showPopup(true, '#user-edit')">
-								Editar
+							<p class="pd_8 pd_left_16 pd_right_16 hover_black" onclick="showPopup(true, '#profile-gallery')" (click)="selectedAlbum = 0">
+								Ver foto de portada
 							</p>
 							<p class="pd_8 pd_left_16 pd_right_16 hover_black" onclick="showPopup(true, '#user-editphotos')">
 								Actualizar Fotos
@@ -150,7 +137,7 @@
 				</div>
 				<div class="profile_photo font_white">
 					<div class="inner">
-						<div class="img_container circle shadow_flat">
+						<div class="img_container circle shadow_flat cursor_pointer" onclick="showPopup(true, '#profile-gallery')" (click)="selectedAlbum = 1">
 							<img src="assets/icons/default_profile.png" *ngIf="user.profilePhoto == undefined || user.profilePhoto == ''">
 							<img src="/media/{{ user._id }}/profile/{{ user.profilePhoto }}"*ngIf="user.profilePhoto != undefined && user.profilePhoto != ''">
 						</div><div class="info">
