@@ -22,6 +22,15 @@ export class ProfileService {
 			.catch(this.handleError);
 	}
 
+	deletePhoto(album: string, name: string): Observable<any> {
+		let options = new RequestOptions({ headers: ContentHeaders });
+		let deleteUrl = this.url + '?album='+ album +'&name=' + name;
+
+		return this.http.delete(deleteUrl, options)
+			.map(this.extractData)
+			.catch(this.handleError);
+	}
+
 	private extractData(res: Response) {
 		let body = res.json();
         return body.user || {};

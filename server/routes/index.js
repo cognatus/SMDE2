@@ -49,6 +49,7 @@ router.route('/courses')
 
 router.route('/profile')
 	.post(profile.uploadProfilePhotos)
-	.put(profile.updatePhoto);
+	.put(profile.updatePhoto)
+	.delete(profile.deletePhoto);
 
 module.exports = router;

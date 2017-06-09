@@ -52,6 +52,8 @@ exports.uploadProfilePhotos = (req, res) => {
 						}
 					});
 				});
+			} else {
+				file.resume();
 			}
 		}
 		if ( fieldname === 'profilePhoto' ) {
@@ -71,6 +73,8 @@ exports.uploadProfilePhotos = (req, res) => {
 						}
 					});
 				});
+			} else {
+				file.resume();
 			}
 		}
 	});
@@ -95,10 +99,9 @@ exports.updateProfileName = (req, res) => {
 };
 
 exports.updatePhoto = (req, res) => {
-	console.log(req.body);
-	var userId = req.cookies.login._id;
+	let userId = req.cookies.login._id;
 	if ( req.body.album === 'background' ) {
-		User.findOneAndUpdate({_id: userId}, {$set: {
+		User.findOneAndUpdate({ _id: userId }, { $set: {
 			backPhoto: req.body.name,
 		}}, {new: false}, (err, doc) => {
 			if (err) {
@@ -108,7 +111,7 @@ exports.updatePhoto = (req, res) => {
 			}
 		});
 	} else if ( req.body.album === 'profile' ) {
-		User.findOneAndUpdate({_id: userId}, {$set: {
+		User.findOneAndUpdate({ _id: userId }, {$set: {
 			profilePhoto: req.body.name,
 		}}, {new: false}, (err, doc) => {
 			if (err) {
@@ -118,4 +121,42 @@ exports.updatePhoto = (req, res) => {
 			}
 		});
 	}
+};
+
+exports.deletePhoto = (req, res) => {
+	let userId = req.cookies.login._id;
+	let fileToRemove = _media + userId + '/' + req.query.album + '/' + req.query.name
+	fs.unlink(fileToRemove, () => {
+		User.findOneAndUpdate({ _id: userId }, { $pull:
+			{ photos: { name: req.query.name, album: req.query.album } } 
+		}, {new: false}, (err, doc) => {
+			if (err) {
+				res.status(500).send({ message: err });
+			}else{
+				if ( req.query.album == 'background' ) {
+					User.findOneAndUpdate({ _id: userId }, { $set: {
+						backPhoto: ''
+					}}, {new: false}, (err, doc) => {
+						if ( err ) {
+							res.status(500).send({ message: err })
+						} else {
+							res.send({ message: 'Foto de perfil borrada' });
+						}
+					});
+				} else if ( req.query.album == 'profile' ) {
+					User.findOneAndUpdate({ _id: userId }, { $set: {
+						profilePhoto: ''
+					}}, {new: false}, (err, doc) => {
+						if ( err ) {
+							res.status(500).send({ message: err })
+						} else {
+							res.send({ message: 'Foto de portada borrada' });
+						}
+					});
+				} else {
+					res.send({ message: 'Foto borrada' });
+				}
+			}
+		});
+	});
 };

@@ -30,12 +30,9 @@ export class ProfileComponent implements OnInit {
 		this.activatedRoute.params.subscribe((params: Params) => {
         	this.userId = params['id'];
         });
-	}
-
-	ngOnInit() {
-		if ( this.userId !== undefined && this.userId !== '' ) {
-			if ( this.userId === this.auth.getUser._id ) {
-				this.user = this.auth.getUser;
+        if ( this.userId !== undefined && this.userId !== '' ) {
+			if ( this.userId === this.auth.getUser()._id ) {
+				this.user = this.auth.getUser();
 			} else {
 				this.fetchUser();
 				this.privateUser = false;
@@ -43,10 +40,12 @@ export class ProfileComponent implements OnInit {
 			this.userSrc = '/media/' + this.userId + '/';
 		} else {
 			this.auth.updateUser();
-			this.user = this.auth.getUser;
+			this.user = this.auth.getUser();
 			this.userSrc = '/media/' + this.user._id + '/';
 		}
+	}
 
+	ngOnInit() {
 		let userBirthDay = new Date(this.user.birthDay);
 		this.formatedUserBirth = ''
 			+ ((userBirthDay.getDate() + 1 < 10) ? '0' + (userBirthDay.getDate() + 1).toString() : (userBirthDay.getDate() + 1).toString()) + '/'
@@ -57,25 +56,25 @@ export class ProfileComponent implements OnInit {
 			let item = this.user.photos[i];
 			for ( let j = 0 ; j < this.photos.length ; j++ ) {
 				let sub_item = this.photos[j];
+				sub_item.selected = 0;
 				if ( sub_item.album === item.album ) {
 					sub_item.array.push(this.userSrc + sub_item.album + '/' + item.name);
-					let albumCheck = '';
-					let srcCheck = '';
-					if ( sub_item.album == 'background' ) {
-						albumCheck = 'background';
-						srcCheck = this.userSrc + 'background/' + this.user.backPhoto;
-					} else if ( sub_item.album == 'profile' ) {
-						albumCheck = 'profile';
-						srcCheck = this.userSrc + 'profile/' + this.user.profilePhoto;
-					}
-					for ( let check in sub_item.array ) {
-						if ( albumCheck === sub_item.album ) {
-							if ( sub_item.array[check] === srcCheck ) {
-								sub_item.selected = sub_item.array.indexOf(sub_item.array[check]);
-							}
-						}
-					}
 				}
+			}
+		}
+		let srcCheck = '';
+		let profAttr = '';
+		for ( let j = 0 ; j < this.photos.length ; j++ ) {
+			let sub_item = this.photos[j];
+			if ( sub_item.album == 'background' ) {
+				profAttr = this.user.profilePhoto;
+				srcCheck = this.userSrc + 'background/' + this.user.backPhoto;
+			} else if ( sub_item.album == 'profile' ) {
+				profAttr = this.user.backPhoto;
+				srcCheck = this.userSrc + 'profile/' + this.user.profilePhoto;
+			}
+			if ( profAttr !== undefined && profAttr !== null ) {
+				sub_item.selected = sub_item.array.indexOf(srcCheck);			
 			}
 		}
 	}
@@ -113,12 +112,24 @@ export class ProfileComponent implements OnInit {
 		let name = nameSrcArray[nameSrcArray.length - 1];
 		this.profileService.updatePhoto(album, name)
 			.subscribe( response => {
-					location.reload();
+					location.href = '/perfil';
 				}, error => {
 					console.log('Error');
 					alert('Hubo un error al actualizar la foto');
 				});
-		console.log(album + '  '  + name);
+	}
+
+	deletePhoto(): void {
+		let album = this.photos[this.selectedAlbum].album;
+		let nameSrcArray = this.photos[this.selectedAlbum].array[this.photos[this.selectedAlbum].selected].split('/'); 
+		let name = nameSrcArray[nameSrcArray.length - 1];
+		this.profileService.deletePhoto(album, name)
+			.subscribe( response => {
+					location.href = '/perfil';
+				}, error => {
+					console.log('Error');
+					alert('Hubo un error al eliminar la foto');
+				});
 	}
 
 }

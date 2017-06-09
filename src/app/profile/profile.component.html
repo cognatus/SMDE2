@@ -37,7 +37,7 @@
 										<p class="pd_8 pd_left_16 pd_right_16 hover_black" (click)="changePhoto()" *ngIf="selectedAlbum == 1 && photos[selectedAlbum].array[photos[selectedAlbum].selected] !== userSrc + 'profile/' + user.profilePhoto">
 											<span>Seleccionar como foto de Perfil</span>
 										</p>
-										<p class="pd_8 pd_left_16 pd_right_16 hover_black">
+										<p class="pd_8 pd_left_16 pd_right_16 hover_black" (click)="deletePhoto()">
 											Eliminar Foto
 										</p>
 									</div>
@@ -122,7 +122,7 @@
 								Ver foto de portada
 							</p>
 							<p class="pd_8 pd_left_16 pd_right_16 hover_black" onclick="showPopup(true, '#user-editphotos')">
-								Actualizar Fotos
+								Subir fotos
 							</p>
 						</div>
 					</div>

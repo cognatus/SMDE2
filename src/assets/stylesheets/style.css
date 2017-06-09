@@ -751,7 +751,7 @@ img.opacity { opacity: 0.4; }
 
 .profile_display {
 	position: relative;
-	height: 232px;
+	height: 260px;
 }
 
 .profile_display.small {
@@ -786,7 +786,7 @@ img.opacity { opacity: 0.4; }
 	position: absolute;
 	top: 0;
 	left: 0;
-	background-color: rgba(0, 0, 0, 0.26);
+	background-color: rgba(0, 0, 0, 0.2);
 }
 
 .profile_display .profile_photo {
@@ -797,7 +797,7 @@ img.opacity { opacity: 0.4; }
 }
 
 .profile_display .profile_photo .inner {
-	padding: 16px;
+	padding: 20px;
 }
 
 .profile_display.mini .profile_photo .inner {
