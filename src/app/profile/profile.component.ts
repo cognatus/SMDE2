@@ -4,6 +4,7 @@ import { Location } from '@angular/common';
 import { AuthGuard } from '../auth/auth.guard';
 import { UserDetailService } from '../user-detail/user-detail.service';
 import { ProfileService } from './profile.service';
+
 import { User } from '../models/user';
 import { colors, userTypes } from '../app.constants';
 

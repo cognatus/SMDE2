@@ -1,8 +1,12 @@
-import { Subject } from './subject';
-import { Group } from './group';
+import { User } from './user';
 
 export class Course {
 	_id: string;
-	subject: Subject;
-	group: Group;
+	name: string;
+	description: string;
+	tags: string[];
+	createdDate: Date;
+	updatedDate: Date;
+	user: User;
+	color: String;
 };

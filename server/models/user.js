@@ -9,12 +9,10 @@ var UserSchema = new Schema({
 	lastName: {type: String, required: true},
 	phone: {type: Number, required: true},
 	birthDay: {type: Date, required: true},
-	type: {type: Number, required: true}, // Privilegio
-	createDate: {type: Date, required: true, default: new Date()},
+	privilege: {type: Number, required: true},
 	sex: Number,
-	profilePhoto: String,
-	backPhoto: String,
-	updateDate: {type: Date, default: new Date()},
+	createDate: { type: Date, required: true, default: new Date() },
+	updateDate: { type: Date, default: new Date() },
 	institute: [{
 		name: {type: String, required:true},
 		level: {type: String, required:true}
@@ -44,8 +42,8 @@ var UserSchema = new Schema({
 		tags: {type: String},
 		album: {type: String},
 	}],
-	profilePhoto: {type: String},
-	backPhoto: {type: String}
+	profilePhoto: String,
+	backPhoto: String
 });
 
 module.exports = mongoose.model('User', UserSchema);

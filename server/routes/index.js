@@ -25,24 +25,6 @@ router.route('/users/:id')
 	.put(admin.updateUser)
 	.delete(admin.deleteUser);
 
-router.route('/subjects')
-	.get(admin.getSubjects)
-	.post(admin.insertSubject);
-
-router.route('/subjects/:id')
-	.get(admin.getSubjectById)
-	.put(admin.updateSubject)
-	.delete(admin.deleteSubject);
-
-router.route('/groups')
-	.get(admin.getGroups)
-	.post(admin.insertGroup);
-
-router.route('/groups/:id')
-	.get(admin.getGroupById)
-	.put(admin.updateGroup)
-	.delete(admin.deleteGroup);
-
 router.route('/courses')
 	.get(admin.getCourses)
 	.post(admin.insertCourses);

@@ -1,6 +1,4 @@
 const User = require('../../models/User');
-const Subject = require('../../models/Subject');
-const Group = require('../../models/Group');
 const Course = require('../../models/Course');
 
 // Obtener usuarios
@@ -86,169 +84,6 @@ exports.deleteUser = (req, res) => {
 	});
 };
 
-// Obtener asignaturas
-exports.getSubjects = (req, res) => {
-	Subject.find({}, (err, doc) => {
-		if (err) {
-			console.log(err);
-			res.status(500).send({ message: err });
-		} else {
-			res.json(doc);
-		}
-	});
-};
-
-// Agregar nueva asignatura
-exports.insertSubject = (req, res) => {
-	var data = {
-		'key': req.body.key,
-		'name': req.body.name,
-		'level': req.body.level,
-		'area': req.body.area
-	};
-
-	Subject.findOne({ key: data.key }, (err, doc) => {
-		if (err) {
-			console.log(err);
-			res.status(500).send({ message: err });
-		} else {
-			if ( doc ) {
-				res.status(500).send({ message: 'Clave ya utilizada' });
-			} else {
-				let subject = new Subject(data);
-				subject.save( (err) => {
-					if (err) {
-						console.log(err);
-						res.status(500).send({ message: err });	
-					} else {
-						res.json({ message: 'Asignatura registrada' });
-					}
-				});
-			}
-		}
-	});
-};
-
-// Obtener asignatura por id
-exports.getSubjectById = (req, res) => {
-	Subject.find({_id: req.params.id}, (err, doc) => {
-		if (err) {
-			console.log(err);
-			res.status(500).send({ message: err });
-		} else {
-			res.json(doc[0]);
-		}
-	});
-};
-
-// Modificar asignatura
-exports.updateSubject = (req, res) => {
-	Subject.findOneAndUpdate({_id: req.params.id}, {$set: {
-		key: req.body.key,
-		name: req.body.name,
-		level: req.body.level,
-		area: req.body.area
-	}}, {new: false}, (err, doc) => {
-		if (err) {
-			res.status(500).send({ message: err });
-		}else{
-			res.send({ message: 'Asignatura modificada' });
-		}
-	});
-};
-
-// Eliminar asignatura
-exports.deleteSubject = (req, res) => {
-	Subject.remove({_id: req.params.id}, (err, doc) => {
-		if (err) {
-			res.status(500).send({ message: err });
-		}else{
-			res.send({ message: 'Asignatura eliminada' });
-		}
-	});
-};
-
-// Obtener grupos
-exports.getGroups = (req, res) => {
-	Group.find({}, (err, doc) => {
-		if (err) {
-			console.log(err);
-			res.status(500).send({ message: err });
-		} else {
-			res.json(doc);
-		}
-	});
-};
-
-// Agregar nueva grupo
-exports.insertGroup = (req, res) => {
-	var data = {
-		'key': req.body.key,
-		'name': req.body.name,
-		'level': req.body.level,
-		'area': req.body.area
-	};
-
-	Group.findOne({ key: data.key }, (err, doc) => {
-		if (err) {
-			console.log(err);
-			res.status(500).send({ message: err });
-		} else {
-			if ( doc ) {
-				res.status(500).send({ message: 'Clave ya utilizada' });
-			} else {
-				let group = new Group(data);
-				group.save( (err) => {
-					if (err) {
-						console.log(err);
-						res.status(500).send({ message: err });
-					} else {
-						res.json({ message: 'Grupo registrada' });
-					}
-				});
-			}
-		}
-	});
-};
-
-// Obtener grupo por id
-exports.getGroupById = (req, res) => {
-	Group.find({_id: req.params.id}, (err, doc) => {
-		if (err) {
-			console.log(err);
-			res.status(500).send({ message: err });
-		} else {
-			res.json(doc[0]);
-		}
-	});
-};
-
-// Modificar grupo
-exports.updateGroup = (req, res) => {
-	Group.findOneAndUpdate({_id: req.params.id}, {$set: {
-		key: req.body.key,
-		name: req.body.name,
-		level: req.body.level
-	}}, {new: false}, (err, doc) => {
-		if (err) {
-			res.status(500).send({ message: err });
-		}else{
-			res.send({ message: 'Grupo modificada' });
-		}
-	});
-};
-
-// Eliminar grupo
-exports.deleteGroup = (req, res) => {
-	Group.remove({_id: req.params.id}, (err, doc) => {
-		if (err) {
-			res.status(500).send({ message: err });
-		}else{
-			res.send({ message: 'Grupo eliminado' });
-		}
-	});
-};
-
 // Obtener cursos
 exports.getCourses = (req, res) => {
 	Course.find({}, (err, doc) => {
@@ -263,14 +98,19 @@ exports.getCourses = (req, res) => {
 
 // Agregar nuevos cursos
 exports.insertCourses = (req, res) => {
-	var data = req.body;
+	var data = new Course({
+		name: req.body.name,
+		description: req.body.description,
+		tags: req.body.tags,
+		user: req.body.user
+	});
 
-	Course.create(data, (err) => {
+	data.save( (err) => {
 		if (err) {
 			console.log(err);
 			res.status(500).send({ message: err });
 		} else {
-			res.json({ message: 'Cursos registrado' });
+			res.json({ message: 'Cursos agregado' });
 		}
 	});
 		

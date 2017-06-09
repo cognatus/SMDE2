@@ -122,6 +122,8 @@ label.size_24 { display: inline-block; }
 .pd_bottom_48{padding-bottom: 48px;}
 .pd_top_56{padding-top: 56px;}
 .pd_bottom_56{padding-bottom: 56px;}
+.pd_top_64{padding-top: 64px;}
+.pd_bottom_64{padding-bottom: 64px;}
 .responsive_padding{padding: 32px 16px 32px 16px;}
 
 /* MARGIN */
@@ -365,6 +367,7 @@ img.opacity { opacity: 0.4; }
 }
 
 .field textarea {
+	padding: 12px;
 	resize: none;
 	height: 140px;
 	display: inline-block;
@@ -598,11 +601,11 @@ img.opacity { opacity: 0.4; }
 }
 
 .app_bar .app_bar_inner .bar_bottom .menu .item img {
-	opacity: 0.4;
+	opacity: 0.5;
 }
 
 .app_bar .app_bar_inner .bar_bottom .menu .item span {
-	opacity: 0.5;
+	opacity: 0.6;
 }
 
 .app_bar .app_bar_inner .bar_bottom .menu .item.active img,

@@ -19,21 +19,10 @@ export class CoursesService {
 			.catch(this.handleError);
 	}
 
-	addCourses(courses: Course[]): Observable<Course[]> {
+	addCourse(course: Course): Observable<Course> {
         let options = new RequestOptions({ headers: ContentHeaders });
-        let dataArray = [];
-        let data = '';
 
-        dataArray = courses;
-        dataArray.forEach( (item) => {
-        	delete item._id;
-        	delete item.subject._id;
-        	delete item.group._id;
-        });
-      
-        data = JSON.stringify(dataArray);
-
-        return this.http.post(this.url, data, options)
+        return this.http.post(this.url, course, options)
             .map(this.extractData)
             .catch(this.handleError);
     }

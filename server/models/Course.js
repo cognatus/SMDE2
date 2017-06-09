@@ -2,19 +2,19 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var CourseSchema = new Schema({
-	subject : {
-		key: {type: String, required:true},
-		name: {type: String, required: true},
-		level: {type: Number, required: true},
-		area: String
-	}, 
-	group : {
-		key: {type: String, required:true},
-		name: {type: String, required: true},
-		level: {type: Number, required: true}
+	name: { type: String, required: true },
+	description: { type: String },
+	tags: [],
+	createdDate: { type: Date, required: true, default: new Date() },
+	updatedDate: { type: Date, default: new Date() },
+	user: {
+		name: { type: String, required: true },
+		lastName: { type: String, required: true },
+		nick: { type: String },
+		mail: { type: String, required: true },
+		profilePhoto: { type: String },
+		backPhoto: { type: String }
 	}
-}, {
-	unique: true
 });
 
 module.exports = mongoose.model('Course', CourseSchema);

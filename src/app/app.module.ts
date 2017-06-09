@@ -19,11 +19,8 @@ import { MessageConversationComponent } from './message-conversation/message-con
 import { AdminComponent } from './admin/admin.component';
 import { UsersComponent } from './users/users.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
-import { SubjectsComponent } from './subjects/subjects.component';
-import { GroupsComponent } from './groups/groups.component';
 import { CoursesComponent } from './courses/courses.component';
 import { ProfileComponent } from './profile/profile.component';
-import { UserCoursesComponent } from './user-courses/user-courses.component';
 
 @NgModule({
 	declarations: [
@@ -37,11 +34,8 @@ import { UserCoursesComponent } from './user-courses/user-courses.component';
 		AdminComponent,
 		UsersComponent,
 		UserDetailComponent,
-		SubjectsComponent,
-		GroupsComponent,
 		CoursesComponent,
-		ProfileComponent,
-		UserCoursesComponent
+		ProfileComponent
 	],
 	imports: [
 		BrowserModule,

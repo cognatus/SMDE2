@@ -45,7 +45,11 @@ $(document).ready( function() {
 		showHiddenBlock( false, $('#options-mini' ) );
 	});
 
-	jQuery(document).keydown(function(e) {
+	jQuery('#profile-photo-img').click( function() {
+		showPopup(true, '#profile-gallery')
+	});
+
+	jQuery(document).keydown( function(e) {
 		if ( jQuery('#profile-gallery').css('left') === '0px' ) {
 			if ( e.which == 37 ) { // keyboard left
 				jQuery('#prof-galbutton-left').trigger('click');

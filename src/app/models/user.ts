@@ -10,11 +10,9 @@ export class User {
 	phone: number;
 	birthDay: Date;
 	privilege: number;
+	sex: number;
 	createdDate: Date;
 	updateDate: Date;
-	sex: number;
-	profilePhoto: string;
-	backPhoto: string;
 	institute: Institute[];
 	setting: {
 		notifEmail: boolean;
@@ -22,6 +20,7 @@ export class User {
 		primaryColor: string;
 		theme: number;
 	};
+	courses: Course[];
 	photos: [{
 		name: string,
 		description: string,
@@ -29,5 +28,6 @@ export class User {
 		tags: string[],
 		album: string,
 	}];
-	courses: Course[];
+	profilePhoto: string;
+	backPhoto: string;
 };

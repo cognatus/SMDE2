@@ -118,7 +118,7 @@
 					</button>
 					<div class="hidden_options">
 						<div class="bg_white pd_bottom_8 pd_top_8 shadow_flat border_radius font_normal">
-							<p class="pd_8 pd_left_16 pd_right_16 hover_black" onclick="showPopup(true, '#profile-gallery')" (click)="selectedAlbum = 0">
+							<p class="pd_8 pd_left_16 pd_right_16 hover_black" onclick="showPopup(true, '#profile-gallery')" (click)="selectedAlbum = 0" *ngIf="photos[0].array.length > 0">
 								Ver foto de portada
 							</p>
 							<p class="pd_8 pd_left_16 pd_right_16 hover_black" onclick="showPopup(true, '#user-editphotos')">
@@ -137,7 +137,7 @@
 				</div>
 				<div class="profile_photo font_white">
 					<div class="inner">
-						<div class="img_container circle shadow_flat cursor_pointer" onclick="showPopup(true, '#profile-gallery')" (click)="selectedAlbum = 1">
+						<div class="img_container circle shadow_flat cursor_pointer" [attr.id]="photos[1].array?.length > 0 ? 'profile-photo-img' : null" (click)="selectedAlbum = 1">
 							<img src="assets/icons/default_profile.png" *ngIf="user.profilePhoto == undefined || user.profilePhoto == ''">
 							<img src="/media/{{ user._id }}/profile/{{ user.profilePhoto }}"*ngIf="user.profilePhoto != undefined && user.profilePhoto != ''">
 						</div><div class="info">

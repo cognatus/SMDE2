@@ -112,11 +112,11 @@
 		</div>
 		<div class="bar_bottom">
 			<div class="menu font_black">
-				<nav class="item hover_white" *ngIf="user.privilege != 0" [ngClass]="{'active font_white': getActive('asignaturas')}">
-					<a href="/asignaturas">
+				<nav class="item hover_white" *ngIf="user.privilege != 0" [ngClass]="{'active font_white': getActive('cursos')}">
+					<a href="/cursos">
 						<div class="inner">
-							<img class="icon" src="assets/icons/book-multiple_white.png" *ngIf=" getActive('asignaturas') "><img class="icon" src="assets/icons/book-multiple_black.png" *ngIf=" !getActive('asignaturas') "><span>
-								Mis Cursos
+							<img class="icon" src="assets/icons/book-multiple_white.png" *ngIf=" getActive('cursos') "><img class="icon" src="assets/icons/book-multiple_black.png" *ngIf=" !getActive('cursos') "><span>
+								Cursos
 							</span>
 						</div>
 					</a>
