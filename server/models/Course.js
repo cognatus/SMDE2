@@ -8,6 +8,7 @@ var CourseSchema = new Schema({
 	createdDate: { type: Date, required: true, default: new Date() },
 	updatedDate: { type: Date, default: new Date() },
 	user: {
+		id: { type: String, required: true },
 		name: { type: String, required: true },
 		lastName: { type: String, required: true },
 		nick: { type: String },

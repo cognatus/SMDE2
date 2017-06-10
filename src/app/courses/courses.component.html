@@ -16,7 +16,7 @@
 						</div>
 					</div>
 				</div>
-				<form class="padding_block responsive_col" (submit)="addCourses($event)">
+				<form class="padding_block responsive_col" (submit)="addCourse($event)">
 					<div class="data_container">
 						<h2 class="title_medium mr_bottom_24 font_secondary">Información de Curso</h2>
 						<div class="pd_left_8 pd_right_8">
@@ -25,11 +25,22 @@
 									<label class="opacity font_bold font_small">Nombre</label>
 									<input type="text" [(ngModel)]="course.name" name="name" placeholder="Nombre del Curso" />
 								</div>
-								<div class="field mr_top_8">
+								<div class="field mr_top_12">
 									<label class="opacity font_bold font_small">Etiquetas</label>
-									<textarea [(ngModel)]="course.tags" name="tags" placeholder="Agrega etiquetas (Temas de interés, Especialidades, Materias)"></textarea>
+									<div class="pd_top_4" *ngIf="course.tags?.length > 0">
+										<span class="bg_blue circle_radius font_white pd_8 mr_right_8 mr_bottom_8 pd_left_12 pd_right_8" *ngFor="let tag of course.tags">
+											{{ tag }}
+											<img class="icon_small opacity cursor_pointer v_align_middle relative_pos" src="assets/icons/close_black.png" (click)="removeTag(tag)" style="top: -1px">
+										</span>
+									</div>
+									<input type="text" [(ngModel)]="tagsString" name="tags" placeholder="Agrega etiquetas (Temas de interés, Especialidades, Materias)" (keydown)="addTag($event);" (keyup)="this.displayingTags = this.findTagCoincidences(tagsString, this.hiddenTags);">
+									<div class="list_scroll mini bg_white shadow_flat" [hidden]="tagsString == null || tagsString.trim() == ''">
+										<div class="pd_12 hover_black" *ngFor="let tag of displayingTags; let i=index" (click)="addTag($event, tag)" [ngClass]=" { 'bg_blue hover_blue': i == selectedDisplayTag } ">
+											{{ tag }}
+										</div>
+									</div>
 								</div>
-								<div class="field mr_top_8">
+								<div class="field mr_top_12">
 									<label class="opacity font_bold font_small">Descipción</label>
 									<textarea [(ngModel)]="course.description" name="description" placeholder="Agrega una descipción"></textarea>
 								</div>
@@ -70,7 +81,7 @@
 							</button>
 							<div class="hidden_options">
 								<div class="bg_white pd_bottom_8 pd_top_8 shadow_flat border_radius font_normal">
-									<a href="">
+									<a href="/cursos/{{ course._id }}">
 										<p class="pd_8 pd_left_16 pd_right_16 hover_black">
 											Ver mas
 										</p>
@@ -80,36 +91,52 @@
 						</div>
 					</div>
 					<div class="profile_display mini">
-						<div class="background bg_primary_dark">
-							<div class="img_container" *ngIf="user.backPhoto != undefined && user.backPhoto != ''">
-								<img src="/media/{{ user._id }}/background/{{ user.backPhoto }}" adjustable>
-							</div>
-							<div class="bg_opacity" *ngIf="user.backPhoto != undefined && user.backPhoto != ''"></div>
+						<div class="background" [ngStyle]="{ 'background-color': course.color }">
 						</div>
-						<div class="profile_photo font_white">
-							<div class="inner">
-								<a href="/admin/usuarios/{{ user._id }}">
-									<div class="img_container circle shadow_flat">
-										<img src="assets/icons/default_profile.png" *ngIf="user.profilePhoto == undefined || user.profilePhoto == ''">
-										<img src="/media/{{ user._id }}/profile/{{ user.profilePhoto }}"*ngIf="user.profilePhoto != undefined && user.profilePhoto != ''">
+						<div class="profile_photo">
+							<a href="/cursos/{{ course._id }}">
+								<div class="list_element">
+									<div class="ref">
+										<span class="circle bg_opacity_light font_white border_white">
+											<label class="title_smaller font_light size_24">{{ course.name.charAt(0) }}</label>
+										</span>
+									</div><div class="info font_white">
+										<div class="pd_16">
+											<h3 class="font_normal mr_bottom_4">
+												{{ course.name }}
+											</h3>
+											<p class="opacity">
+												<b class="font_normal">Creado el {{ course.createdDate  | date: 'dd/MM/yyyy' }}</b>
+											</p>
+										</div>
 									</div>
-								</a>
-							</div>
+								</div>
+							</a>
 						</div>
 					</div>
-					<div class="info">
-						<div class="pd_16">
-							<div class="mr_bottom_8">
+					<div class="pd_16">
+						<h4 class="font_big font_normal opacity">Descripción</h4>
+						<p class="pd_top_8 pd_left_12 pd_right_12">{{ course.description }}</p>
+					</div>
+					<div class="list_element">
+						<div class="pd_left_12 pd_right_12 opacity">
+							<b>Creado por:</b>
+						</div>
+						<div class="ref">
+							<a href="/perfil/{{ course.user._id }}">
+								<div class="img_container circle">
+									<img src="/media/{{ course.user.id }}/profile/{{ course.user.profilePhoto }}">
+								</div>
+							</a>
+						</div><div class="info">
+							<div class="pd_16">
 								<h3 class="font_normal mr_bottom_4">
-									{{ user.name }} {{ user.lastName }}
+									{{ course.user.name }} {{ course.user.lastName }}
 								</h3>
 								<p class="opacity">
-									<b class="font_normal">{{ user.mail }}</b>
+									<b class="font_normal">{{ course.user.mail }}</b>
 								</p>
 							</div>
-							<p class="font_normal">
-								{{ userTypes[user.privilege] }}
-							</p>
 						</div>
 					</div>
 				</div>	

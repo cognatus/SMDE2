@@ -98,11 +98,20 @@ exports.getCourses = (req, res) => {
 
 // Agregar nuevos cursos
 exports.insertCourses = (req, res) => {
+	console.log(req.body);
 	var data = new Course({
 		name: req.body.name,
 		description: req.body.description,
 		tags: req.body.tags,
-		user: req.body.user
+		user: {
+			id: req.body.user._id,
+			name: req.body.user.name,
+			lastName: req.body.user.lastName,
+			nick: req.body.user.nick,
+			mail: req.body.user.mail,
+			profilePhoto: req.body.user.profilePhoto,
+			backPhoto: req.body.user.backPhoto
+		}
 	});
 
 	data.save( (err) => {
@@ -110,7 +119,7 @@ exports.insertCourses = (req, res) => {
 			console.log(err);
 			res.status(500).send({ message: err });
 		} else {
-			res.json({ message: 'Cursos agregado' });
+			res.json({ message: 'Curso agregado' });
 		}
 	});
 		

@@ -59,14 +59,13 @@ $(document).ready( function() {
 		}
 	});
 
+	resizeImg();
 	var readyStateCheckInterval = setInterval( function() {
 		if (document.readyState === "complete") {
 			clearInterval( readyStateCheckInterval );
 			resizeImg();
 		}
 	}, 500);
-
-
 
 });
 
