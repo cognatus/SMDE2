@@ -73,7 +73,7 @@
 		</div>
 		<div class="responsive_col resp_list text_align_center">
 			<div class="col_3 text_align_left" *ngFor="let course of courses">
-				<div class="bg_white resp_item shadow_flat border_radius mr_bottom_12 relative_pos">
+				<div class="bg_white resp_item shadow_flat border_radius mr_bottom_16 relative_pos">
 					<div class="tr_0 h_32">
 						<div class="mr_12 size_32 relative_pos">
 							<button class="options_button hover_black size_32 text_align_center circle">
@@ -97,7 +97,7 @@
 							<a href="/cursos/{{ course._id }}">
 								<div class="list_element">
 									<div class="ref">
-										<span class="circle bg_opacity_light font_white border_white">
+										<span class="circle bg_opacity_light font_white">
 											<label class="title_smaller font_light size_24">{{ course.name.charAt(0) }}</label>
 										</span>
 									</div><div class="info font_white">
@@ -114,7 +114,20 @@
 							</a>
 						</div>
 					</div>
-					<div class="pd_16">
+					<div class="pd_12 pd_top_16 font_white">
+						<div class="tags_container" ng>
+							<div class="auto_col" *ngFor="let tag of course.tags; let i = index">
+								<span class="bg_blue tag" *ngIf="i < 5">
+									{{ tag }}
+								</span>
+							</div><div class="auto_col" *ngIf="course.tags?.length > 5">
+								<span class="bg_blue tag">
+									{{ course.tags?.length - 5 }} +
+								</span>
+							</div>
+						</div>
+					</div>
+					<div class="pd_16 pd_top_0">
 						<h4 class="font_big font_normal opacity">Descripción</h4>
 						<p class="pd_top_8 pd_left_12 pd_right_12">{{ course.description }}</p>
 					</div>
@@ -123,7 +136,7 @@
 							<b>Creado por:</b>
 						</div>
 						<div class="ref">
-							<a href="/perfil/{{ course.user._id }}">
+							<a href="/perfil/{{ course.user.id }}">
 								<div class="img_container circle">
 									<img src="/media/{{ course.user.id }}/profile/{{ course.user.profilePhoto }}" *ngIf="course.user.profilePhoto != undefined && course.user.profilePhoto != null">
 									<img src="assets/icons/default_profile.png" *ngIf="course.user.profilePhoto == undefined || course.user.profilePhoto == null">
@@ -143,5 +156,6 @@
 				</div>	
 			</div>
 		</div>
+		<div class="pd_32" *ngIf="courses?.length > 0"></div>
 	</section>
 </div>

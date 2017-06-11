@@ -6,7 +6,9 @@ export class Course {
 	description: string;
 	tags: string[];
 	createdDate: Date;
+	private: boolean;
 	updatedDate: Date;
 	user: User;
+	members: User[];
 	color: String;
 };

@@ -3,6 +3,7 @@ import { Institute } from './institute';
 
 export class User {
 	_id: string;
+	id: string;
 	mail: string;
 	password: string;
 	name: string;

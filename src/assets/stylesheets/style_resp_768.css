@@ -94,4 +94,16 @@
 		top: 24px;
 		left: 24px;
 	}
+
+	.courses_container .left_grid {
+		width: 35%;
+		display: inline-block;
+		vertical-align: top;
+	}
+
+	.courses_container .right_grid {
+		width: 65%;
+		display: inline-block;
+		vertical-align: top;
+	}
 }

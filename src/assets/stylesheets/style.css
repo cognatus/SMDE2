@@ -648,7 +648,7 @@ img.opacity { opacity: 0.4; }
 }
 
 .list_element .info {
-	width: calc(100% - 68px);
+	width: calc(100% - 64px);
 	display: inline-block;
 	margin-top: 0 !important;
 	vertical-align: top;
@@ -901,4 +901,15 @@ img.opacity { opacity: 0.4; }
 
 .gallery_container .buttons_container {
 	height: 48px;
+}
+
+.tags_container {
+	overflow: hidden;
+}
+
+.tags_container .tag {
+	padding: 5px 10px 5px 10px;
+	margin: 0 4px 4px 0;
+	border-radius: 20px;
+	cursor: pointer;
 }

@@ -5,7 +5,7 @@ import { CourseDetailService } from './course-detail.service';
 
 import { User } from '../models/user';
 import { Course } from '../models/course';
-import { userTypes, getRandomColor } from '../app.constants';
+import { userTypes, getRandomColor, FormatDatePipe } from '../app.constants';
 
 @Component({
 	selector: 'app-course-detail',
@@ -31,6 +31,8 @@ export class CourseDetailComponent implements OnInit {
 		this.courseDetailService.getCourse(this.courseId)
 			.subscribe( course => {
 				this.course = course;
+				this.course.color = getRandomColor();
+				console.log(this.course.user);
 			}, error => {
 				console.log(error);
 			});
