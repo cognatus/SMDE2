@@ -7,6 +7,8 @@ import { RouterModule } from '@angular/router';
 
 import { AUTH_PROVIDERS } from 'angular2-jwt';
 import { AuthGuard } from './auth/auth.guard';
+import { FocusedDirective } from './directives/focused.directive';
+import { FormatDatePipe } from './app.constants';
 
 import { routes } from './app.routes';
 import { AppComponent } from './app.component';
@@ -20,22 +22,26 @@ import { AdminComponent } from './admin/admin.component';
 import { UsersComponent } from './users/users.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { CoursesComponent } from './courses/courses.component';
+import { CourseDetailComponent } from './course-detail/course-detail.component';
 import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
 	declarations: [
+		FocusedDirective,
+		FormatDatePipe,
 		AppComponent,
 		LoginComponent,
 		HomeComponent,
 		SignupComponent,
 		MenuComponent,
-		MessagesComponent,
-		MessageConversationComponent,
 		AdminComponent,
 		UsersComponent,
 		UserDetailComponent,
 		CoursesComponent,
-		ProfileComponent
+		CourseDetailComponent,
+		ProfileComponent,
+		MessagesComponent,
+		MessageConversationComponent
 	],
 	imports: [
 		BrowserModule,

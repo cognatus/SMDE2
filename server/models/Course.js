@@ -7,6 +7,7 @@ var CourseSchema = new Schema({
 	tags: [],
 	createdDate: { type: Date, required: true, default: new Date() },
 	updatedDate: { type: Date, default: new Date() },
+	private: { type: Boolean, required: true },
 	user: {
 		id: { type: String, required: true },
 		name: { type: String, required: true },
@@ -15,7 +16,16 @@ var CourseSchema = new Schema({
 		mail: { type: String, required: true },
 		profilePhoto: { type: String },
 		backPhoto: { type: String }
-	}
+	},
+	members: [{
+		id: { type: String, required: true },
+		name: { type: String, required: true },
+		lastName: { type: String, required: true },
+		nick: { type: String },
+		mail: { type: String, required: true },
+		profilePhoto: { type: String },
+		backPhoto: { type: String }
+	}]
 });
 
 module.exports = mongoose.model('Course', CourseSchema);

@@ -33,9 +33,9 @@
 											<img class="icon_small opacity cursor_pointer v_align_middle relative_pos" src="assets/icons/close_black.png" (click)="removeTag(tag)" style="top: -1px">
 										</span>
 									</div>
-									<input type="text" [(ngModel)]="tagsString" name="tags" placeholder="Agrega etiquetas (Temas de interés, Especialidades, Materias)" (keydown)="addTag($event);" (keyup)="this.displayingTags = this.findTagCoincidences(tagsString, this.hiddenTags);">
+									<input type="text" [(ngModel)]="tagsString" name="tags" placeholder="Agrega etiquetas (Temas de interés, Especialidades, Materias)" (keydown)="addTag($event);" (keyup)="this.displayingTags = findTagCoincidences(tagsString, this.hiddenTags);">
 									<div class="list_scroll mini bg_white shadow_flat" [hidden]="tagsString == null || tagsString.trim() == ''">
-										<div class="pd_12 hover_black" *ngFor="let tag of displayingTags; let i=index" (click)="addTag($event, tag)" [ngClass]=" { 'bg_blue hover_blue': i == selectedDisplayTag } ">
+										<div class="pd_12 hover_black" *ngFor="let tag of displayingTags; let i=index" (click)="addTag($event, tag)" [ngClass]=" { 'bg_blue hover_blue': i == selectedDisplayTag } " [focused]="i == selectedDisplayTag">
 											{{ tag }}
 										</div>
 									</div>
@@ -106,7 +106,7 @@
 												{{ course.name }}
 											</h3>
 											<p class="opacity">
-												<b class="font_normal">Creado el {{ course.createdDate  | date: 'dd/MM/yyyy' }}</b>
+												<b class="font_normal">Creado el {{ course.createdDate | formatDate }}</b>
 											</p>
 										</div>
 									</div>
@@ -125,7 +125,8 @@
 						<div class="ref">
 							<a href="/perfil/{{ course.user._id }}">
 								<div class="img_container circle">
-									<img src="/media/{{ course.user.id }}/profile/{{ course.user.profilePhoto }}">
+									<img src="/media/{{ course.user.id }}/profile/{{ course.user.profilePhoto }}" *ngIf="course.user.profilePhoto != undefined && course.user.profilePhoto != null">
+									<img src="assets/icons/default_profile.png" *ngIf="course.user.profilePhoto == undefined || course.user.profilePhoto == null">
 								</div>
 							</a>
 						</div><div class="info">

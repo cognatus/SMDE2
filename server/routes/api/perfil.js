@@ -1,5 +1,5 @@
-var Busboy = require('busboy');
 const fs = require('fs');
+const Busboy = require('busboy');
 const User = require('../../models/User');
 
 const _media =	'src/media/';

@@ -299,6 +299,7 @@ label.size_24 { display: inline-block; }
 .border_white { border: 1px solid #fff; }
 .border_top { border-top: 1px solid rgba(0, 0, 0, 0.06); }
 .border_bottom { border-bottom: 1px solid rgba(0, 0, 0, 0.04); }
+.border_bottom_white { border-bottom: 2px solid #fff; }
 .bg_white .border_bottom { border-bottom: 1px solid rgba(0, 0, 0, 0.04); }
 
 .opacity { opacity: 0.5; }
@@ -444,7 +445,7 @@ img.opacity { opacity: 0.4; }
 
 .list_scroll.mini {
 	position: absolute;
-	max-height: 260px;
+	max-height: 200px;
 	width: 100%;
 	z-index: 3;
 }
@@ -542,8 +543,10 @@ img.opacity { opacity: 0.4; }
 .app_bar .app_bar_inner .hidden_block_container { position: relative; }
 
 .app_bar .app_bar_inner .prof_container span {
-	max-width: 160px;
+	width: auto;
+	max-width: 100px;
 	line-height: normal;
+	white-space: nowrap;
 	height: auto;
 	overflow: hidden;
 	vertical-align: middle;
@@ -760,18 +763,22 @@ img.opacity { opacity: 0.4; }
 	padding-bottom: 20px;
 }
 
-.admin_container {
+.admin_container, .courses_container {
 	max-width: 1080px;
 	margin: 0 auto; 
 }
 
-.profile_container, .courses_container {
+.profile_container {
 	max-width: 1024px;
 	margin: 0 auto;
 }
 
 .admin_container .admin_page {
 	margin-bottom: 32px;
+}
+.admin_container .admin_navigation {
+	height: 47px;
+	box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
 }
 
 .profile_display {

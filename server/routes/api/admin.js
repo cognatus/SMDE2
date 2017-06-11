@@ -8,19 +8,19 @@ exports.getUsers = (req, res) => {
 			console.log(err);
 			res.status(500).send({ message: err });
 		} else {
-			res.json(doc);
+			res.status(200).json(doc);
 		}
 	});
 };
 
 // Obtener usuario por id
 exports.getUserById = (req, res) => {
-	User.find({_id: req.params.id}, (err, doc) => {
+	User.find({ _id: req.params.id }, (err, doc) => {
 		if (err) {
 			console.log(err);
 			res.status(500).send({ message: err });
 		} else {
-			res.json(doc[0]);
+			res.status(200).json(doc[0]);
 		}
 	});
 };
@@ -48,7 +48,7 @@ exports.insertUser = (req, res) => {
 			console.log(err);
 			res.status(500).send({ message: err });
 		} else {
-			res.json({ message: 'Usuario registrado con exito' });
+			res.status(200).json({ message: 'Usuario registrado con exito' });
 		}
 	});
 };
@@ -56,7 +56,7 @@ exports.insertUser = (req, res) => {
 
 // Modificar usuario
 exports.updateUser = (req, res) => {
-	User.findOneAndUpdate({_id: req.params.id}, {$set: {
+	User.findOneAndUpdate({ _id: req.params.id }, {$set: {
 		mail: req.body.mail,
 		password: req.body.password,
 		name: req.body.name,
@@ -68,18 +68,18 @@ exports.updateUser = (req, res) => {
 		if (err) {
 			res.status(500).send({ message: err });
 		}else{
-			res.send('Usuario modificado');
+			res.send({ message: 'Usuario modificado' });
 		}
 	});
 };
 
 // Eliminar usuario
 exports.deleteUser = (req, res) => {
-	User.remove({_id: req.params.id}, (err, doc) => {
+	User.remove({ _id: req.params.id }, (err, doc) => {
 		if (err) {
 			res.status(500).send({ message: err });
 		}else{
-			res.send('Usuario eliminado');
+			res.send({ message: 'Usuario eliminado' });
 		}
 	});
 };
@@ -91,7 +91,19 @@ exports.getCourses = (req, res) => {
 			console.log(err);
 			res.status(500).send({ message: err });
 		} else {
-			res.json(doc);
+			res.status(200).json(doc);
+		}
+	});
+};
+
+// Obtener cursos
+exports.getCourseById = (req, res) => {
+	Course.find({ _id: req.params.id }, (err, doc) => {
+		if (err) {
+			console.log(err);
+			res.status(500).send({ message: err });
+		} else {
+			res.status(200).json(doc[0]);
 		}
 	});
 };
@@ -119,7 +131,7 @@ exports.insertCourses = (req, res) => {
 			console.log(err);
 			res.status(500).send({ message: err });
 		} else {
-			res.json({ message: 'Curso agregado' });
+			res.status(200).json({ message: 'Curso agregado' });
 		}
 	});
 		

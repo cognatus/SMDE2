@@ -9,6 +9,7 @@ import { AdminComponent } from './admin/admin.component';
 import { UsersComponent } from './users/users.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { CoursesComponent } from './courses/courses.component';
+import { CourseDetailComponent } from './course-detail/course-detail.component';
 import { ProfileComponent } from './profile/profile.component';
 
 export const routes: Routes = [
@@ -26,6 +27,7 @@ export const routes: Routes = [
     { path: 'perfil', component: ProfileComponent, canActivate: [AuthGuard] },
     { path: 'perfil/:id', component: ProfileComponent },
     { path: 'cursos', component: CoursesComponent, canActivate: [AuthGuard] },
+    { path: 'cursos/:id', component: CourseDetailComponent, canActivate: [AuthGuard] },
     { path: 'mensajes', component: MessagesComponent, canActivate: [AuthGuard],
         children: [
             { path: ':id', component: MessageConversationComponent }

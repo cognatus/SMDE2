@@ -20,7 +20,7 @@ exports.login = (req, res) => {
 			let send = { user: doc[0], token: token };
 
 			res.cookie('login', userCookie);
-			res.json(send);
+			res.status(200).json(send);
 		}
 	});
 };

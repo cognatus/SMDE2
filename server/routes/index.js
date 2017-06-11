@@ -1,15 +1,13 @@
 const express = require('express');
 const router = express.Router();
 
-const _media =  'src/media/';
-
 const login = require('./api/login');
 const admin = require('./api/admin');
 const profile = require('./api/perfil');
 
 /* GET api listing. */
 router.get('/', (req, res) => {
-  res.send('api works');
+	res.send('api works');
 });
 
 router.post('/login', login.login);
@@ -28,6 +26,9 @@ router.route('/users/:id')
 router.route('/courses')
 	.get(admin.getCourses)
 	.post(admin.insertCourses);
+
+router.route('/courses/:id')
+	.get(admin.getCourseById);
 
 router.route('/profile')
 	.post(profile.uploadProfilePhotos)

@@ -44,6 +44,10 @@
 		width: calc(100% - 80px);
 	}
 
+	.admin_container .admin_navigation {
+		padding: 10px;
+	}
+
 	.admin_container .admin_navigation .auto_col nav {
 		padding-left: 16px;
 		padding-right: 16px;

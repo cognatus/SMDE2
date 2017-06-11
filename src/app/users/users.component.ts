@@ -4,7 +4,7 @@ import { Location } from '@angular/common';
 import { AuthGuard } from '../auth/auth.guard';
 import { UsersService } from './users.service';
 import { User } from '../models/user';
-import { colors, userTypes } from '../app.constants';
+import { colors, userTypes, getRandomColor } from '../app.constants';
 
 @Component({
 	selector: 'app-users',
@@ -40,12 +40,6 @@ export class UsersComponent implements OnInit {
 				}, error => {
 					console.log(error);
 				});
-	}
-
-	getRandomColor() {
-		return {
-			"background-color": colors[Math.floor(Math.random()*colors.length)]	
-		};
 	}
 
 }

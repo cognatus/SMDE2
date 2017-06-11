@@ -69,9 +69,7 @@
 	}
 
 	.admin_container .admin_navigation {
-		padding-left: 8px;
-		padding-top: 8px;
-		padding-bottom: 6px;
+		padding: 8px;
 	}
 
 	.main_action_button {

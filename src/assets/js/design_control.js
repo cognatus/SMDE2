@@ -124,6 +124,7 @@ function showSearchBar( status ) {
 	var selector = $('#search-bar');
 	if ( status ) {
 		selector.fadeIn();
+		$('search-bar-input').trigger('focus');
 	} else {
 		selector.fadeOut();
 	}
@@ -185,15 +186,13 @@ function resizeImg( selector ) {
 }
 
 function previewPhoto( input, img_selector ) {
-	console.log(input.value);
-	console.log(input.files);
 	if ( input.files.length > 0 ) {
-			var reader = new FileReader();
+		var reader = new FileReader();
 
-			reader.onload = function ( event ) {
-					jQuery(img_selector).attr('src', event.target.result);
-			}
-			reader.readAsDataURL( input.files[0] );
+		reader.onload = function ( event ) {
+			jQuery(img_selector).attr('src', event.target.result);
+		}
+		reader.readAsDataURL( input.files[0] );
 	}
 }
 

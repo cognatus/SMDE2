@@ -28,9 +28,7 @@
 	}
 
 	.admin_container .admin_navigation {
-		padding-left: 6px;
-		padding-top: 4px;
-		padding-bottom: 4px;
+		padding: 6px;
 	}
 
 	.profile_display {

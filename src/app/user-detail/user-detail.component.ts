@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { AuthGuard } from '../auth/auth.guard';
 import { UserDetailService } from './user-detail.service';
+
 import { User } from '../models/user';
-import { colors, userTypes } from '../app.constants';
+import { userTypes, getRandomColor, formatedDate } from '../app.constants';
 
 @Component({
 	selector: 'app-user-detail',
@@ -32,11 +33,7 @@ export class UserDetailComponent implements OnInit {
 		this.userDetailService.getUser(this.userId)
 			.subscribe( user => { 
 					this.user = user;
-					let userBirthDay = new Date(this.user.birthDay);
-					this.formatedUserBirth = 
-						((userBirthDay.getDate() + 1 < 10) ? '0' + (userBirthDay.getDate() + 1).toString() : (userBirthDay.getDate() + 1).toString()) + '/'
-						+ ((userBirthDay.getMonth() + 1 < 10) ? '0' + (userBirthDay.getMonth() + 1).toString() : (userBirthDay.getMonth() + 1).toString()) + '/'
-						+ (userBirthDay.getFullYear()).toString();
+					this.formatedUserBirth = formatedDate(new Date(this.user.birthDay));
 				}, error => {
 					console.log(error);
 				});
@@ -59,12 +56,6 @@ export class UserDetailComponent implements OnInit {
 				}, error => {
 					console.log(error);
 				});
-	}
-
-	getRandomColor() {
-		return {
-			"background-color": colors[Math.floor(Math.random()*colors.length)]	
-		};
 	}
 
 }

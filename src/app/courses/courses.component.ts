@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { AuthGuard } from '../auth/auth.guard';
@@ -6,13 +6,13 @@ import { CoursesService } from '../courses/courses.service';
 
 import { Course } from '../models/course';
 import { User } from '../models/user';
-import { colors, userTypes } from '../app.constants';
+import { userTypes, replaceCharacters, getRandomColor, FormatDatePipe } from '../app.constants';
 
 @Component({
 	selector: 'app-courses',
 	templateUrl: './courses.component.html',
 	styleUrls: ['./courses.component.css'],
-	providers: [CoursesService],
+	providers: [CoursesService]
 })
 export class CoursesComponent implements OnInit {
 	groupActive: boolean;
@@ -40,7 +40,7 @@ export class CoursesComponent implements OnInit {
 			.subscribe( courses => {
 					this.courses = courses;
 					for( let item in this.courses ) {
-						this.courses[item].color = this.getRandomColor();
+						this.courses[item].color = getRandomColor();
 						for ( let sub in this.courses[item].tags ) {
 							let tag = this.courses[item].tags[sub] 
 							if ( this.hiddenTags.indexOf(tag) === -1 ) {
@@ -48,7 +48,6 @@ export class CoursesComponent implements OnInit {
 							}
 						}
 					}
-					console.log(this.hiddenTags);
 				}, error => {
 					console.log(error);
 				});
@@ -66,35 +65,38 @@ export class CoursesComponent implements OnInit {
 	}
 
 	addTag(event, tag: string): void {
-		let tags = this.tagsString;
+		let tempTag = '';
 		let tagsArray = [];
 		let newTag = '';
 
 		if ( tag !== undefined ) {
-			tags = tag;
+			newTag = tag;
 		} else {
 			if ( event.keyCode === 32 || event.keyCode === 13 || event.keyCode === 9 ) { // space, enter, tab
 				event.preventDefault();
+				tempTag = this.tagsString;
 				if ( this.selectedDisplayTag > -1 ) {
-					newTag = this.displayingTags[this.selectedDisplayTag];
-				} else {
-					tagsArray = tags.split(' ');
-					newTag = tagsArray[tagsArray.length - 1];
+					this.tagsString = this.displayingTags[this.selectedDisplayTag];
+					tempTag = this.displayingTags[this.selectedDisplayTag];
 				}
+				tagsArray = tempTag.split(' ');
+				newTag = tagsArray[tagsArray.length - 1];
 			} else if ( event.keyCode === 38 || event.keyCode === 40 ) {
 				if ( event.keyCode === 38 && this.selectedDisplayTag > 0 ) {
 					this.selectedDisplayTag--;
 				} else if ( event.keyCode == 40 && this.selectedDisplayTag < this.displayingTags.length - 1 ) {
 					this.selectedDisplayTag++;
 				}
+			} else {
+				this.selectedDisplayTag = -1;
 			}
 		}
-		if ( tags !== '' && newTag !== '' ) {
+		if ( newTag !== '' ) {
 			if ( this.course.tags.indexOf(newTag) === -1 ) {
 				this.course.tags.push(newTag);
-				this.tagsString = '';
-				this.selectedDisplayTag = 0;
-			}
+			} 
+			this.tagsString = '';
+			this.selectedDisplayTag = -1;
 		}
 	}
 
@@ -104,26 +106,14 @@ export class CoursesComponent implements OnInit {
 
 	findTagCoincidences(text: string, array: string[]): string[] {
 		let coincidenceArray = [];
-		text = text.toUpperCase();
+		text = replaceCharacters(text.toLowerCase());
 		for ( let i in array ) {
-			let itemText = array[i].toUpperCase(); 
+			let itemText = replaceCharacters(array[i].toLowerCase());
 			if ( itemText.indexOf( text ) > -1 ) {
 				coincidenceArray.push(array[i]);
 			}
 		}
 		return coincidenceArray;
-	}
-
-	replaceCharacter(text: string): string {
-		let newText = '';
-		for ( let i = 0 ; i < newText.length ; i++ ) {
-			
-		}
-		return newText;
-	}
-
-	getRandomColor() {
-		return colors[Math.floor(Math.random()*colors.length)];
 	}
 
 }

@@ -6,7 +6,7 @@ import { UserDetailService } from '../user-detail/user-detail.service';
 import { ProfileService } from './profile.service';
 
 import { User } from '../models/user';
-import { colors, userTypes } from '../app.constants';
+import { colors, userTypes, formatedDate } from '../app.constants';
 
 @Component({
 	selector: 'app-profile',
@@ -47,12 +47,6 @@ export class ProfileComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		let userBirthDay = new Date(this.user.birthDay);
-		this.formatedUserBirth = ''
-			+ ((userBirthDay.getDate() + 1 < 10) ? '0' + (userBirthDay.getDate() + 1).toString() : (userBirthDay.getDate() + 1).toString()) + '/'
-			+ ((userBirthDay.getMonth() + 1 < 10) ? '0' + (userBirthDay.getMonth() + 1).toString() : (userBirthDay.getMonth() + 1).toString()) + '/'
-			+ (userBirthDay.getFullYear()).toString();
-
 		for ( let i = this.user.photos.length - 1 ; i >= 0 ; i-- ) {
 			let item = this.user.photos[i];
 			for ( let j = 0 ; j < this.photos.length ; j++ ) {

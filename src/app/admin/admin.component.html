@@ -3,17 +3,17 @@
 	<section class="font_big admin_navigation bg_primary_dark">
 		<div class="auto_col">
 			<a href="/admin/usuarios" class="font_white">
-				<nav class="pd_12 hover_black border_radius">
+				<nav class="pd_12 border_radius" [ngClass]="getActive('usuarios') ? 'bg_white font_color_normal' : 'hover_black'">
 					Usuarios
 				</nav>
 			</a>
-		</div><div class="auto_col">
+		</div><!-- <div class="auto_col">
 			<a href="/admin/cursos" class="font_white">
-				<nav class="pd_12 hover_black border_radius">
+				<nav class="pd_12 border_radius" [ngClass]="getActive('cursos') ? 'bg_white font_color_normal' : 'hover_black'">
 					Cursos
 				</nav>
 			</a>
-		</div>
+		</div> -->
 	</section><section class="admin_page">
 		<router-outlet></router-outlet>
 	</section>

@@ -15,7 +15,9 @@
 						</div>
 					</div>
 				</div>
-				<form class="padding_block" (submit)="addUser()">
+				<form class="padding_block" autocomplete="off" (submit)="addUser()">
+					<input style="display:none" type="text" name="user"/>
+					<input style="display:none" type="password" name="password"/>
 					<div class="data_container">
 						<h2 class="title_medium mr_bottom_24 font_secondary">Datos</h2>
 						<div class="pd_left_8 pd_right_8">
@@ -38,7 +40,7 @@
 								</div>
 								<div class="field mr_top_8">
 									<label class="opacity font_bold font_small">Fecha de Nacimiento</label>
-									<input type="text" [(ngModel)]="user.birthDay" name="birthDay" placeholder="Fecha (dd/mm/yyyy)"/>
+									<input type="text" [(ngModel)]="user.birthDay" name="birthday" placeholder="Fecha (dd/mm/yyyy)" value=""/>
 								</div>
 								<div class="field mr_top_8">
 									<label class="opacity font_bold font_small">Tipo</label>
@@ -58,7 +60,7 @@
 								</div>
 								<div class="field mr_top_8">
 									<label class="opacity font_bold font_small">Contraseña Nueva</label>
-									<input type="password" [(ngModel)]="user.password" name="password" placeholder="Contraseña Nueva"/>
+									<input type="password" [(ngModel)]="user.password" name="newpassword" placeholder="Contraseña Nueva" value="" />
 								</div>
 							</div>
 							<div class="field text_align_right">

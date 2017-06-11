@@ -20,15 +20,25 @@ export class AdminComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		if ( this.location.path() == '/admin' ) {
-			this.router.navigate(['admin/usuarios']);
-		} else if (this.location.path() == '/admin/asignaturas' ) {
-			this.router.navigate(['admin/asignaturas']);
-		} else if (this.location.path() == '/admin/grupos' ) {
-			this.router.navigate(['admin/grupos']);
-		} else if (this.location.path() == '/admin/cursos' ) {
-			this.router.navigate(['admin/cursos']);
+		if ( this.auth.getUser().privilege !== 0 ) {
+			location.href = '/';
+		} else {
+			if ( this.location.path() == '/admin' ) {
+				this.router.navigate(['admin/usuarios']);
+			} else if (this.location.path() == '/admin/asignaturas' ) {
+				this.router.navigate(['admin/asignaturas']);
+			} else if (this.location.path() == '/admin/grupos' ) {
+				this.router.navigate(['admin/grupos']);
+			} else if (this.location.path() == '/admin/cursos' ) {
+				this.router.navigate(['admin/cursos']);
+			}
 		}
+	}
+
+	getActive(parameter): boolean {
+		let locationMenu = this.location.path().normalize();
+		let active = locationMenu.split('/')[2];
+		return parameter === active;
 	}
 
 }
