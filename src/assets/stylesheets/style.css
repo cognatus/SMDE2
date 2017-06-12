@@ -768,6 +768,10 @@ img.opacity { opacity: 0.4; }
 	margin: 0 auto; 
 }
 
+.courses_container.full {
+	max-width: 1440px;
+}
+
 .profile_container {
 	max-width: 1024px;
 	margin: 0 auto;

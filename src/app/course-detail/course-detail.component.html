@@ -1,8 +1,7 @@
 <app-menu *ngIf="auth.loggedIn()"></app-menu>
-<div class="courses_container">
-	<input type="hidden" [(ngModel)]="course.user.profilePhoto" name="">
+<div class="courses_container full">
 	<section class="left_grid">
-		<div class="bg_white shadow_flat mr_bottom_16 relative_pos">
+		<div class="bg_white info_block shadow_flat relative_pos">
 			<div class="tr_0 h_32">
 				<div class="mr_12 size_32 relative_pos">
 					<button class="options_button hover_black size_32 text_align_center circle">
@@ -24,7 +23,7 @@
 					<div class="list_element">
 						<div class="ref">
 							<span class="circle bg_opacity_light font_white">
-								<label class="title_smaller font_light size_24">{{ course.name.charAt(0) }}</label>
+								<label class="title_smaller font_light size_24" *ngIf="course.name != undefined">{{ course.name.charAt(0) }}</label>
 							</span>
 						</div><div class="info font_white">
 							<div class="pd_16">
@@ -39,38 +38,39 @@
 					</div>
 				</div>
 			</div>
-			<div class="pd_12 pd_bottom_0 font_white">
-				<div class="tags_container" ng>
-					<div class="auto_col" *ngFor="let tag of course.tags; let i = index">
-						<span class="bg_blue tag">
-							{{ tag }}
-						</span>
+			<div class="inner_info">
+				<div class="pd_12 pd_bottom_0 font_white">
+					<div class="tags_container">
+						<div class="auto_col" *ngFor="let tag of course.tags">
+							<span class="bg_blue tag">
+								{{ tag }}
+							</span>
+						</div>
 					</div>
 				</div>
-			</div>
-			<div class="pd_16">
-				<h4 class="font_big font_normal opacity">Descripción</h4>
-				<p class="pd_top_8 pd_left_12 pd_right_12">{{ course.description }}</p>
-			</div>
-			<div class="list_element">
-				<div class="pd_left_12 pd_right_12 opacity">
-					<b>Creado por:</b>
+				<div class="pd_16">
+					<h4 class="font_big font_normal opacity">Descripción</h4>
+					<p class="pd_top_8 pd_left_12 pd_right_12">{{ course.description }}</p>
 				</div>
-				<div class="ref">
-					<a href="/perfil/{{ course.user.id }}">
-						<div class="img_container circle">
-							<img src="/media/{{ course.user.id }}/profile/{{ course.user.profilePhoto }}" *ngIf="course.user.profilePhoto != undefined && course.user.profilePhoto != null">
-							<img src="assets/icons/default_profile.png" *ngIf="course.user.profilePhoto == undefined || course.user.profilePhoto == null">
+				<div class="list_element" *ngIf="course.user != undefined">
+					<div class="pd_left_12 pd_right_12 opacity">
+						<b>Creado por:</b>
+					</div>
+					<div class="ref">
+						<a href="/perfil/{{ course.user.id }}">
+							<div class="img_container circle">
+								<img [src]="course.user.profilePhoto != undefined && course.user.profilePhoto != null ? '/media/'+course.user.id+'/profile/'+course.user.profilePhoto : 'assets/icons/default_profile.png'">
+							</div>
+						</a>
+					</div><div class="info">
+						<div class="pd_16">
+							<h3 class="font_normal mr_bottom_4">
+								{{ course.user.name }} {{ course.user.lastName }}
+							</h3>
+							<p class="opacity">
+								<b class="font_normal">{{ course.user.mail }}</b>
+							</p>
 						</div>
-					</a>
-				</div><div class="info">
-					<div class="pd_16">
-						<h3 class="font_normal mr_bottom_4">
-							{{ course.user.name }} {{ course.user.lastName }}
-						</h3>
-						<p class="opacity">
-							<b class="font_normal">{{ course.user.mail }}</b>
-						</p>
 					</div>
 				</div>
 			</div>

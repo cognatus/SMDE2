@@ -89,8 +89,7 @@
 						<div class="profile_photo font_white">
 							<div class="inner">
 								<div class="img_container circle shadow_flat">
-									<img src="assets/icons/default_profile.png" *ngIf="user.profilePhoto == undefined || user.profilePhoto == ''" id="profile-photo">
-									<img src="/media/{{ user._id }}/profile/{{ user.profilePhoto }}" *ngIf="user.profilePhoto != undefined && user.profilePhoto != ''" id="profile-photo">
+									<img id="profile-photo" [src]="user.profilePhoto != undefined && user.profilePhoto != null ? '/media/'+user._id+'/profile/'+user.profilePhoto : 'assets/icons/default_profile.png'">
 									<div class="editable" onclick="triggerClick('#profile-img-file')">
 										<img src="assets/icons/camera_white.png">
 									</div>

@@ -32,7 +32,6 @@ export class CourseDetailComponent implements OnInit {
 			.subscribe( course => {
 				this.course = course;
 				this.course.color = getRandomColor();
-				console.log(this.course.user);
 			}, error => {
 				console.log(error);
 			});
@@ -46,5 +45,4 @@ export class CourseDetailComponent implements OnInit {
 				console.log(error);
 			})
 	}
-
 }

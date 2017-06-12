@@ -96,14 +96,17 @@
 	}
 
 	.courses_container .left_grid {
-		width: 35%;
+		width: 40%;
+		max-width: 400px;
 		display: inline-block;
 		vertical-align: top;
 	}
 
 	.courses_container .right_grid {
-		width: 65%;
+		width: 60%;
+		max-width: calc(100% - 400px);
 		display: inline-block;
 		vertical-align: top;
 	}
+
 }

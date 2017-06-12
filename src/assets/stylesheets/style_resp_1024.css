@@ -53,6 +53,11 @@
 		padding-right: 16px;
 	}
 
+	.courses_container.full {
+		margin: 32px auto;
+		width: calc(100% - 64px);
+	}
+
 	.main_action_button {
 		margin-top: 0;
 		margin-bottom: 0;

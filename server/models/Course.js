@@ -25,6 +25,12 @@ var CourseSchema = new Schema({
 		mail: { type: String, required: true },
 		profilePhoto: { type: String },
 		backPhoto: { type: String }
+	}],
+	section: [{
+		name: { type: String, required: true },
+		subsection: [{
+			name: { type: String, required: true },
+		}]
 	}]
 });
 
