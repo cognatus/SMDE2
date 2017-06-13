@@ -58,6 +58,22 @@
 		width: calc(100% - 64px);
 	}
 
+	.courses_container .left_grid {
+		margin-right: 24px;
+	}
+
+	.courses_container .right_grid {
+		width: calc(60% - 24px);
+	}
+
+	.courses_container .right_grid .course_navigation {
+		padding-top: 0;
+	}
+	.courses_container .right_grid .course_navigation nav {
+		padding-left: 16px;
+		padding-right: 16px;
+	}
+
 	.main_action_button {
 		margin-top: 0;
 		margin-bottom: 0;

@@ -31,7 +31,7 @@ export class CourseDetailComponent implements OnInit {
 		this.courseDetailService.getCourse(this.courseId)
 			.subscribe( course => {
 				this.course = course;
-				this.course.color = getRandomColor();
+				this.course.color = getRandomColor(this.course.name.charAt(0));
 			}, error => {
 				console.log(error);
 			});

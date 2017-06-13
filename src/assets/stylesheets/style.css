@@ -203,6 +203,7 @@ label.size_24 { display: inline-block; }
 .font_small { font-size: 13px; }
 .font_light { font-weight: lighter !important; }
 .font_lightnormal { font-weight: 300 !important; }
+.font_nn { font-weight: normal; !important; }
 .font_normal { font-weight: 500 !important; }
 .font_bold { font-weight: bold !important; }
 
@@ -300,6 +301,7 @@ label.size_24 { display: inline-block; }
 .border_top { border-top: 1px solid rgba(0, 0, 0, 0.06); }
 .border_bottom { border-bottom: 1px solid rgba(0, 0, 0, 0.04); }
 .border_bottom_white { border-bottom: 2px solid #fff; }
+.border_bottom_primary { border-bottom: 3px solid #3F51B5; }
 .bg_white .border_bottom { border-bottom: 1px solid rgba(0, 0, 0, 0.04); }
 
 .opacity { opacity: 0.5; }
@@ -769,7 +771,7 @@ img.opacity { opacity: 0.4; }
 }
 
 .courses_container.full {
-	max-width: 1440px;
+	max-width: 1200px;
 }
 
 .profile_container {

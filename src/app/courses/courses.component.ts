@@ -40,9 +40,9 @@ export class CoursesComponent implements OnInit {
 			.subscribe( courses => {
 					this.courses = courses;
 					for( let item in this.courses ) {
-						this.courses[item].color = getRandomColor();
+						this.courses[item].color = getRandomColor(this.courses[item].name.charAt(0));
 						for ( let sub in this.courses[item].tags ) {
-							let tag = this.courses[item].tags[sub] 
+							let tag = this.courses[item].tags[sub];
 							if ( this.hiddenTags.indexOf(tag) === -1 ) {
 								this.hiddenTags.push(tag);
 							}
@@ -91,9 +91,9 @@ export class CoursesComponent implements OnInit {
 				this.selectedDisplayTag = -1;
 			}
 		}
-		if ( newTag !== '' ) {
-			if ( this.course.tags.indexOf(newTag) === -1 ) {
-				this.course.tags.push(newTag);
+		if ( newTag.trim() !== '' && newTag.length > 1 ) {
+			if ( this.course.tags.indexOf(newTag[0].toUpperCase() + newTag.substr(1, newTag.length)) === -1 ) {
+				this.course.tags.push(newTag[0].toUpperCase() + newTag.substr(1, newTag.length));
 			} 
 			this.tagsString = '';
 			this.selectedDisplayTag = -1;
@@ -106,11 +106,13 @@ export class CoursesComponent implements OnInit {
 
 	findTagCoincidences(text: string, array: string[]): string[] {
 		let coincidenceArray = [];
-		text = replaceCharacters(text.toLowerCase());
-		for ( let i in array ) {
-			let itemText = replaceCharacters(array[i].toLowerCase());
-			if ( itemText.indexOf( text ) > -1 ) {
-				coincidenceArray.push(array[i]);
+		if ( text !== null && text.trim() !== '' ) {
+			text = replaceCharacters( text.toLowerCase() );
+			for ( let i in array ) {
+				let itemText = replaceCharacters( array[i].toLowerCase() );
+				if ( itemText.indexOf( text ) > -1 ) {
+					coincidenceArray.push(array[i]);
+				}
 			}
 		}
 		return coincidenceArray;

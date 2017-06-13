@@ -97,16 +97,19 @@
 
 	.courses_container .left_grid {
 		width: 40%;
-		max-width: 400px;
+		margin-right: 12px;
 		display: inline-block;
 		vertical-align: top;
 	}
 
 	.courses_container .right_grid {
-		width: 60%;
-		max-width: calc(100% - 400px);
+		width: calc(60% - 12px);
 		display: inline-block;
 		vertical-align: top;
+	}
+
+	.courses_container .right_grid .course_navigation {
+		padding-top: 8px;
 	}
 
 }

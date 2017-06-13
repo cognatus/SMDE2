@@ -24,13 +24,21 @@ export function replaceCharacters(text: string): string {
 	return newText;
 }
 
-export function getRandomColor(): string {
+export function getRandomColor(character: string): string {
 	const colors = ['#F44336', '#E91E63', '#9C27B0', '#673AB7', '#3F51B5',
 					'#2196F3', '#03A9F4', '#00BCD4', '#009688', '#4CAF50',
-					'#8BC34A', '#CDDC39', '#FFEB3B', '#FFC107', '#FF9800',
-					'#FF5722', '#795548', '#607D8B', '#424242'];
+					'#8BC34A', '#CDDC39', '#FFC107', '#FF9800',
+					'#FF5722', '#795548', '#607D8B'];
 
-	return colors[Math.floor(Math.random()*colors.length)];
+	let char = character.toUpperCase().charCodeAt(0);
+	let result = 0;
+	let color = '#424242';
+
+	if ( ( char > 47 && char < 58 ) || ( char > 64 && char < 91 ) ) {
+		color = colors[char % colors.length];
+	}
+
+	return color;
 }
 
 export function formatedDate(date: Date): string {

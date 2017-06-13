@@ -39,7 +39,7 @@
 				</div>
 			</div>
 			<div class="inner_info">
-				<div class="pd_12 pd_bottom_0 font_white">
+				<div class="pd_12 pd_top_16 font_white">
 					<div class="tags_container">
 						<div class="auto_col" *ngFor="let tag of course.tags">
 							<span class="bg_blue tag">
@@ -48,7 +48,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="pd_16">
+				<div class="pd_16 pd_top_0">
 					<h4 class="font_big font_normal opacity">Descripción</h4>
 					<p class="pd_top_8 pd_left_12 pd_right_12">{{ course.description }}</p>
 				</div>
@@ -76,6 +76,14 @@
 			</div>
 		</div>
 	</section><section class="right_grid">
-		
+		<div class="course_navigation font_secondary">
+			<nav class="pd_12 title_smaller auto_col cursor_pointer border_bottom_primary">
+				Contenidos
+			</nav><nav class="pd_12 title_smaller auto_col cursor_pointer">
+				Actividades
+			</nav><nav class="pd_12 title_smaller auto_col cursor_pointer">
+				Miembros
+			</nav>
+		</div>
 	</section>
 </div>

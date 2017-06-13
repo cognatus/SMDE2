@@ -33,8 +33,8 @@
 											<img class="icon_small opacity cursor_pointer v_align_middle relative_pos" src="assets/icons/close_black.png" (click)="removeTag(tag)" style="top: -1px">
 										</span>
 									</div>
-									<input type="text" [(ngModel)]="tagsString" name="tags" placeholder="Agrega etiquetas (Temas de interés, Especialidades, Materias)" (keydown)="addTag($event);" (keyup)="this.displayingTags = findTagCoincidences(tagsString, this.hiddenTags);">
-									<div class="list_scroll mini bg_white shadow_flat" [hidden]="tagsString == null || tagsString.trim() == ''">
+									<input type="text" [(ngModel)]="tagsString" name="tags" placeholder="Agrega etiquetas (Temas de interés, Especialidades, Materias)" (keydown)="addTag($event)" (keyup)="tagsString != null ? displayingTags = findTagCoincidences(tagsString, this.hiddenTags) : displayingTags = []">
+									<div class="list_scroll mini bg_white shadow_flat" [hidden]="displayingTags?.length < 1">
 										<div class="pd_12 hover_black" *ngFor="let tag of displayingTags; let i=index" (click)="addTag($event, tag)" [ngClass]=" { 'bg_blue hover_blue': i == selectedDisplayTag } " [focused]="i == selectedDisplayTag">
 											{{ tag }}
 										</div>
@@ -91,7 +91,7 @@
 						</div>
 					</div>
 					<div class="profile_display mini">
-						<div class="background" [ngStyle]="{ 'background-color': course.color }">
+						<div class="background" [style.background]="course.color">
 						</div>
 						<div class="profile_photo">
 							<a href="/cursos/{{ course._id }}">
