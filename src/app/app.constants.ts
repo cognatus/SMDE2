@@ -15,8 +15,8 @@ export function replaceCharacters(text: string): string {
 
 	let newText = '';
 	for ( let i = 0 ; i < text.length ; i++ ) {
-		if ( charsForReplace.indexOf(text[i]) > -1 ) {
-			newText += charsToReplace[charsForReplace.indexOf(text[i])];
+		if ( charsForReplace.indexOf( text[i] ) > -1 ) {
+			newText += charsToReplace[ charsForReplace.indexOf( text[i] ) ];
 		} else {
 			newText += text[i];
 		}

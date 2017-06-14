@@ -60,10 +60,11 @@
 
 	.courses_container .left_grid {
 		margin-right: 24px;
+		width: 35%;
 	}
 
 	.courses_container .right_grid {
-		width: calc(60% - 24px);
+		width: calc(65% - 24px);
 	}
 
 	.courses_container .right_grid .course_navigation {

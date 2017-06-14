@@ -20,13 +20,23 @@ export class CourseDetailService {
 			.catch(this.handleError);
 	}
 
-	suscribeCourse(id: string, user: User): Observable<Course> {
-        let options = new RequestOptions({ headers: ContentHeaders });
+	suscribeCourse(status: boolean, id: string, user: User, group: string): Observable<Course> {
+		let options = new RequestOptions({ headers: ContentHeaders });
+		let data = {
+			id: user._id,
+			group: group
+		}
 
-        return this.http.put(this.url + id + '/suscribe', user, options)
-            .map(response => console.log(response))
-            .catch(this.handleError);
-    }
+		if ( status ) {
+			return this.http.post(this.url + id + '/suscribe', data, options)
+				.map(this.extractData)
+				.catch(this.handleError);
+		} else {
+			return this.http.delete(this.url + id + '/suscribe', options)
+				.map(this.extractData)
+				.catch(this.handleError);
+		}
+	}
 
 	private extractData(res: Response) {
 		let body = res.json();

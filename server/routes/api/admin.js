@@ -1,5 +1,4 @@
 const User = require('../../models/User');
-const Course = require('../../models/Course');
 
 // Obtener usuarios
 exports.getUsers = (req, res) => {
@@ -82,57 +81,4 @@ exports.deleteUser = (req, res) => {
 			res.send({ message: 'Usuario eliminado' });
 		}
 	});
-};
-
-// Obtener cursos
-exports.getCourses = (req, res) => {
-	Course.find({}, (err, doc) => {
-		if (err) {
-			console.log(err);
-			res.status(500).send({ message: err });
-		} else {
-			res.status(200).json(doc);
-		}
-	});
-};
-
-// Obtener cursos
-exports.getCourseById = (req, res) => {
-	Course.find({ _id: req.params.id }, (err, doc) => {
-		if (err) {
-			console.log(err);
-			res.status(500).send({ message: err });
-		} else {
-			res.status(200).json(doc[0]);
-		}
-	});
-};
-
-// Agregar nuevos cursos
-exports.insertCourses = (req, res) => {
-	console.log(req.body);
-	var data = new Course({
-		name: req.body.name,
-		description: req.body.description,
-		tags: req.body.tags,
-		user: {
-			id: req.body.user._id,
-			name: req.body.user.name,
-			lastName: req.body.user.lastName,
-			nick: req.body.user.nick,
-			mail: req.body.user.mail,
-			profilePhoto: req.body.user.profilePhoto,
-			backPhoto: req.body.user.backPhoto
-		}
-	});
-
-	data.save( (err) => {
-		if (err) {
-			console.log(err);
-			res.status(500).send({ message: err });
-		} else {
-			res.status(200).json({ message: 'Curso agregado' });
-		}
-	});
-		
 };

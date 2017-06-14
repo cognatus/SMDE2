@@ -4,6 +4,7 @@ const router = express.Router();
 const login = require('./api/login');
 const admin = require('./api/admin');
 const profile = require('./api/perfil');
+const courses = require('./api/cursos');
 
 /* GET api listing. */
 router.get('/', (req, res) => {
@@ -23,16 +24,22 @@ router.route('/users/:id')
 	.put(admin.updateUser)
 	.delete(admin.deleteUser);
 
-router.route('/courses')
-	.get(admin.getCourses)
-	.post(admin.insertCourses);
-
-router.route('/courses/:id')
-	.get(admin.getCourseById);
-
 router.route('/profile')
 	.post(profile.uploadProfilePhotos)
 	.put(profile.updatePhoto)
 	.delete(profile.deletePhoto);
+
+router.route('/courses')
+	.get(courses.getCourses)
+	.post(courses.insertCourse);
+
+router.route('/courses/:id')
+	.get(courses.getCourseById)
+	.put(courses.updateCourse)
+	.delete(courses.deleteCourse);
+
+router.route('/courses/:id/suscribe')
+	.post(courses.suscribeUser)
+	.delete(courses.unsuscribeUser);
 
 module.exports = router;

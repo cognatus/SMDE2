@@ -1,17 +1,33 @@
 <app-menu *ngIf="auth.loggedIn()"></app-menu>
 <div class="courses_container full">
 	<section class="left_grid">
-		<div class="bg_white info_block shadow_flat relative_pos">
+		<div class="bg_white info_block shadow_flat relative_pos mr_bottom_16">
 			<div class="tr_0 h_32">
 				<div class="mr_12 size_32 relative_pos">
 					<button class="options_button hover_black size_32 text_align_center circle">
 						<img class="icon v_align_middle" src="assets/icons/dots-vertical_white.png">
 					</button>
 					<div class="hidden_options">
-						<div class="bg_white pd_bottom_8 pd_top_8 shadow_flat border_radius font_normal">
-							<p class="pd_8 pd_left_16 pd_right_16 hover_black" (click)="suscribeCourse()">
-								Inscribirse
+						<div class="bg_white pd_bottom_8 pd_top_8 shadow_flat border_radius font_normal" *ngIf="course.user != undefined">
+							<p class="pd_8 pd_left_16 pd_right_16 hover_black" (click)="suscribeCourse(!isSuscribed())">
+								<span *ngIf="isSuscribed()">
+									Inscribirse
+								</span>
+								<span *ngIf="!isSuscribed()">
+									Cancelar Inscripción
+								</span>
 							</p>
+							<div *ngIf="course.user.id == auth.getUser()._id">
+								<p class="pd_8 pd_left_16 pd_right_16 hover_black" >
+									Editar
+								</p>
+								<p class="pd_8 pd_left_16 pd_right_16 hover_black" >
+									Agregar grupos
+								</p>
+								<p class="pd_8 pd_left_16 pd_right_16 font_red hover_black">
+									Eliminar
+								</p>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -76,14 +92,79 @@
 			</div>
 		</div>
 	</section><section class="right_grid">
-		<div class="course_navigation font_secondary">
-			<nav class="pd_12 title_smaller auto_col cursor_pointer border_bottom_primary">
+		<div class="course_navigation font_secondary mr_bottom_16">
+			<nav class="pd_12 title_smaller auto_col cursor_pointer" [ngClass]="{'border_bottom_primary': displayedList == 0 }" (click)="displayedList = 0">
 				Contenidos
-			</nav><nav class="pd_12 title_smaller auto_col cursor_pointer">
+			</nav><nav class="pd_12 title_smaller auto_col cursor_pointer" [ngClass]="{'border_bottom_primary': displayedList == 1 }" (click)="displayedList = 1">
 				Actividades
-			</nav><nav class="pd_12 title_smaller auto_col cursor_pointer">
+			</nav><nav class="pd_12 title_smaller auto_col cursor_pointer" [ngClass]="{'border_bottom_primary': displayedList == 2 }" (click)="displayedList = 2">
 				Miembros
 			</nav>
+		</div>
+		<div class="list">
+			<div class="" [hidden]="displayedList != 0">
+				
+			</div>
+			<div class="" [hidden]="displayedList != 1">
+				
+			</div>
+			<div class="" [hidden]="displayedList != 2">
+				<div class="pd_32" *ngIf="course.members?.length < 1">
+					<h2 class="title_big font_light opacity">
+						Ningun miembro por el momento
+					</h2>
+				</div>
+				<div class="responsive_col resp_list text_align_center" *ngIf="course.members != undefined && course.members?.length > 0">
+					<div class="col_2 text_align_left" *ngFor="let member of course.members">
+						<div class="bg_white resp_item shadow_flat border_radius mr_bottom_12 relative_pos">
+							<div class="tr_0 h_32">
+								<div class="mr_12 size_32 relative_pos">
+									<button class="options_button hover_black size_32 text_align_center circle">
+										<img class="icon v_align_middle" src="assets/icons/dots-vertical_white.png">
+									</button>
+									<div class="hidden_options">
+										<div class="bg_white pd_bottom_8 pd_top_8 shadow_flat border_radius font_normal">
+											<a href="/perfil/{{ member.user.id }}">
+												<p class="pd_8 pd_left_16 pd_right_16 hover_black">
+													Ver
+												</p>
+											</a>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="profile_display mini">
+								<div class="background bg_primary_dark">
+									<div class="img_container" *ngIf="member.user.backPhoto != undefined && member.user.backPhoto != ''">
+										<img src="/media/{{ member.user._id }}/background/{{ member.user.backPhoto }}" adjustable>
+									</div>
+									<div class="bg_opacity" *ngIf="member.user.backPhoto != undefined && member.user.backPhoto != ''"></div>
+								</div>
+								<div class="profile_photo font_white">
+									<div class="inner">
+										<a href="/perfil/{{ member.user.id }}">
+											<div class="img_container circle shadow_flat">
+												<img src="assets/icons/default_profile.png" *ngIf="member.user.profilePhoto == undefined || member.user.profilePhoto == ''">
+												<img src="/media/{{ member.user._id }}/profile/{{ member.user.profilePhoto }}"*ngIf="member.user.profilePhoto != undefined && member.user.profilePhoto != ''">
+											</div>
+										</a>
+									</div>
+								</div>
+							</div>
+							<div class="info">
+								<div class="pd_16">
+									<h3 class="font_normal mr_bottom_4">
+										{{ member.user.name }} {{ member.user.lastName }}
+									</h3>
+									<p class="opacity">
+										<b class="font_normal">{{ member.user.mail }}</b>
+									</p>
+								</div>
+							</div>
+						</div>	
+					</div>
+				</div>
+			</div>
 		</div>
 	</section>
 </div>

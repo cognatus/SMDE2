@@ -80,20 +80,26 @@ exports.uploadProfilePhotos = (req, res) => {
 	});
 	busboy.on('finish', function() {
 		console.log('Finish upload');
-		res.redirect('/perfil');
+		User.update({ _id: userId }, { $set: { updateDate: new Date() } }, (err, doc) => {
+			if (err) {
+				res.status(500).send({ message: 'Hubo un error al actualizar la fecha de actualización' });
+			} else {
+				res.redirect('/perfil');
+			}
+		});
 	});
 	req.pipe(busboy);
 };
 
 exports.updateProfileName = (req, res) => {
-	User.findOneAndUpdate({_id: req.cookies.login._id}, {$set: {
+	User.findOneAndUpdate({ _id: req.cookies.login._id }, { $set: {
 		name: req.body.name,
-		lastName: req.body.lastName,
+		lastName: req.body.lastName
 	}}, {new: false}, (err, doc) => {
 		if (err) {
 			res.status(500).send({ message: err });
 		}else{
-			res.send('Usuario modificado');
+			res.send({ message: 'Usuario modificado' });
 		}
 	});
 };
@@ -133,7 +139,7 @@ exports.deletePhoto = (req, res) => {
 			if (err) {
 				res.status(500).send({ message: err });
 			}else{
-				if ( req.query.album == 'background' ) {
+				if ( req.query.album === 'background' ) {
 					User.findOneAndUpdate({ _id: userId }, { $set: {
 						backPhoto: ''
 					}}, {new: false}, (err, doc) => {
@@ -143,7 +149,7 @@ exports.deletePhoto = (req, res) => {
 							res.send({ message: 'Foto de perfil borrada' });
 						}
 					});
-				} else if ( req.query.album == 'profile' ) {
+				} else if ( req.query.album === 'profile' ) {
 					User.findOneAndUpdate({ _id: userId }, { $set: {
 						profilePhoto: ''
 					}}, {new: false}, (err, doc) => {

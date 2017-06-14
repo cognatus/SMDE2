@@ -32,6 +32,7 @@ export class CoursesComponent implements OnInit {
 
 	ngOnInit() {
 		this.fetchCourses();
+		this.course.isPrivate = false;
 		this.course.user = this.user;
 	}
 

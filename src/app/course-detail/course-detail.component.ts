@@ -16,6 +16,8 @@ import { userTypes, getRandomColor, FormatDatePipe } from '../app.constants';
 export class CourseDetailComponent implements OnInit {
 	courseId: string = '';
 	course = new Course;
+	courseMembers: User[];
+	displayedList: number = 0; // O contenidos, 1 actividades, 2 miembros
 
 	constructor(private router: Router, private auth: AuthGuard, private activatedRoute: ActivatedRoute, private courseDetailService: CourseDetailService) {
 		this.activatedRoute.params.subscribe((params: Params) => {
@@ -37,12 +39,25 @@ export class CourseDetailComponent implements OnInit {
 			});
 	}
 
-	suscribeCourse(): void {
-		this.courseDetailService.suscribeCourse(this.courseId, this.auth.getUser())
+	suscribeCourse(status: boolean): void {
+		this.courseDetailService.suscribeCourse(status, this.courseId, this.auth.getUser(), '')
 			.subscribe( response => {
 				location.reload();
 			}, error => {
 				console.log(error);
 			})
+	}
+
+	isSuscribed(): boolean {
+		let flag = true;
+		if ( this.course.user.id !== this.auth.getUser()._id ) {
+			for ( let i = 0 ; i < this.course.members.length ; i++ ) {
+				if ( this.course.members[i].user._id == this.auth.getUser()._id ) {
+					flag = false;
+					break;
+				}
+			}
+		}
+		return flag;
 	}
 }
