@@ -105,9 +105,9 @@ export class CourseDetailComponent implements OnInit {
 		event.preventDefault();
 		if ( group !== undefined ) {
 			this.selectedGroup = {
-				id: group.id,
+				id: group._id,
 				name: group.name,
-				users: this.getGroupMembers(group.id),
+				users: this.getGroupMembers(group._id),
 				isNew: false
 			};
 		} else {
@@ -118,6 +118,7 @@ export class CourseDetailComponent implements OnInit {
 				isNew: true
 			};
 		}
+		console.log(this.selectedGroup);
 	}
 
 	getGroupMembers(group: string): User[] {
