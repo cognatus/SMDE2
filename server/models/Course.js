@@ -7,7 +7,7 @@ var CourseSchema = new Schema({
 	tags: [],
 	createdDate: { type: Date, required: true, default: new Date() },
 	updatedDate: { type: Date, default: new Date() },
-	isPrivate: { type: Boolean, required: true },
+	isPrivate: { type: Boolean, required: true, default: false },
 	user: {
 		id: { type: String, required: true },
 		name: { type: String, required: true },
@@ -21,7 +21,7 @@ var CourseSchema = new Schema({
 		name: { type: String, required: true, unique: true },
 	}],
 	members: [{
-		id: { type: String, required: true },
+		id: { type: String, required: true, unique: true },
 		group: { type: String }
 	}],
 	activities: [{

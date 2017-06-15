@@ -9,6 +9,10 @@ export class Course {
 	isPrivate: boolean;
 	updatedDate: Date;
 	user: User;
+	groups: [{
+		name: string;
+		color: string;
+	}];
 	members: [{
 		group: string;
 		user: User;

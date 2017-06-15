@@ -648,11 +648,11 @@ img.opacity { opacity: 0.4; }
 	text-align: center;
 }
 
-.list_element .ref span { padding: 12px;margin: 12px 0 16px 14px; }
+.list_element .ref span { padding: 12px;margin: 12px 0 16px 14px;width: 24px;height: 24px; }
 .list_element .ref span label { cursor: pointer !important; }
 
 .list_element .ref .img_container {
-	margin: 12px 0 16px 16px;
+	margin: 12px 0 12px 16px;
 	height: 48px;width: 48px;
 }
 
@@ -722,6 +722,10 @@ img.opacity { opacity: 0.4; }
 	z-index: 2;
 	max-width: 620px;
 	background-color: #fff;
+}
+
+.pop_up_container.big .pop_up {
+	max-width: 1080px;
 }
 
 .pop_up_container.gallery .pop_up {

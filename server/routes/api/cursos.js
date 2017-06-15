@@ -39,8 +39,7 @@ exports.getCourseById = (req, res) => {
 						for ( let i = 0 ; i < subdoc.length ; i++ ) {
 							newCourse.members[i] = {
 								group: membersToFind[i].group,
-								user: { 
-									_id: subdoc[i]._id,
+								user: {
 									id: subdoc[i]._id,
 									mail: subdoc[i].mail,
 									name: subdoc[i].name,
@@ -120,7 +119,7 @@ exports.suscribeUser = (req, res) => {
 	};
 
 	Course.update({ _id: req.params.id }, {
-		$push: { members: user }
+		$push: { members: user }, $set: { updateDate: new Date() }
 	}, (err, doc) => {
 		if (err) {
 			res.status(500).send({ message: err });
@@ -133,7 +132,7 @@ exports.suscribeUser = (req, res) => {
 exports.unsuscribeUser = (req, res) => {
 	let userId = req.cookies.login._id;
 	Course.update({ _id: req.params.id }, {
-		$pull: { members: { id: userId } }
+		$pull: { members: { id: userId } }, $set: { updateDate: new Date() }
 	}, (err, doc) => {
 		if (err) {
 			res.status(500).send({ message: err });
