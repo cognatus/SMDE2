@@ -6,7 +6,7 @@ import { UserDetailService } from '../user-detail/user-detail.service';
 import { ProfileService } from './profile.service';
 
 import { User } from '../models/user';
-import { colors, userTypes, formatedDate } from '../app.constants';
+import { Colors, userTypes, formatedDate } from '../app.constants';
 
 @Component({
 	selector: 'app-profile',
@@ -22,6 +22,7 @@ export class ProfileComponent implements OnInit {
 	formatedUserBirth: string;
 	privateUser: boolean = true;
 	selectedAlbum: number = 0;
+	colors = new Colors;
 	photos: any[] = [{ album: 'background', array: [], selected: '' }, 
 					 { album: 'profile', array: [], selected: '' },
 					 { album: 'other', array: [], selected: '' }];

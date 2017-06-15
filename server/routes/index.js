@@ -42,4 +42,11 @@ router.route('/courses/:id/suscribe')
 	.post(courses.suscribeUser)
 	.delete(courses.unsuscribeUser);
 
+router.route('/courses/:id/updategroup')
+	.post(courses.createGroup)
+
+router.route('/courses/:id/updategroup/:groupid')
+	.put(courses.updateGroup)
+	.delete(courses.deleteGroup);
+
 module.exports = router;

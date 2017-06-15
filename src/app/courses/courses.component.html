@@ -100,7 +100,7 @@
 						</div>
 					</div>
 					<div class="profile_display mini">
-						<div class="background" [style.background]="course.color">
+						<div class="background" [style.background]="colors.getColor(course.name)">
 						</div>
 						<div class="profile_photo">
 							<a href="/cursos/{{ course._id }}">

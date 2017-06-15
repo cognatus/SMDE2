@@ -6,7 +6,7 @@ import { CourseDetailService } from './course-detail.service';
 
 import { User } from '../models/user';
 import { Course } from '../models/course';
-import { userTypes, getRandomColor, FormatDatePipe } from '../app.constants';
+import { userTypes, Colors, FormatDatePipe } from '../app.constants';
 
 @Component({
 	selector: 'app-course-detail',
@@ -19,8 +19,8 @@ export class CourseDetailComponent implements OnInit {
 	course = new Course;
 	courseMembers: User[];
 	displayedList: number = 0; // O contenidos, 1 actividades, 2 miembros
-	newGroup: any;
-	selectedGroup: string = '';
+	selectedGroup: any;
+	colors= new Colors;
 
 	constructor(private router: Router, private auth: AuthGuard, private activatedRoute: ActivatedRoute, private courseDetailService: CourseDetailService) {
 		this.activatedRoute.params.subscribe((params: Params) => {
@@ -30,20 +30,43 @@ export class CourseDetailComponent implements OnInit {
 
 	ngOnInit() {
 		this.fetchCourse();
+		this.selectedGroup = undefined;
 	}
 
 	fetchCourse(): void {
 		this.courseDetailService.getCourse(this.courseId)
 			.subscribe( course => {
 				this.course = course;
-				this.course.color = getRandomColor(this.course.name.charAt(0));
-				this.course.groups.push({ name: 'Grupo Prueba', color: '' });
-				for ( let item in this.course.groups ) {
-					this.course.groups[item].color = getRandomColor(this.course.groups[item].name);
-				}
+				/*console.log(this.course);*/
 			}, error => {
 				console.log(error);
 			});
+	}
+
+	updateGroup(): void {
+		this.courseDetailService.updateGroup(this.selectedGroup, this.course._id)
+			.subscribe( response => {
+				location.reload();
+			}, error => {
+				console.log(error);
+			})
+	}
+
+	deleteGroup(): void {
+		this.courseDetailService.deleteGroup(this.course._id, this.selectedGroup.id)
+			.subscribe( response => {
+				location.reload();
+			}, error => {
+				console.log(error);
+			})
+	}
+
+	preventSubmit($event): void {
+		event.preventDefault();
+	}
+
+	resetValues(): void {
+		this.selectedGroup = undefined;
 	}
 
 	suscribeCourse(status: boolean): void {
@@ -59,7 +82,7 @@ export class CourseDetailComponent implements OnInit {
 		let flag = false;
 		if ( this.course.user.id !== this.auth.getUser()._id ) {
 			for ( let i = 0 ; i < this.course.members.length ; i++ ) {
-				if ( this.course.members[i].user._id === this.auth.getUser()._id ) {
+				if ( this.course.members[i].user.id === this.auth.getUser()._id ) {
 					flag = true;
 					break;
 				}
@@ -68,25 +91,28 @@ export class CourseDetailComponent implements OnInit {
 		return flag;
 	}
 
-	createGroup(event): void {
+	selectGroup(event, group: any): void {
 		event.preventDefault();
-		this.newGroup = {
-			name: ''
+		if ( group !== undefined ) {
+			this.selectedGroup = {
+				id: group.id,
+				name: group.name,
+				users: this.getGroupMembers(group.id),
+				isNew: false
+			};
+		} else {
+			this.selectedGroup = {
+				id: 'newgroupid',
+				name: '',
+				users: [],
+				isNew: true
+			};
 		}
-	}
-
-	selectGroup(name: string): void {
-		this.selectedGroup = name;
-	}
-
-	resetValues(): void {
-		this.selectedGroup = '';
-		this.newGroup = undefined;
 	}
 
 	getGroupMembers(group: string): User[] {
 		let usersArray = [];
-		if ( group !== undefined ) {
+		if ( group !== undefined || group !== '' ) {
 			for ( let item in this.course.members ) {
 				if ( this.course.members[item].group === group ) {
 					usersArray.push( this.course.members[item].user );
@@ -94,10 +120,31 @@ export class CourseDetailComponent implements OnInit {
 			}
 		} else {
 			for ( let item in this.course.members ) {
-				usersArray.push( this.course.members[item].user );
+				if ( this.course.members[item].group === undefined || this.course.members[item].group === '') {
+					usersArray.push( this.course.members[item].user );
+				}
 			}
 		}
 		return usersArray;
 	}
 
+	addUserToGroup(user: User) {
+		let check = this.selectedGroup.users.indexOf( user ); 
+		if ( check > -1 ) {
+			this.selectedGroup.users.splice(check, 1);	
+		} else {
+			this.selectedGroup.users.push(user);
+		}
+	}
+
+	isInGroup(id: string): boolean {
+		let flag = false;
+		for( let item in this.selectedGroup.users ) { 
+			if ( this.selectedGroup.users[item].id === id ) {
+				flag = true;
+				break;
+			}
+		}
+		return flag;
+	}
 }

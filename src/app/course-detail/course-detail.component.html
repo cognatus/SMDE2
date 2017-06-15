@@ -1,83 +1,165 @@
 <app-menu *ngIf="auth.loggedIn()"></app-menu>
 <div class="courses_container full">
-	<div class="pop_up_container" id="groups-add">
-		<div class="pop_up_back" onclick="showPopup(false, '#groups-add')"></div>
+	<div class="pop_up_container" id="confirm-box">
+		<div class="pop_up_back" onclick="showPopup(false, '#confirm-box')"></div>
 		<div class="pop_up">
 			<div class="inner border_radius">
 				<div class="bg_primary">
 					<div class="pop_up_title font_white">
 						<h1 class="title">
-							Administrar Grupos
+							Advertencia
 						</h1>
 						<div class="close_button">
-							<button class="pd_8 hover_black circle" onclick="showPopup(false, '#groups-add')">
+							<button class="pd_8 hover_black circle" onclick="showPopup(false, '#confirm-box')">
 								<img class="icon" src="assets/icons/arrow-left_white.png">
 							</button>
 						</div>
 					</div>
 				</div>
-				<form class="padding_block" (submit)="addGroups()">
-					<div class="text_align_left pd_bottom_24" *ngIf="!newGroup && !selectedGroup">
-						<button class="pd_8 pd_right_12 bg_secondary shadow_raised border_radius" (click)="createGroup($event)">
+				<div class="padding_block">
+					<p class="title_small opacity font_normal">¿Estas seguro de realizar esta acción?</p>
+					<div class="field mr_top_48 text_align_right">
+						<button class="bg_red font_white shadow_raised border_radius mr_right_8">Cancelar</button>
+						<button class="bg_blue font_white shadow_raised border_radius" (click)="deleteGroup()">Aceptar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="pop_up_container" id="groups-admin">
+		<div class="pop_up_back" onclick="showPopup(false, '#groups-admin')"></div>
+		<div class="pop_up">
+			<div class="inner border_radius">
+				<div class="bg_primary">
+					<div class="pop_up_title font_white">
+						<h1 class="title" *ngIf="!selectedGroup">
+							Administrar Grupos
+						</h1>
+						<h1 class="title" *ngIf="selectedGroup">
+							{{ selectedGroup.isNew ? 'Nuevo Grupo' : selectedGroup.name }}
+						</h1>
+						<div class="close_button">
+							<button class="pd_8 hover_black circle" onclick="showPopup(false, '#groups-admin')" *ngIf="!selectedGroup">
+								<img class="icon" src="assets/icons/arrow-left_white.png">
+							</button>
+							<button class="pd_8 hover_black circle" (click)="resetValues()" *ngIf="selectedGroup">
+								<img class="icon" src="assets/icons/arrow-left_white.png">
+							</button>
+						</div>
+					</div>
+				</div>
+				<form class="padding_block" (submit)="updateGroup()">
+					<div class="pd_24 text_align_center" *ngIf="(!course.groups || course.groups?.length < 1) && !selectedGroup">
+						<h2 class="title_medium opacity pd_bottom_8 mr_bottom_32">No hay grupos aun</h2>
+						<button class="pd_16 font_big bg_secondary shadow_raised border_radius" (click)="selectGroup($event)">
 							<img class="v_align_middle icon" src="assets/icons/plus_white.png">
-							<b class="v_align_middle mr_left_4 font_normal">Nuevo Grupo</b>
+							<b class="v_align_middle mr_left_4 font_normal">Crear Grupo</b>
 						</button>
 					</div>
-					<div class="data_container">
-						<div class="mr_bottom_24 font_secondary">
-							<span class="circle pd_8 icon hover_black v_align_middle mr_right_8" *ngIf="newGroup || selectedGroup != ''" (click)="resetValues()">
-								<img class="icon opacity" src="assets/icons/arrow-left_black.png">
-							</span><h2 class="auto_col title_medium v_align_middle" *ngIf="newGroup != undefined">
-								Nuevo Grupo
-							</h2><h2 class="auto_col title_medium v_align_middle" *ngIf="newGroup == undefined">
-								{{ selectedGroup == '' ? 'Grupos' : selectedGroup }}
-							</h2>
+					<div *ngIf="(course.groups && course.groups?.length > 0) || selectedGroup">
+						<div class="text_align_left pd_bottom_24" *ngIf="!selectedGroup">
+							<button class="pd_8 pd_right_12 bg_secondary shadow_raised border_radius" (click)="selectGroup($event)">
+								<img class="v_align_middle icon" src="assets/icons/plus_white.png">
+								<b class="v_align_middle mr_left_4 font_normal">Nuevo Grupo</b>
+							</button>
 						</div>
-						<div class="pd_left_8 pd_right_8" *ngIf="!newGroup && selectedGroup == ''">
-							<div class="list_element hover_black" *ngFor="let group of course.groups; let i = index" [ngClass]="{'border_top': i > 0}">
-								<div (click)="selectGroup(group.name)">
-									<div class="ref">
-										<span class="circle bg_opacity_light font_white" [style.background]="group.color">
-											<label class="title_smaller font_light size_24">{{ group.name.charAt(0) }}</label>
-										</span>
-									</div><div class="info">
-										<div class="pd_16">
-											<h3 class="font_normal mr_bottom_4">{{ group.name }}</h3>
-											<p class="opacity">
-												<b class="font_normal">0 Miembros</b>
-											</p>
+						<div class="data_container">
+							<div class="mr_bottom_24 font_secondary">
+								<h2 class="auto_col title_medium v_align_middle" *ngIf="!selectedGroup">
+									Grupos
+								</h2><h2 class="auto_col title_medium v_align_middle" *ngIf="selectedGroup">
+									{{ selectedGroup.name == '' ? 'Nuevo Grupo' : selectedGroup.name }}
+								</h2>
+							</div>
+							<div class="pd_left_8 pd_right_8" *ngIf="!selectedGroup">
+								<div class="list_element hover_black" *ngFor="let group of course.groups; let i = index" [ngClass]="{'border_top': i > 0}">
+									<div (click)="selectGroup($event, {name: group.name, id: group._id})">
+										<div class="ref">
+											<span class="circle font_white" [style.background]="colors.getColor(group.name)">
+												<label class="title_smaller font_light size_24">{{ group.name.charAt(0) }}</label>
+											</span>
+										</div><div class="info">
+											<div class="pd_16">
+												<h3 class="font_normal mr_bottom_4">{{ group.name }}</h3>
+												<p class="opacity">
+													<b class="font_normal">{{ getGroupMembers(group._id).length }} Miembros</b>
+												</p>
+											</div>
 										</div>
 									</div>
 								</div>
 							</div>
-							<!-- <div class="field text_align_right">
-								<input type="submit" class="bg_secondary font_white shadow_raised" value="Agregar">
-							</div> -->
-						</div>
-						<div class="pd_left_8 pd_right_8" *ngIf="newGroup != undefined">
-							<div class="field">
-								<p class="opacity title_smaller mr_bottom_12">Nombre del Grupo</p>
-								<input type="text" [(ngModel)]="newGroup.name" name="newGroupname" placeholder="Nombre del Grupo"/>
-							</div>
-							<div class="list mr_top_24" *ngIf="course.members?.length > 0">
-								<h4 class="title_smaller opacity mr_bottom_12">Miembros</h4>
-								<div>
-									<div class="list_element hover_black" *ngFor="let user of getGroupMembers(); let i = index" [ngClass]="{'border_top': i > 0}">
-										<div (click)="some()">
-											<div class="ref">
-												<div class="img_container circle">
-													<img [src]="user.profilePhoto && user.profilePhoto != '' ? '/media/'+user.id+'/profile/'+user.profilePhoto : 'assets/icons/default_profile.png'">
-												</div>
-											</div><div class="info">
-												<div class="pd_16">
-													<h3 class="font_normal mr_bottom_4">{{ user.name }} {{ user.lastName }}</h3>
-													<p class="opacity">
-														<b class="font_normal">{{ user.mail }}</b>
-													</p>
+							<div class="pd_left_8 pd_right_8" *ngIf="selectedGroup">
+								<div class="field">
+									<p class="opacity title_smaller mr_bottom_12">Nombre del Grupo</p>
+									<input type="text" [(ngModel)]="selectedGroup.name" name="group_name" placeholder="Nombre del Grupo"/>
+								</div>
+								<div class="pd_top_8" *ngIf="course.members?.length > 0">
+									<div class="mr_top_24" *ngIf="!selectedGroup.isNew">
+										<h4 class="title_smaller opacity mr_bottom_12">
+											Miembros
+										</h4>
+										<p class="pd_24 title_small font_normal opacity" *ngIf="getGroupMembers(selectedGroup.id)?.length < 1 && !selectedGroup.isNew">
+											No hay miembros en este grupo
+										</p>
+										<div class="list">
+											<div class="list_element hover_black" *ngFor="let user of getGroupMembers(selectedGroup.id); let i = index" [ngClass]="{'border_top': i > 0}">
+												<div (click)="addUserToGroup(user)">
+													<div class="ref">
+														<span class="circle bg_red font_white" *ngIf="!isInGroup(user.id)">
+															<img class="icon" src="assets/icons/close_white.png">
+														</span>
+														<div class="img_container circle" *ngIf="isInGroup(user.id)">
+															<img [src]="user.profilePhoto && user.profilePhoto != '' ? '/media/'+user.id+'/profile/'+user.profilePhoto : 'assets/icons/default_profile.png'">
+														</div>
+													</div><div class="info">
+														<div class="pd_16">
+															<h3 class="font_normal mr_bottom_4">{{ user.name }} {{ user.lastName }}</h3>
+															<p class="opacity">
+																<b class="font_normal">{{ user.mail }}</b>
+															</p>
+														</div>
+													</div>
 												</div>
 											</div>
 										</div>
 									</div>
+									<div class="mr_top_24">
+										<h4 class="title_smaller opacity mr_bottom_12">
+											Agregar Miembros
+										</h4>
+										<p class="pd_24 title_small font_normal" *ngIf="getGroupMembers('')?.length < 1">
+											<span class="opacity">No hay miembros para agregar</span>
+											<span class="font_big mr_top_16">
+												Para agregar miembros a este grupo debes eliminar miembros de otro(s) grupo(s)
+											</span>
+										</p>
+										<div class="list">
+											<div class="list_element hover_black" *ngFor="let user of getGroupMembers(''); let i = index" [ngClass]="{'border_top': i > 0}">
+												<div (click)="addUserToGroup(user)">
+													<div class="ref">
+														<span class="circle bg_blue font_white" *ngIf="isInGroup(user.id)">
+															<img class="icon" src="assets/icons/check_white.png">
+														</span>
+														<div class="img_container circle" *ngIf="!isInGroup(user.id)">
+															<img [src]="user.profilePhoto && user.profilePhoto != '' ? '/media/'+user.id+'/profile/'+user.profilePhoto : 'assets/icons/default_profile.png'">
+														</div>
+													</div><div class="info">
+														<div class="pd_16">
+															<h3 class="font_normal mr_bottom_4">{{ user.name }} {{ user.lastName }}</h3>
+															<p class="opacity">
+																<b class="font_normal">{{ user.mail }}</b>
+															</p>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="field mr_top_24 text_align_right">
+									<input type="button" class="bg_red font_white shadow_raised mr_right_8" value="Eliminar Grupo" *ngIf="!selectedGroup.isNew" onclick="showPopup(true, '#confirm-box')" (click)="preventSubmit($event)">
+									<input type="submit" class="bg_secondary font_white shadow_raised" value="{{ selectedGroup.isNew ? 'Crear Grupo' : 'Actualizar Grupo' }}">
 								</div>
 							</div>
 						</div>
@@ -104,7 +186,7 @@
 								<p class="pd_8 pd_left_16 pd_right_16 hover_black" >
 									Editar
 								</p>
-								<p class="pd_8 pd_left_16 pd_right_16 hover_black" onclick="showPopup(true, '#groups-add')">
+								<p class="pd_8 pd_left_16 pd_right_16 hover_black" onclick="showPopup(true, '#groups-admin')">
 									Administrar grupos
 								</p>
 								<p class="pd_8 pd_left_16 pd_right_16 font_red hover_black">
@@ -116,13 +198,13 @@
 				</div>
 			</div>
 			<div class="profile_display mini">
-				<div class="background" [ngStyle]="{ 'background-color': course.color }">
+				<div class="background" *ngIf="course.name" [ngStyle]="{ 'background-color': colors.getColor(course.name) }">
 				</div>
 				<div class="profile_photo">
 					<div class="list_element">
 						<div class="ref">
 							<span class="circle bg_opacity_light font_white">
-								<label class="title_smaller font_light size_24" *ngIf="course.name != undefined">{{ course.name.charAt(0) }}</label>
+								<label class="title_smaller font_light size_24" *ngIf="course.name">{{ course.name.charAt(0) }}</label>
 							</span>
 						</div><div class="info font_white">
 							<div class="pd_16">
@@ -181,7 +263,7 @@
 			</nav><nav class="pd_12 title_smaller auto_col cursor_pointer" [ngClass]="{'border_bottom_primary': displayedList == 1 }" (click)="displayedList = 1">
 				Actividades
 			</nav><nav class="pd_12 title_smaller auto_col cursor_pointer" [ngClass]="{'border_bottom_primary': displayedList == 2 }" (click)="displayedList = 2">
-				Miembros
+				Miembros ({{ course.members?.length }})
 			</nav>
 		</div>
 		<div class="list">

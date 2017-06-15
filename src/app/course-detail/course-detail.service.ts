@@ -20,6 +20,33 @@ export class CourseDetailService {
 			.catch(this.handleError);
 	}
 
+	updateGroup(group: any, id: string): Observable<any> {
+		let options = new RequestOptions({ headers: ContentHeaders });
+		let data = { name: group.name, users: [] };
+
+		for ( let item in group.users ) {
+		 	data.users.push(group.users[item].id);
+		}
+
+		if ( group.isNew ) {
+			return this.http.post(this.url + id +'/updategroup', data, options)
+				.map(this.extractData)
+				.catch(this.handleError);
+		} else {
+			return this.http.put(this.url + id +'/updategroup/' + group.id, data, options)
+				.map(this.extractData)
+				.catch(this.handleError);
+		}
+	}
+
+	deleteGroup(courseId: string, groupId: any) {
+		let options = new RequestOptions({ headers: ContentHeaders });
+
+		return this.http.delete(this.url + courseId + '/updategroup/' + groupId , options)
+			.map(this.extractData)
+			.catch(this.handleError);
+	}
+
 	suscribeCourse(status: boolean, id: string, user: User, group: string): Observable<Course> {
 		let options = new RequestOptions({ headers: ContentHeaders });
 		let data = {

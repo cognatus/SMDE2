@@ -277,6 +277,7 @@ label.size_24 { display: inline-block; }
 .bg_darkgray { background-color: #424242 !important; }
 .bg_blue { background-color: #2196F3 !important; }
 .bg_blue.hover_blue { color: #fff !important; }
+.bg_red { background-color: #F44336 !important; }
 .bg_opacity { background-color: rgba(0, 0, 0, 0.3); }
 .bg_opacity_light { background-color: rgba(0, 0, 0, 0.18); }
 
@@ -394,7 +395,7 @@ img.opacity { opacity: 0.4; }
 	border-color: #64DD17;
 }
 
-.field input[type="submit"], .field input[type="button"] {
+.field input[type="submit"], .field input[type="button"], .field button {
 	width: auto;
 	height: 44px !important;
 	border: none;

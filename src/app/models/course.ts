@@ -10,8 +10,8 @@ export class Course {
 	updatedDate: Date;
 	user: User;
 	groups: [{
+		_id: string;
 		name: string;
-		color: string;
 	}];
 	members: [{
 		group: string;
@@ -50,5 +50,4 @@ export class Course {
 			name: string;
 		}];
 	}];
-	color: string;
 };

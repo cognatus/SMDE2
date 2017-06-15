@@ -18,10 +18,10 @@ var CourseSchema = new Schema({
 		backPhoto: { type: String }
 	},
 	groups: [{
-		name: { type: String, required: true, unique: true },
+		name: { type: String, required: true },
 	}],
 	members: [{
-		id: { type: String, required: true, unique: true },
+		id: { type: String, required: true },
 		group: { type: String }
 	}],
 	activities: [{

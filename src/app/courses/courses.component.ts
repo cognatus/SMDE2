@@ -6,7 +6,7 @@ import { CoursesService } from '../courses/courses.service';
 
 import { Course } from '../models/course';
 import { User } from '../models/user';
-import { userTypes, replaceCharacters, getRandomColor, FormatDatePipe } from '../app.constants';
+import { userTypes, replaceCharacters, Colors, FormatDatePipe } from '../app.constants';
 
 @Component({
 	selector: 'app-courses',
@@ -24,6 +24,7 @@ export class CoursesComponent implements OnInit {
 	displayingTags: string[] = [];
 	selectedDisplayTag: number = -1;
 	error: string = '';
+	colors = new Colors;
 
 	constructor(private coursesService: CoursesService, private location: Location, private router: Router, private auth: AuthGuard) {
 		this.user = this.auth.getUser();
@@ -41,7 +42,6 @@ export class CoursesComponent implements OnInit {
 			.subscribe( courses => {
 					this.courses = courses;
 					for( let item in this.courses ) {
-						this.courses[item].color = getRandomColor(this.courses[item].name.charAt(0));
 						for ( let sub in this.courses[item].tags ) {
 							let tag = this.courses[item].tags[sub];
 							if ( this.hiddenTags.indexOf(tag) === -1 ) {
