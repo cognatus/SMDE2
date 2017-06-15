@@ -292,6 +292,7 @@ label.size_24 { display: inline-block; }
 .font_gray { color: #727272 !important; }
 .font_lightgray { color: #bdbdbd !important; }
 .font_red { color: #F44336 !important; }
+.font_blue { color: #2196F3 !important; }
 
 .font_color_normal a { color: #424242 !important; }
 .font_black a { color: #000 !important; }

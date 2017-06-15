@@ -82,24 +82,24 @@
 											<div class="pd_16">
 												<h3 class="font_normal mr_bottom_4">{{ group.name }}</h3>
 												<p class="opacity">
-													<b class="font_normal">{{ getGroupMembers(group._id).length }} Miembros</b>
+													<b class="font_normal">{{ getGroupMembers(group._id).length }} {{ getGroupMembers(group._id).length != 1 ? 'Miembros' : 'Miembro' }}</b>
 												</p>
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
-							<div class="pd_left_8 pd_right_8" *ngIf="selectedGroup">
+							<div class="pd_left_8 pd_right_8 pd_top_8" *ngIf="selectedGroup">
 								<div class="field">
-									<p class="opacity title_smaller mr_bottom_12">Nombre del Grupo</p>
+									<p class="title_smaller font_blue mr_bottom_12">Nombre del Grupo</p>
 									<input type="text" [(ngModel)]="selectedGroup.name" name="group_name" placeholder="Nombre del Grupo"/>
 								</div>
 								<div class="pd_top_8" *ngIf="course.members?.length > 0">
 									<div class="mr_top_24" *ngIf="!selectedGroup.isNew">
-										<h4 class="title_smaller opacity mr_bottom_12">
-											Miembros
+										<h4 class="title_smaller font_blue mr_bottom_12">
+											Miembros <span class="font_small">(Click para eliminar/deshacer)</span>
 										</h4>
-										<p class="pd_24 title_small font_normal opacity" *ngIf="getGroupMembers(selectedGroup.id)?.length < 1">
+										<p class="pd_24 title_small font_lightnormal opacity" *ngIf="getGroupMembers(selectedGroup.id)?.length < 1">
 											No hay miembros en este grupo
 										</p>
 										<div class="list">
@@ -125,13 +125,13 @@
 										</div>
 									</div>
 									<div class="mr_top_24">
-										<h4 class="title_smaller opacity mr_bottom_12">
+										<h4 class="title_smaller font_blue mr_bottom_12">
 											Agregar Miembros
 										</h4>
-										<p class="pd_24 title_small font_normal" *ngIf="getGroupMembers('')?.length < 1">
+										<p class="pd_24 title_small font_lightnormal" *ngIf="getGroupMembers('')?.length < 1">
 											<span class="opacity">No hay miembros para agregar</span>
-											<span class="font_big mr_top_16">
-												Para agregar miembros a este grupo debes eliminar miembros de otro(s) grupo(s)
+											<span class="font_big font_normal opacity mr_top_16">
+												Para agregar miembros a este grupo debes eliminar miembros de otro grupo
 											</span>
 										</p>
 										<div class="list">

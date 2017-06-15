@@ -118,7 +118,6 @@ export class CourseDetailComponent implements OnInit {
 				isNew: true
 			};
 		}
-		console.log(this.selectedGroup);
 	}
 
 	getGroupMembers(group: string): User[] {
