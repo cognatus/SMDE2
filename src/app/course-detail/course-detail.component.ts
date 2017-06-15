@@ -37,7 +37,6 @@ export class CourseDetailComponent implements OnInit {
 		this.courseDetailService.getCourse(this.courseId)
 			.subscribe( course => {
 				this.course = course;
-				/*console.log(this.course);*/
 			}, error => {
 				console.log(error);
 			});
@@ -67,6 +66,17 @@ export class CourseDetailComponent implements OnInit {
 
 	resetValues(): void {
 		this.selectedGroup = undefined;
+	}
+
+	getGroupName(group: string): string {
+		let name = '';
+		for ( let item in this.course.groups ) {
+			if ( this.course.groups[item]._id == group ) {
+				name = this.course.groups[item].name;
+				break;
+			}
+		}
+		return name;
 	}
 
 	suscribeCourse(status: boolean): void {
