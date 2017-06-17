@@ -240,13 +240,12 @@ exports.updateGroup = (req, res) => {
 				}
 
 				let users = doc.members;
-				// borrar grupo de usuarios
+				// Borrar grupo de usuarios
 				for ( let i = 0 ; i < users.length ; i++ ) {
 					if ( users[i].group === groupId ) {
 						users[i].group = '';
 					}
 				}
-
 				// Colocar usuarios nuevamente
 				for ( let i = 0 ; i < users.length ; i++ ) {
 					for ( let j = 0 ; j < members.length ; j++ ) {

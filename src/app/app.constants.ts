@@ -60,7 +60,7 @@ export function formatedDate(date: Date): string {
 
 @Pipe({name: 'formatDate'})
 export class FormatDatePipe implements PipeTransform {
- 	transform(date: string, args: any[]): string {
+ 	transform(date: string, arg: string) {
  		let newDate = new Date(date);
 		const monthLabels = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
 
@@ -71,7 +71,7 @@ export class FormatDatePipe implements PipeTransform {
 		let minutes = newDate.getMinutes();
 		let formatedDate = '';
 
-		if ( args && args[0] === 'time' ) {
+		if ( arg == 'time' ) {
 			formatedDate = day + ' ' + monthLabels[parseInt(month)] + ' ' + year + ' a las ' + hour + ':' + minutes;
 		} else {
 			formatedDate = day + ' ' + monthLabels[parseInt(month)] + ' ' + year;

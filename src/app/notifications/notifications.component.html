@@ -7,7 +7,7 @@
 	<div class="bg_white shadow_flat border_radius notif_container">
 		<section class="mm_section border_bottom pd_top_12 pd_bottom_12">
 			<div class="pd_left_16 pd_right_16">
-				<p class="opacity font_bold font_small">Notificaciones</p>
+				<p class="font_bold">Notificaciones</p>
 			</div>
 		</section>
 		<section class="mm_section border_bottom">
@@ -18,7 +18,7 @@
 						Aun no hay notificaciones
 					</h2>
 				</div>
-				<div class="list_element relative_pos" *ngFor="let notif of notifications;">
+				<div class="list_element relative_pos" *ngFor="let notif of notifications">
 					<a [attr.href]="notif.read ? notif.redirect : null">
 						<div [ngClass]="{'cursor_pointer bg_lightblue': !notif.read, 'hover_black': notif.read}" (click)="!notif.read ? markRead(true, notif) : null">
 							<div class="ref">
@@ -42,10 +42,10 @@
 												{{ j < 1 && notif.responsibleUsers?.length > 1 ? 'y' : '' }}
 											</span>
 										</div>
-										{{ notif.text }} <b>{{ notif.actionOn }}</b>
+										{{ notif.text }} <b *ngIf="notif.actionOn">{{ notif.actionOn }}</b>
 									</div>
 									<p class="font_small">
-										<b class="font_normal opacity">{{ notif.date | formatDate:'time' }}</b>
+										<b class="font_normal opacity">{{ notif.date | formatDate: 'time' }}</b>
 									</p>
 								</div>
 							</div>

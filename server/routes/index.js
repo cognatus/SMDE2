@@ -31,7 +31,15 @@ router.route('/profile')
 	.delete(profile.deletePhoto);
 
 router.route('/notif')
-	.get(notif.getNotifications);
+	.get( ( req, res ) => {
+		notif.getNotifications(req.cookies.login._id, (status, data) => {
+			if ( status ) {
+				res.status(200).json(data);
+			} else {
+				res.status(500).send(data);
+			}
+		});
+	});
 
 router.route('/notif/:id')
 	.put(notif.updateNotifStatus);

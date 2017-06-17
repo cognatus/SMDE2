@@ -18,14 +18,13 @@ export class NotificationsComponent implements OnInit {
 	constructor(private auth: AuthGuard, private notifService: NotificationsService) {}
 
 	ngOnInit() {
-		this.fetchNotifications();
+		this.fetchNotif();
 	}
 
-	fetchNotifications(): void {
+	fetchNotif(): void {
 		this.notifService.getNotifications()
 			.subscribe( notifications => {
 				this.notifications = notifications;
-				/*console.log(this.notifications)*/
 			}, error => {
 				console.log(error);
 			});
