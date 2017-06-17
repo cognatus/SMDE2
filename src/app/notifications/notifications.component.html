@@ -28,13 +28,13 @@
 							</div><div class="info">
 								<div class="pd_12 pd_left_16 pd_right_16">
 									<div class="mr_bottom_8">
-										<div *ngIf="notif.responsibleUsers?.length > 2">
+										<div class="inline" *ngIf="notif.responsibleUsers?.length > 2">
 											<b>
 												{{ notif.responsibleUsers[0].name }} {{ notif.responsibleUsers[0].lastName }}
 											</b>
 											y {{ notif.responsibleUsers?.length - 1 }} personas más {{ notif.text }}
 										</div>
-										<div *ngIf="notif.responsibleUsers?.length <= 2">
+										<div class="inline" *ngIf="notif.responsibleUsers?.length <= 2">
 											<span *ngFor="let user of notif.responsibleUsers; let j = index">
 												<b>
 													{{ user.name }} {{ user.lastName }}

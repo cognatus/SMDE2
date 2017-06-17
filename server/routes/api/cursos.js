@@ -179,7 +179,7 @@ exports.createGroup = (req, res) => {
 										let notif = new Notification({
 											responsibleUsers: [req.cookies.login._id],
 											actionOn: subdoc._id,
-											text: 'ha creado el grupo ' + groupName + ' y te ha añadido a el en',
+											text: 'te ha movido al nuevo grupo "' + groupName + '" en',
 											action: 'course',
 											redirect: '/cursos/' + req.params.id,
 											sendTo: users
@@ -187,7 +187,7 @@ exports.createGroup = (req, res) => {
 										notif.save( (err) => {
 											if (err) {
 												console.log(err);
-												res.status(500).send({ message: 'Error al guardar la notificación' })
+												res.status(500).send({ message: 'Error al guardar la notificación' });
 											} else {
 												res.status(200).send({ message: 'Grupo creado con' + members.length + 'nuevos' });
 											}
@@ -198,7 +198,7 @@ exports.createGroup = (req, res) => {
 							let notif = new Notification({
 								responsibleUsers: [req.cookies.login._id],
 								actionOn: subdoc._id,
-								text: 'ha creado el grupo ' + groupName + ' en',
+								text: 'ha creado el grupo "' + groupName + '" en',
 								action: 'course',
 								redirect: '/cursos/' + req.params.id,
 								sendTo: users

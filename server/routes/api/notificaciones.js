@@ -26,8 +26,18 @@ exports.getNotifications = (req, res) => {
 							res.status(500).send({ message: 'Error al encontrar a los responsalbles'});
 						} else {
 							data[i].responsibleUsers = subdoc;
-							if ( doc[i]. )
-							res.status(200).json(data);
+							if ( doc[i].action && doc[i].action != '' ) {
+								if ( doc[i].action === 'course' ) {
+									Course.findOne({ _id: doc[i].actionOn }, 'name', (err, nameVal) => {
+										if (err) { console.log(err); } else {
+											data[i].actionOn = nameVal.name;
+											res.status(200).json(data);
+										}
+									});
+								}
+							} else {
+								res.status(200).json(data);
+							}
 						}
 					});
 				} else {
