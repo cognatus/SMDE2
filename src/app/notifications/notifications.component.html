@@ -1,0 +1,66 @@
+<button class="action_button pd_left_8 pd_right_8 hover_white" id="notif-open-button" title="Ver Notificaciones">
+	<img class="icon v_align_middle mr_left_4 mr_right_4" src="assets/icons/bell_white.png">
+	<i class="mini_mark circle bg_red" *ngIf="getUnreadNotif() > 0">{{ getUnreadNotif() }}</i>
+</button>
+<div class="hidden_block" id="notif-mini">
+	<i class="mark bg_white"></i>
+	<div class="bg_white shadow_flat border_radius notif_container">
+		<section class="mm_section border_bottom pd_top_12 pd_bottom_12">
+			<div class="pd_left_16 pd_right_16">
+				<p class="opacity font_bold font_small">Notificaciones</p>
+			</div>
+		</section>
+		<section class="mm_section border_bottom">
+			<div class="list">
+				<div class="pd_24 text_align_center opacity" *ngIf="notifications?.length < 1">
+					<img class="size_48 mr_bottom_16 opacity" src="/assets/icons/block-big_black.png">
+					<h2 class="text_align_center title_smaller font_lightnormal">
+						Aun no hay notificaciones
+					</h2>
+				</div>
+				<div class="list_element relative_pos" *ngFor="let notif of notifications;">
+					<a [attr.href]="notif.read ? notif.redirect : null">
+						<div [ngClass]="{'cursor_pointer bg_lightblue': !notif.read, 'hover_black': notif.read}" (click)="!notif.read ? markRead(true, notif) : null">
+							<div class="ref">
+								<div class="img_container circle">
+									<img [src]="notif.responsibleUsers[0].profilePhoto ? '/media/'+notif.responsibleUsers[0]._id+'/profile/'+notif.responsibleUsers[0].profilePhoto : '/assets/icons/default_profile.png'">
+								</div>
+							</div><div class="info">
+								<div class="pd_12 pd_left_16 pd_right_16">
+									<div class="mr_bottom_8">
+										<div *ngIf="notif.responsibleUsers?.length > 2">
+											<b>
+												{{ notif.responsibleUsers[0].name }} {{ notif.responsibleUsers[0].lastName }}
+											</b>
+											y {{ notif.responsibleUsers?.length - 1 }} personas más {{ notif.text }}
+										</div>
+										<div *ngIf="notif.responsibleUsers?.length <= 2">
+											<span *ngFor="let user of notif.responsibleUsers; let j = index">
+												<b>
+													{{ user.name }} {{ user.lastName }}
+												</b>
+												{{ j < 1 && notif.responsibleUsers?.length > 1 ? 'y' : '' }}
+											</span>
+										</div>
+										{{ notif.text }} <b>{{ notif.actionOn }}</b>
+									</div>
+									<p class="font_small">
+										<b class="font_normal opacity">{{ notif.date | formatDate:'time' }}</b>
+									</p>
+								</div>
+							</div>
+						</div>
+					</a>
+					<span class="mini_mark circle size_12 pd_4 circle bg_gray" [ngClass]="{'hover_blue': !notif.read, 'hover_red': notif.read}" (click)="markRead(false, notif)" [title]="!notif.read ? 'Marcar como leido' : 'Marcar como no leido'">
+						<img class="size_12" [src]="!notif.read ? '/assets/icons/check_white.png' : '/assets/icons/close_white.png' ">
+					</span>
+				</div>
+			</div>
+		</section>
+		<section class="mm_section" *ngIf="notifications?.length > 10">
+			<button class="w_100 font_red hover_black">
+				<div class="pd_8 font_secondary">Cargar más</div>
+			</button>
+		</section>
+	</div>
+</div>

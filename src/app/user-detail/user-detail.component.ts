@@ -4,7 +4,7 @@ import { AuthGuard } from '../auth/auth.guard';
 import { UserDetailService } from './user-detail.service';
 
 import { User } from '../models/user';
-import { userTypes, getRandomColor, formatedDate } from '../app.constants';
+import { userTypes, Colors, formatedDate } from '../app.constants';
 
 @Component({
 	selector: 'app-user-detail',

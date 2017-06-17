@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 const Course = require('../../models/Course');
 const User = require('../../models/User');
+const Notification = require('../../models/Notification');
 
 // Obtener cursos
 exports.getCourses = (req, res) => {
@@ -150,37 +151,69 @@ exports.createGroup = (req, res) => {
 			if (err) {
 				res.status(500).send({ message: err });
 			} else {
-				if ( members.length > 0 ) {
-					Course.findOne({ _id: req.params.id }, (err, doc) => {
-						if (err) {
-							console.log(err);
-							res.status(500).send({ message: 'Hubo un error al encontrar el ultimo grupo insertado' })
-						} else {
-							let users = doc.members;
-							let groups = doc.groups;
-							for ( let i = 0 ; i < users.length ; i++ ) {
+				Course.findOne({ _id: req.params.id }, (err, subdoc) => {
+					if (err) {
+						console.log(err);
+						res.status(500).send({ message: 'Hubo un error al encontrar el ultimo grupo insertado' })
+					} else {
+						let users = subdoc.members;
+						let groups = subdoc.groups;
+
+						for ( let i = 0 ; i < users.length ; i++ ) {
+							if ( members.length > 0 ) {
 								for ( let j = 0 ; j < members.length ; j++ ) {
 									if ( users[i].id === members[j] ) {
 										users[i].group = groups[groups.length - 1]._id;
 									}
 								}
 							}
+						}
+						if ( members.length > 0 ) {
 							Course.update({ _id: req.params.id }, { 
 									$set: { members: users }
-								}, (err, doc) => {
+								}, (err, updateddoc) => {
 									if (err) {
 										console.log(err);
 										res.status(500).send({ message: 'Error al insertar a los miembros en el grupo' });
 									} else {
-										res.status(200).send({ message: 'Grupo creado con' + members.length + 'nuevos' });
+										let notif = new Notification({
+											responsibleUsers: [req.cookies.login._id],
+											actionOn: subdoc._id,
+											text: 'ha creado el grupo ' + groupName + ' y te ha añadido a el en',
+											action: 'course',
+											redirect: '/cursos/' + req.params.id,
+											sendTo: users
+										});
+										notif.save( (err) => {
+											if (err) {
+												console.log(err);
+												res.status(500).send({ message: 'Error al guardar la notificación' })
+											} else {
+												res.status(200).send({ message: 'Grupo creado con' + members.length + 'nuevos' });
+											}
+										});
 									}
 							});
+						} else {
+							let notif = new Notification({
+								responsibleUsers: [req.cookies.login._id],
+								actionOn: subdoc._id,
+								text: 'ha creado el grupo ' + groupName + ' en',
+								action: 'course',
+								redirect: '/cursos/' + req.params.id,
+								sendTo: users
+							});
+							notif.save( (err) => {
+								if (err) {
+									console.log(err);
+									res.status(500).send({ message: 'Error al guardar la notificación' })
+								} else {
+									res.status(200).send({ message: 'Grupo creado con exito' });
+								}
+							});
 						}
-					});
-					
-				} else {
-					res.status(200).json({ message: 'Grupo Creado' });
-				}
+					}
+				});
 			}
 	});
 };
@@ -240,13 +273,12 @@ exports.deleteGroup = (req, res) => {
 	let groupId = req.params.groupid;
 
 	Course.findOneAndUpdate({ _id: req.params.id }, {
-			$pull: { groups: groupId }
+			$pull: { groups: { _id: groupId } }
 		}, (err, doc) => {
 			if (err) {
 				console.log(err);
 				res.status(500).send({ message: err });
 			} else {
-				if ( members.length > 0 ) {
 					let users = doc.members;
 					for ( let i = 0 ; i < users.length ; i++ ) {
 						if ( users[i].group === groupId ) {
@@ -263,9 +295,6 @@ exports.deleteGroup = (req, res) => {
 								res.status(200).send({ message: 'Grupo borrado' });
 							}
 					});
-				} else {
-					res.status(200).json({ message: 'Grupo Borrado' });
-				}
 			}
 	});
 };

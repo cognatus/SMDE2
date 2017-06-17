@@ -23,19 +23,14 @@ var UserSchema = new Schema({
 		primaryColor: String,
 		theme: Number
 	},
-	notification: [{
-		id: { type: String, required: true },
-		date: { type: String, required: true },
-		status: { type: Boolean, required: true },
-		text: { type: String, required: true }
-	}],
-	tags: [String],
+	tags: { type: [String] },
 	photos: [{
 		name: { type: String, required: true },
 		description: { type: String},
-		uploadDate: { type: Date, required: true, default: new Date()},
-		tags: { type: String},
-		album: { type: String},
+		uploadDate: { type: Date, required: true, default: new Date() },
+		updatedDate: { type: Date, required: true, default: new Date() },
+		tags: { type: String },
+		album: { type: String },
 	}],
 	profilePhoto: String,
 	backPhoto: String

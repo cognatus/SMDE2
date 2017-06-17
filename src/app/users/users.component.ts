@@ -4,7 +4,7 @@ import { Location } from '@angular/common';
 import { AuthGuard } from '../auth/auth.guard';
 import { UsersService } from './users.service';
 import { User } from '../models/user';
-import { colors, userTypes, getRandomColor } from '../app.constants';
+import { Colors, userTypes } from '../app.constants';
 
 @Component({
 	selector: 'app-users',

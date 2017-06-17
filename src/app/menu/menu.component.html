@@ -30,44 +30,7 @@
 						</button>
 					</a>
 				</div><div class="auto_col v_align_top hidden_block_container notif">
-					<button class="action_button pd_left_8 pd_right_8 hover_white" id="notif-open-button" title="Ver Notificaciones">
-						<img class="icon v_align_middle mr_left_4 mr_right_4" src="assets/icons/bell_white.png">
-					</button>
-					<div class="hidden_block" id="notif-mini">
-						<i class="mark bg_white"></i>
-						<div class="bg_white shadow_flat border_radius notif_container">
-							<section class="mm_section border_bottom pd_top_12 pd_bottom_12">
-								<div class="pd_left_16 pd_right_16">
-									<p class="opacity font_small">Notificaciones</p>
-								</div>
-							</section>
-							<section class="mm_section border_bottom">
-								<div class="list">
-									<div class="list_element hover_black">
-										<div class="ref">
-											<span class="circle bg_secondary">
-												<label class="title_smaller font_light font_white size_24">N</label>
-											</span>
-										</div><div class="info">
-											<div class="pd_12 pd_left_16 pd_right_16">
-												<h3 class="font_normal mr_bottom_8">
-													Lorem Ipsum
-												</h3>
-												<p class="opacity">
-													Lorem ipsum dolor sit amet consectetur
-												</p>
-											</div>
-										</div>
-									</div>
-								</div>
-							</section>
-							<section class="mm_section">
-								<button class="w_100 font_red hover_black">
-									<div class="pd_8 font_secondary">Ver todas</div>
-								</button>
-							</section>
-						</div>
-					</div>
+					<app-notifications></app-notifications>
 				</div><div class="auto_col v_align_top hidden_block_container prof_container pd_left_16 pd_right_16 hover_white" id="menu-pphoto">
 					<div class="img_container circle auto_col size_32 v_align_middle cursor_pointer">
 						<img [src]="user.profilePhoto != undefined && user.profilePhoto != null ? '/media/'+user._id+'/profile/'+user.profilePhoto : 'assets/icons/default_profile.png'">

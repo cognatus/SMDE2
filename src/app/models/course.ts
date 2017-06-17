@@ -32,7 +32,7 @@ export class Course {
 				answers: [{
 					title: string
 				}];
-				openAnswer: { type: string };
+				openAnswer: string;
 				quantity: number;
 			}];
 			quantity: number;

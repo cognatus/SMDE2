@@ -16,6 +16,7 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { SignupComponent } from './signup/signup.component';
 import { MenuComponent } from './menu/menu.component';
+import { NotificationsComponent } from './notifications/notifications.component';
 import { MessagesComponent } from './messages/messages.component';
 import { MessageConversationComponent } from './message-conversation/message-conversation.component';
 import { AdminComponent } from './admin/admin.component';
@@ -34,6 +35,7 @@ import { ProfileComponent } from './profile/profile.component';
 		HomeComponent,
 		SignupComponent,
 		MenuComponent,
+		NotificationsComponent,
 		AdminComponent,
 		UsersComponent,
 		UserDetailComponent,

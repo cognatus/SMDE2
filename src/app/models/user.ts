@@ -21,7 +21,6 @@ export class User {
 		primaryColor: string;
 		theme: number;
 	};
-	courses: Course[];
 	photos: [{
 		name: string,
 		description: string,
