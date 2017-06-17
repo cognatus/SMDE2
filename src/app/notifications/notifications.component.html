@@ -32,7 +32,7 @@
 											<b>
 												{{ notif.responsibleUsers[0].name }} {{ notif.responsibleUsers[0].lastName }}
 											</b>
-											y {{ notif.responsibleUsers?.length - 1 }} personas más {{ notif.text }}
+											y {{ notif.responsibleUsers?.length - 1 }} personas más {{ getText(notif.action, 0) }}
 										</div>
 										<div class="inline" *ngIf="notif.responsibleUsers?.length <= 2">
 											<span *ngFor="let user of notif.responsibleUsers; let j = index">
@@ -42,7 +42,12 @@
 												{{ j < 1 && notif.responsibleUsers?.length > 1 ? 'y' : '' }}
 											</span>
 										</div>
-										{{ notif.text }} <b *ngIf="notif.actionOn">{{ notif.actionOn }}</b>
+										<span class="inline" *ngIf="notif.actionOn">
+											{{ getText(notif.action, 0) }}<b>{{ notif.action.element }}</b>{{ getText(notif.action, 1) }}<b>{{ notif.actionOn }}</b>
+										</span>
+										<span class="inline" *ngIf="!notif.actionOn">
+											{{ getText(notif.action) }}
+										</span>
 									</div>
 									<p class="font_small">
 										<b class="font_normal opacity">{{ notif.date | formatDate: 'time' }}</b>
@@ -51,7 +56,7 @@
 							</div>
 						</div>
 					</a>
-					<span class="mini_mark circle size_12 pd_4 circle bg_gray" [ngClass]="{'hover_blue': !notif.read, 'hover_red': notif.read}" (click)="markRead(false, notif)" [title]="!notif.read ? 'Marcar como leido' : 'Marcar como no leido'">
+					<span class="mini_mark circle size_12 pd_4 circle bg_light" [ngClass]="{'hover_blue': !notif.read, 'hover_red': notif.read}" (click)="markRead(false, notif)" [title]="!notif.read ? 'Marcar como leido' : 'Marcar como no leido'">
 						<img class="size_12" [src]="!notif.read ? '/assets/icons/check_white.png' : '/assets/icons/close_white.png' ">
 					</span>
 				</div>

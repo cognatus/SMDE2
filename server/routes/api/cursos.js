@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const Course = require('../../models/Course');
 const User = require('../../models/User');
-const Notification = require('../../models/Notification');
+const notif = require('./notificaciones');
 
 // Obtener cursos
 exports.getCourses = (req, res) => {
@@ -176,15 +176,19 @@ exports.createGroup = (req, res) => {
 										console.log(err);
 										res.status(500).send({ message: 'Error al insertar a los miembros en el grupo' });
 									} else {
-										let notif = new Notification({
+										let notifSend = [{
 											responsibleUsers: [req.cookies.login._id],
-											actionOn: subdoc._id,
-											text: 'te ha movido al nuevo grupo "' + groupName + '" en',
-											action: 'course',
+											action: {
+												status: 2,
+												substatus: 1,
+												id: subdoc._id,
+												element: groupName
+											},
 											redirect: '/cursos/' + req.params.id,
 											sendTo: users
-										});
-										notif.save( (err) => {
+										}];
+
+										notif.insertNotifications(notifSend, (err, array) => {
 											if (err) {
 												console.log(err);
 												res.status(500).send({ message: 'Error al guardar la notificación' });
@@ -195,15 +199,19 @@ exports.createGroup = (req, res) => {
 									}
 							});
 						} else {
-							let notif = new Notification({
+							let notifSend = [{
 								responsibleUsers: [req.cookies.login._id],
-								actionOn: subdoc._id,
-								text: 'ha creado el grupo "' + groupName + '" en',
-								action: 'course',
+								action: {
+									status: 2,
+									substatus: 0,
+									id: subdoc._id,
+									element: groupName
+								},
 								redirect: '/cursos/' + req.params.id,
 								sendTo: users
-							});
-							notif.save( (err) => {
+							}];
+
+							notif.insertNotifications(notifSend, (err, array) => {
 								if (err) {
 									console.log(err);
 									res.status(500).send({ message: 'Error al guardar la notificación' })
@@ -231,9 +239,11 @@ exports.updateGroup = (req, res) => {
 				res.status(500).send({ message: err });
 			} else {
 				let groups = doc.groups;
+				let oldGroupName = '';
 				// buscar grupo por id para cambiar el nombre
 				for ( let i = 0 ; i < groups.length ; i++ ) {
 					if ( groups[i].id === groupId ) {
+						oldGroupName = groups[i].name;
 						groups[i].name = groupName;
 						break;
 					}
@@ -251,17 +261,72 @@ exports.updateGroup = (req, res) => {
 					for ( let j = 0 ; j < members.length ; j++ ) {
 						if ( users[i].id === members[j] ) {
 							users[i].group = groupId;
+							break;
 						}
 					}
 				}
-				Course.update({ _id: req.params.id }, {
+				Course.findOneAndUpdate({ _id: req.params.id }, {
 						$set: { members: users, groups: groups }
-					}, (err, doc) => {
+					}, (err, subdoc) => {
 						if (err) {
 							console.log(err);
 							res.status(500).send({ message: 'Error al actualizar a los miembros en el grupo' });
 						} else {
-							res.status(200).send({ message: 'Grupo actualizado con' + members.length + 'nuevos' });
+							let oldUsers = [];
+							let newUsers = [];
+
+							for ( let i = 0 ; i < doc.members.length ; i++ ) {
+								oldUsers.push({ id: doc.members[i].id });
+							}
+
+							for ( let i = 0 ; i < doc.members.length; i++ ) { // Este ya esta bien
+								if ( doc.members[i].group === groupId ) {
+									for ( let j = 0 ; j < subdoc.members.length ; j++ ) {
+										if ( subdoc.members[j].id !== doc.members[i].id ) {
+											newUsers.push({ id: subdoc.members[j].id });
+										}
+									}
+								}
+							}
+
+							for ( let i = 0 ; i < oldUsers.length ; i++ ) {
+								for ( let j = 0 ; j < newUsers.length ; j++ ) {
+									if ( oldUsers[i].id === newUsers[j].id ) {
+										oldUsers.splice(i, 1);
+									}
+								}
+							}
+
+							let notifArray = [{
+								responsibleUsers: [req.cookies.login._id],
+								action: {
+									status: 2,
+									substatus: 2,
+									id: subdoc._id,
+									element: oldGroupName
+								},
+								redirect: '/cursos/' + req.params.id,
+								sendTo: oldUsers
+							}, {
+								responsibleUsers: [req.cookies.login._id],
+								action: {
+									status: 2,
+									substatus: 3,
+									id: subdoc._id,
+									element: groupName
+								},
+								redirect: '/cursos/' + req.params.id,
+								sendTo: newUsers
+							}];
+
+							notif.insertNotifications(notifArray, (err, array) => {
+								if (err) {
+									console.log(err);
+									res.status(500).send({ message: 'Error al guardar la notificación' });
+								} else {
+									res.status(200).send({ message: 'Grupo creado con' + members.length + 'nuevos' });
+								}
+							});
 						}
 				});
 			}
@@ -279,19 +344,52 @@ exports.deleteGroup = (req, res) => {
 				res.status(500).send({ message: err });
 			} else {
 					let users = doc.members;
+					let groups = doc.groups;
+					let oldGroupName = '';
+
 					for ( let i = 0 ; i < users.length ; i++ ) {
 						if ( users[i].group === groupId ) {
 							users[i].group = '';
 						}
 					}
-					Course.update({ _id: req.params.id }, {
+					for ( let i = 0 ; i < groups.length ; i++ ) {
+						if ( groups[i].id === groupId ) {
+							oldGroupName = groups[i].name;
+							break;
+						}
+					}
+
+					Course.findOneAndUpdate({ _id: req.params.id }, {
 							$set: { members: users }
-						}, (err, doc) => {
+						}, (err, subdoc) => {
 							if (err) {
 								console.log(err);
 								res.status(500).send({ message: 'Error al eliminar a los miembros del grupo' });
 							} else {
-								res.status(200).send({ message: 'Grupo borrado' });
+								if ( doc.members.length > 0 ) {
+									let notifSend = [{
+										responsibleUsers: [req.cookies.login._id],
+										action: {
+											status: 2,
+											substatus: 0,
+											id: subdoc._id,
+											element: oldGroupName
+										},
+										redirect: '/cursos/' + req.params.id,
+										sendTo: users
+									}];
+
+									notif.insertNotifications(notifSend, (err, array) => {
+										if (err) {
+											console.log(err);
+											res.status(500).send({ message: 'Error al guardar la notificación' })
+										} else {
+											res.status(200).send({ message: 'Grupo creado con exito' });
+										}
+									});
+								} else {
+									res.status(200).send({ message: 'Grupo borrado' });
+								}
 							}
 					});
 			}

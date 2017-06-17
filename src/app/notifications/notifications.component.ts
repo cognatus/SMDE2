@@ -4,7 +4,7 @@ import { AuthGuard } from '../auth/auth.guard';
 
 import { Notification } from '../models/notification';
 import { User } from '../models/user'; 
-import { Colors } from '../app.constants';
+import { Colors, notificationTexts } from '../app.constants';
 
 @Component({
 	selector: 'app-notifications',
@@ -25,6 +25,7 @@ export class NotificationsComponent implements OnInit {
 		this.notifService.getNotifications()
 			.subscribe( notifications => {
 				this.notifications = notifications;
+				console.log(this.notifications);
 			}, error => {
 				console.log(error);
 			});
@@ -51,6 +52,19 @@ export class NotificationsComponent implements OnInit {
 			}
 		}
 		return counter;
+	}
+
+	getText(action, index) : string {
+		let status = action.status;
+		let substatus = action.substatus;
+
+		let parts = notificationTexts[status].string[substatus].text.split('%e');
+
+		if ( index != undefined && parts.length > 1 ) {
+			return parts[index];
+		} else {
+			return parts[0];
+		}
 	}
 
 }

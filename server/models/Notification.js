@@ -3,9 +3,12 @@ var Schema = mongoose.Schema;
 
 var NotificationSchema = new Schema({
 	responsibleUsers: { type: [String] },
-	actionOn: { type: String }, // En que esta recayendo la notificación
-	text: { type: String }, // texto de complemento
-	action: { type: String }, // action para saber en que documento se modifico o creo
+	action: { // De este dependera el texto que se envia
+		status: { type: Number, required: true },
+		substatus: { type: Number },
+		id: { type: String },
+		element: { type: String }
+	},
 	date: { type: Date, required: true, default: new Date() },
 	redirect: { type: String, required: true },
 	sendTo: [{

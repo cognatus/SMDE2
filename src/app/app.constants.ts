@@ -4,6 +4,26 @@ export const ApiUrl = 'http://localhost:3000/api/';
 
 export const userTypes = ['Administrador', 'Estudiante', 'Profesor'];
 
+export const notificationTexts = [
+	{ string: [ // Usuarios
+		{ text: 'se ha registrado' },
+		{ text: 'ha modificado su cuenta' },
+		{ text: 'ha modificado su foto de perfil' }
+	]},
+	{ string: [ // Cursos
+		{ text: 'ha creado el curso: ' },
+		{ text: 'ha modificado el curso: ' }
+	]},
+	{ string: [  // Grupos en cursos 
+		{ text: 'ha creado el grupo %e en ' },
+		{ text: 'te ha movido al nuevo grupo %e en ' },
+		{ text: 'ha modificado el grupo %e en ' },
+		{ text: 'te ha movido al grupo %e en ' },
+		{ text: 'ha eliminado el grupo %e en ' },
+		{ text: 'ha eliminado el grupo %e en ' }
+	]}
+];
+
 export function replaceCharacters(text: string): string {
 	let charsForReplace = ['á','é','í','ó','ú'];
 	let charsToReplace = ['a','e','i','o','u'];

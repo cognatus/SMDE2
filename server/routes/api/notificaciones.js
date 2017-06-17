@@ -4,9 +4,27 @@ const Course = require('../../models/Course');
 const User = require('../../models/User');
 const Notification = require('../../models/Notification');
 
+exports.insertNotifications = ( array, callback ) => {
+	for ( let i = 0 ; i < array.length ; i++ ) {
+		if ( array[i].sendTo.length < 1 ) {
+			array.splice(i ,1);
+		}
+	}
+
+	Notification.create( array, (err, doc) => {
+		if (err) {
+			console.log('Error al insertar notificacion(es): ' + err);
+			callback(err);
+		} else {
+			callback(undefined, array);
+		}
+	});
+};
+
 // Obtener notificaciones
 exports.getNotifications = (userId, callback) => {
-	Notification.find({ sendTo: { $elemMatch: { id: userId } } }, (err, doc) => {
+	Notification.find({ sendTo: { $elemMatch: { id: userId } } }).sort({'date': 'desc'})
+     .exec( (err, doc) => {
 		if (err) {
 			console.log(err);
 			callback(false, { message: err });
@@ -14,7 +32,7 @@ exports.getNotifications = (userId, callback) => {
 			let data = [];
 			if ( doc.length > 0 ) {
 				for ( let i = 0 ; i < doc.length ; i++ ) {
-					data.push({ _id: doc[i]._id, action: doc[i].action, actionOn: doc[i].actionOn, date: doc[i].date, redirect: doc[i].redirect, text: doc[i].text });
+					data.push({ _id: doc[i]._id, action: doc[i].action, date: doc[i].date, redirect: doc[i].redirect });
 					for ( let j = 0 ; j < doc[i].sendTo.length ; j++ ) {
 						if ( doc[i].sendTo[j].id === userId ) {
 							data[i].read = doc[i].sendTo[j].read;
@@ -27,12 +45,12 @@ exports.getNotifications = (userId, callback) => {
 								callback(false, { message: 'Error al encontrar a los responsalbles'});
 							} else {
 								data[i].responsibleUsers = subdoc;
-								if ( doc[i].action && doc[i].action != '' ) {
-									if ( doc[i].action === 'course' ) {
-										Course.findOne({ _id: doc[i].actionOn }, 'name', (err, nameVal) => {
+								if ( doc[i].action ) {
+									if ( doc[i].action.status === 1 || doc[i].action.status === 2 ) {
+										Course.findOne({ _id: doc[i].action.id }, 'name', (err, nameVal) => {
 											if (err) {
 												console.log(err);
-												callback(false, data);
+												callback(false, { message: 'Error al encontrar el curso' });
 											} else {
 												data[i].actionOn = nameVal.name;
 												if ( i === ( doc.length - 1 ) ) {
