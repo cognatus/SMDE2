@@ -46,7 +46,7 @@
 											{{ getText(notif.action, 0) }}<b>"{{ notif.action.element }}"</b>{{ getText(notif.action, 1) }}<b>{{ notif.actionOn }}</b>
 										</span>
 										<span class="inline" *ngIf="!notif.actionOn">
-											{{ getText(notif.action) }}
+											{{ getText(notif.action) }}<b>"{{ notif.action.element }}"</b>
 										</span>
 									</div>
 									<p class="font_small">
