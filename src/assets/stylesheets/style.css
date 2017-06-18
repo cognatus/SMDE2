@@ -687,6 +687,7 @@ img.opacity { opacity: 0.4; }
 .list_element .ref .img_container {
 	margin: 12px 0 12px 16px;
 	height: 48px;width: 48px;
+	background-color: transparent !important;
 }
 
 .list_element .info {

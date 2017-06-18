@@ -32,45 +32,33 @@ exports.getNotifications = (userId, callback) => {
 			let data = [];
 			if ( doc.length > 0 ) {
 				for ( let i = 0 ; i < doc.length ; i++ ) {
-					data.push({ _id: doc[i]._id, action: doc[i].action, date: doc[i].date, redirect: doc[i].redirect });
+					data.push({ _id: doc[i]._id, action: doc[i].action, date: doc[i].date, redirect: doc[i].redirect, actionOn: '' });
 					for ( let j = 0 ; j < doc[i].sendTo.length ; j++ ) {
 						if ( doc[i].sendTo[j].id === userId ) {
 							data[i].read = doc[i].sendTo[j].read;
 						}
 					}
-					if ( doc[i].responsibleUsers.length > 0 ) {
-						User.find({ _id: { $in: doc[i].responsibleUsers } }, '_id name lastName profilePhoto' , (err, subdoc) => {
-							if (err) {
-								console.log(err);
-								callback(false, { message: 'Error al encontrar a los responsalbles'});
-							} else {
-								data[i].responsibleUsers = subdoc;
-								if ( doc[i].action ) {
-									if ( doc[i].action.status === 1 || doc[i].action.status === 2 ) {
-										Course.findOne({ _id: doc[i].action.id }, 'name', (err, nameVal) => {
-											if (err) {
-												console.log(err);
-												callback(false, { message: 'Error al encontrar el curso' });
-											} else {
-												data[i].actionOn = nameVal.name;
-												if ( i === ( doc.length - 1 ) ) {
-													callback(true, data);
-												}
-											}
-										});
+					User.find({ _id: { $in: doc[i].responsibleUsers } }).select('_id name lastName profilePhoto').exec( (err, subdoc) => {
+						if (err) {
+							console.log(err);
+							callback(false, { message: 'Error al encontrar a los responsalbles'});
+						} else {
+							data[i].responsibleUsers = subdoc;
+							if ( doc[i].action.status > 0 && doc[i].action.status < 3 ) {
+								Course.findOne({ _id: data[i].action.id }).select('name').exec( (err, nameval) => {
+									if (err) {
+										console.log(err);
+										callback(false, { message: 'Error al encontrar el curso' });
+									} else {
+										data[i].actionOn = nameval.name;
+										if ( i === doc.length - 1 ) {
+											callback(true, data);
+										}
 									}
-								} else {
-									if ( i === ( doc.length - 1 ) ) {
-										callback(true, data);
-									}
-								}
+								});
 							}
-						});
-					} else {
-						if ( i === ( doc.length - 1 ) ) {
-							callback(true, data);
 						}
-					}
+					});
 				}
 			} else {
 				callback(true, data);

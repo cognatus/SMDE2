@@ -4,7 +4,7 @@
 </button>
 <div class="hidden_block" id="notif-mini">
 	<i class="mark bg_white"></i>
-	<div class="bg_white shadow_flat border_radius notif_container">
+	<div class="bg_white shadow_raised border_radius notif_container">
 		<section class="mm_section border_bottom pd_top_12 pd_bottom_12">
 			<div class="pd_left_16 pd_right_16">
 				<p class="font_bold">Notificaciones</p>
@@ -43,7 +43,7 @@
 											</span>
 										</div>
 										<span class="inline" *ngIf="notif.actionOn">
-											{{ getText(notif.action, 0) }}<b>{{ notif.action.element }}</b>{{ getText(notif.action, 1) }}<b>{{ notif.actionOn }}</b>
+											{{ getText(notif.action, 0) }}<b>"{{ notif.action.element }}"</b>{{ getText(notif.action, 1) }}<b>{{ notif.actionOn }}</b>
 										</span>
 										<span class="inline" *ngIf="!notif.actionOn">
 											{{ getText(notif.action) }}
