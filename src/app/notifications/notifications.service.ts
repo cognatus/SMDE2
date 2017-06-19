@@ -19,11 +19,12 @@ export class NotificationsService {
 			.catch(this.handleError);
 	}
 
-	setRead(id: string, userId: string): Observable<Notification> {
+	setRead(id: string, userId: string, status: boolean): Observable<Notification> {
         let options = new RequestOptions({ headers: ContentHeaders });
         let data = {
         	user: userId,
-        	notif: id
+        	notif: id,
+        	status: status
         }
 
         return this.http.put(this.url + '/' + id, data, options)

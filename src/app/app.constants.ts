@@ -6,21 +6,21 @@ export const userTypes = ['Administrador', 'Estudiante', 'Profesor'];
 
 export const notificationTexts = [
 	{ string: [ // Usuarios
-		{ text: 'se ha registrado' },
-		{ text: 'ha modificado su cuenta' },
-		{ text: 'ha modificado su foto de perfil' }
+		{ text: 'se ha registrado.' },
+		{ text: 'ha modificado su cuenta.' },
+		{ text: 'ha modificado su foto de perfil.' }
 	]},
 	{ string: [ // Cursos
-		{ text: 'ha creado el curso: ' },
-		{ text: 'ha modificado el curso: ' }
+		{ text: 'ha creado el curso: %e' },
+		{ text: 'ha modificado el curso: %e' }
 	]},
 	{ string: [  // Grupos en cursos 
-		{ text: 'ha creado el grupo %e en ' },
-		{ text: 'te ha movido al nuevo grupo %e en ' },
-		{ text: 'ha modificado el grupo %e en ' },
-		{ text: 'te ha movido al grupo %e en ' },
-		{ text: 'ha eliminado el grupo %e en ' },
-		{ text: 'ha eliminado el grupo %e en ' }
+		{ text: 'ha creado el grupo %e en %e' },
+		{ text: 'te ha movido al nuevo grupo %e en %e' },
+		{ text: 'ha modificado el grupo %e en %e' },
+		{ text: 'te ha movido al grupo %e en %e' },
+		{ text: 'ha cambiado el nombre del grupo %e a %e en %e' },
+		{ text: 'ha eliminado el grupo %e en %e' }
 	]}
 ];
 

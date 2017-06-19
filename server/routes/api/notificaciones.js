@@ -4,26 +4,35 @@ const Course = require('../../models/Course');
 const User = require('../../models/User');
 const Notification = require('../../models/Notification');
 
-exports.insertNotifications = ( array, callback ) => {
-	for ( let i = 0 ; i < array.length ; i++ ) {
-		if ( array[i].sendTo.length < 1 ) {
-			array.splice(i ,1);
+exports.insertNotifications = ( obj, callback ) => {
+	if ( obj.sendTo.length > 0 ) {
+		for ( let i = 0; i < obj.sendTo.length ; i++ ) {
+			let notif = new Notification({
+				responsibleUsers: obj.responsibleUsers,
+				action: obj.action,
+				redirect: obj.redirect,
+				sendTo: obj.sendTo[i]
+			});
+			notif.save( (err, doc) => {
+				if (err) {
+					console.log('Error al insertar notificacion(es): ' + err);
+					callback(err);
+				} else {
+					if ( i === obj.sendTo.length - 1 ) {
+						callback(undefined, obj);
+					}
+				}
+			});
 		}
+	} else {
+		callback(undefined, obj);
 	}
-
-	Notification.create( array, (err, doc) => {
-		if (err) {
-			console.log('Error al insertar notificacion(es): ' + err);
-			callback(err);
-		} else {
-			callback(undefined, array);
-		}
-	});
+	
 };
 
 // Obtener notificaciones
 exports.getNotifications = (userId, callback) => {
-	Notification.find({ sendTo: { $elemMatch: { id: userId } } }).sort({'date': 'desc'})
+	Notification.find({ sendTo: userId }).sort({'date': 'desc'})
      .exec( (err, doc) => {
 		if (err) {
 			console.log(err);
@@ -38,24 +47,13 @@ exports.getNotifications = (userId, callback) => {
 							data[i].read = doc[i].sendTo[j].read;
 						}
 					}
-					User.find({ _id: { $in: doc[i].responsibleUsers } }).select('_id name lastName profilePhoto').exec( (err, subdoc) => {
-						if (err) {
-							console.log(err);
-							callback(false, { message: 'Error al encontrar a los responsalbles'});
+					getResponsibleUsers(doc[i].responsibleUsers, (err, array) => {
+						if ( err ) {
+							console.log(err)
 						} else {
-							data[i].responsibleUsers = subdoc;
-							if ( doc[i].action.status > 0 && doc[i].action.status < 3 ) {
-								Course.findOne({ _id: data[i].action.id }).select('name').exec( (err, nameval) => {
-									if (err) {
-										console.log(err);
-										callback(false, { message: 'Error al encontrar el curso' });
-									} else {
-										data[i].actionOn = nameval.name;
-										if ( i === doc.length - 1 ) {
-											callback(true, data);
-										}
-									}
-								});
+							data[i].responsibleUsers = array;
+							if ( i === doc.length - 1 ) {
+								callback(true, data);
 							}
 						}
 					});
@@ -72,27 +70,23 @@ exports.updateNotifStatus = (req, res) => {
 	let userId = req.body.user;
 	let notifId = req.params.id;
 
-	Notification.findOne({ _id: notifId }, (err, doc) => {
+	Notification.findOneAndUpdate({ _id: notifId }, { $set: { read: req.body.status } }, (err, doc) => {
 		if (err) {
 			console.log(err);
-			res.status(500).send({ message: 'Hubo un error al actualizar status de notificación' + err });
+			res.status(500).send({ message: err });
 		} else {
-			let aux = doc.sendTo;
-			for ( let i = 0 ; i < aux.length ; i++ ) {
-				if ( aux[i].id === userId ) {
-					aux[i].read = !aux[i].read;
-				}
-			}
-			Notification.findOneAndUpdate({ _id: notifId }, { 
-					$set: { sendTo: aux }
-				}, (err, doc) => {
-					if (err) {
-						console.log(err);
-						res.status(500).send({ message: err });
-					} else {
-						res.status(200).send({ message: 'Exito al cambiar status de notificación' });
-					}
-			});
+			res.status(200).send({ message: 'Exito al cambiar status de notificación' });
 		}
 	});
 };
+
+var getResponsibleUsers = (array, callback) => {
+	User.find({ _id: { $in: array } }).select('_id name lastName profilePhoto').exec( (err, subdoc) => {
+		if (err) {
+			console.log(err);
+			callback('Error al encontrar a los responsalbles. Error:');
+		} else {
+			callback(undefined, subdoc);
+		}
+	});
+}

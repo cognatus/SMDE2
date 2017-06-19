@@ -42,11 +42,8 @@
 												{{ j < 1 && notif.responsibleUsers?.length > 1 ? 'y' : '' }}
 											</span>
 										</div>
-										<span class="inline" *ngIf="notif.actionOn">
-											{{ getText(notif.action, 0) }}<b>"{{ notif.action.element }}"</b>{{ getText(notif.action, 1) }}<b>{{ notif.actionOn }}</b>
-										</span>
-										<span class="inline" *ngIf="!notif.actionOn">
-											{{ getText(notif.action) }}<b>"{{ notif.action.element }}"</b>
+										<span class="inline" *ngFor="let part of getText(notif.action)">
+											<label class="cursor_pointer" [ngClass]="{'font_bold' : part.elem}">{{ part.text }}</label>
 										</span>
 									</div>
 									<p class="font_small">

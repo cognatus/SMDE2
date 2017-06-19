@@ -6,10 +6,8 @@ export class Notification {
 	action: {
 		status: number;
 		substatus: number;
-		id: string;
 		element: string;
 	}
-	actionOn: string; // nombre de usurario, curso, etc
 	date: Date;
 	redirect: string;
 	read: boolean;
