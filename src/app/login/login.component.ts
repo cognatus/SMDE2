@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { AuthGuard } from '../auth/auth.guard';
 
 import { LoginService } from './login.service';
 import { User } from '../models/user';
@@ -12,22 +13,27 @@ import { User } from '../models/user';
 	providers: [LoginService]
 })
 export class LoginComponent implements OnInit{
-	user = new User;
+	user: any = { mail: '', password: '' };
 	error: string = '';
 	
-	constructor(private router: Router, private loginService: LoginService, private location: Location) {}
+	constructor(private router: Router, private loginService: LoginService, private location: Location, private auth: AuthGuard) {
+
+	}
 
 	login(): void {
 		this.loginService.loginUser(this.user)
-	    	.subscribe( user => {
-	    			location.href = '/home';
+	    	.subscribe( response => {
+		    		localStorage.setItem('currentUser', JSON.stringify(response));
+		    		location.href = '/';
 				}, error => {
-            		console.log(error);
-            		this.error = 'Usuario o contraseña incorrectos';
+            		this.error = error.message;
             	});
 	}
 
 	ngOnInit() {
+		if ( this.auth.loggedIn() ) {
+			this.router.navigate(['/home']);
+		}
 	}
 
 }

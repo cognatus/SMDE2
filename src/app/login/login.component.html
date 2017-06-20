@@ -12,9 +12,9 @@
 			</div>
 			<form (submit)="login()">
 				<div class="pd_top_40 pd_bottom_24">
-					<div class="mr_bottom_16" *ngIf="error != ''">
+					<p class="mr_bottom_16 font_red" *ngIf="error != ''">
 						{{ error }}
-					</div>
+					</p>
 					<div class="icon_field">
 						<div class="field">
 							<label class="opacity font_bold font_small">Usuario</label>
@@ -34,7 +34,7 @@
 			</form>
 			<div class="pd_top_24 text_align_right">
 				<a routerLink="/registro">
-					<button class="font_secondary font_big">
+					<button class="font_blue font_big">
 						Registrarse
 					</button>
 				</a>

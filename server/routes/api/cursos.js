@@ -146,7 +146,7 @@ exports.suscribeUser = (req, res) => {
 };
 
 exports.unsuscribeUser = (req, res) => {
-	let userId = req.cookies.login._id;
+	let userId = req.cookies.urtoken._id;
 	Course.update({ _id: req.params.id }, {
 		$pull: { members: { id: userId } }, $set: { updatedDate: new Date() }
 	}, (err, doc) => {
@@ -194,7 +194,7 @@ exports.createGroup = (req, res) => {
 										res.status(500).send({ message: 'Error al insertar a los miembros en el grupo' });
 									} else {
 										let notifSend = {
-											responsibleUsers: [req.cookies.login._id],
+											responsibleUsers: [req.cookies.urtoken._id],
 											action: {
 												status: 2,
 												substatus: 1,
@@ -216,7 +216,7 @@ exports.createGroup = (req, res) => {
 							});
 						} else {
 							let notifSend = {
-								responsibleUsers: [req.cookies.login._id],
+								responsibleUsers: [req.cookies.urtoken._id],
 								action: {
 									status: 2,
 									substatus: 0,
@@ -302,7 +302,7 @@ exports.updateGroup = (req, res) => {
 							}
 
 							let notifSend = {
-								responsibleUsers: [req.cookies.login._id], //Mandar a miembros viejos del grupo
+								responsibleUsers: [req.cookies.urtoken._id], //Mandar a miembros viejos del grupo
 								action: {
 									status: 2,
 									substatus: 2,
@@ -318,7 +318,7 @@ exports.updateGroup = (req, res) => {
 									res.status(500).send({ message: 'Error al guardar la notificación' });
 								} else {
 									let notifSend2 = {
-										responsibleUsers: [req.cookies.login._id], //Mandar a miembros nuevos en el grupo
+										responsibleUsers: [req.cookies.urtoken._id], //Mandar a miembros nuevos en el grupo
 										action: {
 											status: 2,
 											substatus: 3,
@@ -378,7 +378,7 @@ exports.deleteGroup = (req, res) => {
 							} else {
 								if ( doc.members.length > 0 ) {
 									let notifSend = {
-										responsibleUsers: [req.cookies.login._id],
+										responsibleUsers: [req.cookies.urtoken._id],
 										action: {
 											status: 2,
 											substatus: 5, // grupo eliminado

@@ -14,7 +14,7 @@ export class MenuComponent implements OnInit {
 	user: User;
 
 	constructor(private router: Router, private auth: AuthGuard, private location: Location) {
-		this.user = auth.getUser();
+		this.user = this.auth.getUser();
 	}
 
 	ngOnInit() {
@@ -22,7 +22,7 @@ export class MenuComponent implements OnInit {
 
 	logout(): void {
 		this.auth.deleteUser();
-		location.reload();
+		location.href = '/';
 	}
 
 	getActive(parameter): boolean {

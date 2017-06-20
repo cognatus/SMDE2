@@ -18,9 +18,9 @@
 						Aun no hay notificaciones
 					</h2>
 				</div>
-				<div class="list_element relative_pos" *ngFor="let notif of notifications">
+				<div class="list_element relative_pos" *ngFor="let notif of notifications; let i = index">
 					<a [attr.href]="notif.read ? notif.redirect : null">
-						<div [ngClass]="{'cursor_pointer bg_lightblue': !notif.read, 'hover_black': notif.read}" (click)="!notif.read ? markRead(true, notif) : null">
+						<div [ngClass]="{'cursor_pointer bg_lightblue': !notif.read, 'hover_black': notif.read, 'border_top': i > 0 }" (click)="!notif.read ? markRead(true, notif) : null">
 							<div class="ref">
 								<div class="img_container circle">
 									<img [src]="notif.responsibleUsers[0].profilePhoto ? '/media/'+notif.responsibleUsers[0]._id+'/profile/'+notif.responsibleUsers[0].profilePhoto : '/assets/icons/default_profile.png'">

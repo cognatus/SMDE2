@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 
 import { SignupService } from './signup.service';
 import { User } from '../models/user';
+import { userTypes } from '../app.constants';
 
 @Component({
   selector: 'app-signup',
@@ -14,6 +15,7 @@ import { User } from '../models/user';
 
 export class SignupComponent {
 	user = new User;
+	userTypes = userTypes;
 
 	constructor(private router: Router, private signupService: SignupService) {}
 

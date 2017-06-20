@@ -9,18 +9,21 @@ import { User } from '../models/user';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-	setUser: User;
 	token: string; jwt: string; decodedJwt: string;
+	authUser: User;
+
 	constructor(private router: Router, private http: Http) {
-		this.setUser = JSON.parse(localStorage.getItem('user_profile'));
-		this.token = localStorage.getItem('id_token');
+		if ( localStorage.getItem('currentUser') !== null ) {
+			this.authUser = JSON.parse(localStorage.getItem('currentUser')).user;
+			this.token = JSON.parse(localStorage.getItem('currentUser')).token;
+		}
 		this.jwt = this.token;
 		this.decodedJwt = this.jwt;
 	}
 
 	canActivate() {
 		// Check to see if a user has a valid JWT
-		if (this.loggedIn()) {
+		if ( this.loggedIn() ) {
 			// If they do, return true and allow the user to load the home component
 			return true;
 		} else {
@@ -31,27 +34,28 @@ export class AuthGuard implements CanActivate {
 	}
 
 	loggedIn(): boolean {
-		let token = localStorage.getItem('id_token');
+		let token = this.token;
 		return token !== undefined && token !== null;
 	}
 
 	getUser(): User {
-		return this.setUser;
+		return this.authUser;
 	}
 
 	updateUser() {
 		this.http.get(ApiUrl + 'users/' + this.getUser()._id)
-			.subscribe( res => {
-					localStorage.setItem('user_profile', JSON.stringify(res.json()));
-					this.setUser = res.json();
+			.subscribe( response => {
+					let oldToken = JSON.parse(localStorage.getItem('currentUser'));
+					oldToken.user = response;
+					localStorage.setItem('currentUser', JSON.stringify(oldToken));
 				}, error => {
 					console.log(error);
 				});
 	}
 
 	deleteUser(): void {
-		localStorage.removeItem('id_token');
-		localStorage.removeItem('user_profile');
+		this.token = null;
+		localStorage.removeItem('currentUser');
 	}
 
 }

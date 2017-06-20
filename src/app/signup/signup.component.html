@@ -27,23 +27,25 @@
 							<input type="text" [(ngModel)]="user.mail" name="mail" placeholder="Correo Electrónico">
 						</div>
 						<div class="field mr_top_8">
+							<img src="assets/icons/account_black.png" class="icon opacity">
+							<label class="opacity font_bold font_small">Nombre de usuario</label>
+							<input type="text" [(ngModel)]="user.nick" name="nick" placeholder="Nombre de Usuario">
+						</div>
+						<div class="field mr_top_8">
 							<img src="assets/icons/phone_black.png" class="icon opacity">
 							<label class="opacity font_bold font_small">Teléfono</label>
 							<input type="text" [(ngModel)]="user.phone" name="phone" placeholder="Teléfono">
 						</div>
-							
 						<div class="field mr_top_8">
 							<img src="assets/icons/calendar_black.png" class="icon opacity">
 							<label class="opacity font_bold font_small">Fecha de nacimiento</label>
-							<input type="text" [(ngModel)]="user.birthDay" name="birthDay" placeholder="Fecha (dd/mm/yyyy)">
+							<input type="text" [(ngModel)]="user.birthDay" name="birthDay" placeholder="Fecha de nacimiento (dd/mm/yyyy)">
 						</div>
 						<div class="field mr_top_8">
 							<img src="assets/icons/account_black.png" class="icon opacity">
 							<label class="opacity font_bold font_small">Tipo de Usuario</label>
 							<select [(ngModel)]="user.privilege" name="userType">
-								<option value="1" selected="selected">Alumno</option>
-								<option value="2">Profesor</option>
-								<option value="0">Administrador</option>
+								<option *ngFor="let t of userTypes; let i = index" [value]="i">{{ t }}</option>
 							</select>
 						</div>												
 						<div class="field mr_top_8">
@@ -64,7 +66,7 @@
 			</form>
 			<div class="pd_top_24 text_align_right">
 				<a routerLink="/login">
-					<button class="font_secondary font_big">
+					<button class="font_blue font_big">
 						Iniciar Sesión
 					</button>
 				</a>

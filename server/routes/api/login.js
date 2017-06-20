@@ -1,33 +1,39 @@
 const jwt = require('jsonwebtoken');
+const randtoken = require('rand-token') 
 const User = require('../../models/User');
 
+let refreshTokens = {};
+
 exports.login = (req, res) => {
-	let data = {
-		mail: req.body.mail,
-		password: req.body.password
-	}
-	User.find(data, (err, doc) => {
+	let username = req.body.mail;
+	let password = req.body.password;
+
+	User.findOne({ mail: req.body.mail, password: req.body.password }).select('-password').exec( (err, doc) => {
 		if (err) {
 			res.send(err);
 		} else {
-			let userCookie = {
-				_id: doc[0]._id,
-				mail: doc[0].mail,
-				type: doc[0].type
-			};
-			
-			let token = jwt.sign(userCookie._id, process.env.SECRET_KEY, { expiresIn: 400000 });
-			let send = { user: doc[0], token: token };
-
-			res.cookie('login', userCookie);
-			res.status(200).json(send);
+			let user = {};
+			if ( doc ) {
+				user = {
+					_id: doc._id,
+					mail: doc.mail,
+					privilege: doc.privilege
+				};
+				
+				let token = jwt.sign(user, process.env.SECRET_KEY, { expiresIn: 400000 });
+				let refreshToken = randtoken.uid(256);
+  				refreshTokens[refreshToken] = username;
+  				res.cookie('urtoken', user);
+  				res.status(200).json({ user: doc, token: 'JWT ' + token, refreshToken: refreshToken });
+			} else {
+				res.status(500).send({ message: 'Usuario y/o contraseña incorrectos' });
+			}
 		}
 	});
 };
 
 exports.logout = (req, res) => {
-	res.clearCookie('login');
-	req.session.destroy();
+	res.clearCookie('urtoken');
 	res.redirect('/');
 }
 
@@ -39,6 +45,7 @@ exports.signup = (req, res) => {
 	}
 	let data = new User({
 		mail: req.body.mail,
+		nick: req.body.nick,
 		password: req.body.password,
 		name: req.body.name,
 		lastName: req.body.lastName,

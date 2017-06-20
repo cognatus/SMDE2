@@ -39,28 +39,24 @@ exports.getNotifications = (userId, callback) => {
 			callback(false, { message: err });
 		} else {
 			let data = [];
-			if ( doc.length > 0 ) {
-				for ( let i = 0 ; i < doc.length ; i++ ) {
-					data.push({ _id: doc[i]._id, action: doc[i].action, date: doc[i].date, redirect: doc[i].redirect, actionOn: '' });
-					for ( let j = 0 ; j < doc[i].sendTo.length ; j++ ) {
-						if ( doc[i].sendTo[j].id === userId ) {
-							data[i].read = doc[i].sendTo[j].read;
-						}
-					}
+			let asyncLoop = (i, subcallback) => {
+				if ( i < doc.length ) {
+					data.push({ _id: doc[i]._id, action: doc[i].action, date: doc[i].date, redirect: doc[i].redirect, read: doc[i].read });
 					getResponsibleUsers(doc[i].responsibleUsers, (err, array) => {
-						if ( err ) {
-							console.log(err)
+						if (err) {
+							console.log(err);
 						} else {
 							data[i].responsibleUsers = array;
-							if ( i === doc.length - 1 ) {
-								callback(true, data);
-							}
 						}
+						asyncLoop( i+1, subcallback );
 					});
+				} else {
+					subcallback(data);
 				}
-			} else {
-				callback(true, data);
 			}
+			asyncLoop(0, (data) => {
+				callback(true, data);
+			});
 		}
 	});
 };
