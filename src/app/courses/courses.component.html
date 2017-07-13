@@ -1,4 +1,4 @@
-<app-menu *ngIf="auth.loggedIn()"></app-menu>
+<app-menu *ngIf="auth.isLogged()"></app-menu>
 <div class="courses_container">
 	<div class="pop_up_container" id="courses-add">
 		<div class="pop_up_back" onclick="showPopup(false, '#courses-add')"></div>
@@ -147,7 +147,7 @@
 						<div class="ref">
 							<a href="/perfil/{{ course.user.id }}">
 								<div class="img_container circle">
-									<img src="/media/{{ course.user.id }}/profile/{{ course.user.profilePhoto }}" *ngIf="course.user.profilePhoto != undefined && course.user.profilePhoto != null">
+									<img src="/media/{{ course.user.id }}/profile/{{ course.user.profilePhoto }}" *ngIf="course.user.profilePhoto && course.user.profilePhoto != null">
 									<img src="assets/icons/default_profile.png" *ngIf="course.user.profilePhoto == undefined || course.user.profilePhoto == null">
 								</div>
 							</a>

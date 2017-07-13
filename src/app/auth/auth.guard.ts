@@ -1,29 +1,22 @@
 import { Injectable, Input } from '@angular/core';
 import { Http, Response, RequestOptions } from '@angular/http';
-import { Router, CanActivate } from '@angular/router';
+import { Router, CanActivate, CanDeactivate } from '@angular/router';
 import { tokenNotExpired } from 'angular2-jwt';
 import { Observable } from 'rxjs';
 
 import { ApiUrl } from '../app.constants';
-import { User } from '../models/user';
+import { User } from '../_models/user';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-	token: string; jwt: string; decodedJwt: string;
-	authUser: User;
 
 	constructor(private router: Router, private http: Http) {
-		if ( localStorage.getItem('currentUser') !== null ) {
-			this.authUser = JSON.parse(localStorage.getItem('currentUser')).user;
-			this.token = JSON.parse(localStorage.getItem('currentUser')).token;
-		}
-		this.jwt = this.token;
-		this.decodedJwt = this.jwt;
+		/*console.log(localStorage.getItem('currentUser'));*/
 	}
 
 	canActivate() {
 		// Check to see if a user has a valid JWT
-		if ( this.loggedIn() ) {
+		if ( this.isLogged() ) {
 			// If they do, return true and allow the user to load the home component
 			return true;
 		} else {
@@ -33,28 +26,32 @@ export class AuthGuard implements CanActivate {
 		}
 	}
 
-	loggedIn(): boolean {
-		let token = this.token;
+	isLogged(): boolean {
+		let token = this.getToken();
 		return token !== undefined && token !== null;
 	}
 
 	getUser(): User {
-		return this.authUser;
+		let user = new User();
+		if ( localStorage.getItem('currentUser') ) {
+			user = JSON.parse(localStorage.getItem('currentUser')).user;
+		}
+		return user;
 	}
 
-	updateUser() {
-		this.http.get(ApiUrl + 'users/' + this.getUser()._id)
-			.subscribe( response => {
-					let oldToken = JSON.parse(localStorage.getItem('currentUser'));
-					oldToken.user = response;
-					localStorage.setItem('currentUser', JSON.stringify(oldToken));
-				}, error => {
-					console.log(error);
-				});
+	setUser(user: any): void { // user, token
+		localStorage.setItem('currentUser', JSON.stringify(user));
+	}
+
+	getToken(): string {
+		let token = undefined;
+		if ( localStorage.getItem('currentUser') ) {
+			token = JSON.parse(localStorage.getItem('currentUser')).token;
+		}
+		return token;
 	}
 
 	deleteUser(): void {
-		this.token = null;
 		localStorage.removeItem('currentUser');
 	}
 

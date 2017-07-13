@@ -1,15 +1,9 @@
 import { Routes } from '@angular/router';
 import { AuthGuard } from './auth/auth.guard';
+
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { HomeComponent } from './home/home.component';
-import { MessagesComponent } from './messages/messages.component';
-import { MessageConversationComponent } from './message-conversation/message-conversation.component';
-import { AdminComponent } from './admin/admin.component';
-import { UsersComponent } from './users/users.component';
-import { UserDetailComponent } from './user-detail/user-detail.component';
-import { CoursesComponent } from './courses/courses.component';
-import { CourseDetailComponent } from './course-detail/course-detail.component';
 import { ProfileComponent } from './profile/profile.component';
 
 export const routes: Routes = [
@@ -17,20 +11,6 @@ export const routes: Routes = [
     { path: 'home', redirectTo: '' },
     { path: 'login', component: LoginComponent },
     { path: 'registro', component: SignupComponent },
-    { path: 'admin', component: AdminComponent, canActivate: [AuthGuard],
-    	children: [
-    		{ path: '', redirectTo: 'admin/usuarios', pathMatch: 'full' },
-    		{ path: 'usuarios', component: UsersComponent, canActivate: [AuthGuard] },
-            { path: 'usuarios/:id', component: UserDetailComponent, canActivate: [AuthGuard] },
-    	]
-  	},
     { path: 'perfil', component: ProfileComponent, canActivate: [AuthGuard] },
     { path: 'perfil/:id', component: ProfileComponent },
-    { path: 'cursos', component: CoursesComponent, canActivate: [AuthGuard] },
-    { path: 'cursos/:id', component: CourseDetailComponent, canActivate: [AuthGuard] },
-    { path: 'mensajes', component: MessagesComponent, canActivate: [AuthGuard],
-        children: [
-            { path: ':id', component: MessageConversationComponent }
-        ]
-    }
 ]

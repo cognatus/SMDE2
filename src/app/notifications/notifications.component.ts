@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NotificationsService } from './notifications.service';
 import { AuthGuard } from '../auth/auth.guard';
 
-import { Notification } from '../models/notification';
-import { User } from '../models/user'; 
+import { Notification } from '../_models/notification';
+import { User } from '../_models/user'; 
 import { Colors, notificationTexts } from '../app.constants';
 
 @Component({

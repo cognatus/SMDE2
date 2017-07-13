@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 import { AuthGuard } from '../auth/auth.guard';
-import { UserDetailService } from '../user-detail/user-detail.service';
+import { UserDetailService } from '../admin/user-detail/user-detail.service';
 import { ProfileService } from './profile.service';
 
-import { User } from '../models/user';
+import { User } from '../_models/user';
 import { Colors, userTypes, formatedDate } from '../app.constants';
 
 @Component({
@@ -17,12 +17,12 @@ import { Colors, userTypes, formatedDate } from '../app.constants';
 export class ProfileComponent implements OnInit {
 	userTypes: string[];
 	userId: string;
-	user = new User;
+	user = new User();
 	userSrc: string;
 	formatedUserBirth: string;
 	privateUser: boolean = true;
 	selectedAlbum: number = 0;
-	colors = new Colors;
+	colors = new Colors();
 	photos: any[] = [{ album: 'background', array: [], selected: '' }, 
 					 { album: 'profile', array: [], selected: '' },
 					 { album: 'other', array: [], selected: '' }];
@@ -68,10 +68,9 @@ export class ProfileComponent implements OnInit {
 			}
 		});
 		this.userSrc = '/media/' + this.user._id + '/';
-
 	}
 
-	fetchUser(callback: () => void): void {
+	fetchUser( callback: () => void ): void {
 		let id = this.privateUser ? this.auth.getUser()._id : this.userId;
 
 		this.userDetailService.getUser(id)
@@ -105,12 +104,12 @@ export class ProfileComponent implements OnInit {
 		let album = this.photos[this.selectedAlbum].album;
 		let nameSrcArray = this.photos[this.selectedAlbum].array[this.photos[this.selectedAlbum].selected].split('/'); 
 		let name = nameSrcArray[nameSrcArray.length - 1];
+
 		this.profileService.updatePhoto(album, name)
 			.subscribe( response => {
-					location.href = '/perfil';
+					location.reload();
 				}, error => {
 					console.log('Error');
-					alert('Hubo un error al actualizar la foto');
 				});
 	}
 
@@ -118,9 +117,10 @@ export class ProfileComponent implements OnInit {
 		let album = this.photos[this.selectedAlbum].album;
 		let nameSrcArray = this.photos[this.selectedAlbum].array[this.photos[this.selectedAlbum].selected].split('/'); 
 		let name = nameSrcArray[nameSrcArray.length - 1];
+
 		this.profileService.deletePhoto(album, name)
 			.subscribe( response => {
-					location.href = '/perfil';
+					location.reload();
 				}, error => {
 					console.log('Error');
 					alert('Hubo un error al eliminar la foto');

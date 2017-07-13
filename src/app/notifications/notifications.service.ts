@@ -6,7 +6,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 
 import { ApiUrl } from '../app.constants';
-import { Notification } from '../models/notification';
+import { Notification } from '../_models/notification';
 
 @Injectable()
 export class NotificationsService {

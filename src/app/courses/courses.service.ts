@@ -6,7 +6,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 
 import { ApiUrl } from '../app.constants';
-import { Course } from '../models/course';
+import { Course } from '../_models/course';
 
 @Injectable()
 export class CoursesService {

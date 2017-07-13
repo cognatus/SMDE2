@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { AuthGuard } from '../auth/auth.guard';
-import { User } from '../models/user';
-import { trigger, state, style, animate, transition } from '@angular/core';
+import { User } from '../_models/user';
 
 @Component({
 	selector: 'app-menu',

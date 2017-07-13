@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
-import { AuthGuard } from '../auth/auth.guard';
+import { AuthGuard } from '../../auth/auth.guard';
 import { UsersService } from './users.service';
-import { User } from '../models/user';
-import { Colors, userTypes } from '../app.constants';
+import { User } from '../../_models/user';
+import { Colors, userTypes } from '../../app.constants';
 
 @Component({
 	selector: 'app-users',

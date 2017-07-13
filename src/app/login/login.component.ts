@@ -4,7 +4,7 @@ import { Location } from '@angular/common';
 import { AuthGuard } from '../auth/auth.guard';
 
 import { LoginService } from './login.service';
-import { User } from '../models/user';
+import { User } from '../_models/user';
 
 @Component({
 	selector: 'app-login',
@@ -16,22 +16,20 @@ export class LoginComponent implements OnInit{
 	user: any = { mail: '', password: '' };
 	error: string = '';
 	
-	constructor(private router: Router, private loginService: LoginService, private location: Location, private auth: AuthGuard) {
-
-	}
+	constructor(private router: Router, private loginService: LoginService, private location: Location, private auth: AuthGuard) {}
 
 	login(): void {
 		this.loginService.loginUser(this.user)
 	    	.subscribe( response => {
-		    		localStorage.setItem('currentUser', JSON.stringify(response));
-		    		location.href = '/';
+		    		this.auth.setUser(response);
+		    		this.router.navigate(['/home']);
 				}, error => {
             		this.error = error.message;
             	});
 	}
 
 	ngOnInit() {
-		if ( this.auth.loggedIn() ) {
+		if ( this.auth.isLogged() ) {
 			this.router.navigate(['/home']);
 		}
 	}

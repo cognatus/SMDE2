@@ -1,4 +1,4 @@
-<app-menu *ngIf="auth.loggedIn()"></app-menu>
+<app-menu *ngIf="auth.isLogged()"></app-menu>
 <div class="courses_container full">
 	<div class="pop_up_container" id="confirm-box">
 		<div class="pop_up_back" onclick="showPopup(false, '#confirm-box')"></div>

@@ -6,7 +6,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise'; 
 
 import { ApiUrl } from '../app.constants';
-import { User } from '../models/user';
+import { User } from '../_models/user';
 
 @Injectable()
 export class ProfileService {

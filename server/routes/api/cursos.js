@@ -131,7 +131,7 @@ exports.suscribeUser = (req, res) => {
 					element: [doc.name]
 				},
 				redirect: '/cursos/' + req.params.id,
-				sendTo: users
+				sendTo: user
 			};
 			notif.insertNotifications(notifSend, (err, data) => {
 				if (err) {
@@ -247,97 +247,95 @@ exports.updateGroup = (req, res) => {
 	let groupId = req.params.groupid;
 
 	Course.findOne({ _id: req.params.id }, (err, doc) => {
-			if (err) {
-				console.log(err);
-				res.status(500).send({ message: err });
-			} else {
-				let groups = doc.groups;
-				let oldUsers = [];
-				let oldGroupName = '';
-				// buscar grupo por id para cambiar el nombre
-				for ( let i = 0 ; i < groups.length ; i++ ) {
-					if ( groups[i].id === groupId ) {
-						oldGroupName = groups[i].name;
-						groups[i].name = groupName;
+		if (err) {
+			console.log(err);
+			res.status(500).send({ message: err });
+		} else {
+			let groups = doc.groups;
+			let oldUsers = [];
+			let oldGroupName = '';
+			// buscar grupo por id para cambiar el nombre
+			for ( let i = 0 ; i < groups.length ; i++ ) {
+				if ( groups[i].id === groupId ) {
+					oldGroupName = groups[i].name;
+					groups[i].name = groupName;
+					break;
+				}
+			}
+
+			for ( let i = 0 ; i < doc.members.length ; i++ ) {
+				if ( doc.members[i].group === groupId ) {
+					oldUsers.push(doc.members[i].id);
+				}
+			}
+
+			let users = doc.members;
+			// Borrar grupo de usuarios
+			for ( let i = 0 ; i < users.length ; i++ ) {
+				if ( users[i].group === groupId ) {
+					users[i].group = '';
+				}
+			}
+			// Colocar usuarios nuevamente
+			for ( let i = 0 ; i < users.length ; i++ ) {
+				for ( let j = 0 ; j < members.length ; j++ ) {
+					if ( users[i].id === members[j] ) {
+						users[i].group = groupId;
 						break;
 					}
 				}
+			}
 
-				for ( let i = 0 ; i < doc.members.length ; i++ ) {
-					if ( doc.members[i].group === groupId ) {
-						oldUsers.push(doc.members[i].id);
-					}
-				}
+			Course.findOneAndUpdate({ _id: req.params.id }, {
+					$set: { members: users, groups: groups, updatedDate: new Date() }
+				}, (err, subdoc) => {
+					if (err) {
+						console.log(err);
+						res.status(500).send({ message: 'Error al actualizar a los miembros en el grupo' });
+					} else {
+						let newUsers = [];
 
-				let users = doc.members;
-				// Borrar grupo de usuarios
-				for ( let i = 0 ; i < users.length ; i++ ) {
-					if ( users[i].group === groupId ) {
-						users[i].group = '';
-					}
-				}
-				// Colocar usuarios nuevamente
-				for ( let i = 0 ; i < users.length ; i++ ) {
-					for ( let j = 0 ; j < members.length ; j++ ) {
-						if ( users[i].id === members[j] ) {
-							users[i].group = groupId;
-							break;
-						}
-					}
-				}
-
-				Course.findOneAndUpdate({ _id: req.params.id }, {
-						$set: { members: users, groups: groups, updatedDate: new Date() }
-					}, (err, subdoc) => {
-						if (err) {
-							console.log(err);
-							res.status(500).send({ message: 'Error al actualizar a los miembros en el grupo' });
-						} else {
-							let newUsers = [];
-
-							for ( let i = 0 ; i < members.length ; i++ ) {
-								if ( oldUsers.indexOf(members[i]) < 0 ) {
-									newUsers.push(members[i]);
-								}
+						for ( let i = 0 ; i < members.length ; i++ ) {
+							if ( oldUsers.indexOf(members[i]) < 0 ) {
+								newUsers.push(members[i]);
 							}
-
-							let notifSend = {
-								responsibleUsers: [req.cookies.urtoken._id], //Mandar a miembros viejos del grupo
-								action: {
-									status: 2,
-									substatus: 2,
-									element: [oldGroupName, subdoc.name]
-								},
-								redirect: '/cursos/' + req.params.id,
-								sendTo: oldUsers
-							};
-
-							notif.insertNotifications(notifSend, (err, obj) => {
-								if (err) {
-									console.log(err);
-									res.status(500).send({ message: 'Error al guardar la notificación' });
-								} else {
-									let notifSend2 = {
-										responsibleUsers: [req.cookies.urtoken._id], //Mandar a miembros nuevos en el grupo
-										action: {
-											status: 2,
-											substatus: 3,
-											id: subdoc._id,
-											element: [groupName, subdoc.name]
-										},
-										redirect: '/cursos/' + req.params.id,
-										sendTo: newUsers
-									}
-									notif.insertNotifications(notifSend2, (err, obj2) => {
-										if (err) {
-											console.log(err);
-										} else {
-											res.status(200).send({ message: 'Grupo creado con' + members.length + 'nuevos' });
-										}
-									});
-								}
-							});
 						}
+
+						let notifSend = {
+							responsibleUsers: [req.cookies.urtoken._id], //Mandar a miembros viejos del grupo
+							action: {
+								status: 2,
+								substatus: 2,
+								element: [oldGroupName, subdoc.name]
+							},
+							redirect: '/cursos/' + req.params.id,
+							sendTo: oldUsers
+						};
+						notif.insertNotifications(notifSend, (err, obj) => {
+							if (err) {
+								console.log(err);
+							}
+						});
+
+						let notifSend2 = {
+							responsibleUsers: [req.cookies.urtoken._id], //Mandar a miembros nuevos en el grupo
+							action: {
+								status: 2,
+								substatus: 3,
+								id: subdoc._id,
+								element: [groupName, subdoc.name]
+							},
+							redirect: '/cursos/' + req.params.id,
+							sendTo: newUsers
+						}
+						notif.insertNotifications(notifSend2, (err, obj) => {
+							if (err) {
+								console.log(err);
+							}
+						});
+
+						res.status(200).send({ message: 'Grupo creado con' + members.length + 'nuevos' });
+					}
 				});
 			}
 	});
@@ -391,14 +389,12 @@ exports.deleteGroup = (req, res) => {
 									notif.insertNotifications(notifSend, (err, obj) => {
 										if (err) {
 											console.log(err);
-											res.status(500).send({ message: 'Error al guardar la notificación' })
 										} else {
-											res.status(200).send({ message: 'Grupo creado con exito' });
+
 										}
 									});
-								} else {
-									res.status(200).send({ message: 'Grupo borrado' });
 								}
+								res.status(200).send({ message: 'Grupo borrado' });
 							}
 					});
 			}

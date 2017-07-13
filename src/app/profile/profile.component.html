@@ -1,4 +1,4 @@
-<app-menu *ngIf="auth.loggedIn()"></app-menu>
+<app-menu *ngIf="auth.isLogged()"></app-menu>
 <div class="profile_container">
 	<div class="pop_up_container gallery" id="profile-gallery" *ngIf="photos[selectedAlbum].array?.length > 0">
 		<div class="pop_up_back" onclick="showPopup(false, '#profile-gallery')"></div>

@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { AuthGuard } from '../auth/auth.guard';
 import { AdminService } from './admin.service';
-import { User } from '../models/user';
+import { User } from '../_models/user';
 
 @Component({
 	selector: 'app-admin',

@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { SignupService } from './signup.service';
-import { User } from '../models/user';
+import { User } from '../_models/user';
 import { userTypes } from '../app.constants';
 
 @Component({

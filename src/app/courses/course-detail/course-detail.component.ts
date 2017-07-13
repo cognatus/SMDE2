@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { AuthGuard } from '../auth/auth.guard';
+import { AuthGuard } from '../../auth/auth.guard';
 import { CourseDetailService } from './course-detail.service';
 
-import { User } from '../models/user';
-import { Course } from '../models/course';
-import { userTypes, Colors, FormatDatePipe } from '../app.constants';
+import { User } from '../../_models/user';
+import { Course } from '../../_models/course';
+import { userTypes, Colors } from '../../app.constants';
 
 @Component({
 	selector: 'app-course-detail',

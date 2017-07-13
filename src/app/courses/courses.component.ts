@@ -4,9 +4,9 @@ import { Location } from '@angular/common';
 import { AuthGuard } from '../auth/auth.guard';
 import { CoursesService } from '../courses/courses.service';
 
-import { Course } from '../models/course';
-import { User } from '../models/user';
-import { userTypes, replaceCharacters, Colors, FormatDatePipe } from '../app.constants';
+import { Course } from '../_models/course';
+import { User } from '../_models/user';
+import { userTypes, replaceCharacters, Colors } from '../app.constants';
 
 @Component({
 	selector: 'app-courses',
