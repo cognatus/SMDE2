@@ -43,7 +43,7 @@
 											</span>
 										</div>
 										<span class="inline" *ngFor="let part of getText(notif.action)">
-											<label class="cursor_pointer" [ngClass]="{'font_bold' : part.elem}">{{ part.text }}</label>
+											<label class="cursor_pointer" [class.font_bold]="part.elem">{{ part.text }}</label>
 										</span>
 									</div>
 									<p class="font_small">

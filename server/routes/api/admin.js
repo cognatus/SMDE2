@@ -31,6 +31,7 @@ exports.insertUser = (req, res) => {
 		month: req.body.birthDay.split('/')[1], 
 		year: req.body.birthDay.split('/')[2]
 	}
+
 	var data = new User({
 		mail: req.body.mail,
 		password: req.body.password,
