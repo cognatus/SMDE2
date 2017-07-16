@@ -1,33 +1,33 @@
-<button class="action_button pd_left_8 pd_right_8 hover_white" id="notif-open-button" title="Ver Notificaciones">
-	<img class="icon v_align_middle mr_left_4 mr_right_4" src="assets/icons/bell_white.png">
+<button class="action_button pl_8 pr_8 hover_black" id="notif-open-button" title="Ver Notificaciones">
+	<img class="icon va_m ml_4 mr_4" src="assets/icons/bell_black.png">
 	<i class="mini_mark circle bg_red" *ngIf="getUnreadNotif() > 0">{{ getUnreadNotif() }}</i>
 </button>
 <div class="hidden_block" id="notif-mini">
 	<i class="mark bg_white"></i>
 	<div class="bg_white shadow_raised border_radius notif_container">
-		<section class="mm_section border_bottom pd_top_12 pd_bottom_12">
-			<div class="pd_left_16 pd_right_16">
-				<p class="font_bold">Notificaciones</p>
+		<section class="mm_section bb pt_12 pb_12">
+			<div class="pl_16 pr_16">
+				<p class="fw_b">Notificaciones</p>
 			</div>
 		</section>
-		<section class="mm_section border_bottom">
+		<section class="mm_section bb">
 			<div class="list">
-				<div class="pd_24 text_align_center opacity" *ngIf="notifications?.length < 1">
-					<img class="size_48 mr_bottom_16 opacity" src="/assets/icons/block-big_black.png">
-					<h2 class="text_align_center title_smaller font_lightnormal">
+				<div class="p_24 ta_c opacity" *ngIf="notifications?.length < 1">
+					<img class="size_48 mb_16 opacity" src="/assets/icons/block-big_black.png">
+					<h2 class="ta_c title_smaller fw_300">
 						Aun no hay notificaciones
 					</h2>
 				</div>
-				<div class="list_element relative_pos" *ngFor="let notif of notifications; let i = index">
+				<div class="list_element pos_r" *ngFor="let notif of notifications; let i = index">
 					<a [attr.href]="notif.read ? notif.redirect : null">
-						<div [ngClass]="{'cursor_pointer bg_lightblue': !notif.read, 'hover_black': notif.read, 'border_top': i > 0 }" (click)="!notif.read ? markRead(true, notif) : null">
+						<div [ngClass]="{'cursor_pointer bg_lightblue': !notif.read, 'hover_black': notif.read, 'bt': i > 0 }" (click)="!notif.read ? markRead(true, notif) : null">
 							<div class="ref">
 								<div class="img_container circle">
 									<img [src]="notif.responsibleUsers[0].profilePhoto ? '/media/'+notif.responsibleUsers[0]._id+'/profile/'+notif.responsibleUsers[0].profilePhoto : '/assets/icons/default_profile.png'">
 								</div>
 							</div><div class="info">
-								<div class="pd_12 pd_left_16 pd_right_16">
-									<div class="mr_bottom_8">
+								<div class="p_12 pl_16 pr_16">
+									<div class="mb_8">
 										<div class="inline" *ngIf="notif.responsibleUsers?.length > 2">
 											<b>
 												{{ notif.responsibleUsers[0].name }} {{ notif.responsibleUsers[0].lastName }}
@@ -43,25 +43,25 @@
 											</span>
 										</div>
 										<span class="inline" *ngFor="let part of getText(notif.action)">
-											<label class="cursor_pointer" [class.font_bold]="part.elem">{{ part.text }}</label>
+											<label class="cursor_pointer" [class.fw_b]="part.elem">{{ part.text }}</label>
 										</span>
 									</div>
-									<p class="font_small">
-										<b class="font_normal opacity">{{ notif.date | formatDate: 'time' }}</b>
+									<p class="fs_s">
+										<b class="fw_500 opacity">{{ notif.date | formatDate: 'time' }}</b>
 									</p>
 								</div>
 							</div>
 						</div>
 					</a>
-					<span class="mini_mark circle size_12 pd_4 circle bg_light" [ngClass]="{'hover_blue': !notif.read, 'hover_red': notif.read}" (click)="markRead(false, notif)" [title]="!notif.read ? 'Marcar como leido' : 'Marcar como no leido'">
-						<img class="size_12" [src]="!notif.read ? '/assets/icons/check_white.png' : '/assets/icons/close_white.png' ">
+					<span class="mini_mark circle size_12 p_4 circle bg_light" [ngClass]="{'hover_blue': notif.read, 'hover_red': !notif.read}" (click)="markRead(false, notif)" [title]="!notif.read ? 'Marcar como leido' : 'Marcar como no leido'">
+						<img class="size_12" [src]="notif.read ? '/assets/icons/check_white.png' : '/assets/icons/close_white.png' ">
 					</span>
 				</div>
 			</div>
 		</section>
 		<section class="mm_section" *ngIf="notifications?.length > 10">
-			<button class="w_100 font_red hover_black">
-				<div class="pd_8 font_secondary">Cargar más</div>
+			<button class="w_100 fc_red hover_black">
+				<div class="p_8 fc_secondary">Cargar más</div>
 			</button>
 		</section>
 	</div>

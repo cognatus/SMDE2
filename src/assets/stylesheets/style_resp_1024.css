@@ -1,5 +1,17 @@
 @media screen and (min-width: 1024px) {
+	.page_container { margin-left: 48px;margin-right: 48px; }
+	.page_container .page_container_in { max-width: 1080px; }
+
+	.page_container.full { margin: 0; }
+	.page_container.full .page_container_in { max-width: 1080px; }
+
+	.page_container.full.s_t { margin: 32px;margin-top: 0; }
+
+	.h_selection .item h3 {padding: 12px 16px;}
+
 	.increment_margin { margin: 24px;margin-top: 20px; }
+
+	.app_bar .app_bar_inner .logo_container { width: 56px; }
 
 	.app_bar, .app_bar_back, .app_bar .app_bar_inner .bar_top, .app_bar .app_bar_inner .bar_bottom { height: 56px; }
 
@@ -15,11 +27,13 @@
 
 	.app_bar .app_bar_inner .hidden_block_container.notif .hidden_block { width: 460px; }
 
+	.app_bar .app_bar_inner .prof_container {height: 56px;}
+
 	.app_bar .app_bar_inner .bar_bottom { top: -56px; }
 
 	.app_bar .app_bar_inner .bar_bottom .menu .item { line-height: 54px; }
 
-	.app_bar .app_bar_inner .bar_bottom .menu .item span {
+	.app_bar .app_bar_inner .bar_bottom .menu .item .inner span.label {
 		display: inline-block;
 	}
 
@@ -35,44 +49,31 @@
 		padding: 40px;
 	}
 
-	.pop_up_container .pop_up .inner .responsive_col .col_2 {
+	.pop_up_container .pop_up .inner .col_r .col_2 {
 		display: inline-block;
 		width: calc(50% - 8px);
 	}
 
-	.admin_container, .profile_container {
-		width: calc(100% - 80px);
-	}
-
-	.admin_container .admin_navigation {
-		padding: 10px;
-	}
-
-	.admin_container .admin_navigation .auto_col nav {
-		padding-left: 16px;
-		padding-right: 16px;
-	}
-
-	.courses_container.full {
-		margin: 32px auto;
-		width: calc(100% - 64px);
-	}
-
-	.courses_container .left_grid {
+	.page_container_in .left_grid {
 		margin-right: 24px;
 		width: 35%;
 	}
 
-	.courses_container .right_grid {
+	.page_container_in .right_grid {
 		width: calc(65% - 24px);
 	}
 
-	.courses_container .right_grid .course_navigation {
+	.page_container_in .right_grid .course_navigation {
 		padding-top: 0;
 	}
-	.courses_container .right_grid .course_navigation nav {
+	.page_container_in .right_grid .course_navigation nav {
 		padding-left: 16px;
 		padding-right: 16px;
+	}
+
+	.page_container.full .resp_title {
+		padding-left: 0;
+		padding-right: 0;
 	}
 
 	.main_action_button {
@@ -82,7 +83,7 @@
 		padding-bottom: 24px;	
 	}
 
-	.responsive_col .col_3 {
+	.col_r .col_3 {
 		width: 33.3333333%;
 	}
 

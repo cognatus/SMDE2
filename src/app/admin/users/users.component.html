@@ -1,15 +1,15 @@
-<div class="users_container">
+<div class="page_container">
 	<div class="pop_up_container" id="user-add">
 		<div class="pop_up_back" onclick="showPopup(false, '#user-add')"></div>
 		<div class="pop_up">
 			<div class="inner border_radius">
 				<div class="bg_primary">
-					<div class="pop_up_title font_white">
+					<div class="pop_up_title fc_white">
 						<h1 class="title">
 							Nuevo Usuario
 						</h1>
 						<div class="close_button">
-							<button class="pd_8 hover_black circle" onclick="showPopup(false, '#user-add')">
+							<button class="p_8 hover_black circle" onclick="showPopup(false, '#user-add')">
 								<img class="icon" src="assets/icons/arrow-left_white.png">
 							</button>
 						</div>
@@ -19,52 +19,52 @@
 					<input style="display:none" type="text" name="user"/>
 					<input style="display:none" type="password" name="password"/>
 					<div class="data_container">
-						<h2 class="title_medium mr_bottom_24 font_secondary">Datos</h2>
-						<div class="pd_left_8 pd_right_8">
-							<div class="field_container pd_bottom_24">
-								<div class="field mr_top_8">
-									<label class="opacity font_bold font_small">Nombre(s)</label>
+						<h2 class="title_medium mb_24 fc_secondary">Datos</h2>
+						<div class="pl_8 pr_8">
+							<div class="field_container pb_24">
+								<div class="field mt_8">
+									<label class="opacity fw_b fs_s">Nombre(s)</label>
 									<input type="text" [(ngModel)]="user.name" name="name" placeholder="Nombre(s)"/>
 								</div>
-								<div class="field mr_top_8">
-									<label class="opacity font_bold font_small">Apellidos</label>
+								<div class="field mt_8">
+									<label class="opacity fw_b fs_s">Apellidos</label>
 									<input type="text" [(ngModel)]="user.lastName" name="lastName" placeholder="Apellidos"/>
 								</div>
-								<div class="field mr_top_8">
-									<label class="opacity font_bold font_small">Correo</label>
+								<div class="field mt_8">
+									<label class="opacity fw_b fs_s">Correo</label>
 									<input type="text" [(ngModel)]="user.mail" name="mail" placeholder="Correo Electrónico"/>
 								</div>
-								<div class="field mr_top_8">
-									<label class="opacity font_bold font_small">Télefono</label>
+								<div class="field mt_8">
+									<label class="opacity fw_b fs_s">Télefono</label>
 									<input type="text" [(ngModel)]="user.phone" name="phone" placeholder="Teléfono"/>
 								</div>
-								<div class="field mr_top_8">
-									<label class="opacity font_bold font_small">Fecha de Nacimiento</label>
+								<div class="field mt_8">
+									<label class="opacity fw_b fs_s">Fecha de Nacimiento</label>
 									<input type="text" [(ngModel)]="user.birthDay" name="birthday" placeholder="Fecha (dd/mm/yyyy)" value=""/>
 								</div>
-								<div class="field mr_top_8">
-									<label class="opacity font_bold font_small">Tipo</label>
+								<div class="field mt_8">
+									<label class="opacity fw_b fs_s">Tipo</label>
 									<select [(ngModel)]="user.privilege" name="area">
 										<option value="1" selected="selected">Alumno</option>
 										<option value="2">Profesor</option>
 										<option value="3">Administrador</option>
 									</select>
 								</div>
-								<div class="field mr_top_8">
-									<label class="opacity font_bold font_small">Sexo</label>
+								<div class="field mt_8">
+									<label class="opacity fw_b fs_s">Sexo</label>
 									<select [(ngModel)]="user.sex" name="area">
 										<option value="0" selected="selected">Hombre</option>
 										<option value="1">Mujer</option>
 										<option value="2">Otro</option>
 									</select>
 								</div>
-								<div class="field mr_top_8">
-									<label class="opacity font_bold font_small">Contraseña Nueva</label>
+								<div class="field mt_8">
+									<label class="opacity fw_b fs_s">Contraseña Nueva</label>
 									<input type="password" [(ngModel)]="user.password" name="newpassword" placeholder="Contraseña Nueva" value="" />
 								</div>
 							</div>
-							<div class="field text_align_right">
-								<input type="submit" class="bg_secondary font_white shadow_raised" value="Agregar">
+							<div class="field ta_r">
+								<input type="submit" class="bg_secondary fc_white shadow_raised" value="Agregar">
 							</div>
 						</div>
 					</div>
@@ -72,77 +72,79 @@
 			</div>
 		</div>
 	</div>
-	<section class="list">
-		<div class="pd_16 resp_title main_action_button">
-			<button class="pd_8 pd_right_12 bg_secondary shadow_raised border_radius" onclick="showPopup(true, '#user-add')">
-				<img class="v_align_middle icon" src="assets/icons/plus_white.png">
-				<b class="v_align_middle mr_left_4 font_normal">Nuevo Usuario</b>
-			</button>
-		</div>
-		<div class="pd_32" *ngIf="users?.length < 1">
-			<h2 class="title_big font_light opacity">
-				Ningun usuario por el momento
-			</h2>
-		</div>
-		<div class="responsive_col resp_list text_align_center">
-			<div class="col_3 text_align_left" *ngFor="let user of users">
-				<div class="bg_white resp_item shadow_flat border_radius mr_bottom_12 relative_pos">
-					<div class="tr_0 h_32">
-						<div class="mr_12 size_32 relative_pos">
-							<button class="options_button hover_black size_32 text_align_center circle">
-								<img class="icon v_align_middle" src="assets/icons/dots-vertical_white.png">
-							</button>
-							<div class="hidden_options">
-								<div class="bg_white pd_bottom_8 pd_top_8 shadow_flat border_radius font_normal">
+	<div class="page_container_in">
+		<section class="list">
+			<div class="p_16 resp_title main_action_button">
+				<button class="p_8 pr_12 bg_secondary shadow_raised border_radius" onclick="showPopup(true, '#user-add')">
+					<img class="va_m icon" src="assets/icons/plus_white.png">
+					<b class="va_m ml_4 fw_500">Nuevo Usuario</b>
+				</button>
+			</div>
+			<div class="p_32" *ngIf="users?.length < 1">
+				<h2 class="title_big fw_l opacity">
+					Ningun usuario por el momento
+				</h2>
+			</div>
+			<div class="col_r resp_list ta_c">
+				<div class="col_3 ta_l" *ngFor="let user of users">
+					<div class="bg_white resp_item shadow_flat border_radius mb_12 pos_r">
+						<div class="tr_0 h_32">
+							<div class="m_12 size_32 pos_r">
+								<button class="options_button hover_black size_32 ta_c circle">
+									<img class="icon va_m" src="assets/icons/dots-vertical_white.png">
+								</button>
+								<div class="hidden_options">
+									<div class="bg_white pb_8 pt_8 shadow_flat border_radius fw_500">
+										<a href="/admin/usuarios/{{ user._id }}">
+											<p class="p_8 pl_16 pr_16 hover_black">
+												Ver
+											</p>
+										</a>
+										<a href="/admin/usuarios/{{ user._id }}?edit=true">
+											<p class="p_8 pl_16 pr_16 hover_black">
+												Editar
+											</p>
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="profile_display mini">
+							<div class="background bg_primary_dark">
+								<div class="img_container" *ngIf="user.backPhoto != undefined && user.backPhoto != ''">
+									<img src="/media/{{ user._id }}/background/{{ user.backPhoto }}" adjustable>
+								</div>
+								<div class="bg_opacity" *ngIf="user.backPhoto != undefined && user.backPhoto != ''"></div>
+							</div>
+							<div class="profile_photo fc_white">
+								<div class="inner">
 									<a href="/admin/usuarios/{{ user._id }}">
-										<p class="pd_8 pd_left_16 pd_right_16 hover_black">
-											Ver
-										</p>
-									</a>
-									<a href="/admin/usuarios/{{ user._id }}?edit=true">
-										<p class="pd_8 pd_left_16 pd_right_16 hover_black">
-											Editar
-										</p>
+										<div class="img_container circle shadow_flat">
+											<img src="assets/icons/default_profile.png" *ngIf="user.profilePhoto == undefined || user.profilePhoto == ''">
+											<img src="/media/{{ user._id }}/profile/{{ user.profilePhoto }}"*ngIf="user.profilePhoto != undefined && user.profilePhoto != ''">
+										</div>
 									</a>
 								</div>
 							</div>
 						</div>
-					</div>
-					<div class="profile_display mini">
-						<div class="background bg_primary_dark">
-							<div class="img_container" *ngIf="user.backPhoto != undefined && user.backPhoto != ''">
-								<img src="/media/{{ user._id }}/background/{{ user.backPhoto }}" adjustable>
-							</div>
-							<div class="bg_opacity" *ngIf="user.backPhoto != undefined && user.backPhoto != ''"></div>
-						</div>
-						<div class="profile_photo font_white">
-							<div class="inner">
-								<a href="/admin/usuarios/{{ user._id }}">
-									<div class="img_container circle shadow_flat">
-										<img src="assets/icons/default_profile.png" *ngIf="user.profilePhoto == undefined || user.profilePhoto == ''">
-										<img src="/media/{{ user._id }}/profile/{{ user.profilePhoto }}"*ngIf="user.profilePhoto != undefined && user.profilePhoto != ''">
-									</div>
-								</a>
-							</div>
-						</div>
-					</div>
-					<div class="info">
-						<div class="pd_16">
-							<div class="mr_bottom_8">
-								<h3 class="font_normal mr_bottom_4">
-									{{ user.name }} {{ user.lastName }}
-								</h3>
-								<p class="opacity">
-									<b class="font_normal">{{ user.mail }}</b>
+						<div class="info">
+							<div class="p_16">
+								<div class="mb_8">
+									<h3 class="fw_500 mb_4">
+										{{ user.name }} {{ user.lastName }}
+									</h3>
+									<p class="opacity">
+										<b class="fw_500">{{ user.mail }}</b>
+									</p>
+								</div>
+								<p class="fw_500">
+									{{ userTypes[user.privilege] }}
 								</p>
 							</div>
-							<p class="font_normal">
-								{{ userTypes[user.privilege] }}
-							</p>
 						</div>
-					</div>
-				</div>	
+					</div>	
+				</div>
 			</div>
-		</div>
-	</section>
+		</section>
+	</div>
 </div>

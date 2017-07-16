@@ -1,70 +1,78 @@
 <section class="app_bar_back"></section>
-<section class="app_bar bg_primary shadow_flat">
+<section class="app_bar bg_white shadow_flat">
 	<div class="app_bar_inner">
 		<div class="bar_top">
 			<a href="/">
-				<div class="auto_col logo_container hover_white">
-					<img class="icon v_align_middle" src="assets/icons/logo_flat_white.png">
+				<div class="col_a logo_container hover_black">
+					<img class="icon va_m" src="assets/icons/logo.png">
 				</div>
 			</a>
 			<div class="float_right">
-				<div class="auto_col v_align_top searchbar_container">
-					<button class="action_button pd_left_8 pd_right_8 hover_white" id="search-icon" title="Buscar" onclick="showSearchBar(true)">
-						<img class="icon v_align_middle mr_left_4 mr_right_4" src="assets/icons/magnify_white.png">
+				<div class="col_a va_t searchbar_container">
+					<button class="action_button pl_8 pr_8 hover_black" id="search-icon" title="Buscar" onclick="showSearchBar(true)">
+						<img class="icon va_m ml_4 mr_4" src="assets/icons/magnify_black.png">
 					</button>
 					<div class="searchbar" id="search-bar">
 						<div class="field">
 							<button onclick="showSearchBar(false)">
-								<img class="icon" src="assets/icons/arrow-left_white.png">
+								<img class="icon opacity" src="assets/icons/arrow-left_black.png">
 							</button>
 							<button class="close">
-								<img class="icon" src="assets/icons/magnify_white.png">
+								<img class="icon opacity" src="assets/icons/magnify_black.png">
 							</button>
-							<input class="bg_primary_dark" id="search-bar-input" type="text" placeholder="Buscar">
+							<input class="bg_lightgray" id="search-bar-input" type="text" placeholder="Buscar">
 						</div>
 					</div>
-				</div><div class="auto_col v_align_top messages_button">
+				</div><div class="col_a va_t messages_button">
 					<a href="/mensajes">
-						<button class="action_button pd_left_8 pd_right_8 hover_white" id="msm-open-button" title="Abrir Mensajes">
-							<img class="icon v_align_middle mr_left_4 mr_right_4" src="assets/icons/email_white.png">
+						<button class="action_button pl_8 pr_8 hover_black" id="msm-open-button" title="Abrir Mensajes">
+							<img class="icon va_m ml_4 mr_4" src="assets/icons/email_black.png">
 						</button>
 					</a>
-				</div><div class="auto_col v_align_top hidden_block_container notif">
+				</div><div class="col_a va_t hidden_block_container notif">
 					<app-notifications></app-notifications>
-				</div><div class="auto_col v_align_top hidden_block_container prof_container pd_left_16 pd_right_16 hover_white" id="menu-pphoto">
-					<div class="img_container circle auto_col size_32 v_align_middle cursor_pointer">
-						<img [src]="user.profilePhoto != undefined && user.profilePhoto != null ? '/media/'+user._id+'/profile/'+user.profilePhoto : 'assets/icons/default_profile.png'">
+				</div><div class="col_a va_t hidden_block_container prof_container pl_16 pr_16 hover_black" id="menu-pphoto">
+					<div class="img_container circle col_a size_32 va_m cursor_pointer">
+						<img [src]="user.profilePhoto ? '/media/'+user._id+'/profile/'+user.profilePhoto : 'assets/icons/default_profile.png'">
 					</div>
-					<span class="mr_left_8 font_white">{{ user.name }}</span>
+					<span class="ml_8 name">{{ user.name }}</span>
 					<div class="hidden_block" id="options-mini">
 						<i class="mark bg_white"></i>
 						<div class="bg_white shadow_flat border_radius">
-							<section class="mm_section border_bottom pd_top_12 pd_bottom_12">
-								<div class="pd_left_16 pd_right_16 opacity">
-									<p class="font_small">Iniciado con:</p>
-									<p class="font_bold mr_top_4">{{ user.mail }}</p>
+							<section class="mm_section bb pt_12 pb_12">
+								<div class="pl_16 pr_16 opacity">
+									<p class="fs_s">Iniciado con:</p>
+									<p class="fw_b mt_4">{{ user.mail }}</p>
 								</div>
 							</section>
-							<section class="mm_section border_bottom pd_top_8 pd_bottom_8 font_normal font_color_normal">
-								<a href="/perfil">
-									<div class="pd_8 pd_left_16 pd_right_16 hover_black">
-										<p>Cuenta</p>
+							<section class="mm_section bb pt_8 pb_8 fw_500 fc_n">
+								<a routerLink="/perfil" routerLinkActive="fc_blue">
+									<div class="p_8 pl_16 pr_16 hover_black">
+										<span class="va_m icon small">
+											<i class="material-icons">&#xE853;</i>
+										</span><span class="va_m ml_12">Cuenta</span>
 									</div>
 								</a>
-								<a href="/ayuda">
-									<div class="pd_8 pd_left_16 pd_right_16 hover_black">
-										<p>Ayuda</p>
+								<a routerLink="/ayuda" routerLinkActive="fc_blue">
+									<div class="p_8 pl_16 pr_16 hover_black">
+										<span class="va_m icon small">
+											<i class="material-icons">help</i>
+										</span><span class="va_m ml_12">Ayuda</span>
 									</div>
 								</a>
-								<a href="/ajustes">
-									<div class="pd_8 pd_left_16 pd_right_16 hover_black">
-										<p>Ajustes</p>
+								<a routerLink="/ajustes" routerLinkActive="fc_blue">
+									<div class="p_8 pl_16 pr_16 hover_black">
+										<p>
+											<span class="va_m icon small">
+												<i class="material-icons">settings</i>
+											</span><span class="va_m ml_12">Ajustes</span>
+										</p>
 									</div>
 								</a>
 							</section>
-							<section class="mm_section pd_top_4 pd_bottom_4">
-								<button class="w_100 font_red red_trans" (click)="logout()">
-									<div class="pd_8 font_bold">Cerrar Sesión</div>
+							<section class="mm_section pt_4 pb_4">
+								<button class="w_100 fc_red red_trans" (click)="logout()">
+									<div class="p_8 fw_b">Cerrar Sesión</div>
 								</button>
 							</section>
 						</div>
@@ -73,43 +81,53 @@
 			</div>
 		</div>
 		<div class="bar_bottom">
-			<div class="menu font_black">
-				<nav class="item hover_white" *ngIf="user.privilege != 0" [ngClass]="{'active font_white': getActive('cursos')}">
-					<a href="/cursos">
+			<div class="menu">
+				<nav class="item hover_black" *ngIf="user.privilege != 0">
+					<a routerLink="/cursos" routerLinkActive="fc_black">
 						<div class="inner">
-							<img class="icon" src="assets/icons/book-multiple_white.png" *ngIf=" getActive('cursos') "><img class="icon" src="assets/icons/book-multiple_black.png" *ngIf=" !getActive('cursos') "><span>
+							<span class="icon va_m">
+								<i class="material-icons">book</i>
+							</span><span class="va_m ml_8 label">
 								Cursos
 							</span>
 						</div>
 					</a>
-				</nav><nav class="item hover_white" *ngIf="user.privilege == 0" [ngClass]="{'active font_white': getActive('admin')}">
-					<a href="/admin">
+				</nav><nav class="item hover_black" *ngIf="user.privilege == 0">
+					<a routerLink="/admin" routerLinkActive="fc_black">
 						<div class="inner">
-							<img class="icon" src="assets/icons/edit_white.png" *ngIf=" getActive('admin') "><img class="icon" src="assets/icons/edit_black.png" *ngIf=" !getActive('admin') "><span>
+							<span class="icon va_m">
+								<i class="material-icons">mode edit</i>
+							</span><span class="va_m ml_8 label">
 								Administrador
 							</span>
-						</div>
+						</div> size_24
 					</a>
-				</nav><nav class="item hover_white" [ngClass]="{'active font_white': getActive('agenda')}">
-					<a href="/agenda">
+				</nav><nav class="item hover_black">
+					<a routerLink="/agenda" routerLinkActive="fc_black">
 						<div class="inner">
-							<img class="icon" src="assets/icons/calendar_white.png" *ngIf=" getActive('agenda') "><img class="icon" src="assets/icons/calendar_black.png" *ngIf=" !getActive('agenda') "><span>
+							<span class="icon va_m">
+								<i class="material-icons">event</i>
+							</span><span class="va_m ml_8 label">
 								Agenda
 							</span>
 						</div>
 					</a>
-				</nav><nav class="item hover_white" [ngClass]="{'active font_white': getActive('foro')}">
-					<a href="/foro">
+				</nav><nav class="item hover_black">
+					<a routerLink="/foro" routerLinkActive="fc_black">
 						<div class="inner">
-							<img class="icon" src="assets/icons/forum_white.png" *ngIf=" getActive('foro') "><img class="icon" src="assets/icons/forum_black.png" *ngIf=" !getActive('foro') "><span>
+							<span class="icon va_m">
+								<i class="material-icons">forum</i>
+							</span><span class="va_m ml_8 label">
 								Foro
 							</span>
 						</div>
 					</a>
-				</nav><nav class="item hover_white" [ngClass]="{'active font_white': getActive('contenidos')}">
-					<a href="/contenidos">
+				</nav><nav class="item hover_black">
+					<a routerLink="/contenidos" routerLinkActive="fc_black">
 						<div class="inner">
-							<img class="icon" src="assets/icons/book-open_white.png" *ngIf=" getActive('contenidos') "><img class="icon" src="assets/icons/book-open_black.png" *ngIf=" !getActive('contenidos') "><span>
+							<span class="icon va_m">
+								<i class="material-icons">&#xE02F;</i>
+							</span><span class="va_m ml_8 label">
 								Contenidos
 							</span>
 						</div>

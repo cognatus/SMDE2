@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Router, ActivatedRoute, Params, ParamMap } from '@angular/router';
 import { AuthGuard } from '../../auth/auth.guard';
 import { CourseDetailService } from './course-detail.service';
+
+import 'rxjs/add/operator/switchMap';
 
 import { User } from '../../_models/user';
 import { Course } from '../../_models/course';
@@ -20,21 +22,26 @@ export class CourseDetailComponent implements OnInit {
 	courseMembers: User[];
 	displayedList: number = 0; // O contenidos, 1 actividades, 2 miembros
 	selectedGroup: any;
+	suscribeAction: boolean = true;
 	colors= new Colors;
 
-	constructor(private router: Router, private auth: AuthGuard, private activatedRoute: ActivatedRoute, private courseDetailService: CourseDetailService) {
-		this.activatedRoute.params.subscribe((params: Params) => {
-			this.courseId = params['id'];
-		});
+	constructor(private router: Router, 
+		private auth: AuthGuard, 
+		private activatedRoute: ActivatedRoute, 
+		private courseDetailService: CourseDetailService) {
 	}
 
 	ngOnInit() {
-		this.fetchCourse();
+		this.activatedRoute.paramMap.switchMap((params: Params) => 
+			this.courseDetailService.getCourse(params.get('id')))
+				.subscribe( course => {
+					this.course = course;
+				});
 		this.selectedGroup = undefined;
 	}
 
 	fetchCourse(): void {
-		this.courseDetailService.getCourse(this.courseId)
+		this.courseDetailService.getCourse(this.course._id)
 			.subscribe( course => {
 				this.course = course;
 			}, error => {
@@ -80,9 +87,9 @@ export class CourseDetailComponent implements OnInit {
 	}
 
 	suscribeCourse(status: boolean): void {
-		this.courseDetailService.suscribeCourse(status, this.courseId, this.auth.getUser(), '')
+		this.courseDetailService.suscribeCourse(status, this.course._id, this.auth.getUser(), '')
 			.subscribe( response => {
-				location.reload();
+				this.fetchCourse();
 			}, error => {
 				console.log(error);
 			});
@@ -92,7 +99,7 @@ export class CourseDetailComponent implements OnInit {
 		let flag = false;
 		if ( this.course.user.id !== this.auth.getUser()._id ) {
 			for ( let i = 0 ; i < this.course.members.length ; i++ ) {
-				if ( this.course.members[i].user.id === this.auth.getUser()._id ) {
+				if ( this.course.members[i].user._id === this.auth.getUser()._id ) {
 					flag = true;
 					break;
 				}

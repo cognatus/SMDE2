@@ -31,9 +31,6 @@ import { routes } from './app.routes';
 		CoursesModule,
 		MessagesModule
 	],
-	exports: [
-		MessagesModule
-	],
 	bootstrap: [ AppComponent ]
 })
 export class AppModule { }

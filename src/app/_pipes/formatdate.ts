@@ -9,8 +9,8 @@ export class FormatDatePipe implements PipeTransform {
 		let day = newDate.getDate() + 1 < 10 ? '0' + (newDate.getDate() + 1).toString() : (newDate.getDate() + 1).toString();
 		let month = newDate.getMonth() + 1 < 10 ? '0' + (newDate.getMonth() + 1).toString() : (newDate.getMonth() + 1).toString();
 		let year = newDate.getFullYear().toString();
-		let hour = newDate.getHours();
-		let minutes = newDate.getMinutes();
+		let hour = newDate.getHours() < 10 ? '0' + newDate.getHours() : newDate.getHours();
+		let minutes = newDate.getMinutes() < 10 ? '0' + newDate.getMinutes() : newDate.getMinutes();
 		let formatedDate = '';
 
 		if ( arg == 'time' ) {

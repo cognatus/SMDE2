@@ -41,6 +41,7 @@ export class ProfileComponent implements OnInit {
 
 	ngOnInit() {
 		this.fetchUser( () => {
+			this.userSrc = '/media/' + this.user._id + '/';
 			for ( let i = this.user.photos.length - 1 ; i >= 0 ; i-- ) {
 				let item = this.user.photos[i];
 				for ( let j = 0 ; j < this.photos.length ; j++ ) {
@@ -67,7 +68,6 @@ export class ProfileComponent implements OnInit {
 				}
 			}
 		});
-		this.userSrc = '/media/' + this.user._id + '/';
 	}
 
 	fetchUser( callback: () => void ): void {

@@ -1,26 +1,25 @@
-<app-menu *ngIf="auth.isLogged()"></app-menu>
-<div class="courses_container full">
+<div class="page_container full s_t">
 	<div class="pop_up_container" id="confirm-box">
 		<div class="pop_up_back" onclick="showPopup(false, '#confirm-box')"></div>
 		<div class="pop_up">
 			<div class="inner border_radius">
 				<div class="bg_primary">
-					<div class="pop_up_title font_white">
+					<div class="pop_up_title fc_white">
 						<h1 class="title">
 							Advertencia
 						</h1>
 						<div class="close_button">
-							<button class="pd_8 hover_black circle" onclick="showPopup(false, '#confirm-box')">
+							<button class="p_8 hover_black circle" onclick="showPopup(false, '#confirm-box')">
 								<img class="icon" src="assets/icons/arrow-left_white.png">
 							</button>
 						</div>
 					</div>
 				</div>
 				<div class="padding_block">
-					<p class="title_small opacity font_normal">¿Estas seguro de realizar esta acción?</p>
-					<div class="field mr_top_48 text_align_right">
-						<button class="bg_red font_white shadow_raised border_radius mr_right_8">Cancelar</button>
-						<button class="bg_blue font_white shadow_raised border_radius" (click)="deleteGroup()">Aceptar</button>
+					<p class="title_small opacity fw_500">¿Estas seguro de realizar esta acción?</p>
+					<div class="field mt_48 ta_r">
+						<button class="bg_red fc_white shadow_raised border_radius mr_8">Cancelar</button>
+						<button class="bg_blue fc_white shadow_raised border_radius" (click)="deleteGroup()">Aceptar</button>
 					</div>
 				</div>
 			</div>
@@ -31,7 +30,7 @@
 		<div class="pop_up">
 			<div class="inner border_radius">
 				<div class="bg_primary">
-					<div class="pop_up_title font_white">
+					<div class="pop_up_title fc_white">
 						<h1 class="title" *ngIf="!selectedGroup">
 							Administrar Grupos
 						</h1>
@@ -39,84 +38,84 @@
 							{{ selectedGroup.isNew ? 'Nuevo Grupo' : selectedGroup.name }}
 						</h1>
 						<div class="close_button">
-							<button class="pd_8 hover_black circle" onclick="showPopup(false, '#groups-admin')" *ngIf="!selectedGroup">
+							<button class="p_8 hover_black circle" onclick="showPopup(false, '#groups-admin')" *ngIf="!selectedGroup">
 								<img class="icon" src="assets/icons/arrow-left_white.png">
 							</button>
-							<button class="pd_8 hover_black circle" (click)="resetValues()" *ngIf="selectedGroup">
+							<button class="p_8 hover_black circle" (click)="resetValues()" *ngIf="selectedGroup">
 								<img class="icon" src="assets/icons/arrow-left_white.png">
 							</button>
 						</div>
 					</div>
 				</div>
 				<form class="padding_block" (submit)="updateGroup()">
-					<div class="pd_24 text_align_center" *ngIf="(!course.groups || course.groups?.length < 1) && !selectedGroup">
-						<h2 class="title_medium opacity pd_bottom_8 mr_bottom_32">No hay grupos aun</h2>
-						<button class="pd_16 font_big bg_secondary shadow_raised border_radius" (click)="selectGroup($event)">
-							<img class="v_align_middle icon" src="assets/icons/plus_white.png">
-							<b class="v_align_middle mr_left_4 font_normal">Crear Grupo</b>
+					<div class="p_24 ta_c" *ngIf="(!course.groups || course.groups?.length < 1) && !selectedGroup">
+						<h2 class="title_medium opacity pb_8 mb_32">No hay grupos aun</h2>
+						<button class="p_16 fs_b bg_secondary shadow_raised border_radius" (click)="selectGroup($event)">
+							<img class="va_m icon" src="assets/icons/plus_white.png">
+							<b class="va_m ml_4 fw_500">Crear Grupo</b>
 						</button>
 					</div>
 					<div *ngIf="(course.groups && course.groups?.length > 0) || selectedGroup">
-						<div class="text_align_left pd_bottom_24" *ngIf="!selectedGroup">
-							<button class="pd_8 pd_right_12 bg_secondary shadow_raised border_radius" (click)="selectGroup($event)">
-								<img class="v_align_middle icon" src="assets/icons/plus_white.png">
-								<b class="v_align_middle mr_left_4 font_normal">Nuevo Grupo</b>
+						<div class="ta_l pb_24" *ngIf="!selectedGroup">
+							<button class="p_8 pr_12 bg_secondary shadow_raised border_radius" (click)="selectGroup($event)">
+								<img class="va_m icon" src="assets/icons/plus_white.png">
+								<b class="va_m ml_4 fw_500">Nuevo Grupo</b>
 							</button>
 						</div>
 						<div class="data_container">
-							<div class="mr_bottom_24 font_secondary">
-								<h2 class="auto_col title_medium v_align_middle" *ngIf="!selectedGroup">
+							<div class="mb_24 fc_secondary">
+								<h2 class="col_a title_medium va_m" *ngIf="!selectedGroup">
 									Grupos
-								</h2><h2 class="auto_col title_medium v_align_middle" *ngIf="selectedGroup">
+								</h2><h2 class="col_a title_medium va_m" *ngIf="selectedGroup">
 									{{ selectedGroup.name == '' ? 'Nuevo Grupo' : selectedGroup.name }}
 								</h2>
 							</div>
-							<div class="pd_left_8 pd_right_8" *ngIf="!selectedGroup">
-								<div class="list_element hover_black" *ngFor="let group of course.groups; let i = index" [ngClass]="{'border_top': i > 0}">
+							<div class="pl_8 pr_8" *ngIf="!selectedGroup">
+								<div class="list_element hover_black" *ngFor="let group of course.groups; let i = index" [ngClass]="{'bt': i > 0}">
 									<div (click)="selectGroup($event, group)">
 										<div class="ref">
-											<span class="circle font_white" [style.background]="colors.getColor(group.name)">
-												<label class="title_smaller font_light size_24">{{ group.name.charAt(0) }}</label>
+											<span class="circle fc_white" [style.background]="colors.getColor(group.name)">
+												<label class="title_smaller fw_l size_24">{{ group.name.charAt(0) }}</label>
 											</span>
 										</div><div class="info">
-											<div class="pd_16">
-												<h3 class="font_normal mr_bottom_4">{{ group.name }}</h3>
+											<div class="p_16">
+												<h3 class="fw_500 mb_4">{{ group.name }}</h3>
 												<p class="opacity">
-													<b class="font_normal">{{ getGroupMembers(group._id).length }} {{ getGroupMembers(group._id).length != 1 ? 'Miembros' : 'Miembro' }}</b>
+													<b class="fw_500">{{ getGroupMembers(group._id).length }} {{ getGroupMembers(group._id).length != 1 ? 'Miembros' : 'Miembro' }}</b>
 												</p>
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
-							<div class="pd_left_8 pd_right_8 pd_top_8" *ngIf="selectedGroup">
+							<div class="pl_8 pr_8 pt_8" *ngIf="selectedGroup">
 								<div class="field">
-									<p class="title_smaller font_blue mr_bottom_12">Nombre del Grupo</p>
+									<p class="title_smaller fc_blue mb_12">Nombre del Grupo</p>
 									<input type="text" [(ngModel)]="selectedGroup.name" name="group_name" placeholder="Nombre del Grupo"/>
 								</div>
-								<div class="pd_top_8" *ngIf="course.members?.length > 0">
-									<div class="mr_top_24" *ngIf="!selectedGroup.isNew">
-										<h4 class="title_smaller font_blue mr_bottom_12">
-											Miembros <span class="font_small">(Click para eliminar/deshacer)</span>
+								<div class="pt_8" *ngIf="course.members?.length > 0">
+									<div class="mt_24" *ngIf="!selectedGroup.isNew">
+										<h4 class="title_smaller fc_blue mb_12">
+											Miembros <span class="fs_s">(Click para eliminar/deshacer)</span>
 										</h4>
-										<p class="pd_24 title_small font_lightnormal opacity" *ngIf="getGroupMembers(selectedGroup.id)?.length < 1">
+										<p class="p_24 title_small fw_300 opacity" *ngIf="getGroupMembers(selectedGroup.id)?.length < 1">
 											No hay miembros en este grupo
 										</p>
 										<div class="list">
-											<div class="list_element hover_black" *ngFor="let user of getGroupMembers(selectedGroup.id); let i = index" [ngClass]="{'border_top': i > 0}">
+											<div class="list_element hover_black" *ngFor="let user of getGroupMembers(selectedGroup.id); let i = index" [ngClass]="{'bt': i > 0}">
 												<div (click)="addUserToGroup(user)">
 													<div class="ref">
-														<span class="circle bg_red font_white" *ngIf="!isInGroup(user.id)">
+														<span class="circle bg_red fc_white" *ngIf="!isInGroup(user.id)">
 															<img class="icon" src="assets/icons/close_white.png">
 														</span>
 														<div class="img_container circle" *ngIf="isInGroup(user.id)">
 															<img [src]="user.profilePhoto && user.profilePhoto != '' ? '/media/'+user.id+'/profile/'+user.profilePhoto : 'assets/icons/default_profile.png'">
 														</div>
 													</div><div class="info">
-														<div class="pd_16">
-															<h3 class="font_normal mr_bottom_4">{{ user.name }} {{ user.lastName }}</h3>
+														<div class="p_16">
+															<h3 class="fw_500 mb_4">{{ user.name }} {{ user.lastName }}</h3>
 															<p class="opacity">
-																<b class="font_normal">{{ user.mail }}</b>
+																<b class="fw_500">{{ user.mail }}</b>
 															</p>
 														</div>
 													</div>
@@ -124,31 +123,31 @@
 											</div>
 										</div>
 									</div>
-									<div class="mr_top_24">
-										<h4 class="title_smaller font_blue mr_bottom_12">
+									<div class="mt_24">
+										<h4 class="title_smaller fc_blue mb_12">
 											Agregar Miembros
 										</h4>
-										<p class="pd_24 title_small font_lightnormal" *ngIf="getGroupMembers('')?.length < 1">
+										<p class="p_24 title_small fw_300" *ngIf="getGroupMembers('')?.length < 1">
 											<span class="opacity">No hay miembros para agregar</span>
-											<span class="font_big font_normal opacity mr_top_16">
+											<span class="fs_b fw_500 opacity mt_16">
 												Para agregar miembros a este grupo debes eliminar miembros de otro grupo
 											</span>
 										</p>
 										<div class="list">
-											<div class="list_element hover_black" *ngFor="let user of getGroupMembers(''); let i = index" [ngClass]="{'border_top': i > 0}">
+											<div class="list_element hover_black" *ngFor="let user of getGroupMembers(''); let i = index" [ngClass]="{'bt': i > 0}">
 												<div (click)="addUserToGroup(user)">
 													<div class="ref">
-														<span class="circle bg_blue font_white" *ngIf="isInGroup(user.id)">
+														<span class="circle bg_blue fc_white" *ngIf="isInGroup(user.id)">
 															<img class="icon" src="assets/icons/check_white.png">
 														</span>
 														<div class="img_container circle" *ngIf="!isInGroup(user.id)">
 															<img [src]="user.profilePhoto && user.profilePhoto != '' ? '/media/'+user.id+'/profile/'+user.profilePhoto : 'assets/icons/default_profile.png'">
 														</div>
 													</div><div class="info">
-														<div class="pd_16">
-															<h3 class="font_normal mr_bottom_4">{{ user.name }} {{ user.lastName }}</h3>
+														<div class="p_16">
+															<h3 class="fw_500 mb_4">{{ user.name }} {{ user.lastName }}</h3>
 															<p class="opacity">
-																<b class="font_normal">{{ user.mail }}</b>
+																<b class="fw_500">{{ user.mail }}</b>
 															</p>
 														</div>
 													</div>
@@ -157,9 +156,9 @@
 										</div>
 									</div>
 								</div>
-								<div class="field mr_top_24 text_align_right">
-									<input type="button" class="bg_red font_white shadow_raised mr_right_8" value="Eliminar Grupo" *ngIf="!selectedGroup.isNew" onclick="showPopup(true, '#confirm-box')" (click)="preventSubmit($event)">
-									<input type="submit" class="bg_secondary font_white shadow_raised" value="{{ selectedGroup.isNew ? 'Crear Grupo' : 'Actualizar Grupo' }}">
+								<div class="field mt_24 ta_r">
+									<input type="button" class="bg_red fc_white shadow_raised mr_8" value="Eliminar Grupo" *ngIf="!selectedGroup.isNew" onclick="showPopup(true, '#confirm-box')" (click)="preventSubmit($event)">
+									<input type="submit" class="bg_secondary fc_white shadow_raised" value="{{ selectedGroup.isNew ? 'Crear Grupo' : 'Actualizar Grupo' }}">
 								</div>
 							</div>
 						</div>
@@ -168,171 +167,162 @@
 			</div>
 		</div>
 	</div>
-	<section class="left_grid">
-		<div class="bg_white info_block shadow_flat relative_pos mr_bottom_16">
-			<div class="tr_0 h_32">
-				<div class="mr_12 size_32 relative_pos">
-					<button class="options_button hover_black size_32 text_align_center circle">
-						<img class="icon v_align_middle" src="assets/icons/dots-vertical_white.png">
+	<div class="page_container_in">
+		<div class="p_16 resp_title main_action_button">
+			<a href="/cursos">
+				<button class="btn btn_primary" onclick="showPopup(true, '#courses-add')">
+					<span class="va_m icon">
+						<i class="material-icons fw_500">arrow_back</i>
+					</span><span class="va_m ml_4">
+						Regresar
+					</span>
+				</button>
+			</a>
+		</div>
+		<section class="left_grid">
+			<div class="pos_r mb_16 b_gray bg_white border_radius" *ngIf="course.name">
+				<div class="p_12 ta_r">
+					<button class="btn suscribe_button border_radius fw_b" [class.active]="isSuscribed()" (click)="suscribeCourse(!isSuscribed())" (mouseover)="suscribeAction = false" (mouseleave)="suscribeAction = true">
+						<div *ngIf="isSuscribed()">
+							<span class="icon small va_m">
+								<i class="material-icons">{{ suscribeAction ? 'check' : 'close' }}</i>
+							</span><span class="va_m fs_m" [class.ml_8]="isSuscribed()">
+								{{ suscribeAction ? auth.getUser().sex == 0 ? 'Inscrito': 'Inscrita' : 'Cancelar Inscripción' }}
+							</span>
+						</div>
+						<div *ngIf="!isSuscribed()">
+							<span class="va_m fs_m">
+								Inscribirse
+							</span>
+						</div>
 					</button>
-					<div class="hidden_options">
-						<div class="bg_white pd_bottom_8 pd_top_8 shadow_flat border_radius font_normal" *ngIf="course.user != undefined">
-							<p class="pd_8 pd_left_16 pd_right_16 hover_black" (click)="suscribeCourse(!isSuscribed())" *ngIf="course.user.id != auth.getUser()._id">
-								<span>
-									{{ isSuscribed() ? 'Cancelar Inscripción' : 'Inscribirse'}}
-								</span>
-							</p>
-							<div *ngIf="course.user.id == auth.getUser()._id">
-								<p class="pd_8 pd_left_16 pd_right_16 hover_black" >
+				</div>
+				<div class="p_12 ta_r pos_r h_32" *ngIf="auth.getUser()._id == course.user.id">
+					<button class="options_button hover_black size_32 ta_c circle">
+						<img class="icon va_m opacity" src="assets/icons/dots-vertical_black.png">
+					</button>
+					<div class="hidden_options ta_l">
+						<div class="bg_darkgray fc_white pb_8 pt_8 shadow_flat border_radius fw_500">
+							<div>
+								<p class="p_8 pl_16 pr_16 hover_black" >
 									Editar
 								</p>
-								<p class="pd_8 pd_left_16 pd_right_16 hover_black" onclick="showPopup(true, '#groups-admin')">
+								<p class="p_8 pl_16 pr_16 hover_black" onclick="showPopup(true, '#groups-admin')">
 									Administrar grupos
 								</p>
-								<p class="pd_8 pd_left_16 pd_right_16 font_red hover_black">
+								<p class="p_8 pl_16 pr_16 fc_red hover_black">
 									Eliminar
 								</p>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-			<div class="profile_display mini">
-				<div class="background" *ngIf="course.name" [ngStyle]="{ 'background-color': colors.getColor(course.name) }">
-				</div>
-				<div class="profile_photo">
-					<div class="list_element">
-						<div class="ref">
-							<span class="circle bg_opacity_light font_white">
-								<label class="title_smaller font_light size_24" *ngIf="course.name">{{ course.name.charAt(0) }}</label>
-							</span>
-						</div><div class="info font_white">
-							<div class="pd_16">
-								<h3 class="font_normal mr_bottom_4">
-									{{ course.name }}
-								</h3>
-								<p class="opacity">
-									<b class="font_normal">Creado el {{ course.createdDate | formatDate }}</b>
-								</p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="inner_info">
-				<div class="pd_12 pd_top_16 font_white">
-					<div class="tags_container">
-						<div class="auto_col" *ngFor="let tag of course.tags">
-							<span class="bg_blue tag">
-								{{ tag }}
-							</span>
-						</div>
-					</div>
-				</div>
-				<div class="pd_16 pd_top_0">
-					<h4 class="font_big font_normal opacity">Descripción</h4>
-					<p class="pd_top_8 pd_left_12 pd_right_12">{{ course.description }}</p>
-				</div>
-				<div class="list_element" *ngIf="course.user != undefined">
-					<div class="pd_left_12 pd_right_12 opacity">
-						<b>Creado por:</b>
-					</div>
+				<div class="list_element">
 					<div class="ref">
-						<a href="/perfil/{{ course.user.id }}">
-							<div class="img_container circle">
-								<img [src]="course.user.profilePhoto != undefined && course.user.profilePhoto != null ? '/media/'+course.user.id+'/profile/'+course.user.profilePhoto : 'assets/icons/default_profile.png'">
-							</div>
-						</a>
+						<span class="circle bg_opacity_light fc_white" [style.background]="colors.getColor(course.name)" *ngIf="course.name">
+							<label class="title_smaller fw_l size_24">{{ course.name.charAt(0) }}</label>
+						</span>
 					</div><div class="info">
-						<div class="pd_16">
-							<h3 class="font_normal mr_bottom_4">
-								{{ course.user.name }} {{ course.user.lastName }}
+						<div class="p_16">
+							<h3 class="fw_500 mb_4">
+								{{ course.name }}
 							</h3>
 							<p class="opacity">
-								<b class="font_normal">{{ course.user.mail }}</b>
+								<b class="fw_500">Creado el {{ course.createdDate | formatDate }}</b>
 							</p>
 						</div>
 					</div>
 				</div>
-			</div>
-		</div>
-	</section><section class="right_grid">
-		<div class="course_navigation font_secondary mr_bottom_16">
-			<nav class="pd_12 title_smaller auto_col cursor_pointer" [ngClass]="{'border_bottom_primary': displayedList == 0 }" (click)="displayedList = 0">
-				Contenidos
-			</nav><nav class="pd_12 title_smaller auto_col cursor_pointer" [ngClass]="{'border_bottom_primary': displayedList == 1 }" (click)="displayedList = 1">
-				Actividades
-			</nav><nav class="pd_12 title_smaller auto_col cursor_pointer" [ngClass]="{'border_bottom_primary': displayedList == 2 }" (click)="displayedList = 2">
-				Miembros ({{ course.members?.length }})
-			</nav>
-		</div>
-		<div class="list">
-			<div class="" [hidden]="displayedList != 0">
-				
-			</div>
-			<div class="" [hidden]="displayedList != 1">
-				
-			</div>
-			<div class="" [hidden]="displayedList != 2">
-				<div class="pd_32" *ngIf="course.members?.length < 1">
-					<h2 class="title_big font_light opacity">
-						Ningun miembro por el momento
-					</h2>
-				</div>
-				<div class="responsive_col resp_list text_align_center" *ngIf="course.members != undefined && course.members?.length > 0">
-					<div class="col_2 text_align_left" *ngFor="let member of course.members">
-						<div class="bg_white resp_item shadow_flat border_radius mr_bottom_12 relative_pos">
-							<div class="tr_0 h_32">
-								<div class="mr_12 size_32 relative_pos">
-									<button class="options_button hover_black size_32 text_align_center circle">
-										<img class="icon v_align_middle" src="assets/icons/dots-vertical_white.png">
-									</button>
-									<div class="hidden_options">
-										<div class="bg_white pd_bottom_8 pd_top_8 shadow_flat border_radius font_normal">
-											<a href="/perfil/{{ member.user.id }}">
-												<p class="pd_8 pd_left_16 pd_right_16 hover_black">
-													Ver Perfil
-												</p>
-											</a>
-										</div>
+				<div class="inner_info">
+					<div class="p_12 fc_white">
+						<div class="tags_container">
+							<div class="col_a" *ngFor="let tag of course.tags">
+								<span class="bg_blue tag">
+									{{ tag }}
+								</span>
+							</div>
+						</div>
+					</div>
+					<div class="p_16 pt_0" *ngIf="course.description">
+						<p class="p_8 fs_b">{{ course.description }}</p>
+					</div>
+					<div class="list_element" *ngIf="course.user">
+						<div class="pl_12 pr_12 opacity">
+							<b>Creado por:</b>
+						</div>
+						<a href="/perfil/{{ course.user.id }}">
+							<div class="hover_blue">
+								<div class="ref">
+									<div class="img_container circle">
+										<img [src]="course.user.profilePhoto ? '/media/'+course.user.id+'/profile/'+course.user.profilePhoto : 'assets/icons/default_profile.png'">
+									</div>
+								</div><div class="info">
+									<div class="p_16">
+										<h3 class="fw_500 mb_4">
+											{{ course.user.name }} {{ course.user.lastName }}
+										</h3>
+										<p class="opacity">
+											<b class="fw_500">{{ course.user.mail }}</b>
+										</p>
 									</div>
 								</div>
 							</div>
-							<div class="profile_display mini">
-								<div class="background bg_primary_dark">
-									<div class="img_container" *ngIf="member.user.backPhoto != undefined && member.user.backPhoto != ''">
-										<img src="/media/{{ member.user.id }}/background/{{ member.user.backPhoto }}" adjustable>
-									</div>
-									<div class="bg_opacity" *ngIf="member.user.backPhoto != undefined && member.user.backPhoto != ''"></div>
-								</div>
-								<div class="profile_photo font_white">
-									<div class="inner">
-										<a href="/perfil/{{ member.user.id }}">
-											<div class="img_container circle shadow_flat">
-												<img src="assets/icons/default_profile.png" *ngIf="member.user.profilePhoto == undefined || member.user.profilePhoto == ''">
-												<img src="/media/{{ member.user.id }}/profile/{{ member.user.profilePhoto }}"*ngIf="member.user.profilePhoto != undefined && member.user.profilePhoto != ''">
-											</div>
-										</a>
-									</div>
-								</div>
-							</div>
-							<div class="info">
-								<div class="pd_16">
-									<h3 class="font_normal mr_bottom_4">
-										{{ member.user.name }} {{ member.user.lastName }}
-									</h3>
-									<p class="opacity">
-										<b class="font_normal">{{ member.user.mail }}</b>
-									</p>
-									<p class="mr_top_8 font_normal" *ngIf="member.group && member.group != ''">
-										<b class="opacity">Grupo:</b> {{ getGroupName(member.group) }}
-									</p>
-								</div>
-							</div>
-						</div>	
+						</a>
 					</div>
 				</div>
 			</div>
-		</div>
-	</section>
+		</section><section class="right_grid">
+			<section class="h_selection ta_c mb_16">
+				<div class="in">
+					<div class="item" (click)="displayedList = 0" [class.active]="displayedList == 0">
+						<h3>Contenidos</h3>
+					</div><div class="item" (click)="displayedList = 1" [class.active]="displayedList == 1">
+						<h3>Actividades</h3>
+					</div><div class="item" (click)="displayedList = 2" [class.active]="displayedList == 2">
+						<h3>Miembros{{ course.members?.length > 0 ? ' ('+course.members?.length+')' : '' }}</h3>
+					</div>
+				</div>
+			</section>
+			<div class="list">
+				<div [hidden]="displayedList != 0">
+					
+				</div>
+				<div [hidden]="displayedList != 1">
+					
+				</div>
+				<div [hidden]="displayedList != 2">
+					<div class="p_32 ta_c" *ngIf="course.members?.length < 1">
+						<h2 class="title_big fw_l opacity">
+							Ningun miembro por el momento
+						</h2>
+					</div>
+					<div *ngIf="course.members">
+						<div class="bg_white b_gray border_radius mb_16" *ngFor="let member of course.members">
+							<a href="/perfil/{{ member.user.id }}">
+								<div class="list_element hover_blue">
+									<div class="ref">
+										<div class="img_container circle shadow_flat">
+											<img [src]="member.user.profilePhoto && member.user.profilePhoto != '' ? '/media/' +member.user.id+'/profile/'+member.user.profilePhoto : 'assets/icons/default_profile.png'">
+										</div>
+									</div><div class="info">
+										<div class="p_16">
+											<h3 class="fw_500 mb_4">
+												{{ member.user.name }} {{ member.user.lastName }}
+											</h3>
+											<p class="opacity">
+												<b class="fw_500">{{ member.user.mail }}</b>
+											</p>
+											<p class="mt_8 fw_500" *ngIf="member.group && member.group != ''">
+												<b class="opacity">Grupo:</b> {{ getGroupName(member.group) }}
+											</p>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
 </div>

@@ -53,7 +53,6 @@ exports.insertUser = (req, res) => {
 	});
 };
 
-
 // Modificar usuario
 exports.updateUser = (req, res) => {
 	User.findOneAndUpdate({ _id: req.params.id }, {$set: {

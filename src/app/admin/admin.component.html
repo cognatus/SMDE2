@@ -1,20 +1,21 @@
-<app-menu *ngIf="auth.isLogged()"></app-menu>
-<article class="admin_container">
-	<section class="font_big admin_navigation bg_primary_dark">
-		<div class="auto_col">
-			<a href="/admin/usuarios" class="font_white">
-				<nav class="pd_12 border_radius" [ngClass]="getActive('usuarios') ? 'bg_white font_color_normal' : 'hover_black'">
-					Usuarios
-				</nav>
-			</a>
-		</div><!-- <div class="auto_col">
-			<a href="/admin/cursos" class="font_white">
-				<nav class="pd_12 border_radius" [ngClass]="getActive('cursos') ? 'bg_white font_color_normal' : 'hover_black'">
-					Cursos
-				</nav>
-			</a>
-		</div> -->
-	</section><section class="admin_page">
-		<router-outlet></router-outlet>
-	</section>
+<article class="page_container">
+	<div class="page_container_in">
+		<section class="fs_b admin_navigation bg_primary_dark">
+			<div class="col_a">
+				<a href="/admin/usuarios" class="fc_white">
+					<nav class="p_12 border_radius" [ngClass]="getActive('usuarios') ? 'bg_white fc_n' : 'hover_black'">
+						Usuarios
+					</nav>
+				</a>
+			</div><!-- <div class="col_a">
+				<a href="/admin/cursos" class="fc_white">
+					<nav class="p_12 border_radius" [ngClass]="getActive('cursos') ? 'bg_white fc_n' : 'hover_black'">
+						Cursos
+					</nav>
+				</a>
+			</div> -->
+		</section><section class="admin_page">
+			<router-outlet></router-outlet>
+		</section>
+	</div>
 </article>

@@ -1,61 +1,60 @@
-<app-menu *ngIf="auth.isLogged()"></app-menu>
-<div class="courses_container">
+<div class="page_container course_list">
 	<div class="pop_up_container" id="courses-add">
 		<div class="pop_up_back" onclick="showPopup(false, '#courses-add')"></div>
 		<div class="pop_up big">
 			<div class="inner border_radius">
 				<div class="bg_primary">
-					<div class="pop_up_title font_white">
+					<div class="pop_up_title fc_white">
 						<h1 class="title">
 							Nuevo Curso
 						</h1>
 						<div class="close_button">
-							<button class="pd_8 hover_black circle" onclick="showPopup(false, '#courses-add')">
+							<button class="p_8 hover_black circle" onclick="showPopup(false, '#courses-add')">
 								<img class="icon" src="assets/icons/arrow-left_white.png">
 							</button>
 						</div>
 					</div>
 				</div>
-				<form class="padding_block responsive_col" (submit)="addCourse($event)">
+				<form class="padding_block col_r" (submit)="addCourse($event)">
 					<div class="data_container">
-						<h2 class="title_medium mr_bottom_24 font_secondary">Información de Curso</h2>
-						<div class="pd_left_8 pd_right_8">
-							<div class="field_container pd_bottom_24">
-								<div class="field mr_top_8">
-									<label class="opacity font_bold font_small">Nombre</label>
+						<h2 class="title_medium mb_24 fc_secondary">Información de Curso</h2>
+						<div class="pl_8 pr_8">
+							<div class="field_container pb_24">
+								<div class="field mt_8">
+									<label class="opacity fw_b fs_s">Nombre</label>
 									<input type="text" [(ngModel)]="course.name" name="name" placeholder="Nombre del Curso" />
 								</div>
-								<div class="field mr_top_12">
-									<label class="opacity font_bold font_small">Etiquetas</label>
-									<div class="pd_top_4" *ngIf="course.tags?.length > 0">
-										<span class="bg_blue circle_radius font_white pd_8 mr_right_8 mr_bottom_8 pd_left_12 pd_right_8" *ngFor="let tag of course.tags">
+								<div class="field mt_8">
+									<label class="opacity fw_b fs_s">Etiquetas</label>
+									<div class="pt_4" *ngIf="course.tags?.length > 0">
+										<span class="bg_blue circle_radius fc_white p_8 mr_8 mb_8 pl_12 pr_8" *ngFor="let tag of course.tags">
 											{{ tag }}
-											<img class="icon_small opacity cursor_pointer v_align_middle relative_pos" src="assets/icons/close_black.png" (click)="removeTag(tag)" style="top: -1px">
+											<img class="icon small opacity cursor_pointer va_m pos_r" src="assets/icons/close_black.png" (click)="removeTag(tag)" style="top: -1px">
 										</span>
 									</div>
 									<input type="text" [(ngModel)]="tagsString" name="tags" placeholder="Agrega etiquetas (Temas de interés, Especialidades, Materias)" (keydown)="addTag($event)" (keyup)="tagsString != null ? displayingTags = findTagCoincidences(tagsString, this.hiddenTags) : displayingTags = []">
 									<div class="list_scroll mini bg_white shadow_flat" [hidden]="displayingTags?.length < 1">
-										<div class="pd_12 hover_black" *ngFor="let tag of displayingTags; let i=index" (click)="addTag($event, tag)" [ngClass]=" { 'bg_blue hover_blue': i == selectedDisplayTag } " [focused]="i == selectedDisplayTag">
+										<div class="p_12 hover_black" *ngFor="let tag of displayingTags; let i=index" (click)="addTag($event, tag)" [ngClass]=" { 'bg_blue hover_blue': i == selectedDisplayTag } " [focused]="i == selectedDisplayTag">
 											{{ tag }}
 										</div>
 									</div>
 								</div>
-								<div class="mr_top_12">
-									<h4 class="opacity font_bold font_small">Hacer Privado</h4>
-									<div class="mr_top_8">
+								<div class="mt_8">
+									<h4 class="opacity fw_b fs_s">Hacer Privado</h4>
+									<div class="mt_8">
 										<label class="switch">
 											<input type="checkbox" name="isPrivate" [(ngModel)]="course.isPrivate">
 											<span class="slider"></span>
 										</label>
 									</div>
 								</div>
-								<div class="field mr_top_12">
-									<label class="opacity font_bold font_small">Descipción</label>
+								<div class="field mt_8">
+									<label class="opacity fw_b fs_s">Descipción</label>
 									<textarea [(ngModel)]="course.description" name="description" placeholder="Agrega una descipción"></textarea>
 								</div>
 							</div>
-							<div class="field text_align_right">
-								<input type="submit" class="bg_secondary font_white shadow_raised" value="Crear Curso">
+							<div class="ta_r">
+								<input type="submit" class="btn btn_primary" value="Crear Curso">
 							</div>
 						</div>
 					</div>
@@ -63,108 +62,92 @@
 			</div>
 		</div>
 	</div>
-	<section class="list">
-		<div class="pd_16 resp_title main_action_button">
-			<button class="pd_8 pd_right_12 bg_secondary shadow_raised border_radius" onclick="showPopup(true, '#courses-add')">
-				<img class="v_align_middle icon" src="assets/icons/plus_white.png">
-				<b class="v_align_middle mr_left_4 font_normal">Crear Nuevo Curso</b>
-			</button>
-		</div>
-		<div class="pd_32 pd_top_64 text_align_center" *ngIf="courses?.length < 1">
-			<h2 class="title_big font_light opacity">
-				Ningun curso por el momento
-			</h2>
-			<div class="mr_top_48">
-				<button class="pd_24 bg_secondary border_radius shadow_raised" onclick="showPopup(true, '#courses-add')">
-					<h3 class="font_big font_normal">Crear un Curso Nuevo</h3>
+	<div class="page_container_in">
+		<section class="list">
+			<div class="p_16 resp_title main_action_button">
+				<button class="btn btn_primary" onclick="showPopup(true, '#courses-add')">
+					<span class="va_m icon">
+						<i class="material-icons fw_500">add</i>
+					</span><span class="va_m ml_4">
+						Nuevo Curso
+					</span>
 				</button>
 			</div>
-		</div>
-		<div class="responsive_col resp_list text_align_center">
-			<div class="col_3 text_align_left" *ngFor="let course of courses">
-				<div class="bg_white resp_item shadow_flat border_radius mr_bottom_16 relative_pos">
-					<div class="tr_0 h_32">
-						<div class="mr_12 size_32 relative_pos">
-							<button class="options_button hover_black size_32 text_align_center circle">
-								<img class="icon v_align_middle" src="assets/icons/dots-vertical_white.png">
-							</button>
-							<div class="hidden_options">
-								<div class="bg_white pd_bottom_8 pd_top_8 shadow_flat border_radius font_normal">
-									<a href="/cursos/{{ course._id }}">
-										<p class="pd_8 pd_left_16 pd_right_16 hover_black">
-											Ver mas
+			<div class="p_32 pt_64 ta_c" *ngIf="courses?.length < 1">
+				<h2 class="title_big fw_l opacity">
+					Ningun curso por el momento
+				</h2>
+				<div class="mt_48">
+					<button class="btn btn_primary" onclick="showPopup(true, '#courses-add')">
+						<span class="va_m icon">
+							<i class="material-icons fw_500">add</i>
+						</span><span class="va_m ml_4">
+							Nuevo Curso
+						</span>
+					</button>
+				</div>
+			</div>
+			<div class="col_r resp_list ta_c">
+				<div class="col_2 ta_l" *ngFor="let course of courses">
+					<div class="resp_item b_gray bg_white border_radius mb_16 pos_r b_trans">
+						<a href="/cursos/{{ course._id }}">
+							<div class="list_element">
+								<div class="ref">
+									<span class="circle bg_opacity_light fc_white" [style.background]="colors.getColor(course.name)">
+										<label class="title_smaller fw_l size_24">{{ course.name.charAt(0) }}</label>
+									</span>
+								</div><div class="info">
+									<div class="p_16">
+										<h3 class="fw_500 mb_4">
+											{{ course.name }}
+										</h3>
+										<p class="opacity">
+											<b class="fw_500">Creado el {{ course.createdDate | formatDate }}</b>
 										</p>
-									</a>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="profile_display mini">
-						<div class="background" [style.background]="colors.getColor(course.name)">
-						</div>
-						<div class="profile_photo">
-							<a href="/cursos/{{ course._id }}">
-								<div class="list_element">
-									<div class="ref">
-										<span class="circle bg_opacity_light font_white">
-											<label class="title_smaller font_light size_24">{{ course.name.charAt(0) }}</label>
-										</span>
-									</div><div class="info font_white">
-										<div class="pd_16">
-											<h3 class="font_normal mr_bottom_4">
-												{{ course.name }}
-											</h3>
-											<p class="opacity">
-												<b class="font_normal">Creado el {{ course.createdDate | formatDate }}</b>
-											</p>
-										</div>
 									</div>
 								</div>
-							</a>
-						</div>
-					</div>
-					<div class="pd_12 pd_top_16 font_white">
-						<div class="tags_container" ng>
-							<div class="auto_col" *ngFor="let tag of course.tags; let i = index">
-								<span class="bg_blue tag" *ngIf="i < 5">
-									{{ tag }}
-								</span>
-							</div><div class="auto_col" *ngIf="course.tags?.length > 5">
-								<span class="bg_blue tag">
-									{{ course.tags?.length - 5 }} +
-								</span>
 							</div>
-						</div>
-					</div>
-					<div class="pd_16 pd_top_0">
-						<h4 class="font_big font_normal opacity">Descripción</h4>
-						<p class="pd_top_8 pd_left_12 pd_right_12">{{ course.description }}</p>
-					</div>
-					<div class="list_element">
-						<div class="pd_left_12 pd_right_12 opacity">
-							<b>Creado por:</b>
-						</div>
-						<div class="ref">
-							<a href="/perfil/{{ course.user.id }}">
-								<div class="img_container circle">
-									<img src="/media/{{ course.user.id }}/profile/{{ course.user.profilePhoto }}" *ngIf="course.user.profilePhoto && course.user.profilePhoto != null">
-									<img src="assets/icons/default_profile.png" *ngIf="course.user.profilePhoto == undefined || course.user.profilePhoto == null">
+							<div class="p_12 fc_white">
+								<div class="tags_container">
+									<div class="col_a" *ngFor="let tag of course.tags; let i = index">
+										<span class="bg_blue tag">
+											{{ tag }}
+										</span>
+									</div>
 								</div>
-							</a>
-						</div><div class="info">
-							<div class="pd_16">
-								<h3 class="font_normal mr_bottom_4">
-									{{ course.user.name }} {{ course.user.lastName }}
-								</h3>
-								<p class="opacity">
-									<b class="font_normal">{{ course.user.mail }}</b>
-								</p>
 							</div>
-						</div>
-					</div>
-				</div>	
+							<div class="p_16 pt_0" *ngIf="course.description">
+								<p class="p_8 fs_b">{{ course.description }}</p>
+							</div>
+							<div class="list_element">
+								<div class="pl_12 pr_12 opacity">
+									<b>Creado por:</b>
+								</div>
+								<a href="/perfil/{{ course.user.id }}">
+									<div class="hover_blue">
+										<div class="ref">
+											<div class="img_container circle">
+												<img [src]="course.user.profilePhoto ? '/media/'+course.user.id+'/profile/'+ course.user.profilePhoto : 'assets/icons/default_profile.png'">
+											</div>
+										</div><div class="info">
+											<div class="p_16">
+												<h3 class="fw_500 mb_4">
+													{{ course.user.name }} {{ course.user.lastName }}
+												</h3>
+												<p class="opacity">
+													<b class="fw_500">{{ course.user.mail }}</b>
+												</p>
+											</div>
+										</div>
+									</div>
+								</a>
+							</div>
+						</a>
+						
+					</div>	
+				</div>
 			</div>
-		</div>
-		<div class="pd_32" *ngIf="courses?.length > 0"></div>
-	</section>
+			<div class="p_32" *ngIf="courses?.length > 0"></div>
+		</section>
+	</div>
 </div>

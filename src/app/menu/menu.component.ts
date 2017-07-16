@@ -24,10 +24,4 @@ export class MenuComponent implements OnInit {
 		location.href = '/';
 	}
 
-	getActive(parameter): boolean {
-		let locationMenu = this.location.path().normalize();
-		let active = locationMenu.split('/')[1];
-		return parameter === active;
-	}
-
 }

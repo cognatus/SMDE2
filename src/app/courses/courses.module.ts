@@ -4,9 +4,6 @@ import { RouterModule } from '@angular/router';
 
 import { SharedModule } from '../shared/shared.module';
 
-import { FocusedDirective } from '../_directives/focused.directive';
-import { FormatDatePipe } from '../_pipes/formatdate';
-
 import { CoursesComponent } from './courses.component';
 import { CourseDetailComponent } from './course-detail/course-detail.component';
 import { GroupsComponent } from './groups/groups.component';

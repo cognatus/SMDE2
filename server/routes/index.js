@@ -6,6 +6,7 @@ const admin = require('./api/admin');
 const notif = require('./api/notificaciones');
 const profile = require('./api/perfil');
 const courses = require('./api/cursos');
+const groups = require('./api/grupos');
 
 /* GET api listing. */
 router.get('/', (req, res) => {
@@ -50,10 +51,10 @@ router.route('/courses/:id/suscribe')
 	.delete(courses.unsuscribeUser);
 
 router.route('/courses/:id/updategroup')
-	.post(courses.createGroup)
+	.post(groups.createGroup)
 
 router.route('/courses/:id/updategroup/:groupid')
-	.put(courses.updateGroup)
-	.delete(courses.deleteGroup);
+	.put(groups.updateGroup)
+	.delete(groups.deleteGroup);
 
 module.exports = router;

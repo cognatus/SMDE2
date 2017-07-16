@@ -1,40 +1,40 @@
 <div class="login_bg bg_primary"></div>
 <section class="login_container">
-	<div class="logo_container text_align_center">
-		<img src="assets/icons/logo_white.png" class="icon_big v_align_middle mr_right_16"><span class="v_align_middle">
-			<h1 class="font_white title_big font_normal">SMDE</h1>
+	<div class="logo_container ta_c">
+		<img src="assets/icons/logo_white.png" class="icon_big va_m mr_16"><span class="va_m">
+			<h1 class="fc_white title_big fw_500">SMDE</h1>
 		</span>
 	</div>
-	<div class="bg_white shadow_flat mr_12 mr_top_24 border_radius">
-		<div class="pd_24">
-			<div class="title_container text_align_center">
-				<h2 class="title_big pd_top_8 font_secondary font_light">Iniciar Sesión</h2>
+	<div class="bg_white shadow_flat m_12 mt_24 border_radius">
+		<div class="p_24">
+			<div class="title_container ta_c">
+				<h2 class="title_big pt_8 fc_secondary fw_l">Iniciar Sesión</h2>
 			</div>
 			<form (submit)="login()">
-				<div class="pd_top_40 pd_bottom_24">
-					<p class="mr_bottom_16 font_red" *ngIf="error != ''">
+				<div class="pt_40 pb_24">
+					<p class="mb_16 fc_red" *ngIf="error != ''">
 						{{ error }}
 					</p>
 					<div class="icon_field">
 						<div class="field">
-							<label class="opacity font_bold font_small">Usuario</label>
+							<label class="opacity fw_b fs_s">Usuario</label>
 							<img src="assets/icons/account_black.png" class="icon opacity">
 							<input type="text" [(ngModel)]="user.mail" name="user" id="user" placeholder="Usuario">
 						</div>
-						<div class="field mr_top_8">
-							<label class="opacity font_bold font_small">Contraseña</label>
+						<div class="field mt_8">
+							<label class="opacity fw_b fs_s">Contraseña</label>
 							<img src="assets/icons/lock_black.png" class="icon opacity">
 							<input type="password" [(ngModel)]="user.password" name="password" id="password" placeholder="Contraseña">
 						</div>
 					</div>
 				</div>
 				<div class="field">
-					<input type="submit" value="Iniciar" class="bg_secondary shadow_raised w_100 font_white border_radius">
+					<input type="submit" value="Iniciar" class="bg_secondary shadow_raised w_100 fc_white border_radius">
 				</div>
 			</form>
-			<div class="pd_top_24 text_align_right">
+			<div class="pt_24 ta_r">
 				<a routerLink="/registro">
-					<button class="font_blue font_big">
+					<button class="fc_blue fs_b">
 						Registrarse
 					</button>
 				</a>
