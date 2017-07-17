@@ -2,8 +2,8 @@
 		<div class="pop_up_back" onclick="showPopup(false, '#profile-gallery')"></div>
 		<div class="pop_up">
 			<div class="inner border_radius">
-				<div class="bg_primary">
-					<div class="pop_up_title fc_white">
+				<div class="border_b b_light bg_white">
+					<div class="pop_up_title fc_opacity">
 						<h1 class="title" *ngIf="selectedAlbum == 0">
 							Fotos de Portada
 						</h1>
@@ -11,15 +11,17 @@
 							Fotos de Perfil
 						</h1>
 						<div class="close_button">
-							<button class="p_8 hover_black circle" onclick="showPopup(false, '#profile-gallery')">
-								<img class="icon" src="assets/icons/arrow-left_white.png">
+							<button class="btn_icon hover_black" onclick="showPopup(false, '#profile-gallery')">
+								<span class="icon">
+									<i class="material-icons fc_opacity">arrow_back</i>
+								</span>
 							</button>
 						</div>
 					</div>
 				</div>
 				<div class="gallery_container">
 					<div class="gal_inner bg_black pos_r">
-						<div class="img_container ">
+						<div class="img_container">
 							<img src="{{ photos[selectedAlbum].array[photos[selectedAlbum].selected] }}">
 						</div>
 						<div class="tr_0 h_32" *ngIf="privateUser">
@@ -28,7 +30,7 @@
 									<img class="icon va_m" src="assets/icons/dots-vertical_white.png">
 								</button>
 								<div class="hidden_options">
-									<div class="bg_white pb_8 pt_8 shadow_flat border_radius fw_500">
+									<div class="bg_white pb_8 pt_8 shadow_flat border_radius fw_500 fc_n">
 										<p class="p_8 pl_16 pr_16 hover_black" (click)="changePhoto()" *ngIf="selectedAlbum == 0 && photos[selectedAlbum].array[photos[selectedAlbum].selected] !== userSrc + 'background/' + user.backPhoto">
 											<span>Seleccionar como foto de portada</span>
 										</p>
@@ -60,14 +62,16 @@
 	<div class="pop_up_back" onclick="showPopup(false, '#user-editphotos')"></div>
 	<div class="pop_up">
 		<div class="inner border_radius">
-			<div class="bg_primary">
-				<div class="pop_up_title fc_white">
+			<div class="border_b b_light">
+				<div class="pop_up_title fc_opacity">
 					<h1 class="title">
 						Actualizar Fotos
 					</h1>
 					<div class="close_button">
-						<button class="p_8 hover_black circle" onclick="showPopup(false, '#user-editphotos')">
-							<img class="icon" src="assets/icons/arrow-left_white.png">
+						<button class="btn_icon hover_black" onclick="showPopup(false, '#user-editphotos')">
+							<span class="icon">
+								<i class="material-icons fc_opacity">arrow_back</i>
+							</span>
 						</button>
 					</div>
 				</div>
@@ -76,9 +80,9 @@
 				<div class="profile_display small">
 					<div class="background bg_primarydark">
 						<div class="editable">
-							<span class="size_48 circle hover_black ta_c" onclick="triggerClick('#back-img-file')">
-								<img class="icon mt_8" src="assets/icons/camera_white.png">
-							</span>
+							<button class="btn_icon hover_black" onclick="triggerClick('#back-img-file')">
+								<img class="icon" src="assets/icons/camera_white.png">
+							</button>
 						</div>
 						<div class="img_container bg_primarydark">
 							<img src="/media/{{ user._id }}/background/{{ user.backPhoto }}" id="profile-back" *ngIf="user.backPhoto != undefined && user.profilePhoto != ''" adjustable>
@@ -86,7 +90,7 @@
 					</div>
 					<div class="profile_photo fc_white">
 						<div class="inner">
-							<div class="img_container circle shadow_flat">
+							<div class="img_container border_radius shadow_flat">
 								<img id="profile-photo" [src]="user.profilePhoto != undefined && user.profilePhoto != null ? '/media/'+user._id+'/profile/'+user.profilePhoto : 'assets/icons/default_profile.png'">
 								<div class="editable" onclick="triggerClick('#profile-img-file')">
 									<img src="assets/icons/camera_white.png">
@@ -95,19 +99,20 @@
 						</div>
 					</div>
 				</div>
-				<form id="formUpload" class="field p_16 ta_r" action="api/profile/" method="POST" enctype="multipart/form-data">
+				<form id="formUpload" class="p_16 ta_r" action="api/profile/" method="POST" enctype="multipart/form-data">
 					<div class="hidden_input">
 						<input type="file" accept="image/*" name="profilePhoto" id="profile-img-file" onchange="previewPhoto(this, '#profile-photo')">
 						<input type="file" accept="image/*" name="profileBackground" id="back-img-file" onchange="previewPhoto(this, '#profile-back');resizeImg('#profile-back');">
 					</div>
-					<input type="submit" class="bg_secondary shadow_raised border_radius fc_white" name="" value="Actualizar" onclick="$('#formUpload').submit();">
+					<button class="btn btn_outline b_red fc_red bg_trans_red" onclick="showPopup(false, '#user-editphotos')">Cancelar</button>
+					<input type="submit" class="btn btn_primary shadow_flat ml_8" name="" value="Actualizar" onclick="$('#formUpload').submit();">
 				</form>
 			</div>
 		</div>
 	</div>
 </div>
 <article class="mb_24">
-	<section class="bg_white shadow_flat mb_12 pos_r">
+	<section class="mb_12 pos_r">
 		<div class="tr_0 h_32" *ngIf="privateUser">
 			<div class="increment_margin size_32 pos_r">
 				<button class="options_button hover_black size_32 ta_c circle">
@@ -134,36 +139,35 @@
 			</div>
 			<div class="profile_photo fc_white">
 				<div class="inner">
-					<div class="img_container circle shadow_flat cursor_pointer" [attr.id]="photos[1].array?.length > 0 ? 'profile-photo-img' : null" (click)="selectedAlbum = 1">
-						<img src="assets/icons/default_profile.png" *ngIf="user.profilePhoto == undefined || user.profilePhoto == ''">
-						<img src="/media/{{ user._id }}/profile/{{ user.profilePhoto }}"*ngIf="user.profilePhoto != undefined && user.profilePhoto != ''">
+					<div class="img_container border_radius shadow_flat cursor_pointer" [attr.id]="photos[1].array?.length > 0 ? 'profile-photo-img' : null" (click)="selectedAlbum = 1">
+						<img [src]="user.profilePhoto && user.profilePhoto != '' ? '/media/'+user._id+'/profile/'+user.profilePhoto : 'assets/icons/default_profile.png'">
 					</div><div class="info">
 						<h3 class="title_smaller">
 							{{ user.name }} {{ user.lastName }}
 						</h3>
 						<p class="opacity mt_8">
-							<b class="fs_b fw_500">{{ user.mail }}</b>
+							<b class="fs_b fw_n">{{ user.mail }}</b>
 						</p>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="col_s ta_c">
-			<div class="col_3">
-				<div class="p_12">
-					<h4 class="fw_500 opacity">Tipo</h4>
-					<h2 class="fw_500 fs_b mt_4">{{ userTypes[user.privilege] }}</h2>
+		<div class="col_s ta_c border b_gray border_radius m_16">
+			<div class="col_3 hover_light">
+				<div class="p_8 pl_12 pl_12 border_r b_gray">
+					<h4 class="fw_n opacity">Tipo</h4>
+					<h2 class="fw_n fs_b mt_4">{{ userTypes[user.privilege] }}</h2>
 				</div>
-			</div><div class="col_3">
-				<div class="p_12">
-					<h4 class="fw_500 opacity">Cursos</h4>
-					<h2 class="fw_500 fs_b mt_4" *ngIf="user.courses?.length > 0">{{ user.courses?.length }}</h2>
-					<h2 class="fw_500 fs_b mt_4" *ngIf="user.courses?.length < 1 || user.courses == undefined">0</h2>
+			</div><div class="col_3 hover_light">
+				<div class="p_8 pl_12 pl_12 border_r b_gray">
+					<h4 class="fw_n opacity">Cursos</h4>
+					<h2 class="fw_n fs_b mt_4" *ngIf="user.courses?.length > 0">{{ user.courses?.length }}</h2>
+					<h2 class="fw_n fs_b mt_4" *ngIf="user.courses?.length < 1 || user.courses == undefined">0</h2>
 				</div>
-			</div><div class="col_3">
-				<div class="p_12">
-					<h4 class="fw_500 opacity">Promedio</h4>
-					<h2 class="fw_500 fs_b mt_4">0.0</h2>
+			</div><div class="col_3 hover_light">
+				<div class="p_8 pl_12 pl_12">
+					<h4 class="fw_n opacity">Promedio</h4>
+					<h2 class="fw_n fs_b mt_4">0.0</h2>
 				</div>
 			</div>
 		</div>
@@ -176,7 +180,7 @@
 						Información
 					</h2>
 				</div>
-				<div class="bg_white shadow_flat mb_8">
+				<div class="mb_8 border b_gray">
 					<div class="p_16">
 						<div class="mb_12">
 							<p class="opacity fw_b mb_4">Teléfono</p>
@@ -210,12 +214,12 @@
 						Este usuario no esta inscrito a ningun curso por el momento
 					</h2>
 					<div *ngIf="privateUser">
-						<h2 class="title_big fw_l opacity">
+						<h2 class="title_big fw_300 fc_lightgray">
 							No estas inscrito a ningun curso por el momento
 						</h2>
-						<div class="field mt_24">
-							<a href="/asignaturas" class="fc_white">
-								<button class="p_12 bg_secondary shadow_raised border_radius fc_white">
+						<div class="mt_32">
+							<a href="/cursos">
+								<button class="btn bg_trans_secondary">
 									Agregar Curso(s)
 								</button>
 							</a>

@@ -27,15 +27,27 @@ export class GroupsComponent implements OnInit {
 	colors = new Colors();
 	selectedGroup: any;
 	alertMessage;
+	usersNoGroup: any;
+	originalSelectedGroup: any = {
+		name: null,
+		users: null,
+	};
 
 	constructor(private courseDetailService: CourseDetailService, 
 		private auth: AuthGuard) {}
 
 	ngOnInit() {
+		this.usersNoGroup = this.getGroupMembers();
 	}
 
 	resetValues(): void {
 		this.selectedGroup = undefined;
+		this.originalSelectedGroup = {
+			id: null,
+			name: null,
+			users: null,
+			isNew: null
+		};
 	}
 
 	updateGroup(): void {
@@ -58,9 +70,9 @@ export class GroupsComponent implements OnInit {
 			})
 	}
 
-	selectGroup(event, group: any): void {
+	selectGroup(event, group?: any): void {
 		event.preventDefault();
-		if ( group !== undefined ) {
+		if ( group ) {
 			this.selectedGroup = {
 				id: group._id,
 				name: group.name,
@@ -75,6 +87,28 @@ export class GroupsComponent implements OnInit {
 				isNew: true
 			};
 		}
+
+		this.originalSelectedGroup.users = group ? this.getGroupMembers(group._id) : [];
+		this.originalSelectedGroup.name = group ? group.name : '';
+	}
+
+	groupNotChanged() {
+		let checkUsersChange = false;
+
+		for ( let i = 0; i < this.originalSelectedGroup.users.length; i++ ) {
+			if ( this.selectedGroup.users.indexOf(this.originalSelectedGroup.users[i]) < 0 ) {
+				checkUsersChange = true;
+			}
+		}
+
+		for ( let i = 0; i < this.selectedGroup.users.length; i++ ) {
+			if ( this.originalSelectedGroup.users.indexOf(this.selectedGroup.users[i]) < 0 ) {
+				checkUsersChange = true;
+			}
+		}
+
+		return this.originalSelectedGroup.name === this.selectedGroup.name && 
+			!checkUsersChange;
 	}
 
 	getGroupMembers(group?: string): User[] {
@@ -98,9 +132,11 @@ export class GroupsComponent implements OnInit {
 	addUserToGroup(user: User) {
 		let check = this.selectedGroup.users.indexOf( user ); 
 		if ( check > -1 ) {
-			this.selectedGroup.users.splice(check, 1);	
+			this.selectedGroup.users.splice(check, 1);
+			this.usersNoGroup.push(user);
 		} else {
 			this.selectedGroup.users.push(user);
+			this.usersNoGroup.splice(this.usersNoGroup.indexOf(user), 1);
 		}
 	}
 

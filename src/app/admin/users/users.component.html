@@ -119,7 +119,7 @@
 							<div class="profile_photo fc_white">
 								<div class="inner">
 									<a href="/admin/usuarios/{{ user._id }}">
-										<div class="img_container circle shadow_flat">
+										<div class="img_container border_radius shadow_flat">
 											<img src="assets/icons/default_profile.png" *ngIf="user.profilePhoto == undefined || user.profilePhoto == ''">
 											<img src="/media/{{ user._id }}/profile/{{ user.profilePhoto }}"*ngIf="user.profilePhoto != undefined && user.profilePhoto != ''">
 										</div>

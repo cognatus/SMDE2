@@ -23,7 +23,6 @@ export class CourseDetailComponent implements OnInit {
 	course = new Course;
 	colors = new Colors;
 	courseId: string = '';
-	courseMembers: User[];
 	displayedList: number = 0; // O contenidos, 1 actividades, 2 miembros
 	suscribeAction: boolean = true;
 	confirmationStatus: any = {

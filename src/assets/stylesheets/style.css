@@ -21,12 +21,12 @@ button {
 
 button.btn, input.btn {
 	cursor: pointer;
-	font-size: 15px;
+	font-size: 16px;
 	border: none;
-	color: #909090;
+	color: #838383;
 	background-color: #eeeeee;
-	font-weight: bold;
-	border-radius: 50px;
+	font-weight: 500;
+	border-radius: 5px;
 	padding: 0 16px;
 	min-width: 120px;
 	height: 40px;
@@ -39,14 +39,33 @@ button.btn *, input.btn { font-weight: 500; }
 
 button.btn span { vertical-align: middle; }
 
+.btn span.icon {
+	margin-right: 0;
+	position: relative;
+	left: -4px;
+	font-weight: normal !important;
+}
+
+.btn_auto span.icon {
+	left: -2px;
+	margin-right: 6px;
+}
+
 button.btn.btn_primary, input.btn.btn_primary {
 	background-color: #00BCD4;
 	color: #fff;
 }
 
+button.btn:disabled, input.btn:disabled {
+	background-color: #f2f2f2 !important;
+	color: #bdbdbd !important;
+	box-shadow: none !important;
+	cursor: default;
+}
+
 button.btn.btn_primary:hover, input.btn.btn_primary:hover {
-	background-color: #00ACC1 !important;
-	color: #fff !important;
+	background-color: #00ACC1;
+	color: #fff;
 	box-shadow: 0 1px 16px rgba(0, 0, 0, 0.12);
 }
 
@@ -64,12 +83,15 @@ button.btn_icon .icon {
 
 button.btn.btn_outline, input.btn.btn_outline {
 	background-color: transparent;
-	height: 36px;
-	border: 2px solid #bdbdbd;
+	height: 40px;
+	border: 1px solid #bdbdbd;
+	font-weight: normal;
 	color: #bdbdbd;
 }
 
-input.btn.btn_outline { height: 40px; }
+button.btn.btn_outline:hover, input.btn.btn_outline:hover {
+	font-weight: 500;
+}
 
 button.btn.btn_auto { min-width: 0; }
 
@@ -87,7 +109,7 @@ a { text-decoration: none;color: #424242; }
 
 .loader .inner {
     border: 4px solid rgba(170, 170, 170, 0.1);
-    border-top: 4px solid #FFEA00;
+    border-top: 4px solid #7C4DFF;
     border-radius: 50%;
     width: 64px;
     height: 64px;
@@ -337,7 +359,8 @@ label.size_24 { display: inline-block; }
 
 .bg_primary { background-color: #00BCD4 !important;color: #fff; }
 .bg_primarydark { background-color: #0097A7 !important;color: #fff; }
-.bg_secondary { background-color: #FFEA00 !important;color: #fff; }
+.bg_primarylight { background-color: #4DD0E1 !important;color: #fff; }
+.bg_secondary { background-color: #7C4DFF !important;color: #fff; }
 .bg_white { background-color: #FFF !important; }
 .bg_black { background-color: #000 !important;color: #fff; }
 .bg_gray { background-color: #e0e0e0 !important; }
@@ -355,7 +378,7 @@ label.size_24 { display: inline-block; }
 .fc_primarylight { color: #4DD0E1 !important; }
 .fc_primary { color: #00BCD4 !important; }
 .fc_primarydark { color: #0097A7 !important; }
-.fc_secondary { color: #FFEA00 !important; }
+.fc_secondary { color: #7C4DFF !important; }
 .fc_white { color: #FFF !important; }
 .fc_black { color: #000 !important; }
 .fc_gray { color: #909090 !important; }
@@ -390,15 +413,18 @@ a.fc_blue { color: #2196F3 !important; }
 .b_2 { border-width: 2px; }
 .b_4 { border-width: 4px; }
 
-.b_trans, .b_trans_red, .bg_trans_blue, .bg_trans_red, .fc_trans_blue { transition: all 0.2s;cursor: pointer; }
-.b_trans:hover, .b_trans_red:hover, .bg_trans_blue:hover, .bg_trans_red:hover { box-shadow: 0 1px 12px rgba(0, 0, 0, 0.2); }
+.b_trans, .b_trans_red, .bg_trans_primary, .bg_trans_secondary, .bg_trans_blue, .bg_trans_red, .fc_trans_blue { transition: all 0.2s;cursor: pointer; }
+.b_trans:hover, .b_trans_red:hover, .bg_trans_primary:hover, .bg_trans_secondary:hover, .bg_trans_blue:hover, .bg_trans_red:hover { box-shadow: 0 1px 12px rgba(0, 0, 0, 0.2); }
 .b_trans:hover { border-color: #00BCD4 !important; }
 .b_trans_red:hover { border-color: #F44336 !important; }
 
+.bg_trans_primary:hover { border-color: #00BCD4;background-color: #00BCD4 !important;color: #fff !important; }
+.bg_trans_secondary:hover { border-color: #7C4DFF;background-color: #7C4DFF !important;color: #fff !important; }
 .bg_trans_blue:hover { border-color: #2196F3;background-color: #2196F3 !important;color: #fff !important; }
 .bg_trans_red:hover { border-color: #F44336;background-color: #F44336 !important;color: #fff !important; }
 
-.bg_trans_blue:hover *, .bg_trans_red:hover * { color: #fff !important; }
+.bg_trans_blue:hover *, .bg_trans_red:hover *, 
+.bg_trans_primary:hover *, .bg_trans_secondary:hover * { color: #fff !important; }
 
 .fc_trans_blue:hover { color: #2196F3 !important; }
 
@@ -437,6 +463,8 @@ img.opacity { opacity: 0.4; }
 .h_selection .item h3 {
 	padding: 8px;
 	font-weight: 500;
+	font-size: 15px;
+	font-weight: normal;
 }
 
 .h_selection .item:last-child {
@@ -490,8 +518,8 @@ img.opacity { opacity: 0.4; }
 	height: 40px;
 	padding-left: 12px;
 	padding-right: 12px;
-	background-color: rgba(0, 0, 0, 0.01);
-	border: 1px solid rgba(0, 0, 0, 0.08);
+	background-color: #fff;
+	border: 1px solid rgba(0, 0, 0, 0.1);
 	box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.04);
 	color: #424242;
 	font-size: 15px;
@@ -691,6 +719,7 @@ img.opacity { opacity: 0.4; }
 	width: calc(100% - 80px);
 	padding-left: 40px;
 	padding-right: 40px;
+	background-color: #f9f9f9;
 	border: none;
 }
 
@@ -777,20 +806,30 @@ img.opacity { opacity: 0.4; }
 }
 
 .list_element .ref {
+	min-height: 70px;
 	width: 64px;
 	display: inline-block;
 	vertical-align: top; 
 	text-align: center;
 }
 
-.list_element .ref span { width: 56px;height: 56px;line-height: 56px;margin: 6px;border-radius: 4px; }
-.list_element .ref span label { cursor: pointer !important;display: inline-block;vertical-align: middle; }
+.list_element .ref span { width: 60px;height: 60px;line-height: 60px;margin: 5px;border-radius: 4px;display: block; }
+.list_element .ref span label { cursor: pointer !important;display: inline-block;vertical-align: middle;font-weight: 300 !important; }
 
 .list_element .ref .img_container {
-	margin: 12px 0 12px 16px;
-	border-radius: 100%;
-	height: 48px;width: 48px;
+	margin: 5px;
+	border-radius: 4px;
+	height: 60px;width: 60px;
 	background-color: transparent !important;
+}
+
+.list_element .ref .img_container.mini, .list_element .ref span.mini {
+	width: 48px;
+	height: 48px;
+	margin: 11px 2px 11px auto;
+	margin-left: auto;
+	line-height: 48px;
+	margin-right: 2px;
 }
 
 .img_container span.check {
@@ -799,9 +838,9 @@ img.opacity { opacity: 0.4; }
 	margin: 0;
 	top: 0;
 	left: 0;
-	width: 48px;
-	line-height: 44px;
-	height: 48px;
+	width: 100%;
+	line-height: 54px;
+	height: 100%;
 	text-align: center;
 	border-radius: 100%;
 	z-index: 2;
@@ -817,6 +856,10 @@ img.opacity { opacity: 0.4; }
 	margin-top: 0 !important;
 	vertical-align: top;
 	position: relative;
+}
+
+.list_element .info .p_16 {
+	padding: 14px 16px 13px 16px;
 }
 
 .list_element .mini_mark {

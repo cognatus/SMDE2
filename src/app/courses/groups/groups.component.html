@@ -1,4 +1,4 @@
-<app-confirmation *ngIf="alertMessage" [message]="alertMessage" (onSelection)="doConfirmation($event)"></app-confirmation>
+<app-confirmation [message]="alertMessage" (onSelection)="doConfirmation($event)"></app-confirmation>
 <div class="border_b b_light">
 	<div class="pop_up_title fc_opacity">
 		<h1 class="title" *ngIf="!selectedGroup">
@@ -30,12 +30,12 @@
 		</button>
 	</div>
 	<div *ngIf="groups && groups?.length > 0">
-		<div *ngIf="!selectedGroup" [@fade]>
+		<div *ngIf="!selectedGroup" [@slide]="'timed'">
 			<div class="ta_l pb_24">
 				<button class="btn btn_primary shadow_flat" (click)="selectGroup($event)">
 					<span class="icon">
 						<i class="material-icons">add</i>
-					</span><span class="ml_4">Nuevo Grupo</span>
+					</span><span class="text">Nuevo Grupo</span>
 				</button>
 			</div>
 			<div class="data_container">
@@ -50,7 +50,7 @@
 					<div class="list_element hover_black" *ngFor="let group of groups;let i = index" [ngClass]="{'border_t b_light': i > 0}">
 						<div (click)="selectGroup($event, group)">
 							<div class="ref">
-								<span class="circle fc_white" [style.background]="colors.getColor(group.name)">
+								<span class="mini fc_white" [style.background]="colors.getColor(group.name)">
 									<label class="title_smaller size_24">{{ group.name.charAt(0) }}</label>
 								</span>
 							</div><div class="info">
@@ -66,7 +66,7 @@
 				</div>
 			</div>
 		</div>
-		<div *ngIf="selectedGroup" [@fade]>
+		<div *ngIf="selectedGroup" [@slideReverse]="'timed'">
 			<div class="data_container">
 				<div class="mb_24 fc_primarylight">
 					<h2 class="col_a title_medium va_m">
@@ -78,19 +78,19 @@
 						<p class="fs_b fc_lightgray mb_12">Nombre del Grupo</p>
 						<input type="text" [(ngModel)]="selectedGroup.name" name="group_name" placeholder="Nombre del Grupo"/>
 					</div>
-					<div class="pt_8" *ngIf="members?.length > 0">
+					<div *ngIf="members?.length > 0">
 						<div class="mt_24">
 							<h4 class="fs_b fw_n fc_lightgray mb_12">
 								Miembros <span class="fs_s" *ngIf="selectedGroup.users?.length > 0">(Click para eliminar)</span>
 							</h4>
-							<p class="p_24 title_small fw_300 opacity" *ngIf="selectedGroup.users?.length < 1">
+							<p class="p_24 title_small fw_300 opacity" *ngIf="selectedGroup.users?.length < 1" [@slide]="'timed'">
 								No hay miembros en este grupo
 							</p>
 							<div class="list">
-								<div class="list_element hover_black" *ngFor="let user of selectedGroup.users;let i = index" [ngClass]="{'border_t b_light': i > 0}" [@slide]>
+								<div class="list_element hover_black" *ngFor="let user of selectedGroup.users;let i = index" [ngClass]="{'border_t b_light': i > 0}" [@slide]="selectedGroup.users?.length == 1 ? 'timed' : 'normal'">
 									<div (click)="addUserToGroup(user)">
 										<div class="ref">
-											<div class="img_container circle">
+											<div class="img_container mini">
 												<img [src]="user.profilePhoto && user.profilePhoto != '' ? '/media/'+user.id+'/profile/'+user.profilePhoto : 'assets/icons/default_profile.png'">
 											</div>
 										</div><div class="info">
@@ -105,21 +105,21 @@
 								</div>
 							</div>
 						</div>
-						<div class="mt_24">
-							<h4 class="fs_b fw_n fc_lightgray mb_12" *ngIf="getGroupMembers()?.length > 0">
+						<div class="mt_24" *ngIf="usersNoGroup?.length > 0" [@slide]="'normal'">
+							<h4 class="fs_b fw_n fc_lightgray mb_12">
 								Agregar Miembros
 							</h4>
-							<p class="p_24 title_small fw_l" *ngIf="getGroupMembers()?.length < 1">
+							<p class="p_24 title_small fw_l" *ngIf="usersNoGroup?.length < 1">
 								<span class="opacity fw_300">No hay miembros para agregar</span>
 								<span class="fs_b fw_500 fc_opacity mt_16">
 									Para agregar miembros a este grupo debes eliminar miembros de otro grupo
 								</span>
 							</p>
 							<div class="list">
-								<div class="list_element hover_black" *ngFor="let user of getGroupMembers();let i = index" [ngClass]="{'border_t b_light': i > 0}">
-									<div (click)="addUserToGroup(user)" *ngIf="!isInGroup(user.id)" [@slide]>
+								<div class="list_element hover_black" *ngFor="let user of usersNoGroup;let i = index" [ngClass]="{'border_t b_light': i > 0}">
+									<div (click)="addUserToGroup(user)" *ngIf="!isInGroup(user.id)" [@slide]="'normal'">
 										<div class="ref">
-											<div class="img_container circle">
+											<div class="img_container mini">
 												<img [src]="user.profilePhoto && user.profilePhoto != '' ? '/media/'+user.id+'/profile/'+user.profilePhoto : 'assets/icons/default_profile.png'">
 											</div>
 										</div><div class="info">
@@ -135,10 +135,10 @@
 							</div>
 						</div>
 					</div>
-					<div class="mt_24 ta_r">
-						<input type="button" class="btn btn_outline b_red fc_red bg_trans_red" value="Eliminar Grupo" *ngIf="!selectedGroup.isNew" (click)="setConfirmation($event)">
-						<input type="submit" class="btn btn_primary shadow_raised ml_8" value="{{ selectedGroup.isNew ? 'Crear Grupo' : 'Actualizar Grupo' }}">
-					</div>
+				</div>
+				<div class="pt_24 ta_r">
+					<input type="button" class="btn btn_outline b_red fc_red bg_trans_red" value="Eliminar Grupo" *ngIf="!selectedGroup.isNew" (click)="setConfirmation($event)">
+					<input type="submit" class="btn btn_primary shadow_raised ml_8" value="{{ selectedGroup.isNew ? 'Crear Grupo' : 'Actualizar Grupo' }}" [disabled]="groupNotChanged()">
 				</div>
 			</div>
 		</div>

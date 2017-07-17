@@ -1,5 +1,5 @@
 <section class="app_bar_back"></section>
-<section class="app_bar bg_white shadow_flat">
+<section class="app_bar bg_white shadow_raised">
 	<div class="app_bar_inner">
 		<div class="bar_top">
 			<a routerLink="/">
@@ -20,7 +20,7 @@
 							<button class="close">
 								<img class="icon opacity" src="assets/icons/magnify_black.png">
 							</button>
-							<input class="bg_lightgray" id="search-bar-input" type="text" placeholder="Buscar">
+							<input id="search-bar-input" type="text" placeholder="Buscar">
 						</div>
 					</div>
 				</div><div class="col_a va_t messages_button">
@@ -32,7 +32,7 @@
 				</div><div class="col_a va_t hidden_block_container notif">
 					<app-notifications></app-notifications>
 				</div><div class="col_a va_t hidden_block_container prof_container pl_16 pr_16 hover_black" id="menu-pphoto">
-					<div class="img_container circle col_a size_32 va_m cursor_pointer">
+					<div class="img_container border_radius col_a size_32 va_m cursor_pointer">
 						<img [src]="user.profilePhoto ? '/media/'+user._id+'/profile/'+user.profilePhoto : 'assets/icons/default_profile.png'">
 					</div>
 					<span class="ml_8 name fw_500">{{ user.name }}</span>
