@@ -11,14 +11,13 @@ import { Course } from '../../_models/course';
 import { userTypes, Colors } from '../../app.constants';
 
 import { toggleSize } from '../../_animations/toggleSize';
-import { sliceReverse, slice } from '../../_animations/slice';
+import { slideReverse, slide } from '../../_animations/slide';
 
 @Component({
 	selector: 'app-course-detail',
 	templateUrl: './course-detail.component.html',
 	styleUrls: ['./course-detail.component.css'],
-	providers: [CourseDetailService],
-	animations: [toggleSize, sliceReverse, slice]
+	animations: [toggleSize, slideReverse, slide]
 })
 export class CourseDetailComponent implements OnInit {
 	course = new Course;
@@ -26,7 +25,6 @@ export class CourseDetailComponent implements OnInit {
 	courseId: string = '';
 	courseMembers: User[];
 	displayedList: number = 0; // O contenidos, 1 actividades, 2 miembros
-	selectedGroup: any;
 	suscribeAction: boolean = true;
 	confirmationStatus: any = {
 		message: null,
@@ -45,7 +43,6 @@ export class CourseDetailComponent implements OnInit {
 				.subscribe( course => {
 					this.course = course;
 				});
-		this.resetValues();
 	}
 
 	fetchCourse(): void {
@@ -57,35 +54,11 @@ export class CourseDetailComponent implements OnInit {
 			});
 	}
 
-	updateGroup(): void {
-		this.courseDetailService.updateGroup(this.selectedGroup, this.course._id)
-			.subscribe( response => {
-				this.fetchCourse();
-				this.resetValues();
-			}, error => {
-				console.log(error);
-			})
-	}
-
-	deleteGroup(): void {
-		this.courseDetailService.deleteGroup(this.course._id, this.selectedGroup.id)
-			.subscribe( response => {
-				this.fetchCourse();
-				this.resetValues();
-			}, error => {
-				console.log(error);
-			})
-	}
-
 	preventSubmit($event): void {
 		event.preventDefault();
 	}
 
-	resetValues(): void {
-		this.selectedGroup = undefined;
-	}
-
-	getGroupName(group: string): string {
+	getMemberGroup(group: string): string {
 		let name = '';
 		for ( let item in this.course.groups ) {
 			if ( this.course.groups[item]._id == group ) {
@@ -118,63 +91,6 @@ export class CourseDetailComponent implements OnInit {
 		return flag;
 	}
 
-	selectGroup(event, group: any): void {
-		event.preventDefault();
-		if ( group !== undefined ) {
-			this.selectedGroup = {
-				id: group._id,
-				name: group.name,
-				users: this.getGroupMembers(group._id),
-				isNew: false
-			};
-		} else {
-			this.selectedGroup = {
-				id: 'newgroupid',
-				name: '',
-				users: [],
-				isNew: true
-			};
-		}
-	}
-
-	getGroupMembers(group: string): User[] {
-		let usersArray = [];
-		if ( group !== undefined || group !== '' ) {
-			for ( let item in this.course.members ) {
-				if ( this.course.members[item].group === group ) {
-					usersArray.push( this.course.members[item].user );
-				}
-			}
-		} else {
-			for ( let item in this.course.members ) {
-				if ( this.course.members[item].group === undefined || this.course.members[item].group === '') {
-					usersArray.push( this.course.members[item].user );
-				}
-			}
-		}
-		return usersArray;
-	}
-
-	addUserToGroup(user: User) {
-		let check = this.selectedGroup.users.indexOf( user ); 
-		if ( check > -1 ) {
-			this.selectedGroup.users.splice(check, 1);	
-		} else {
-			this.selectedGroup.users.push(user);
-		}
-	}
-
-	isInGroup(id: string): boolean {
-		let flag = false;
-		for( let item in this.selectedGroup.users ) { 
-			if ( this.selectedGroup.users[item].id === id ) {
-				flag = true;
-				break;
-			}
-		}
-		return flag;
-	}
-
 	setConfirmation(event: Event, elem: string) {
 		event.preventDefault();
 		let message: string = null;
@@ -182,9 +98,6 @@ export class CourseDetailComponent implements OnInit {
 		switch (elem) {
 			case 'deleteCourse':
 				message = 'Estas a punto de eliminar el curso. ¿Estas seguro?';
-				break;
-			case 'deleteGroup':
-				message = 'Estas a punto de eliminar este grupo. ¿Estas seguro?';
 				break;
 			case 'suscribe':
 				message = 'Al inscribirte comenzaras a recibir norificaciones acerca de la actividad en el curso.';
@@ -209,9 +122,6 @@ export class CourseDetailComponent implements OnInit {
 				case 'deleteCourse':
 					// code...
 					break;
-				case 'deleteGroup':
-					this.deleteGroup();
-					break;
 				case 'suscribe':
 					this.suscribeCourse(true);
 					break;
@@ -222,15 +132,10 @@ export class CourseDetailComponent implements OnInit {
 					// code...
 					break;
 			}
-			this.confirmationStatus = {
-				message: null,
-				action: null
-			};
-		} else {
-			this.confirmationStatus = {
-				message: null,
-				action: null
-			};
 		}
+		this.confirmationStatus = {
+			message: null,
+			action: null
+		};
 	}
 }
