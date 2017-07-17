@@ -7,12 +7,14 @@ import { CoursesService } from '../courses/courses.service';
 import { Course } from '../_models/course';
 import { User } from '../_models/user';
 import { userTypes, replaceCharacters, Colors } from '../app.constants';
+import { toggleSize } from '../_animations/toggleSize';
 
 @Component({
 	selector: 'app-courses',
 	templateUrl: './courses.component.html',
 	styleUrls: ['./courses.component.css'],
-	providers: [CoursesService]
+	providers: [CoursesService],
+	animations: [toggleSize]
 })
 export class CoursesComponent implements OnInit {
 	groupActive: boolean;
@@ -65,13 +67,14 @@ export class CoursesComponent implements OnInit {
 			});
 	}
 
-	addTag(event, tag: string): void {
+	addTag(event, tag?: string): void {
 		let tempTag = '';
 		let tagsArray = [];
 		let newTag = '';
 
 		if ( tag !== undefined ) {
 			newTag = tag;
+			this.displayingTags = [];
 		} else {
 			if ( event.keyCode === 32 || event.keyCode === 13 || event.keyCode === 9 ) { // space, enter, tab
 				event.preventDefault();

@@ -1,5 +1,5 @@
 @media screen and (min-width: 1024px) {
-	.page_container { margin-left: 48px;margin-right: 48px; }
+	.page_container { margin-left: 56px;margin-right: 56px; }
 	.page_container .page_container_in { max-width: 1080px; }
 
 	.page_container.full { margin: 0; }
@@ -7,7 +7,20 @@
 
 	.page_container.full.s_t { margin: 32px;margin-top: 0; }
 
-	.h_selection .item h3 {padding: 12px 16px;}
+	.page_container_in .left_grid {
+		width: 40%;
+		margin-right: 12px;
+		display: inline-block;
+		vertical-align: top;
+	}
+
+	.page_container_in .right_grid {
+		width: calc(60% - 12px);
+		display: inline-block;
+		vertical-align: top;
+	}
+
+	.h_selection .item h3 {padding: 12px 16px;min-width: 140px;}
 
 	.increment_margin { margin: 24px;margin-top: 20px; }
 

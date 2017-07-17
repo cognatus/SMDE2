@@ -3,13 +3,14 @@ $(document).ready( function() {
 		showHiddenBlock( false, $('#notif-mini') );
 		showHiddenBlock( false, $('#options-mini' ) );
 		showHiddenBlock( false, $('.hidden_options') );
-	}); 
+	});
 
 	$('#notif-mini, #options-mini, .hidden_options').click( function( event ) {
 		event.stopPropagation();
 	});
 
 	$('#notif-open-button').click( function( event ) {
+		console.log('notf');
 		event.stopPropagation();
 		if ( $('#notif-mini').css('display') === 'block' ) {
 			showHiddenBlock( false, $('#notif-mini' ) )
@@ -134,10 +135,12 @@ function showPopup( status, pop_up_id ) {
 	var selector = $(pop_up_id);
 	if ( status ) {
 		jQuery('.pop_up_container').css('z-index','99');
-		selector.css({'left':'0','display':'none','z-index':'999'}).fadeIn();
+		selector.css({'left':'0','display':'none','z-index':'199'}).fadeIn();
 		if ( $(window).width() >= 620 ) {
-			selector.css('background-color','rgba(255,255,255,0.7)');
-			selector.find('.pop_up').css('box-shadow', '0 1px 6px rgba(0,0,0,0.15)');
+			selector.css('background-color','rgba(0,0,0,0.2)');
+			selector.find('.pop_up').css({
+				'box-shadow': '0 1px 16px rgba(0, 0, 0, 0.12)'
+			});
 		}
 		$('body').css({ 
 			'overflow': 'hidden',

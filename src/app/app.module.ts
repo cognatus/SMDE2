@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AuthGuard } from './auth/auth.guard';
 
@@ -29,7 +30,7 @@ import { routes } from './app.routes';
 		RouterModule.forRoot(routes),
 		AdminModule,
 		CoursesModule,
-		MessagesModule
+		MessagesModule,
 	],
 	bootstrap: [ AppComponent ]
 })

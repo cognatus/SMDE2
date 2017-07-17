@@ -1,73 +1,80 @@
-<div class="page_container course_list">
-	<div class="pop_up_container" id="courses-add">
-		<div class="pop_up_back" onclick="showPopup(false, '#courses-add')"></div>
-		<div class="pop_up big">
-			<div class="inner border_radius">
-				<div class="bg_primary">
-					<div class="pop_up_title fc_white">
-						<h1 class="title">
-							Nuevo Curso
-						</h1>
-						<div class="close_button">
-							<button class="p_8 hover_black circle" onclick="showPopup(false, '#courses-add')">
-								<img class="icon" src="assets/icons/arrow-left_white.png">
-							</button>
+<div class="pop_up_container" id="courses-add">
+	<div class="pop_up_back" onclick="showPopup(false, '#courses-add')"></div>
+	<div class="pop_up big">
+		<div class="inner border_radius">
+			<div class="border_b b_light">
+				<div class="pop_up_title fc_opacity">
+					<h1 class="title">
+						Nuevo Curso
+					</h1>
+					<div class="close_button">
+						<button class="btn_icon hover_black" onclick="showPopup(false, '#courses-add')">
+							<span class="icon">
+								<i class="material-icons fc_opacity">arrow_back</i>
+							</span>
+						</button>
+					</div>
+				</div>
+			</div>
+			<form class="padding_block col_r" (submit)="addCourse($event)">
+				<div class="data_container">
+					<h2 class="title_medium mb_24 fc_primarylight">Información de Curso</h2>
+					<div class="pl_8 pr_8">
+						<div class="field_container pb_24">
+							<div class="field mt_8">
+								<label class="fc_lightgray fw_b fs_s">Nombre</label>
+								<input type="text" [(ngModel)]="course.name" name="name" placeholder="Nombre del Curso" />
+							</div>
+							<div class="field mt_12">
+								<label class="fc_lightgray fw_b fs_s">Etiquetas</label>
+								<div class="pt_4 pb_4 tags_container fc_white" *ngIf="course.tags?.length > 0">
+									<div class="col_a" *ngFor="let tag of course.tags" [@toggleSize]>
+										<span class="bg_blue va_m tag big">
+											<span class="ml_4 mr_4">
+												{{ tag }}
+											</span><span class="icon va_m small hover_black circle" (click)="removeTag(tag)">
+												<i class="material-icons">close</i>
+											</span>
+										</span>
+									</div>
+								</div>
+								<input type="text" [(ngModel)]="tagsString" name="tags" placeholder="Agrega etiquetas (Temas de interés, Especialidades, Materias)" (keydown)="addTag($event)" (keyup)="tagsString != null ? displayingTags = findTagCoincidences(tagsString, this.hiddenTags) : displayingTags = []">
+								<div class="list_scroll mini bg_white shadow_flat" [hidden]="displayingTags?.length < 1">
+									<div class="p_12 hover_black" *ngFor="let tag of displayingTags; let i=index" (click)="addTag($event, tag)" [ngClass]=" { 'bg_blue hover_blue': i == selectedDisplayTag } " [focused]="i == selectedDisplayTag">
+										{{ tag }}
+									</div>
+								</div>
+							</div>
+							<div class="mt_12">
+								<h4 class="fc_lightgray fw_b fs_s">Hacer Privado</h4>
+								<div class="mt_8">
+									<label class="switch">
+										<input type="checkbox" name="isPrivate" [(ngModel)]="course.isPrivate">
+										<span class="slider"></span>
+									</label>
+								</div>
+							</div>
+							<div class="field mt_12">
+								<label class="fc_lightgray fw_b fs_s">Descipción</label>
+								<textarea [(ngModel)]="course.description" name="description" placeholder="Agrega una descipción"></textarea>
+							</div>
+						</div>
+						<div class="ta_r">
+							<input type="submit" class="btn btn_primary shadow_flat" value="Crear Curso">
 						</div>
 					</div>
 				</div>
-				<form class="padding_block col_r" (submit)="addCourse($event)">
-					<div class="data_container">
-						<h2 class="title_medium mb_24 fc_secondary">Información de Curso</h2>
-						<div class="pl_8 pr_8">
-							<div class="field_container pb_24">
-								<div class="field mt_8">
-									<label class="opacity fw_b fs_s">Nombre</label>
-									<input type="text" [(ngModel)]="course.name" name="name" placeholder="Nombre del Curso" />
-								</div>
-								<div class="field mt_8">
-									<label class="opacity fw_b fs_s">Etiquetas</label>
-									<div class="pt_4" *ngIf="course.tags?.length > 0">
-										<span class="bg_blue circle_radius fc_white p_8 mr_8 mb_8 pl_12 pr_8" *ngFor="let tag of course.tags">
-											{{ tag }}
-											<img class="icon small opacity cursor_pointer va_m pos_r" src="assets/icons/close_black.png" (click)="removeTag(tag)" style="top: -1px">
-										</span>
-									</div>
-									<input type="text" [(ngModel)]="tagsString" name="tags" placeholder="Agrega etiquetas (Temas de interés, Especialidades, Materias)" (keydown)="addTag($event)" (keyup)="tagsString != null ? displayingTags = findTagCoincidences(tagsString, this.hiddenTags) : displayingTags = []">
-									<div class="list_scroll mini bg_white shadow_flat" [hidden]="displayingTags?.length < 1">
-										<div class="p_12 hover_black" *ngFor="let tag of displayingTags; let i=index" (click)="addTag($event, tag)" [ngClass]=" { 'bg_blue hover_blue': i == selectedDisplayTag } " [focused]="i == selectedDisplayTag">
-											{{ tag }}
-										</div>
-									</div>
-								</div>
-								<div class="mt_8">
-									<h4 class="opacity fw_b fs_s">Hacer Privado</h4>
-									<div class="mt_8">
-										<label class="switch">
-											<input type="checkbox" name="isPrivate" [(ngModel)]="course.isPrivate">
-											<span class="slider"></span>
-										</label>
-									</div>
-								</div>
-								<div class="field mt_8">
-									<label class="opacity fw_b fs_s">Descipción</label>
-									<textarea [(ngModel)]="course.description" name="description" placeholder="Agrega una descipción"></textarea>
-								</div>
-							</div>
-							<div class="ta_r">
-								<input type="submit" class="btn btn_primary" value="Crear Curso">
-							</div>
-						</div>
-					</div>
-				</form>
-			</div>
+			</form>
 		</div>
 	</div>
+</div>
+<div class="page_container course_list">
 	<div class="page_container_in">
 		<section class="list">
 			<div class="p_16 resp_title main_action_button">
-				<button class="btn btn_primary" onclick="showPopup(true, '#courses-add')">
+				<button class="btn btn_primary shadow_flat" onclick="showPopup(true, '#courses-add')">
 					<span class="va_m icon">
-						<i class="material-icons fw_500">add</i>
+						<i class="material-icons">add</i>
 					</span><span class="va_m ml_4">
 						Nuevo Curso
 					</span>
@@ -80,7 +87,7 @@
 				<div class="mt_48">
 					<button class="btn btn_primary" onclick="showPopup(true, '#courses-add')">
 						<span class="va_m icon">
-							<i class="material-icons fw_500">add</i>
+							<i class="material-icons">add</i>
 						</span><span class="va_m ml_4">
 							Nuevo Curso
 						</span>
@@ -89,12 +96,12 @@
 			</div>
 			<div class="col_r resp_list ta_c">
 				<div class="col_2 ta_l" *ngFor="let course of courses">
-					<div class="resp_item b_gray bg_white border_radius mb_16 pos_r b_trans">
+					<div class="resp_item border b_gray border_radius mb_16 b_trans">
 						<a href="/cursos/{{ course._id }}">
 							<div class="list_element">
 								<div class="ref">
-									<span class="circle bg_opacity_light fc_white" [style.background]="colors.getColor(course.name)">
-										<label class="title_smaller fw_l size_24">{{ course.name.charAt(0) }}</label>
+									<span class="fc_white" [style.backgroundColor]="colors.getColor(course.name)">
+										<label class="title_smaller size_24">{{ course.name.charAt(0) }}</label>
 									</span>
 								</div><div class="info">
 									<div class="p_16">
@@ -124,7 +131,7 @@
 									<b>Creado por:</b>
 								</div>
 								<a href="/perfil/{{ course.user.id }}">
-									<div class="hover_blue">
+									<div class="fc_trans_blue">
 										<div class="ref">
 											<div class="img_container circle">
 												<img [src]="course.user.profilePhoto ? '/media/'+course.user.id+'/profile/'+ course.user.profilePhoto : 'assets/icons/default_profile.png'">

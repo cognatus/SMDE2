@@ -5,6 +5,8 @@
 
 	.increment_margin { margin: 12px; }
 
+	.h_selection .item h3 {padding: 8px 12px;}
+
 	.app_bar .app_bar_inner .hidden_block_container.notif .hidden_block {
 		width: 320px;
 		right: -96px; 

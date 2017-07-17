@@ -9,12 +9,13 @@ const notif = require('./notificaciones');
 exports.createGroup = (req, res) => {
 	let members = req.body.users; // [id: string];
 	let groupName = req.body.name; // string;
+	let courseId = req.params.id;
 
-	Course.findOneAndUpdate({ _id: req.params.id }, {
+	Course.findOneAndUpdate({ _id: courseId }, {
 			$push: { groups: { name: groupName } }, 
 			$set: { updatedDate: new Date() }
 		}).exec().then( (doc) => {
-			return Course.findOne({ _id: id }).exec()
+			return Course.findOne({ _id: courseId }).exec()
 				.then( (subdoc) => {
 					return subdoc;
 				})
@@ -83,13 +84,14 @@ exports.updateGroup = (req, res) => {
 	let groupId = req.params.groupid;
 	let courseId = req.params.id;
 
+	let oldUsers = [];
+	let oldGroupName = '';
+
 	Course.findOne({ _id: courseId }).exec()
 		.then( (doc) => {
 			return new Promise( (resolve, reject) => {
 				let groups = doc.groups;
 				let users = doc.members;
-				let oldGroupName = '';
-				let oldUsers = [];
 				// buscar grupo por id para cambiar el nombre
 				for ( let i = 0 ; i < groups.length ; i++ ) {
 					if ( groups[i].id === groupId ) {
@@ -120,7 +122,7 @@ exports.updateGroup = (req, res) => {
 						}
 					}
 				}
-				resolve([users, groups, oldUsers, oldGroupName]);
+				resolve([users, groups]);
 			})
 		}).then( (data) => {
 			return Course.findOneAndUpdate({ _id: courseId }, {
@@ -132,10 +134,10 @@ exports.updateGroup = (req, res) => {
 						action: {
 							status: 2,
 							substatus: 2,
-							element: [data[3], doc.name]
+							element: [oldGroupName, doc.name]
 						},
 						redirect: '/cursos/' + courseId,
-						sendTo: data[2]
+						sendTo: oldUsers
 					}, (err, obj) => {
 						if (err) console.log(err);
 					});
@@ -223,7 +225,3 @@ exports.deleteGroup = (req, res) => {
 			res.status(404).send({ message: err });
 		});
 };
-
-function findCourse(id) {
-	
-}

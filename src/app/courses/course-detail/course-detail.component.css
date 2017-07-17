@@ -4,7 +4,6 @@ button.suscribe_button {
 }
 
 button.suscribe_button.active {
-	border-color: #8BC34A;
 	color: #8BC34A;
 	padding-left: 10px;
 }

@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AuthGuard } from '../auth/auth.guard';
+import { ConfirmationComponent } from '../confirmation/confirmation.component';
 import { MenuComponent } from '../menu/menu.component';
 import { NotificationsComponent } from '../notifications/notifications.component';
 
@@ -18,25 +19,27 @@ import { FormatDatePipe } from '../_pipes/formatdate';
 		CommonModule,
 		BrowserModule,
 		RouterModule,
-		BrowserAnimationsModule,
 		FormsModule,
 		ReactiveFormsModule,
-		HttpModule
+		HttpModule,
+		BrowserAnimationsModule,
 	],
 	declarations: [
 		FocusedDirective,
 		FormatDatePipe,
+		ConfirmationComponent,
 		MenuComponent,
 		NotificationsComponent
 	],
 	exports: [
 		BrowserModule,
-		BrowserAnimationsModule,
 		FormsModule,
 		ReactiveFormsModule,
 		HttpModule,
+		BrowserAnimationsModule,
 		FocusedDirective,
 		FormatDatePipe,
+		ConfirmationComponent,
 		MenuComponent,
 		NotificationsComponent
 	],
