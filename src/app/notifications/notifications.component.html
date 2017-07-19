@@ -1,10 +1,10 @@
-<button class="action_button pl_8 pr_8 hover_black" id="notif-open-button" title="Ver Notificaciones">
+<button class="action_button pl_8 pr_8 hover" id="notif-open-button" title="Ver Notificaciones">
 	<img class="icon va_m ml_4 mr_4" src="assets/icons/bell_black.png">
 	<i class="mini_mark circle bg_red fc_white" *ngIf="getUnreadNotif() > 0">{{ getUnreadNotif() }}</i>
 </button>
 <div class="hidden_block" id="notif-mini">
 	<i class="mark bg_white"></i>
-	<div class="bg_white shadow_raised border_radius notif_container">
+	<div class="bg_white border b_gray shadow_raised border_radius notif_container">
 		<section class="mm_section border_b b_light bg_white pt_12 pb_12 z_2">
 			<div class="pl_16 pr_16">
 				<p class="fw_500 fc_opacity">Notificaciones</p>
@@ -20,7 +20,7 @@
 				</div>
 				<div class="list_element pos_r" *ngFor="let notif of notifications; let i = index">
 					<a [attr.href]="notif.read ? notif.redirect : null">
-						<div [ngClass]="{'cursor_pointer bg_lightblue': !notif.read, 'hover_light': notif.read, 'border_t b_light': i > 0 }" (click)="!notif.read ? markRead(true, notif) : null">
+						<div [ngClass]="{'cursor_pointer bg_superlightblue': !notif.read, 'hover_light': notif.read, 'border_t b_light': i > 0 }" (click)="!notif.read ? markRead(true, notif) : null">
 							<div class="ref">
 								<div class="img_container mini">
 									<img [src]="notif.responsibleUsers[0].profilePhoto ? '/media/'+notif.responsibleUsers[0]._id+'/profile/'+notif.responsibleUsers[0].profilePhoto : '/assets/icons/default_profile.png'">
@@ -53,14 +53,17 @@
 							</div>
 						</div>
 					</a>
-					<span class="mini_mark circle size_12 p_4 circle bg_light" [ngClass]="{'hover_blue': notif.read, 'hover_red': !notif.read}" (click)="markRead(false, notif)" [title]="!notif.read ? 'Marcar como leido' : 'Marcar como no leido'">
-						<img class="size_12" [src]="notif.read ? '/assets/icons/check_white.png' : '/assets/icons/close_white.png' ">
-					</span>
+					<div class="mini_mark">
+						<button class="btn_icon small" [ngClass]="{'hover_blue': notif.read, 'hover_red': !notif.read}" (click)="markRead(false, notif)" [title]="!notif.read ? 'Marcar como leido' : 'Marcar como no leido'">
+							<i class="material-icons" *ngIf="!notif.read">close</i>
+							<i class="material-icons" *ngIf="notif.read">check</i>
+						</button>
+					</div>
 				</div>
 			</div>
 		</section>
 		<section class="mm_section" *ngIf="notifications?.length > 10">
-			<button class="w_100 fc_red hover_black">
+			<button class="w_100 fc_red hover">
 				<div class="p_8 fc_secondary">Cargar más</div>
 			</button>
 		</section>

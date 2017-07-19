@@ -9,9 +9,9 @@
 
 	.increment_margin { margin: 16px; }
 
-	.app_bar .app_bar_inner .logo_container { width: 50px; }
+	.app_bar_back { height: 51px; }
 
-	.app_bar, .app_bar_back, .app_bar .app_bar_inner .bar_top, .app_bar .app_bar_inner .bar_bottom { height: 50px;line-height: 50px; }
+	.app_bar, .app_bar .app_bar_inner .logo_container, .app_bar .app_bar_inner .bar_top, .app_bar .app_bar_inner .bar_bottom { height: 50px;line-height: 50px; }
 
 	.app_bar .app_bar_inner .searchbar_container .searchbar .field { margin-bottom: 3px;margin-top: 5px; }
 
@@ -105,6 +105,23 @@
 	.profile_display .background .editable {
 		top: 24px;
 		left: 24px;
+	}
+
+	.messages_container {
+		top: 51px;
+		height: calc(100% - 51px);
+	}
+
+	.messages_container .left_grid {
+		width: 40%;
+		display: inline-block;
+		vertical-align: top;
+	}
+
+	.messages_container .right_grid {
+		width: 60%;
+		display: inline-block;
+		vertical-align: top;
 	}
 
 }

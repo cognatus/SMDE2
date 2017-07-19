@@ -1,15 +1,15 @@
 <section class="app_bar_back"></section>
-<section class="app_bar bg_white shadow_raised">
+<section class="app_bar border_b b_gray">
 	<div class="app_bar_inner">
 		<div class="bar_top">
 			<a routerLink="/">
-				<div class="col_a logo_container hover_black">
+				<div class="col_a logo_container hover">
 					<img class="icon va_m" src="assets/icons/logo.png">
 				</div>
 			</a>
 			<div class="float_right">
 				<div class="col_a va_t searchbar_container">
-					<button class="action_button pl_8 pr_8 hover_black" id="search-icon" title="Buscar" onclick="showSearchBar(true)">
+					<button class="action_button pl_8 pr_8 hover" id="search-icon" title="Buscar" onclick="showSearchBar(true)">
 						<img class="icon va_m ml_4 mr_4" src="assets/icons/magnify_black.png">
 					</button>
 					<div class="searchbar" id="search-bar">
@@ -24,44 +24,44 @@
 						</div>
 					</div>
 				</div><div class="col_a va_t messages_button">
-					<a href="/mensajes">
-						<button class="action_button pl_8 pr_8 hover_black" id="msm-open-button" title="Abrir Mensajes">
+					<a routerLink="/mensajes">
+						<button class="action_button pl_8 pr_8 hover" id="msm-open-button" title="Abrir Mensajes">
 							<img class="icon va_m ml_4 mr_4" src="assets/icons/email_black.png">
 						</button>
 					</a>
 				</div><div class="col_a va_t hidden_block_container notif">
 					<app-notifications></app-notifications>
-				</div><div class="col_a va_t hidden_block_container prof_container pl_16 pr_16 hover_black" id="menu-pphoto">
+				</div><div class="col_a va_t hidden_block_container prof_container pl_16 pr_16 hover" id="menu-pphoto">
 					<div class="img_container border_radius col_a size_32 va_m cursor_pointer">
 						<img [src]="user.profilePhoto ? '/media/'+user._id+'/profile/'+user.profilePhoto : 'assets/icons/default_profile.png'">
 					</div>
 					<span class="ml_8 name fw_500">{{ user.name }}</span>
 					<div class="hidden_block" id="options-mini">
 						<i class="mark bg_white"></i>
-						<div class="bg_white shadow_flat border_radius">
+						<div class="bg_white border b_gray shadow_raised border_radius">
 							<section class="mm_section border_b b_light pt_12 pb_12 z_2 bg_white">
 								<div class="pl_16 pr_16 fc_opacity">
 									<p class="fs_s">Iniciado con:</p>
 									<p class="fw_b mt_4">{{ user.mail }}</p>
 								</div>
 							</section>
-							<section class="mm_section border_b b_light pt_8 pb_8 fw_500 fc_gray">
+							<section class="mm_section border_b b_light pt_8 pb_8 fw_n fc_gray">
 								<a routerLink="/perfil" routerLinkActive="fc_primary">
-									<div class="p_8 pl_16 pr_16 hover_black">
+									<div class="p_8 pl_16 pr_16 hover">
 										<span class="va_m icon small">
 											<i class="material-icons">&#xE853;</i>
 										</span><span class="va_m ml_12">Cuenta</span>
 									</div>
 								</a>
 								<a routerLink="/ayuda" routerLinkActive="fc_blue">
-									<div class="p_8 pl_16 pr_16 hover_black">
+									<div class="p_8 pl_16 pr_16 hover">
 										<span class="va_m icon small">
 											<i class="material-icons">help</i>
 										</span><span class="va_m ml_12">Ayuda</span>
 									</div>
 								</a>
 								<a routerLink="/ajustes" routerLinkActive="fc_blue">
-									<div class="p_8 pl_16 pr_16 hover_black">
+									<div class="p_8 pl_16 pr_16 hover">
 										<p>
 											<span class="va_m icon small">
 												<i class="material-icons">settings</i>
@@ -82,7 +82,7 @@
 		</div>
 		<div class="bar_bottom">
 			<div class="menu">
-				<nav class="item hover_black" *ngIf="user.privilege != 0">
+				<nav class="item hover" *ngIf="user.privilege != 0">
 					<a routerLink="/cursos" routerLinkActive="fc_primary">
 						<div class="inner">
 							<span class="icon va_m">
@@ -92,7 +92,7 @@
 							</span>
 						</div>
 					</a>
-				</nav><nav class="item hover_black" *ngIf="user.privilege == 0">
+				</nav><nav class="item hover" *ngIf="user.privilege == 0">
 					<a routerLink="/admin" routerLinkActive="fc_primary">
 						<div class="inner">
 							<span class="icon va_m">
@@ -102,7 +102,7 @@
 							</span>
 						</div>
 					</a>
-				</nav><nav class="item hover_black">
+				</nav><nav class="item hover">
 					<a routerLink="/agenda" routerLinkActive="fc_primary">
 						<div class="inner">
 							<span class="icon va_m">
@@ -112,7 +112,7 @@
 							</span>
 						</div>
 					</a>
-				</nav><nav class="item hover_black">
+				</nav><nav class="item hover">
 					<a routerLink="/foro" routerLinkActive="fc_primary">
 						<div class="inner">
 							<span class="icon va_m">
@@ -122,7 +122,7 @@
 							</span>
 						</div>
 					</a>
-				</nav><nav class="item hover_black">
+				</nav><nav class="item hover">
 					<a routerLink="/contenidos" routerLinkActive="fc_primary">
 						<div class="inner">
 							<span class="icon va_m">

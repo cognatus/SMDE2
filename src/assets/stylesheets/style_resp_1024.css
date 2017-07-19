@@ -24,11 +24,13 @@
 
 	.increment_margin { margin: 24px;margin-top: 20px; }
 
+	.app_bar_back { height: 57px; }
+
+	.app_bar, .app_bar .app_bar_inner .logo_container, .app_bar .app_bar_inner .bar_top, .app_bar .app_bar_inner .bar_bottom { height: 56px; }
+
+	.app_bar .app_bar_inner .logo_container, .app_bar .app_bar_inner .bar_top { line-height: 54px; }
+
 	.app_bar .app_bar_inner .logo_container { width: 56px; }
-
-	.app_bar, .app_bar_back, .app_bar .app_bar_inner .bar_top, .app_bar .app_bar_inner .bar_bottom { height: 56px; }
-
-	.app_bar .app_bar_inner .bar_top { line-height: 54px; }
 
 	.app_bar .app_bar_inner .searchbar_container { position: relative; }
 
@@ -115,5 +117,18 @@
 	.profile_display .profile_photo .img_container {
 		width: 104px;
 		height: 104px;
+	}
+
+	.messages_container {
+		top: 57px;
+		height: calc(100% - 57px);
+	}
+
+	.messages_container .left_grid {
+		width: 392px;
+	}
+
+	.messages_container .right_grid {
+		width: calc(100% - 392px);
 	}
 }

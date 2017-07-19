@@ -1,6 +1,7 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from '../auth/auth.guard';
 
 import { CourseDetailService } from './course-detail/course-detail.service';
 
@@ -10,23 +11,29 @@ import { CoursesComponent } from './courses.component';
 import { CourseDetailComponent } from './course-detail/course-detail.component';
 import { GroupsComponent } from './groups/groups.component';
 
-
-
-import { routes } from './courses.routes'
+const routes: Routes = [
+    { 
+    	path: '', 
+    	component: CoursesComponent, 
+    	canActivate: [AuthGuard],
+    }, { 
+    	path: ':id', 
+    	component: CourseDetailComponent, 
+    	canActivate: [AuthGuard] 
+    }
+]
 
 @NgModule({
 	imports: [
 		CommonModule,
-		RouterModule.forRoot(routes),
-		SharedModule
+		SharedModule,
+		RouterModule.forChild(routes)
 	],
 	declarations: [
 		CoursesComponent,
 		CourseDetailComponent,
 		GroupsComponent
 	],
-	providers: [CourseDetailService],
-	exports: [ CoursesComponent, CourseDetailComponent, GroupsComponent ],
-	schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
+	providers: [CourseDetailService]
 })
 export class CoursesModule { }

@@ -8,7 +8,7 @@
 						Nuevo Curso
 					</h1>
 					<div class="close_button">
-						<button class="btn_icon hover_black" onclick="showPopup(false, '#courses-add')">
+						<button class="btn_icon hover" onclick="showPopup(false, '#courses-add')">
 							<span class="icon">
 								<i class="material-icons fc_opacity">arrow_back</i>
 							</span>
@@ -32,7 +32,7 @@
 										<span class="bg_blue va_m tag big">
 											<span class="ml_4 mr_4">
 												{{ tag }}
-											</span><span class="icon va_m small hover_black circle" (click)="removeTag(tag)">
+											</span><span class="icon va_m small hover circle" (click)="removeTag(tag)">
 												<i class="material-icons">close</i>
 											</span>
 										</span>
@@ -40,7 +40,7 @@
 								</div>
 								<input type="text" [(ngModel)]="tagsString" name="tags" placeholder="Agrega etiquetas (Temas de interés, Especialidades, Materias)" (keydown)="addTag($event)" (keyup)="tagsString != null ? displayingTags = findTagCoincidences(tagsString, this.hiddenTags) : displayingTags = []">
 								<div class="list_scroll mini bg_white shadow_flat" [hidden]="displayingTags?.length < 1">
-									<div class="p_12 hover_black" *ngFor="let tag of displayingTags; let i=index" (click)="addTag($event, tag)" [ngClass]=" { 'bg_lightblue': i == selectedDisplayTag } " [focused]="i == selectedDisplayTag">
+									<div class="p_12 hover" *ngFor="let tag of displayingTags; let i=index" (click)="addTag($event, tag)" [ngClass]=" { 'bg_lightblue': i == selectedDisplayTag } " [focused]="i == selectedDisplayTag">
 										{{ tag }}
 									</div>
 								</div>
@@ -60,7 +60,7 @@
 							</div>
 						</div>
 						<div class="ta_r">
-							<input type="submit" class="btn btn_primary shadow_flat" value="Crear Curso">
+							<input type="submit" class="btn btn_primary" value="Crear Curso">
 						</div>
 					</div>
 				</div>
@@ -72,10 +72,10 @@
 	<div class="page_container_in">
 		<section class="list">
 			<div class="p_16 resp_title main_action_button">
-				<button class="btn btn_primary shadow_flat" onclick="showPopup(true, '#courses-add')">
+				<button class="btn btn_primary" onclick="showPopup(true, '#courses-add')">
 					<span class="va_m icon">
 						<i class="material-icons">add</i>
-					</span><span class="va_m ml_4">
+					</span><span class="va_m">
 						Nuevo Curso
 					</span>
 				</button>
@@ -94,10 +94,10 @@
 					</button>
 				</div>
 			</div>
-			<div class="col_r resp_list ta_c">
-				<div class="col_2 ta_l" *ngFor="let course of courses">
-					<div class="resp_item border b_gray border_radius mb_16 b_trans">
-						<a href="/cursos/{{ course._id }}">
+			<section class="col_r resp_list ta_c">
+				<article class="col_2 ta_l" *ngFor="let course of courses">
+					<div class="resp_item border bg_white b_light border_radius mb_16 b_trans">
+						<a routerLink="/cursos/{{ course._id }}">
 							<div class="list_element">
 								<div class="ref">
 									<span class="fc_white" [style.backgroundColor]="colors.getColor(course.name)">
@@ -151,8 +151,8 @@
 							</div>
 						</a>
 					</div>	
-				</div>
-			</div>
+				</article>
+			</section>
 			<div class="p_32" *ngIf="courses?.length > 0"></div>
 		</section>
 	</div>

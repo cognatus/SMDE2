@@ -10,7 +10,6 @@ $(document).ready( function() {
 	});
 
 	$('#notif-open-button').click( function( event ) {
-		console.log('notf');
 		event.stopPropagation();
 		if ( $('#notif-mini').css('display') === 'block' ) {
 			showHiddenBlock( false, $('#notif-mini' ) )
@@ -125,7 +124,7 @@ function showSearchBar( status ) {
 	var selector = $('#search-bar');
 	if ( status ) {
 		selector.fadeIn();
-		$('search-bar-input').trigger('focus');
+		$('#search-bar-input').trigger('focus');
 	} else {
 		selector.fadeOut();
 	}

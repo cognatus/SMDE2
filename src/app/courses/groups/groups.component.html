@@ -8,12 +8,12 @@
 			{{ selectedGroup.isNew ? 'Nuevo Grupo' : 'Grupo' }}
 		</h1>
 		<div class="close_button">
-			<button class="btn_icon hover_black" onclick="showPopup(false, '#groups-admin')" *ngIf="!selectedGroup">
+			<button class="btn_icon hover" onclick="showPopup(false, '#groups-admin')" *ngIf="!selectedGroup">
 				<span class="icon">
 					<i class="material-icons fc_opacity">arrow_back</i>
 				</span>
 			</button>
-			<button class="btn_icon hover_black" (click)="resetValues()" *ngIf="selectedGroup">
+			<button class="btn_icon hover" (click)="resetValues()" *ngIf="selectedGroup">
 				<span class="icon">
 					<i class="material-icons fc_opacity">arrow_back</i>
 				</span>
@@ -23,16 +23,17 @@
 </div>
 <form class="padding_block" (submit)="updateGroup()">
 	<div class="p_24 ta_c" *ngIf="!groups || groups?.length < 1">
-		<h2 class="title_medium fw_l opacity pb_8 mb_32">No hay grupos aun</h2>
-		<button class="p_16 fs_b bg_secondary shadow_raised border_radius" (click)="selectGroup($event)">
-			<img class="va_m icon" src="assets/icons/plus_white.png">
-			<b class="va_m ml_4 fw_500">Crear Grupo</b>
+		<h2 class="title_medium fw_300 fc_lightgray pb_8 mb_32">No hay grupos aun</h2>
+		<button class="btn bg_trans_secondary" (click)="selectGroup($event)">
+			<span class="icon">
+				<i class="material-icons">add</i>
+			</span><b class="va_m ml_4 fw_500">Crear Grupo</b>
 		</button>
 	</div>
 	<div *ngIf="groups && groups?.length > 0">
 		<div *ngIf="!selectedGroup" [@slide]="'timed'">
 			<div class="ta_l pb_24">
-				<button class="btn btn_primary shadow_flat" (click)="selectGroup($event)">
+				<button class="btn btn_primary" (click)="selectGroup($event)">
 					<span class="icon">
 						<i class="material-icons">add</i>
 					</span><span class="text">Nuevo Grupo</span>
@@ -47,7 +48,7 @@
 					</h2>
 				</div>
 				<div class="pl_8 pr_8">
-					<div class="list_element hover_black" *ngFor="let group of groups;let i = index" [ngClass]="{'border_t b_light': i > 0}">
+					<div class="list_element hover" *ngFor="let group of groups;let i = index" [ngClass]="{'border_t b_light': i > 0}">
 						<div (click)="selectGroup($event, group)">
 							<div class="ref">
 								<span class="mini fc_white" [style.background]="colors.getColor(group.name)">
@@ -87,7 +88,7 @@
 								No hay miembros en este grupo
 							</p>
 							<div class="list">
-								<div class="list_element hover_black" *ngFor="let user of selectedGroup.users;let i = index" [ngClass]="{'border_t b_light': i > 0}" [@slide]="selectedGroup.users?.length == 1 ? 'timed' : 'normal'">
+								<div class="list_element hover" *ngFor="let user of selectedGroup.users;let i = index" [ngClass]="{'border_t b_light': i > 0}" [@slide]="selectedGroup.users?.length == 1 ? 'timed' : 'normal'">
 									<div (click)="addUserToGroup(user)">
 										<div class="ref">
 											<div class="img_container mini">
@@ -109,14 +110,8 @@
 							<h4 class="fs_b fw_n fc_lightgray mb_12">
 								Agregar Miembros
 							</h4>
-							<p class="p_24 title_small fw_l" *ngIf="usersNoGroup?.length < 1">
-								<span class="opacity fw_300">No hay miembros para agregar</span>
-								<span class="fs_b fw_500 fc_opacity mt_16">
-									Para agregar miembros a este grupo debes eliminar miembros de otro grupo
-								</span>
-							</p>
 							<div class="list">
-								<div class="list_element hover_black" *ngFor="let user of usersNoGroup;let i = index" [ngClass]="{'border_t b_light': i > 0}">
+								<div class="list_element hover" *ngFor="let user of usersNoGroup;let i = index" [ngClass]="{'border_t b_light': i > 0}">
 									<div (click)="addUserToGroup(user)" *ngIf="!isInGroup(user.id)" [@slide]="'normal'">
 										<div class="ref">
 											<div class="img_container mini">
@@ -136,9 +131,9 @@
 						</div>
 					</div>
 				</div>
-				<div class="pt_24 ta_r">
-					<input type="button" class="btn btn_outline b_red fc_red bg_trans_red" value="Eliminar Grupo" *ngIf="!selectedGroup.isNew" (click)="setConfirmation($event)">
-					<input type="submit" class="btn btn_primary shadow_raised ml_8" value="{{ selectedGroup.isNew ? 'Crear Grupo' : 'Actualizar Grupo' }}" [disabled]="groupNotChanged()">
+				<div class="pt_16 ta_r">
+					<input type="button" class="btn btn_cancel mt_8" value="Eliminar" *ngIf="!selectedGroup.isNew" (click)="setConfirmation($event)">
+					<input type="submit" class="btn btn_primary ml_8 mt_8" value="{{ selectedGroup.isNew ? 'Crear Grupo' : 'Actualizar' }}" [disabled]="groupNotChanged()">
 				</div>
 			</div>
 		</div>

@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
@@ -17,12 +15,10 @@ import { FormatDatePipe } from '../_pipes/formatdate';
 @NgModule({
 	imports: [
 		CommonModule,
-		BrowserModule,
 		RouterModule,
 		FormsModule,
 		ReactiveFormsModule,
-		HttpModule,
-		BrowserAnimationsModule,
+		HttpModule
 	],
 	declarations: [
 		FocusedDirective,
@@ -32,11 +28,9 @@ import { FormatDatePipe } from '../_pipes/formatdate';
 		NotificationsComponent
 	],
 	exports: [
-		BrowserModule,
 		FormsModule,
 		ReactiveFormsModule,
 		HttpModule,
-		BrowserAnimationsModule,
 		FocusedDirective,
 		FormatDatePipe,
 		ConfirmationComponent,

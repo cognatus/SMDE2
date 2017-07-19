@@ -10,18 +10,18 @@
 <div class="page_container">
 	<div class="page_container_in">
 		<div class="p_16 resp_title main_action_button">
-			<a href="/cursos">
-				<button class="btn btn_primary shadow_raised">
+			<a routerLink="/cursos">
+				<button class="btn btn_primary">
 					<span class="va_m icon">
-						<i class="material-icons fw_500">arrow_back</i>
-					</span><span class="va_m ml_4 mr_4">
+						<i class="material-icons">arrow_back</i>
+					</span><span class="va_m">
 						Regresar
 					</span>
 				</button>
 			</a>
 		</div>
 		<section class="left_grid">
-			<div class="pos_r mb_24 border b_gray border_radius" *ngIf="course.name">
+			<div class="pos_r mb_24 bg_white border b_light border_radius" *ngIf="course.name">
 				<div class="list_element">
 					<div class="ref">
 						<span class="fc_white" [style.backgroundColor]="colors.getColor(course.name)">
@@ -39,17 +39,17 @@
 					</div>
 				</div>
 				<div class="ta_r p_12 pr_16" *ngIf="auth.getUser()._id == course.user.id">
-					<button class="btn btn_auto bg_trans_secondary float_left" onclick="showPopup(true, '#groups-admin')">
+					<button class="btn bg_trans_secondary float_left" onclick="showPopup(true, '#groups-admin')">
 						<span class="icon small">
 							<i class="material-icons fc_opacity">group</i>
 						</span><span class="text">Grupos</span>
 					</button>
-					<button class="btn_icon hover_black">
+					<button class="btn_icon hover">
 						<span class="icon">
 							<i class="material-icons fc_opacity">mode_edit</i>
 						</span><!-- <span class="text">Editar</span> -->
 					</button>
-					<button class="btn_icon hover_black ml_8" (click)="setConfirmation($event, 'deleteCourse')">
+					<button class="btn_icon hover ml_8" (click)="setConfirmation($event, 'deleteCourse')">
 						<span class="icon">
 							<i class="material-icons fc_opacity">delete</i>
 						</span><!-- <span class="text">Eliminar</span> -->
@@ -111,7 +111,7 @@
 			</div>
 		</section><section class="right_grid">
 			<section class="h_selection ta_c mb_24">
-				<div class="in border_radius border b_gray fc_gray">
+				<div class="in border_radius bg_white border b_gray fc_gray">
 					<div class="item hover_primary border_r b_gray" (click)="displayedList = 0" [class.bg_primary]="displayedList == 0">
 						<h3>Contenidos</h3>
 					</div><div class="item hover_primary border_r b_gray" (click)="displayedList = 1" [class.bg_primary]="displayedList == 1">
@@ -121,22 +121,22 @@
 					</div>
 				</div>
 			</section>
-			<div class="list mb_24">
-				<div [hidden]="displayedList != 0">
+			<div class="list mb_24 o_h">
+				<div *ngIf="displayedList == 0">
 					
 				</div>
-				<div [hidden]="displayedList != 1">
+				<div *ngIf="displayedList == 1">
 					
 				</div>
-				<div [hidden]="displayedList != 2">
+				<div *ngIf="displayedList == 2">
 					<div class="p_32 ta_c" *ngIf="course.members?.length < 1">
 						<h2 class="title_big fw_l opacity">
 							Ningun miembro por el momento
 						</h2>
 					</div>
-					<div class="pl_12 pr_12" *ngIf="course.members">
-						<div class="border_radius" *ngFor="let member of course.members;let i = index" [ngClass]="{'border_t b_light': i > 0}">
-							<a href="/perfil/{{ member.user.id }}">
+					<ul class="pl_12 pr_12" *ngIf="course.members">
+						<li class="border_radius" *ngFor="let member of course.members;let i = index" [ngClass]="{'border_t b_light': i > 0}">
+							<a href="/perfil/{{ member.user._id }}">
 								<div class="list_element fc_trans_blue">
 									<div class="ref">
 										<div class="img_container border_radius">
@@ -157,8 +157,8 @@
 									</div>
 								</div>
 							</a>
-						</div>
-					</div>
+						</li>
+					</ul>
 				</div>
 			</div>
 		</section>

@@ -11,7 +11,7 @@
 							Fotos de Perfil
 						</h1>
 						<div class="close_button">
-							<button class="btn_icon hover_black" onclick="showPopup(false, '#profile-gallery')">
+							<button class="btn_icon hover" onclick="showPopup(false, '#profile-gallery')">
 								<span class="icon">
 									<i class="material-icons fc_opacity">arrow_back</i>
 								</span>
@@ -26,18 +26,18 @@
 						</div>
 						<div class="tr_0 h_32" *ngIf="privateUser">
 							<div class="increment_margin size_32 pos_r">
-								<button class="options_button hover_black size_32 ta_c circle">
+								<button class="options_button hover size_32 ta_c circle">
 									<img class="icon va_m" src="assets/icons/dots-vertical_white.png">
 								</button>
 								<div class="hidden_options">
-									<div class="bg_white pb_8 pt_8 shadow_flat border_radius fw_500 fc_n">
-										<p class="p_8 pl_16 pr_16 hover_black" (click)="changePhoto()" *ngIf="selectedAlbum == 0 && photos[selectedAlbum].array[photos[selectedAlbum].selected] !== userSrc + 'background/' + user.backPhoto">
+									<div class="bg_white border b_gray pb_8 pt_8 shadow_raised border_radius fc_n">
+										<p class="p_8 pl_16 pr_16 hover" (click)="changePhoto()" *ngIf="selectedAlbum == 0 && photos[selectedAlbum].array[photos[selectedAlbum].selected] !== userSrc + 'background/' + user.backPhoto">
 											<span>Seleccionar como foto de portada</span>
 										</p>
-										<p class="p_8 pl_16 pr_16 hover_black" (click)="changePhoto()" *ngIf="selectedAlbum == 1 && photos[selectedAlbum].array[photos[selectedAlbum].selected] !== userSrc + 'profile/' + user.profilePhoto">
+										<p class="p_8 pl_16 pr_16 hover" (click)="changePhoto()" *ngIf="selectedAlbum == 1 && photos[selectedAlbum].array[photos[selectedAlbum].selected] !== userSrc + 'profile/' + user.profilePhoto">
 											<span>Seleccionar como foto de Perfil</span>
 										</p>
-										<p class="p_8 pl_16 pr_16 hover_black" (click)="deletePhoto()">
+										<p class="p_8 pl_16 pr_16 hover" (click)="deletePhoto()">
 											Eliminar Foto
 										</p>
 									</div>
@@ -46,11 +46,11 @@
 						</div>
 					</div>
 					<div class="buttons_container bg_white col_s">
-						<button id="prof-galbutton-left" class="col_3 left hover_black" (click)="passImg(false, photos[selectedAlbum].album)">
+						<button id="prof-galbutton-left" class="col_3 left hover" (click)="passImg(false, photos[selectedAlbum].album)">
 							<img class="icon opacity va_m" src="assets/icons/arrow-left_black.png"><span class="ml_16 opacity fw_b va_m">Atras</span>
 						</button><div class="col_3 va_m ta_c fs_b opacity">
 							<b>{{ photos[selectedAlbum].selected + 1 }}</b> de <b>{{ photos[selectedAlbum].array.length }}</b>
-						</div><button id="prof-galbutton-right" class="col_3 right hover_black" (click)="passImg(true, photos[selectedAlbum].album)">
+						</div><button id="prof-galbutton-right" class="col_3 right hover" (click)="passImg(true, photos[selectedAlbum].album)">
 							<span class="mr_16 opacity fw_b va_m">Siguiente</span><img class="icon opacity va_m" src="assets/icons/arrow-right_black.png">
 						</button>
 					</div>
@@ -68,7 +68,7 @@
 						Actualizar Fotos
 					</h1>
 					<div class="close_button">
-						<button class="btn_icon hover_black" onclick="showPopup(false, '#user-editphotos')">
+						<button class="btn_icon hover" onclick="showPopup(false, '#user-editphotos')">
 							<span class="icon">
 								<i class="material-icons fc_opacity">arrow_back</i>
 							</span>
@@ -80,7 +80,7 @@
 				<div class="profile_display small">
 					<div class="background bg_primarydark">
 						<div class="editable">
-							<button class="btn_icon hover_black" onclick="triggerClick('#back-img-file')">
+							<button class="btn_icon hover" onclick="triggerClick('#back-img-file')">
 								<img class="icon" src="assets/icons/camera_white.png">
 							</button>
 						</div>
@@ -90,7 +90,7 @@
 					</div>
 					<div class="profile_photo fc_white">
 						<div class="inner">
-							<div class="img_container border_radius shadow_flat">
+							<div class="img_container border_radius_max shadow_flat">
 								<img id="profile-photo" [src]="user.profilePhoto != undefined && user.profilePhoto != null ? '/media/'+user._id+'/profile/'+user.profilePhoto : 'assets/icons/default_profile.png'">
 								<div class="editable" onclick="triggerClick('#profile-img-file')">
 									<img src="assets/icons/camera_white.png">
@@ -104,8 +104,8 @@
 						<input type="file" accept="image/*" name="profilePhoto" id="profile-img-file" onchange="previewPhoto(this, '#profile-photo')">
 						<input type="file" accept="image/*" name="profileBackground" id="back-img-file" onchange="previewPhoto(this, '#profile-back');resizeImg('#profile-back');">
 					</div>
-					<button class="btn btn_outline b_red fc_red bg_trans_red" onclick="showPopup(false, '#user-editphotos')">Cancelar</button>
-					<input type="submit" class="btn btn_primary shadow_flat ml_8" name="" value="Actualizar" onclick="$('#formUpload').submit();">
+					<button class="btn btn_cancel" onclick="showPopup(false, '#user-editphotos')">Cancelar</button>
+					<input type="submit" class="btn btn_primary ml_8" name="" value="Actualizar" onclick="$('#formUpload').submit();">
 				</form>
 			</div>
 		</div>
@@ -113,17 +113,17 @@
 </div>
 <article class="mb_24">
 	<section class="mb_12 pos_r">
-		<div class="tr_0 h_32" *ngIf="privateUser">
+		<div class="tr_0 h_32">
 			<div class="increment_margin size_32 pos_r">
-				<button class="options_button hover_black size_32 ta_c circle">
+				<button class="options_button hover size_32 ta_c circle">
 					<img class="icon va_m" src="assets/icons/dots-vertical_white.png">
 				</button>
 				<div class="hidden_options">
-					<div class="bg_white pb_8 pt_8 shadow_flat border_radius fw_500">
-						<p class="p_8 pl_16 pr_16 hover_black" onclick="showPopup(true, '#profile-gallery')" (click)="selectedAlbum = 0" *ngIf="photos[0].array.length > 0">
+					<div class="bg_white pb_8 pt_8 shadow_raised border_radius border b_gray">
+						<p class="p_8 pl_16 pr_16 hover" onclick="showPopup(true, '#profile-gallery')" (click)="selectedAlbum = 0" *ngIf="photos[0].array.length > 0">
 							Ver foto de portada
 						</p>
-						<p class="p_8 pl_16 pr_16 hover_black" onclick="showPopup(true, '#user-editphotos')">
+						<p class="p_8 pl_16 pr_16 hover" onclick="showPopup(true, '#user-editphotos')" *ngIf="privateUser">
 							Subir fotos
 						</p>
 					</div>
@@ -139,7 +139,7 @@
 			</div>
 			<div class="profile_photo fc_white">
 				<div class="inner">
-					<div class="img_container border_radius shadow_flat cursor_pointer" [attr.id]="photos[1].array?.length > 0 ? 'profile-photo-img' : null" (click)="selectedAlbum = 1">
+					<div class="img_container border_radius_max shadow_flat cursor_pointer" [attr.id]="photos[1].array?.length > 0 ? 'profile-photo-img' : null" (click)="selectedAlbum = 1">
 						<img [src]="user.profilePhoto && user.profilePhoto != '' ? '/media/'+user._id+'/profile/'+user.profilePhoto : 'assets/icons/default_profile.png'">
 					</div><div class="info">
 						<h3 class="title_smaller">
@@ -152,14 +152,14 @@
 				</div>
 			</div>
 		</div>
-		<div class="col_s ta_c border b_gray border_radius m_16">
+		<div class="col_s ta_c bg_white border b_light border_radius m_16">
 			<div class="col_3 hover_light">
-				<div class="p_8 pl_12 pl_12 border_r b_gray">
+				<div class="p_8 pl_12 pl_12 border_r b_light">
 					<h4 class="fw_n opacity">Tipo</h4>
 					<h2 class="fw_n fs_b mt_4">{{ userTypes[user.privilege] }}</h2>
 				</div>
 			</div><div class="col_3 hover_light">
-				<div class="p_8 pl_12 pl_12 border_r b_gray">
+				<div class="p_8 pl_12 pl_12 border_r b_light">
 					<h4 class="fw_n opacity">Cursos</h4>
 					<h2 class="fw_n fs_b mt_4" *ngIf="user.courses?.length > 0">{{ user.courses?.length }}</h2>
 					<h2 class="fw_n fs_b mt_4" *ngIf="user.courses?.length < 1 || user.courses == undefined">0</h2>
@@ -180,7 +180,7 @@
 						Información
 					</h2>
 				</div>
-				<div class="mb_8 border b_gray">
+				<div class="m_8 bg_white border b_light border_radius">
 					<div class="p_16">
 						<div class="mb_12">
 							<p class="opacity fw_b mb_4">Teléfono</p>
@@ -210,7 +210,7 @@
 					</h2>
 				</div>
 				<div class="p_32 ta_c" *ngIf="user.courses?.length < 1">
-					<h2 class="title_big fw_l opacity" *ngIf="!privateUser">
+					<h2 class="title_big fw_300 fc_lightgray" *ngIf="!privateUser">
 						Este usuario no esta inscrito a ningun curso por el momento
 					</h2>
 					<div *ngIf="privateUser">
@@ -233,18 +233,6 @@
 								<label class="title_smaller fw_l fc_white size_24">{{ (course.name).charAt(0) }}</label>
 							</span>
 						</div><div class="info">
-							<button class="options_button hover_lightgray size_32 ta_c circle">
-								<img class="icon va_m opacity" src="assets/icons/dots-vertical_black.png">
-							</button>
-							<div class="hidden_options">
-								<div class="bg_white pb_8 pt_8 shadow_flat border_radius fw_500">
-									<a>
-										<p class="p_8 pl_16 pr_16 hover_black fc_red">
-											Eliminar
-										</p>
-									</a>
-								</div>
-							</div>
 							<div class="p_12 pl_16 pr_16">
 								<div class="mb_8">
 									<h3 class="fw_500 mb_4">
