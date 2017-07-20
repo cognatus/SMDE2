@@ -19,7 +19,7 @@ import { toggleSize } from '../_animations/toggleSize';
 export class CoursesComponent implements OnInit {
 	groupActive: boolean;
 	user = new User;
-	course= new Course;
+	course = new Course;
 	courses: Course[];
 	tagsString: string;
 	hiddenTags: string[] = [];

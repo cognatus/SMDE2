@@ -31,7 +31,7 @@ button.btn, input.btn, span.btn {
 	cursor: pointer;
 	font-size: 16px;
 	border: 1px solid rgba(0, 0, 0, 0.06);
-	color: #838383;
+	color: #909090;
 	background-color: #eeeeee;
 	font-weight: 500;
 	border-radius: 5px;
@@ -44,12 +44,18 @@ button.btn, input.btn, span.btn {
 }
 
 button.btn.btn_auto { min-width: 40px; }
+button.btn.btn_full, input.btn.btn_full { width: 100% !important;height: 44px; }
 
 button.btn span { vertical-align: middle; }
 
 button.btn.btn_primary, input.btn.btn_primary {
 	background-color: #00BCD4;
 	color: #fff;
+}
+
+button.btn.btn_empty, input.btn.btn_empty {
+	background-color: transparent;
+	border: none;
 }
 
 .btn:disabled {
@@ -72,6 +78,7 @@ button.btn_icon, input.btn_icon, span.btn_icon {
 	text-align: center;
 	width: 40px;
 	height: 40px;
+	color: #909090;
 	border-radius: 100%;
 	background-color: transparent;
 }
@@ -439,7 +446,7 @@ label.size_24 { display: inline-block; }
 .fc_lightgray { color: #bdbdbd; }
 .fc_red { color: #F44336; }
 .fc_blue { color: #2196F3; }
-.fc_green { color: #8BC34A; }
+.fc_green { color: #8BC34A !important; }
 .fc_opacity { color: rgba(0, 0, 0, 0.4); }
 
 .fc_n a { color: #212121; }
@@ -576,14 +583,16 @@ a.fc_blue { color: #2196F3; }
 }
 
 .field input, .field select, .field textarea {
+	-webkit-apareance: none;
+	-moz-apareance: none;
+	-o-apareance: none;
 	font-family: 'Roboto', 'Helvetica', sans-serif;
 	width: calc(100% - 28px);
 	height: 40px;
 	padding-left: 12px;
 	padding-right: 12px;
 	background-color: #fff;
-	border: 1px solid rgba(0, 0, 0, 0.12);
-	box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.04);
+	border: 1px solid rgba(0, 0, 0, 0.1);
 	color: #424242;
 	font-size: 15px;
 	outline: none;
@@ -662,7 +671,17 @@ a.fc_blue { color: #2196F3; }
 }
 
 .login_bg { width: 100%;height: 200px; }
-.login_container { margin-left: auto;margin-right: auto;margin-top: -100px;width: auto;max-width: 480px; }
+.login_container { margin: 16px; }
+.login_container .inner { max-width: 480px;margin: 24px auto; }
+.login_container.max .inner { max-width: 580px; }
+
+.login_container .field input, .login_container .field select {
+	height: 44px;
+}
+
+.login_container .field .icon {
+	margin: 10px;
+}
 
 .list_scroll {
 	max-height: 520px;
@@ -700,8 +719,10 @@ a.fc_blue { color: #2196F3; }
 	height: 96px;
 	z-index: 49;
 	background-color: #fff;
-	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08);
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
 }
+
+.app_bar .ad_lh { line-height: 46px; }
 
 .app_bar .app_bar_inner {
 	width: auto;
@@ -712,10 +733,8 @@ a.fc_blue { color: #2196F3; }
 
 .app_bar .app_bar_inner .bar_top, .app_bar .app_bar_inner .bar_bottom {
 	width: auto;
-	height: 48px;
+	height: 50%;
 }
-
-.app_bar .app_bar_inner .bar_top { line-height: 48px; }
 
 .app_bar .app_bar_inner .logo_container {
 	width: 48px;
@@ -724,20 +743,19 @@ a.fc_blue { color: #2196F3; }
 	text-align: center;
 }
 
-.app_bar .app_bar_inner button.action_button {
-	height: 40px;
-	width: 40px;
-	background-color: transparent;
-	padding: 0;
-	outline: none;
-	line-height: normal;
-	margin-left: 3px;
-	margin-right: 3px;
-	border-radius: 100%;
-	position: relative;
+.app_bar .app_bar_inner .action_button {
+	vertical-align: middle;
+	display: inline-block;
+	height: 100%;
 }
 
-.app_bar .app_bar_inner button.action_button i.mini_mark {
+.app_bar .app_bar_inner .action_button a {
+	display: inline-block;
+	height: 100%;
+	width: 100%;
+}
+
+.app_bar .app_bar_inner .action_button button i.indicator {
 	font-style: normal;
 	font-size: 12px;
 	position: absolute;
@@ -745,9 +763,9 @@ a.fc_blue { color: #2196F3; }
 	height: 10px;
 	padding: 4px;
 	line-height: 10px;
-	right: 2px;
+	right: 4px;
 	text-align: center;
-	top: 2px;
+	top: 4px;
 	z-index: 1;
 }
 
@@ -766,7 +784,7 @@ a.fc_blue { color: #2196F3; }
 	position: relative;
 	width: auto;
 	height: 40px;
-	margin: 8px 8px 0 8px;
+	margin: 4px 8px 0 8px;
 	line-height: 40px;
 }
 
@@ -795,10 +813,13 @@ a.fc_blue { color: #2196F3; }
 	padding-left: 40px;
 	padding-right: 40px;
 	background-color: #f9f9f9;
-	border: none;
 }
 
 .app_bar .app_bar_inner .hidden_block_container { position: relative; }
+
+.app_bar .app_bar_inner .prof_container {
+	height: 100%;
+}
 
 .app_bar .app_bar_inner .prof_container span.name {
 	width: auto;
@@ -861,7 +882,6 @@ a.fc_blue { color: #2196F3; }
 	width: 25%;
 	vertical-align: top;
 	text-align: center;
-	line-height: 48px;
 	height: 100%;
 	float: left;
 }
@@ -1224,9 +1244,8 @@ a.fc_blue { color: #2196F3; }
 }
 
 .gallery_container .buttons_container button span {
-	color: #000;
-	font-size: 16px;
 	display: none;
+	vertical-align: middle;
 }
 
 .gallery_container .gal_inner {

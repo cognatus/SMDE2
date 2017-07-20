@@ -9,6 +9,7 @@ import { SharedModule } from './shared/shared.module';
 import { AdminModule } from './admin/admin.module';
 import { CoursesModule } from './courses/courses.module';
 import { MessagesModule } from './messages/messages.module';
+import { SettingsModule } from './settings/settings.module';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -30,8 +31,6 @@ import { routes } from './app.routes';
 		BrowserModule,
 		BrowserAnimationsModule,
 		SharedModule,
-		AdminModule,
-		MessagesModule,
 		RouterModule.forRoot(routes),
 	],
 	bootstrap: [ AppComponent ]

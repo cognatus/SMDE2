@@ -35,10 +35,4 @@ export class AdminComponent implements OnInit {
 		}
 	}
 
-	getActive(parameter): boolean {
-		let locationMenu = this.location.path().normalize();
-		let active = locationMenu.split('/')[2];
-		return parameter === active;
-	}
-
 }

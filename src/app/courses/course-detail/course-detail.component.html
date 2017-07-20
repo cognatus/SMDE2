@@ -9,19 +9,19 @@
 </div>
 <div class="page_container">
 	<div class="page_container_in">
-		<div class="p_16 resp_title main_action_button">
-			<a routerLink="/cursos">
-				<button class="btn btn_primary">
-					<span class="va_m icon">
-						<i class="material-icons">arrow_back</i>
-					</span><span class="va_m">
-						Regresar
-					</span>
-				</button>
-			</a>
-		</div>
 		<section class="left_grid">
-			<div class="pos_r mb_24 bg_white border b_light border_radius" *ngIf="course.name">
+			<div class="p_16 resp_title ">
+				<a routerLink="/cursos">
+					<button class="btn btn_primary">
+						<span class="va_m icon">
+							<i class="material-icons">arrow_back</i>
+						</span><span class="va_m">
+							Regresar
+						</span>
+					</button>
+				</a>
+			</div>
+			<div class="pos_r bg_white border b_light border_radius" *ngIf="course.name">
 				<div class="list_element">
 					<div class="ref">
 						<span class="fc_white" [style.backgroundColor]="colors.getColor(course.name)">
@@ -41,17 +41,17 @@
 				<div class="ta_r p_12 pr_16" *ngIf="auth.getUser()._id == course.user.id">
 					<button class="btn bg_trans_secondary float_left" onclick="showPopup(true, '#groups-admin')">
 						<span class="icon small">
-							<i class="material-icons fc_opacity">group</i>
+							<i class="material-icons">group</i>
 						</span><span class="text">Grupos</span>
 					</button>
 					<button class="btn_icon hover">
 						<span class="icon">
-							<i class="material-icons fc_opacity">mode_edit</i>
+							<i class="material-icons">mode_edit</i>
 						</span><!-- <span class="text">Editar</span> -->
 					</button>
-					<button class="btn_icon hover ml_8" (click)="setConfirmation($event, 'deleteCourse')">
+					<button class="btn_icon hover" (click)="setConfirmation($event, 'deleteCourse')">
 						<span class="icon">
-							<i class="material-icons fc_opacity">delete</i>
+							<i class="material-icons">delete</i>
 						</span><!-- <span class="text">Eliminar</span> -->
 					</button>
 				</div>
@@ -110,25 +110,27 @@
 				</div>
 			</div>
 		</section><section class="right_grid">
-			<section class="h_selection ta_c mb_24">
-				<div class="in border_radius bg_white border b_gray fc_gray">
-					<div class="item hover_primary border_r b_gray" (click)="displayedList = 0" [class.bg_primary]="displayedList == 0">
-						<h3>Contenidos</h3>
-					</div><div class="item hover_primary border_r b_gray" (click)="displayedList = 1" [class.bg_primary]="displayedList == 1">
-						<h3>Actividades</h3>
-					</div><div class="item hover_primary" (click)="displayedList = 2" [class.bg_primary]="displayedList == 2">
-						<h3>Miembros{{ course.members?.length > 0 ? ' ('+course.members?.length+')' : '' }}</h3>
+			<div class="resp_title p_24">
+				<div class="h_selection ta_c">
+					<div class="in border_radius bg_white border b_gray fc_gray">
+						<div class="item hover_primary border_r b_gray" (click)="displayedList = 0" [class.bg_primary]="displayedList == 0">
+							<h3>Contenidos</h3>
+						</div><div class="item hover_primary border_r b_gray" (click)="displayedList = 1" [class.bg_primary]="displayedList == 1">
+							<h3>Actividades</h3>
+						</div><div class="item hover_primary" (click)="displayedList = 2" [class.bg_primary]="displayedList == 2">
+							<h3>Miembros{{ course.members?.length > 0 ? ' ('+course.members?.length+')' : '' }}</h3>
+						</div>
 					</div>
 				</div>
-			</section>
+			</div>
 			<div class="list mb_24 o_h">
-				<div *ngIf="displayedList == 0">
+				<section *ngIf="displayedList == 0">
 					
-				</div>
-				<div *ngIf="displayedList == 1">
+				</section>
+				<section *ngIf="displayedList == 1">
 					
-				</div>
-				<div *ngIf="displayedList == 2">
+				</section>
+				<section *ngIf="displayedList == 2">
 					<div class="p_32 ta_c" *ngIf="course.members?.length < 1">
 						<h2 class="title_big fw_l opacity">
 							Ningun miembro por el momento
@@ -147,11 +149,11 @@
 											<h3 class="fw_500 mb_4">
 												{{ member.user.name }} {{ member.user.lastName }}
 											</h3>
-											<p class="opacity">
+											<p class="fc_opacity pt_4 pb_4">
 												<b class="fw_500">{{ member.user.mail }}</b>
 											</p>
-											<p class="mt_8 fw_500" *ngIf="member.group && member.group != ''">
-												<b class="opacity">Grupo:</b> {{ getMemberGroup(member.group) }}
+											<p class="fc_opacity" *ngIf="member.group && member.group != ''">
+												<b class="fw_500">Grupo:</b> {{ getMemberGroup(member.group) }}
 											</p>
 										</div>
 									</div>
@@ -159,7 +161,7 @@
 							</a>
 						</li>
 					</ul>
-				</div>
+				</section>
 			</div>
 		</section>
 	</div>

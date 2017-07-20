@@ -9,11 +9,17 @@
 
 	.increment_margin { margin: 16px; }
 
+	.login_container .inner { margin: 48px auto; }
+
 	.app_bar_back { height: 51px; }
 
-	.app_bar, .app_bar .app_bar_inner .logo_container, .app_bar .app_bar_inner .bar_top, .app_bar .app_bar_inner .bar_bottom { height: 50px;line-height: 50px; }
+	.app_bar { height: 50px; }
 
-	.app_bar .app_bar_inner .searchbar_container .searchbar .field { margin-bottom: 3px;margin-top: 5px; }
+	.app_bar .app_bar_inner .logo_container { width: 50px; }
+
+	.app_bar .app_bar_inner .bar_top, .app_bar .app_bar_inner .bar_bottom { height: 100%; }
+
+	.app_bar .app_bar_inner .searchbar_container .searchbar .field { margin-top: 4px; }
 
 	.app_bar .app_bar_inner .hidden_block_container.notif .hidden_block {
 		right: 0;
@@ -22,10 +28,6 @@
 
 	.app_bar .app_bar_inner .hidden_block_container.notif .hidden_block i.mark {
 		right: 16px;
-	}
-
-	.app_bar .app_bar_inner .prof_container {
-		height: 50px;
 	}
 
 	.app_bar .app_bar_inner .bar_bottom {
@@ -38,7 +40,7 @@
 	}
 
 	.app_bar .app_bar_inner .bar_bottom .menu .item {
-		width: auto;
+		width: 50px;
 	}
 
 	.app_bar .app_bar_inner .bar_bottom .menu .item a {

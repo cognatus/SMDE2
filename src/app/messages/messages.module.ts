@@ -1,19 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import { Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../auth/auth.guard';
 
 import { SharedModule } from '../shared/shared.module';
 
 import { MessagesComponent } from './messages.component';
 import { MessageConversationComponent } from './message-conversation/message-conversation.component';
+import { MessagesListComponent } from './messages-list/messages-list.component';
 
 const routes: Routes = [
     { 
-    	path: 'mensajes', component: MessagesComponent, canActivate: [AuthGuard],
+    	path: '', component: MessagesComponent, canActivate: [AuthGuard],
         children: [
-            { 
+            {
             	path: ':id', component: MessageConversationComponent 
             }
         ]
@@ -28,8 +28,9 @@ const routes: Routes = [
 	],
 	declarations: [
 		MessagesComponent,
-		MessageConversationComponent
+		MessageConversationComponent,
+		MessagesListComponent
 	],
-	exports: [ MessagesComponent, MessageConversationComponent ]
+	exports: [ MessagesComponent, MessagesListComponent, MessageConversationComponent ]
 })
 export class MessagesModule { }

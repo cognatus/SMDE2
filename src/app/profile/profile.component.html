@@ -1,62 +1,68 @@
 <div class="pop_up_container gallery" id="profile-gallery" *ngIf="photos[selectedAlbum].array?.length > 0">
-		<div class="pop_up_back" onclick="showPopup(false, '#profile-gallery')"></div>
-		<div class="pop_up">
-			<div class="inner border_radius">
-				<div class="border_b b_light bg_white">
-					<div class="pop_up_title fc_opacity">
-						<h1 class="title" *ngIf="selectedAlbum == 0">
-							Fotos de Portada
-						</h1>
-						<h1 class="title" *ngIf="selectedAlbum == 1">
-							Fotos de Perfil
-						</h1>
-						<div class="close_button">
-							<button class="btn_icon hover" onclick="showPopup(false, '#profile-gallery')">
-								<span class="icon">
-									<i class="material-icons fc_opacity">arrow_back</i>
-								</span>
-							</button>
-						</div>
-					</div>
-				</div>
-				<div class="gallery_container">
-					<div class="gal_inner bg_black pos_r">
-						<div class="img_container">
-							<img src="{{ photos[selectedAlbum].array[photos[selectedAlbum].selected] }}">
-						</div>
-						<div class="tr_0 h_32" *ngIf="privateUser">
-							<div class="increment_margin size_32 pos_r">
-								<button class="options_button hover size_32 ta_c circle">
-									<img class="icon va_m" src="assets/icons/dots-vertical_white.png">
-								</button>
-								<div class="hidden_options">
-									<div class="bg_white border b_gray pb_8 pt_8 shadow_raised border_radius fc_n">
-										<p class="p_8 pl_16 pr_16 hover" (click)="changePhoto()" *ngIf="selectedAlbum == 0 && photos[selectedAlbum].array[photos[selectedAlbum].selected] !== userSrc + 'background/' + user.backPhoto">
-											<span>Seleccionar como foto de portada</span>
-										</p>
-										<p class="p_8 pl_16 pr_16 hover" (click)="changePhoto()" *ngIf="selectedAlbum == 1 && photos[selectedAlbum].array[photos[selectedAlbum].selected] !== userSrc + 'profile/' + user.profilePhoto">
-											<span>Seleccionar como foto de Perfil</span>
-										</p>
-										<p class="p_8 pl_16 pr_16 hover" (click)="deletePhoto()">
-											Eliminar Foto
-										</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="buttons_container bg_white col_s">
-						<button id="prof-galbutton-left" class="col_3 left hover" (click)="passImg(false, photos[selectedAlbum].album)">
-							<img class="icon opacity va_m" src="assets/icons/arrow-left_black.png"><span class="ml_16 opacity fw_b va_m">Atras</span>
-						</button><div class="col_3 va_m ta_c fs_b opacity">
-							<b>{{ photos[selectedAlbum].selected + 1 }}</b> de <b>{{ photos[selectedAlbum].array.length }}</b>
-						</div><button id="prof-galbutton-right" class="col_3 right hover" (click)="passImg(true, photos[selectedAlbum].album)">
-							<span class="mr_16 opacity fw_b va_m">Siguiente</span><img class="icon opacity va_m" src="assets/icons/arrow-right_black.png">
+	<div class="pop_up_back" onclick="showPopup(false, '#profile-gallery')"></div>
+	<div class="pop_up">
+		<div class="inner border_radius">
+			<div class="border_b b_light bg_white">
+				<div class="pop_up_title fc_opacity">
+					<h1 class="title" *ngIf="selectedAlbum == 0">
+						Fotos de Portada
+					</h1>
+					<h1 class="title" *ngIf="selectedAlbum == 1">
+						Fotos de Perfil
+					</h1>
+					<div class="close_button">
+						<button class="btn_icon hover" onclick="showPopup(false, '#profile-gallery')">
+							<span class="icon">
+								<i class="material-icons fc_opacity">arrow_back</i>
+							</span>
 						</button>
 					</div>
 				</div>
 			</div>
+			<div class="gallery_container">
+				<div class="gal_inner bg_black pos_r">
+					<div class="img_container">
+						<img src="{{ photos[selectedAlbum].array[photos[selectedAlbum].selected] }}">
+					</div>
+					<div class="tr_0 h_32" *ngIf="privateUser">
+						<div class="increment_margin size_32 pos_r">
+							<button class="options_button hover size_32 ta_c circle">
+								<img class="icon va_m" src="assets/icons/dots-vertical_white.png">
+							</button>
+							<div class="hidden_options">
+								<div class="bg_white border b_gray pb_8 pt_8 shadow_raised border_radius fc_n">
+									<p class="p_8 pl_16 pr_16 hover" (click)="changePhoto()" *ngIf="selectedAlbum == 0 && photos[selectedAlbum].array[photos[selectedAlbum].selected] !== userSrc + 'background/' + user.backPhoto">
+										<span>Seleccionar como foto de portada</span>
+									</p>
+									<p class="p_8 pl_16 pr_16 hover" (click)="changePhoto()" *ngIf="selectedAlbum == 1 && photos[selectedAlbum].array[photos[selectedAlbum].selected] !== userSrc + 'profile/' + user.profilePhoto">
+										<span>Seleccionar como foto de Perfil</span>
+									</p>
+									<p class="p_8 pl_16 pr_16 hover" (click)="deletePhoto()">
+										Eliminar Foto
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="buttons_container ta_c bg_white col_s fs_m">
+					<button id="prof-galbutton-left" class="col_3 left hover fc_opacity" (click)="passImg(false, photos[selectedAlbum].album)" *ngIf="photos[selectedAlbum].array.length > 1">
+						<span class="icon">
+							<i class="material-icons">arrow_back</i>
+						</span><span class="ml_16 fs_m fw_500">Atras</span>
+					</button><div class="col_3 full_h va_m fs_b fc_opacity">
+						<span class="va_m mt_12">
+							<b>{{ photos[selectedAlbum].selected + 1 }}</b> de <b>{{ photos[selectedAlbum].array.length }}</b>
+						</span>
+					</div><button id="prof-galbutton-right" class="col_3 right hover fc_opacity" (click)="passImg(true, photos[selectedAlbum].album)" *ngIf="photos[selectedAlbum].array.length > 1">
+						<span class="mr_16 fs_m fw_500">Siguiente</span><span class="icon">
+							<i class="material-icons">arrow_forward</i>
+						</span>
+					</button>
+				</div>
+			</div>
 		</div>
+	</div>
 </div>
 <div class="pop_up_container" id="user-editphotos" *ngIf="privateUser">
 	<div class="pop_up_back" onclick="showPopup(false, '#user-editphotos')"></div>
@@ -85,7 +91,7 @@
 							</button>
 						</div>
 						<div class="img_container bg_primarydark">
-							<img src="/media/{{ user._id }}/background/{{ user.backPhoto }}" id="profile-back" *ngIf="user.backPhoto != undefined && user.profilePhoto != ''" adjustable>
+							<img [src]="user.backPhoto ? '/media/'+user._id+'/background/'+user.backPhoto : ''" id="profile-back" adjustable>
 						</div>
 					</div>
 					<div class="profile_photo fc_white">
@@ -130,7 +136,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="profile_display">
+		<article class="profile_display">
 			<div class="background bg_primarydark">
 				<div class="img_container" *ngIf="user.backPhoto != undefined && user.backPhoto != ''">
 					<img src="/media/{{ user._id }}/background/{{ user.backPhoto }}" adjustable>
@@ -151,7 +157,7 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		</article>
 		<div class="col_s ta_c bg_white border b_light border_radius m_16">
 			<div class="col_3 hover_light">
 				<div class="p_8 pl_12 pl_12 border_r b_light">

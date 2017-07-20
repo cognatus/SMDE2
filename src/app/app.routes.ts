@@ -27,10 +27,16 @@ export const routes: Routes = [
     	path: 'perfil/:id', 
     	component: ProfileComponent 
     }, { 
+        path: 'admin',
+        loadChildren: 'app/admin/admin.module#AdminModule' 
+    }, { 
     	path: 'cursos', 
     	loadChildren: 'app/courses/courses.module#CoursesModule' 
     }, { 
         path: 'mensajes', 
         loadChildren: 'app/messages/messages.module#MessagesModule' 
+    }, { 
+        path: 'ajustes', 
+        loadChildren: 'app/settings/settings.module#SettingsModule' 
     }
 ]

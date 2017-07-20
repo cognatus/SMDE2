@@ -1,6 +1,6 @@
-<button class="action_button pl_8 pr_8 hover" id="notif-open-button" title="Ver Notificaciones">
-	<img class="icon va_m ml_4 mr_4" src="assets/icons/bell_black.png">
-	<i class="mini_mark circle bg_red fc_white" *ngIf="getUnreadNotif() > 0">{{ getUnreadNotif() }}</i>
+<button class="btn_icon ml_4 mr_4 hover" id="notif-open-button" title="Ver Notificaciones">
+	<img class="icon va_m" src="assets/icons/bell_black.png">
+	<i class="indicator circle bg_red fc_white" *ngIf="getUnreadNotif() > 0">{{ getUnreadNotif() }}</i>
 </button>
 <div class="hidden_block" id="notif-mini">
 	<i class="mark bg_white"></i>

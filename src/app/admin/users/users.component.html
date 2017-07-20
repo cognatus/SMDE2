@@ -3,14 +3,16 @@
 		<div class="pop_up_back" onclick="showPopup(false, '#user-add')"></div>
 		<div class="pop_up">
 			<div class="inner border_radius">
-				<div class="bg_primary">
-					<div class="pop_up_title fc_white">
+				<div class="border_b b_light">
+					<div class="pop_up_title fc_opacity">
 						<h1 class="title">
 							Nuevo Usuario
 						</h1>
 						<div class="close_button">
-							<button class="p_8 hover circle" onclick="showPopup(false, '#user-add')">
-								<img class="icon" src="assets/icons/arrow-left_white.png">
+							<button class="btn_icon hover" onclick="showPopup(false, '#user-add')">
+								<span class="icon">
+									<i class="material-icons fc_opacity">arrow_back</i>
+								</span>
 							</button>
 						</div>
 					</div>
@@ -63,8 +65,8 @@
 									<input type="password" [(ngModel)]="user.password" name="newpassword" placeholder="Contraseña Nueva" value="" />
 								</div>
 							</div>
-							<div class="field ta_r">
-								<input type="submit" class="bg_secondary fc_white shadow_raised" value="Agregar">
+							<div class="ta_r">
+								<input type="submit" class="btn btn_primary" value="Agregar">
 							</div>
 						</div>
 					</div>
@@ -74,77 +76,42 @@
 	</div>
 	<div class="page_container_in">
 		<section class="list">
-			<div class="p_16 resp_title main_action_button">
-				<button class="p_8 pr_12 bg_secondary shadow_raised border_radius" onclick="showPopup(true, '#user-add')">
-					<img class="va_m icon" src="assets/icons/plus_white.png">
-					<b class="va_m ml_4 fw_500">Nuevo Usuario</b>
+			<div class="p_16 resp_title ">
+				<button class="btn btn_primary" onclick="showPopup(true, '#user-add')">
+					<span class="icon">
+						<i class="material-icons">add</i>
+					</span><span class="text">Nuevo</span>
 				</button>
 			</div>
 			<div class="p_32" *ngIf="users?.length < 1">
-				<h2 class="title_big fw_l opacity">
+				<h2 class="title_big fw_300 fc_lightgray">
 					Ningun usuario por el momento
 				</h2>
 			</div>
-			<div class="col_r resp_list ta_c">
-				<div class="col_3 ta_l" *ngFor="let user of users">
-					<div class="bg_white resp_item shadow_flat border_radius mb_12 pos_r">
-						<div class="tr_0 h_32">
-							<div class="m_12 size_32 pos_r">
-								<button class="options_button hover size_32 ta_c circle">
-									<img class="icon va_m" src="assets/icons/dots-vertical_white.png">
-								</button>
-								<div class="hidden_options">
-									<div class="bg_white pb_8 pt_8 shadow_flat border_radius fw_500">
-										<a href="/admin/usuarios/{{ user._id }}">
-											<p class="p_8 pl_16 pr_16 hover">
-												Ver
-											</p>
-										</a>
-										<a href="/admin/usuarios/{{ user._id }}?edit=true">
-											<p class="p_8 pl_16 pr_16 hover">
-												Editar
-											</p>
-										</a>
-									</div>
-								</div>
+			<ul class="list ml_8 mr_8">
+				<li class="list_element hover" *ngFor="let user of users;let i = index" [ngClass]="{ 'border_t b_light': i > 0 }">
+					<a routerLink="{{ user._id }}">
+						<div class="ref">
+							<div class="pt_4"></div>
+							<div class="img_container border_radius">
+								<img [src]="user.profilePhoto ? 'media/'+user._id+'/profile/'+user.profilePhoto : 'assets/icons/default_profile.png'">
 							</div>
-						</div>
-						<div class="profile_display mini">
-							<div class="background bg_primarydark">
-								<div class="img_container" *ngIf="user.backPhoto != undefined && user.backPhoto != ''">
-									<img src="/media/{{ user._id }}/background/{{ user.backPhoto }}" adjustable>
-								</div>
-								<div class="bg_opacity" *ngIf="user.backPhoto != undefined && user.backPhoto != ''"></div>
-							</div>
-							<div class="profile_photo fc_white">
-								<div class="inner">
-									<a href="/admin/usuarios/{{ user._id }}">
-										<div class="img_container border_radius shadow_flat">
-											<img src="assets/icons/default_profile.png" *ngIf="user.profilePhoto == undefined || user.profilePhoto == ''">
-											<img src="/media/{{ user._id }}/profile/{{ user.profilePhoto }}"*ngIf="user.profilePhoto != undefined && user.profilePhoto != ''">
-										</div>
-									</a>
-								</div>
-							</div>
-						</div>
-						<div class="info">
+						</div><div class="info">
 							<div class="p_16">
-								<div class="mb_8">
-									<h3 class="fw_500 mb_4">
-										{{ user.name }} {{ user.lastName }}
-									</h3>
-									<p class="opacity">
-										<b class="fw_500">{{ user.mail }}</b>
-									</p>
-								</div>
-								<p class="fw_500">
-									{{ userTypes[user.privilege] }}
+								<h3 class="fw_n">
+									{{ user.name }} {{ user.lastName }}
+								</h3>
+								<p class="pt_4 pb_4 fc_opacity">
+									<b class="fw_500">{{ user.mail }}</b>
+								</p>
+								<p class="fc_opacity">
+									<b>{{ userTypes[user.privilege] }}</b>
 								</p>
 							</div>
 						</div>
-					</div>	
-				</div>
-			</div>
+					</a>
+				</li>
+			</ul>
 		</section>
 	</div>
 </div>
