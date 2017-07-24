@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NotificationsService } from './notifications.service';
 import { AuthGuard } from '../auth/auth.guard';
 
 import { Notification } from '../_models/notification';
 import { User } from '../_models/user'; 
 import { Colors, notificationTexts } from '../app.constants';
+
+import { toggleHeight } from '../_animations/toggleSize';
 
 @Component({
 	selector: 'app-notifications',
@@ -14,8 +17,8 @@ import { Colors, notificationTexts } from '../app.constants';
 })
 export class NotificationsComponent implements OnInit {
 	notifications: Notification[];
-
-	constructor(private auth: AuthGuard, private notifService: NotificationsService) {}
+	
+	constructor(private auth: AuthGuard, private notifService: NotificationsService, private router: Router) {}
 
 	ngOnInit() {
 		this.fetchNotif();
@@ -34,7 +37,7 @@ export class NotificationsComponent implements OnInit {
 		this.notifService.setRead(notif._id, this.auth.getUser()._id, !notif.read)
 			.subscribe( response => {
 				if ( status ) {
-					location.href = notif.redirect;
+					this.router.navigateByUrl(notif.redirect);
 				} else {
 					notif.read = !notif.read;
 				}

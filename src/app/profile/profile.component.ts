@@ -15,23 +15,30 @@ import { Colors, userTypes, formatedDate } from '../app.constants';
 	providers: [UserDetailService, ProfileService]
 })
 export class ProfileComponent implements OnInit {
-	userTypes: string[];
+	userTypes: string[] = userTypes;
 	userId: string;
 	user = new User();
 	userSrc: string;
 	formatedUserBirth: string;
 	privateUser: boolean = true;
 	selectedAlbum: number = 0;
+	alertMessage: string;
 	colors = new Colors();
 	photos: any[] = [{ album: 'background', array: [], selected: '' }, 
 					 { album: 'profile', array: [], selected: '' },
 					 { album: 'other', array: [], selected: '' }];
 
-	constructor(private auth: AuthGuard, private location: Location, private router: Router, private activatedRoute: ActivatedRoute, private userDetailService: UserDetailService, private profileService: ProfileService) {
-		this.userTypes = userTypes;
+	constructor(private auth: AuthGuard, 
+		private userDetailService: UserDetailService, 
+		private profileService: ProfileService, 
+		private location: Location, 
+		private router: Router, 
+		private activatedRoute: ActivatedRoute) {
+		
 		this.activatedRoute.params.subscribe((params: Params) => {
         	this.userId = params['id'];
         });
+
         if ( this.userId !== undefined && this.userId !== '' ) {
 			if ( this.userId !== this.auth.getUser()._id ) {
 				this.privateUser = false;
@@ -125,6 +132,17 @@ export class ProfileComponent implements OnInit {
 					console.log('Error');
 					alert('Hubo un error al eliminar la foto');
 				});
+	}
+
+	setConfirmation() {
+		this.alertMessage = 'Se eliminara para siempre esta foto. ¿Estas seguro?';
+	}
+
+	doConfirmation(status: boolean): void {
+		if (status) {
+			this.deletePhoto();
+		}
+		this.alertMessage = null;
 	}
 
 }

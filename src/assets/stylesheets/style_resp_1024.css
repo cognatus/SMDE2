@@ -36,9 +36,9 @@
 
 	.app_bar .app_bar_inner .searchbar_container { position: relative; }
 
-	.app_bar .app_bar_inner .searchbar_container .searchbar { width: 360px; }
+	.app_bar .app_bar_inner .searchbar_container .searchbar { width: 380px; }
 
-	.app_bar .app_bar_inner .searchbar_container .searchbar .field { margin-top: 7px; }
+	.app_bar .app_bar_inner .searchbar_container .searchbar .field { margin-top: 8px; }
 
 	.app_bar .app_bar_inner .hidden_block_container .hidden_block { top: 64px; }
 

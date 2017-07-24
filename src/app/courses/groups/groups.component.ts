@@ -26,28 +26,29 @@ export class GroupsComponent implements OnInit {
 	@Output() onUpdate = new EventEmitter<boolean>();
 	colors = new Colors();
 	selectedGroup: any;
-	alertMessage;
+	alertMessage: string;
 	usersNoGroup: any;
 	originalSelectedGroup: any = {
 		name: null,
-		users: null,
+		users: null
 	};
 
 	constructor(private courseDetailService: CourseDetailService, 
-		private auth: AuthGuard) {}
+		private auth: AuthGuard) {
+	}
 
 	ngOnInit() {
 		this.usersNoGroup = this.getGroupMembers();
 	}
 
 	resetValues(): void {
-		this.selectedGroup = undefined;
 		this.originalSelectedGroup = {
 			id: null,
 			name: null,
 			users: null,
 			isNew: null
 		};
+		this.selectedGroup = null;
 	}
 
 	updateGroup(): void {
@@ -67,11 +68,12 @@ export class GroupsComponent implements OnInit {
 				this.resetValues();
 			}, error => {
 				console.log(error);
-			})
+			});
 	}
 
 	selectGroup(event, group?: any): void {
 		event.preventDefault();
+		this.usersNoGroup = this.getGroupMembers();
 		if ( group ) {
 			this.selectedGroup = {
 				id: group._id,
@@ -129,18 +131,21 @@ export class GroupsComponent implements OnInit {
 		return usersArray;
 	}
 
-	addUserToGroup(user: User) {
-		let check = this.selectedGroup.users.indexOf( user ); 
-		if ( check > -1 ) {
-			this.selectedGroup.users.splice(check, 1);
-			this.usersNoGroup.push(user);
-		} else {
-			this.selectedGroup.users.push(user);
-			this.usersNoGroup.splice(this.usersNoGroup.indexOf(user), 1);
-		}
+	addUser(user: User) {
+		let check = this.usersNoGroup.indexOf(user);
+
+		this.selectedGroup.users.push(user);
+		this.usersNoGroup.splice(check, 1);
 	}
 
-	isInGroup(id: string): boolean {
+	removeUser(user: User) {
+		let check = this.selectedGroup.users.indexOf(user);
+
+		this.selectedGroup.users.splice(check, 1);
+		this.usersNoGroup.push(user);
+	}
+
+	isInSelectedGroup(id: string): boolean {
 		let flag = false;
 		for( let item in this.selectedGroup.users ) { 
 			if ( this.selectedGroup.users[item].id === id ) {

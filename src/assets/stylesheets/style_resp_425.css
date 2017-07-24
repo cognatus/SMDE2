@@ -22,7 +22,13 @@
 
 	.pop_up_container .pop_up {
 		overflow: hidden;
-		border-radius: 3px;
+		border-radius: 4px;
+		margin: 24px auto;
+	}
+
+	.pop_up_container.gallery .pop_up {
+		margin: 0 auto;
+		border-radius: 0;
 	}
 
 	.pop_up_container .pop_up .inner .padding_block {

@@ -24,6 +24,7 @@
     "@angular/platform-server": "^4.3.0",
     "@angular/router": "^4.3.0",
     "angular2-jwt": "^0.2.3",
+    "async": "^2.5.0",
     "bluebird": "^3.5.0",
     "body-parser": "^1.17.2",
     "busboy": "^0.2.14",

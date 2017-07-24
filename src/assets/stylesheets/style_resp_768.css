@@ -19,8 +19,6 @@
 
 	.app_bar .app_bar_inner .bar_top, .app_bar .app_bar_inner .bar_bottom { height: 100%; }
 
-	.app_bar .app_bar_inner .searchbar_container .searchbar .field { margin-top: 4px; }
-
 	.app_bar .app_bar_inner .hidden_block_container.notif .hidden_block {
 		right: 0;
 		width: 430px;
@@ -49,7 +47,7 @@
 	}
 
 	.pop_up_container .pop_up {
-		margin: 24px auto;
+		margin: 32px auto;
 	}
 
 	.pop_up_container.big .pop_up {
@@ -57,8 +55,10 @@
 	}
 
 	.pop_up_container.gallery .pop_up {
+		margin: 24px auto;
 		width: calc(100% - 64px);
 		height: calc(100% - 48px);
+		border-radius: 4px;
 	}
 
 	.pop_up_container .pop_up .inner .padding_block {

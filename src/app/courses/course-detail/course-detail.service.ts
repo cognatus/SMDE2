@@ -25,7 +25,7 @@ export class CourseDetailService {
 		let data = { name: group.name, users: [] };
 
 		for ( let item in group.users ) {
-		 	data.users.push(group.users[item].id);
+		 	data.users.push(group.users[item]._id);
 		}
 
 		if ( group.isNew ) {

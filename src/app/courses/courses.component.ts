@@ -29,14 +29,13 @@ export class CoursesComponent implements OnInit {
 	colors = new Colors;
 
 	constructor(private coursesService: CoursesService, private location: Location, private router: Router, private auth: AuthGuard) {
-		this.user = this.auth.getUser();
+		this.course.user = this.auth.getUser();
 		this.course.tags = [];
 	}
 
 	ngOnInit() {
 		this.fetchCourses();
 		this.course.isPrivate = false;
-		this.course.user = this.user;
 	}
 
 	fetchCourses(): void {

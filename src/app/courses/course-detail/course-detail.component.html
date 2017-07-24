@@ -137,7 +137,7 @@
 						</h2>
 					</div>
 					<ul class="pl_12 pr_12" *ngIf="course.members">
-						<li class="border_radius" *ngFor="let member of course.members;let i = index" [ngClass]="{'border_t b_light': i > 0}">
+						<li class="border_radius hover" *ngFor="let member of course.members;let i = index" [ngClass]="{'border_t b_light': i > 0}">
 							<a href="/perfil/{{ member.user._id }}">
 								<div class="list_element fc_trans_blue">
 									<div class="ref">
@@ -146,13 +146,13 @@
 										</div>
 									</div><div class="info">
 										<div class="p_16">
-											<h3 class="fw_500 mb_4">
+											<h3 class="fw_500">
 												{{ member.user.name }} {{ member.user.lastName }}
 											</h3>
-											<p class="fc_opacity pt_4 pb_4">
+											<p class="fc_opacity pt_4">
 												<b class="fw_500">{{ member.user.mail }}</b>
 											</p>
-											<p class="fc_opacity" *ngIf="member.group && member.group != ''">
+											<p class="fc_n pt_4" *ngIf="member.group && member.group != ''">
 												<b class="fw_500">Grupo:</b> {{ getMemberGroup(member.group) }}
 											</p>
 										</div>

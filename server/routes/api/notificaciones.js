@@ -6,7 +6,7 @@ const Course = require('../../models/Course');
 const User = require('../../models/User');
 const Notification = require('../../models/Notification');
 
-exports.insertNotifications = ( obj, callback ) => {
+exports.insertNotifications = (obj, callback) => {
 	let date = new Date();
 	let asyncLoop = (i, subcallback) => {
 		if ( i < obj.sendTo.length ) {
@@ -26,7 +26,7 @@ exports.insertNotifications = ( obj, callback ) => {
 		}
 	};
 	asyncLoop(0, (data) => {
-		callback(undefined, data);
+		callback(data);
 	});
 };
 

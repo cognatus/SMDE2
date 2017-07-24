@@ -1,3 +1,4 @@
+<app-confirmation [message]="alertMessage" (onSelection)="doConfirmation($event)"></app-confirmation>
 <div class="pop_up_container gallery" id="profile-gallery" *ngIf="photos[selectedAlbum].array?.length > 0">
 	<div class="pop_up_back" onclick="showPopup(false, '#profile-gallery')"></div>
 	<div class="pop_up">
@@ -37,7 +38,7 @@
 									<p class="p_8 pl_16 pr_16 hover" (click)="changePhoto()" *ngIf="selectedAlbum == 1 && photos[selectedAlbum].array[photos[selectedAlbum].selected] !== userSrc + 'profile/' + user.profilePhoto">
 										<span>Seleccionar como foto de Perfil</span>
 									</p>
-									<p class="p_8 pl_16 pr_16 hover" (click)="deletePhoto()">
+									<p class="p_8 pl_16 pr_16 hover" (click)="setConfirmation()">
 										Eliminar Foto
 									</p>
 								</div>
