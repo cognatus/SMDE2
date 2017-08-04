@@ -85,8 +85,8 @@ exports.updateGroup = (req, res) => {
 	let groupId = req.params.groupid;
 	let courseId = req.params.id;
 
-	let oldUsers = [];
-	let newUsers = [];
+	let oldMembers = [];
+	let newMembers = [];
 	let oldGroupName = '';
 
 	Course.findOne({ _id: courseId }).exec()
@@ -96,7 +96,7 @@ exports.updateGroup = (req, res) => {
 					function(callback) {
 						for ( let i = 0 ; i < doc.members.length ; i++ ) {
 							if ( doc.members[i].group === groupId ) {
-								oldUsers.push(doc.members[i].id);
+								oldMembers.push(doc.members[i].id);
 							}
 						}
 						callback(null);
@@ -105,7 +105,7 @@ exports.updateGroup = (req, res) => {
 						// Borrar grupo de usuarios
 						for ( let i = 0 ; i < users.length ; i++ ) {
 							if ( users[i].group === groupId ) {
-								users[i].group = '';
+								users[i].group = null;
 							}
 						}
 						callback(null, users);
@@ -132,8 +132,9 @@ exports.updateGroup = (req, res) => {
 						}
 						callback(null, [users, groups])
 					}
-				], (err, result) => {
-					resolve([result[0], result[1]]);
+				], function(err, result) {
+					if (err) reject('Error');
+					else resolve([result[0], result[1]]);
 				});
 			});
 		}).then( (data) => {
@@ -146,8 +147,8 @@ exports.updateGroup = (req, res) => {
 				}).exec();
 		}).then( (data) => {
 			for ( let i = 0 ; i < members.length ; i++ ) {
-				if ( oldUsers.indexOf(members[i]) < 0 ) {
-					newUsers.push(members[i]);
+				if ( oldMembers.indexOf(members[i]) < 0 ) {
+					newMembers.push(members[i]);
 				}
 			}
 
@@ -159,7 +160,7 @@ exports.updateGroup = (req, res) => {
 					element: [oldGroupName, data.name]
 				},
 				redirect: '/cursos/' + courseId,
-				sendTo: oldUsers
+				sendTo: oldMembers
 			}, (obj) => {
 				notif.insertNotifications({
 					responsibleUsers: [req.cookies.urtoken._id], //Mandar a miembros nuevos en el grupo
@@ -170,7 +171,7 @@ exports.updateGroup = (req, res) => {
 						element: [groupName, data.name]
 					},
 					redirect: '/cursos/' + courseId,
-					sendTo: newUsers
+					sendTo: newMembers
 				}, (obj) => {
 					res.status(200).send({ message: 'Grupo editado correctamente' });
 				});
@@ -184,48 +185,55 @@ exports.updateGroup = (req, res) => {
 exports.deleteGroup = (req, res) => {
 	let groupId = req.params.groupid;
 	let courseId = req.params.id;
+	let oldGroupName = '';
+	let oldMembers = [];
 
 	Course.findOneAndUpdate({ _id: courseId }, {
 			$pull: { groups: { _id: groupId } }
 		}).exec()
 		.then( (doc) => {
 			return new Promise( (resolve, reject) => {
-				let users = doc.members;
-				let groups = doc.groups;
-				let oldGroupName = '';
-
-				for ( let i = 0 ; i < users.length ; i++ ) {
-					if ( users[i].group === groupId ) {
-						users[i].group = '';
+				async.waterfall([
+					function(callback) {
+						let users = doc.members;
+						for ( let i = 0 ; i < users.length ; i++ ) {
+							oldMembers.push(users[i].id);
+							if ( users[i].group === groupId ) {
+								users[i].group = null;
+							}
+						}
+						callback(null, users);
+					}, function(users, callback) {
+						let groups = doc.groups;
+						for ( let i = 0 ; i < groups.length ; i++ ) {
+							if ( groups[i].id === groupId ) {
+								oldGroupName = groups[i].name;
+								break;
+							}
+						}
+						callback(null, users)
 					}
-				}
-				for ( let i = 0 ; i < groups.length ; i++ ) {
-					if ( groups[i].id === groupId ) {
-						oldGroupName = groups[i].name;
-						break;
-					}
-				}
-				resolve([users, oldGroupName]);
+				], function(err, result) {
+					if (err) reject('Error');
+					else resolve(result);
+				});
 			});
 		}).then( (data) => {
-			Course.findOneAndUpdate({ _id: courseId }, {
-					$set: { members: data[0] }
-				}).then( (doc) => {
-					notif.insertNotifications({
-						responsibleUsers: [req.cookies.urtoken._id],
-						action: {
-							status: 2,
-							substatus: 5, // grupo eliminado
-							element: [data[1], doc.name]
-						},
-						redirect: '/cursos/' + courseId,
-						sendTo: data[0]
-					}, (obj) => {
-						res.status(200).send({ message: 'Grupo borrado' });
-					});
-			}).catch( (err) => {
-				console.log(err);
-				res.status(500).send({ message: err });
+			return Course.findOneAndUpdate({ _id: courseId }, {
+					$set: { members: data }
+				}).exec()
+		}).then( (data) => {
+			notif.insertNotifications({
+				responsibleUsers: [req.cookies.urtoken._id],
+				action: {
+					status: 2,
+					substatus: 5, // grupo eliminado
+					element: [oldGroupName, data.name]
+				},
+				redirect: '/cursos/' + courseId,
+				sendTo: oldMembers
+			}, (obj) => {
+				res.status(200).send({ message: 'Grupo borrado' });
 			});
 		}).catch( (err) => {
 			console.log(err);

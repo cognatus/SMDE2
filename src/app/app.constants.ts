@@ -9,8 +9,9 @@ export const notificationTexts = [
 		{ text: 'ha modificado su foto de perfil.' }
 	]},
 	{ string: [ // Cursos
-		{ text: 'ha creado el curso: %e' },
-		{ text: 'ha modificado el curso: %e' }
+		{ text: 'ha creado el curso %e' },
+		{ text: 'ha modificado el curso %e' },
+		{ text: 'se ha suscrito al curso %e', textPlural: 'se han suscrito al curso %e' }
 	]},
 	{ string: [  // Grupos en cursos 
 		{ text: 'ha creado el grupo %e en %e' },
@@ -19,7 +20,7 @@ export const notificationTexts = [
 		{ text: 'te ha movido al grupo %e en %e' },
 		{ text: 'ha cambiado el nombre del grupo %e a %e en %e' },
 		{ text: 'ha eliminado el grupo %e en %e' }
-	]}
+	]},
 ];
 
 export function replaceCharacters(text: string): string {

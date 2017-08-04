@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Promise = require('bluebird');
 mongoose.Promise = Promise;
+const async = require('async');
 
 const Course = require('../../models/Course');
 const User = require('../../models/User');
@@ -22,7 +23,7 @@ exports.getCourses = (req, res) => {
 exports.getCourseById = (req, res) => {
 	Course.findOne({ _id: req.params.id }).exec()
 		.then( (doc) => {
-			return getUsers(doc);
+			return getUsers(doc); // [doc, users]
 		}).then( (data) => {
 			let aux = data;
 			let asyncLoop = ( i, callback ) => {
@@ -47,7 +48,6 @@ exports.getCourseById = (req, res) => {
 
 // Agregar nuevos cursos
 exports.insertCourse = (req, res) => {
-	console.log(req.body);
 	var data = new Course({
 		name: req.body.name,
 		description: req.body.description,
@@ -82,10 +82,25 @@ exports.updateCourse = (req, res) => {
 	}}, {new: false}, (err, doc) => {
 		if (err) {
 			res.status(500).send({ message: err });
-		}else{
+		} else {
 			res.status(200).json({ message: 'Usuario modificado' });
 		}
 	});
+};
+
+exports.createContent = (req, res) => {
+	let courseId = req.params.id;
+	let content = req.body;
+
+	console.log(content);
+
+	/*Course.findOneAndUpdate({ _id: courseId }, { 
+		$push:  { section: content }, 
+		$set: { updatedDate: new Date() }
+	}, (err, doc) => {
+		res.status(200).json(doc);
+	});*/
+	res.status(200).json(req.body);
 };
 
 exports.deleteCourse = (req, res) => {
@@ -108,24 +123,18 @@ exports.suscribeUser = (req, res) => {
 			console.log(err);
 			res.status(500).send({ message: err });
 		} else {
-			let notifSend = {
+			notif.insertNotifications({
 				responsibleUsers: [user.id],
 				action: {
-					status: 2,
-					substatus: 1,
+					status: 1,
+					substatus: 2,
 					element: [doc.name]
 				},
 				redirect: '/cursos/' + req.params.id,
-				sendTo: user
-			};
-			notif.insertNotifications(notifSend, (err, data) => {
-				if (err) {
-					console.log(err);
-				} else {
-
-				}
+				sendTo: [doc.user.id]
+			}, (obj) => {
+				res.status(200).json({ message: 'Inscrito con exito' });
 			});
-			res.status(200).json({ message: 'Inscrito con exito' });
 		}
 	});
 };

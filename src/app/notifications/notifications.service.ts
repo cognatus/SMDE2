@@ -11,10 +11,10 @@ import { Notification } from '../_models/notification';
 @Injectable()
 export class NotificationsService {
 	url = ApiUrl + 'notif';
-	constructor(private http: Http ) {}
+	constructor(private http: Http) {}
 
-	getNotifications(): Observable<Notification[]> {
-		return this.http.get(this.url)
+	getNotifications(offset?: number): Observable<Notification[]> {
+		return this.http.get(this.url + '?offset=' + offset)
 			.map(this.extractData)
 			.catch(this.handleError);
 	}

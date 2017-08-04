@@ -110,8 +110,8 @@
 				</div>
 			</div>
 		</section><section class="right_grid">
-			<div class="resp_title p_24">
-				<div class="h_selection ta_c">
+			<div class="p_24">
+				<div class="h_selection i_3 ta_c">
 					<div class="in border_radius bg_white border b_gray fc_gray">
 						<div class="item hover_primary border_r b_gray" (click)="displayedList = 0" [class.bg_primary]="displayedList == 0">
 							<h3>Contenidos</h3>
@@ -125,7 +125,7 @@
 			</div>
 			<div class="list mb_24 o_h">
 				<section *ngIf="displayedList == 0">
-					
+					<app-contents></app-contents>
 				</section>
 				<section *ngIf="displayedList == 1">
 					

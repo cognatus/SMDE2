@@ -42,20 +42,26 @@ var CourseSchema = new Schema({
 				openAnswer: { type: String },
 				quantity: { type: Number } // value/100
 			}],
-			quantity: { type: Number } // value/100
 		}],
-		quantity: { type: Number },
+		quantity: { type: Number }, // value/100
 		createdDate: { type: Date, required: true, default: new Date() },
 		updatedDate: { type: Date, default: new Date() }
 	}],
 	section: [{
 		name: { type: String, required: true },
+		content: { type: String }
 		subsection: [{
 			name: { type: String, required: true },
+			content: { type: String, required: true },
+			createdDate: { type: String, required: true, default: new Date() }
+			updatedDate: { type: String, required: true, default: new Date() }
 		}],
 		files: [{
 			name: { type: String, required: true },
+			uploadedDate: { type: Date, required: true, default: new Date() }
 		}],
+		createdDate: { type: Date, required: true, default: new Date() },
+		updatedDate: { type: Date, required: true, default: new Date() },
 	}]
 });
 

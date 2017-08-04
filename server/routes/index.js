@@ -57,4 +57,7 @@ router.route('/courses/:id/updategroup/:groupid')
 	.put(groups.updateGroup)
 	.delete(groups.deleteGroup);
 
+router.route('/courses/:id/createcontent')
+	.post(courses.createContent)
+
 module.exports = router;

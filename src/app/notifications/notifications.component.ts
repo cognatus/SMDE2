@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { NotificationsService } from './notifications.service';
 import { AuthGuard } from '../auth/auth.guard';
@@ -16,18 +16,40 @@ import { toggleHeight } from '../_animations/toggleSize';
 	providers: [NotificationsService]
 })
 export class NotificationsComponent implements OnInit {
-	notifications: Notification[];
+	notifications: Notification[] = [];
+	disableScrollDown: boolean = false;
+	countScroll: number = 0;
+	offset: number = 8;
+	isLoading: boolean;
 	
-	constructor(private auth: AuthGuard, private notifService: NotificationsService, private router: Router) {}
+	constructor(private auth: AuthGuard, 
+		private notifService: NotificationsService,
+		private router: Router) {}
 
 	ngOnInit() {
 		this.fetchNotif();
 	}
 
+	@HostListener('scroll', ['$event'])
+	onScroll(event: Event): void {
+		if ( this.scrolledBottom(event.target) ) {
+			this.countScroll++;
+			this.fetchNotif();
+		}
+	}
+
+	scrolledBottom(element: any): boolean {
+		return element.scrollHeight - element.scrollTop === element.clientHeight
+	}
+
 	fetchNotif(): void {
-		this.notifService.getNotifications()
-			.subscribe( notifications => {
-				this.notifications = notifications;
+		this.isLoading = true;
+		this.notifService.getNotifications(this.offset*this.countScroll)
+			.subscribe( resp => {
+				for ( let notif of resp ) {
+					this.notifications.push(notif);
+				}
+				this.isLoading = false;
 			}, error => {
 				console.log(error);
 			});

@@ -343,7 +343,7 @@ label.size_24 { display: inline-block; }
 .title_bigger { font-size: 44px;font-weight: normal;line-height: normal; }
 .title_big { font-size: 38px;font-weight: normal;line-height: normal; }
 .title_medium { font-size: 32px;font-weight: normal;line-height: normal; }
-.title_small { font-size: 28px;font-weight: normal;line-height: 32px; }
+.title_small { font-size: 27px;font-weight: normal;line-height: 30px; }
 .title_smaller { font-size: 24px;font-weight: normal;line-height: 24px; }
 
 .fs_b { font-size: 19px; }
@@ -456,6 +456,7 @@ label.size_24 { display: inline-block; }
 .border_r { border-right-width: 1px;border-right-style: solid; }
 
 .b_primary { border-color: #00BCD4; }
+.b_secondary { border-color: #7C4DFF; }
 .b_white { border-color: #fff; }
 .b_light { border-color: rgba(0, 0, 0, 0.07); }
 .b_lightwhite { border-color: rgba(255, 255, 255, 0.3); }
@@ -516,6 +517,10 @@ label.size_24 { display: inline-block; }
 	overflow: hidden;
 }
 
+.h_selection.i_3 .in {
+	display: block;
+}
+
 .h_selection .item {
 	cursor: pointer;
 	width: auto;
@@ -524,8 +529,12 @@ label.size_24 { display: inline-block; }
 	transition: all 0.2s;
 }
 
+.h_selection.i_3 .item {
+	display: block;
+}
+
 .h_selection .item h3 {
-	padding: 8px;
+	padding: 8px 12px;
 	font-weight: 500;
 	font-size: 15px;
 	font-weight: normal;

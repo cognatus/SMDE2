@@ -5,7 +5,9 @@
 
 	.increment_margin { margin: 12px; }
 
-	.h_selection .item h3 {padding: 8px 14px;font-size: 17px;}
+	.h_selection .item h3 { padding: 10px 14px;font-size: 17px; }
+
+	.h_selection.i_3 .in, .h_selection.i_3 .item { display: inline-block; }
 
 	.login_container .inner { margin: 32px auto; }
 

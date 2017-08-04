@@ -10,6 +10,7 @@ import { SharedModule } from '../shared/shared.module';
 import { CoursesComponent } from './courses.component';
 import { CourseDetailComponent } from './course-detail/course-detail.component';
 import { GroupsComponent } from './groups/groups.component';
+import { ContentsComponent } from './contents/contents.component';
 
 const routes: Routes = [
     { 
@@ -32,7 +33,8 @@ const routes: Routes = [
 	declarations: [
 		CoursesComponent,
 		CourseDetailComponent,
-		GroupsComponent
+		GroupsComponent,
+		ContentsComponent
 	],
 	providers: [CourseDetailService]
 })

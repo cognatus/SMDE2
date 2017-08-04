@@ -7,14 +7,12 @@ const User = require('../../models/User');
 const Notification = require('../../models/Notification');
 
 exports.insertNotifications = (obj, callback) => {
-	let date = new Date();
 	let asyncLoop = (i, subcallback) => {
 		if ( i < obj.sendTo.length ) {
 			let notif = new Notification({
 				responsibleUsers: obj.responsibleUsers,
 				action: obj.action,
 				redirect: obj.redirect,
-				date: date,
 				sendTo: obj.sendTo[i] });
 
 			notif.save( (err, doc) => {
@@ -32,14 +30,17 @@ exports.insertNotifications = (obj, callback) => {
 
 // Obtener notificaciones
 exports.getNotifications = (req, res) => {
+	let offset = req.query.offset ? parseInt(req.query.offset) : 0;
 	let promise = Notification.find({ sendTo: req.cookies.urtoken._id })
-		.sort({'date': 'desc'})
+		.sort({'date': 'desc'}).skip(offset).limit(8)
 		.exec();
 
 	promise.then( (doc) => {
 		return setUsers(doc);
 	}).then( (data) => {
-		res.status(200).json(data);
+		setTimeout( () => {
+			res.status(200).json(data);
+		}, 1000)
 	}).catch( (err) => {
 		console.log(err);
 		res.status(404).send({ message: err })
