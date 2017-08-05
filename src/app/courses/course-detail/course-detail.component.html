@@ -49,7 +49,7 @@
 							<i class="material-icons">mode_edit</i>
 						</span><!-- <span class="text">Editar</span> -->
 					</button>
-					<button class="btn_icon hover" (click)="setConfirmation($event, 'deleteCourse')">
+					<button class="btn_icon bg_trans_red" (click)="setConfirmation($event, 'deleteCourse')">
 						<span class="icon">
 							<i class="material-icons">delete</i>
 						</span><!-- <span class="text">Eliminar</span> -->
@@ -125,7 +125,7 @@
 			</div>
 			<div class="list mb_24 o_h">
 				<section *ngIf="displayedList == 0">
-					<app-contents></app-contents>
+					<app-contents [owner]="course.user.id" *ngIf="course.user"></app-contents>
 				</section>
 				<section *ngIf="displayedList == 1">
 					

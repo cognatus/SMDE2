@@ -994,6 +994,10 @@ label.size_24 { display: inline-block; }
 	padding: 14px 16px 13px 16px;
 }
 
+.list_element .info .col_a {
+	max-width: calc(100% - 84px);
+	overflow: hidden;
+}
 
 .list_element.max_h .info h3, .list_element.max_h .info p {
 	height: 21px;

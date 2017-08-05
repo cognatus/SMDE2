@@ -10,6 +10,7 @@ import { Colors } from '../../app.constants';
 })
 export class ContentsComponent implements OnInit {
 	colors = new Colors();
+	@Input() owner: string;
 
 	constructor(private auth: AuthGuard) {}
 
