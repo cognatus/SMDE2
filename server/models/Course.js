@@ -49,16 +49,16 @@ var CourseSchema = new Schema({
 	}],
 	section: [{
 		name: { type: String, required: true },
-		content: { type: String }
+		content: { type: String },
 		subsection: [{
 			name: { type: String, required: true },
 			content: { type: String, required: true },
-			createdDate: { type: String, required: true, default: new Date() }
-			updatedDate: { type: String, required: true, default: new Date() }
+			createdDate: { type: String, required: true, default: new Date() },
+			updatedDate: { type: String, required: true, default: new Date() },
 		}],
 		files: [{
 			name: { type: String, required: true },
-			uploadedDate: { type: Date, required: true, default: new Date() }
+			uploadedDate: { type: Date, required: true, default: new Date() },
 		}],
 		createdDate: { type: Date, required: true, default: new Date() },
 		updatedDate: { type: Date, required: true, default: new Date() },

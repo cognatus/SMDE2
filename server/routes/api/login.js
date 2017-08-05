@@ -51,7 +51,8 @@ exports.signup = (req, res) => {
 		lastName: req.body.lastName,
 		phone: req.body.phone,
 		birthDay: new Date(birthDay.year + '-' + birthDay.month + '-' + birthDay.day),
-		type: req.body.userType
+		type: req.body.userType,
+		privilege: req.body.privilege
 	});
 
 	data.save( (err) => {
