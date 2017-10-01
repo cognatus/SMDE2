@@ -1,5 +1,6 @@
 module.exports = {
 	SECRET: 'Cl4v3Sup3rS3cr3t4',
+	TOKEN_LIFETIME: 86400, // Time in seconds 24h
 
 	MAIL_CONFIG : {
 		'HOST': 'smtp.gmail.com',

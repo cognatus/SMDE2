@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const settings = require('../settings');
+const auth = require('../_auth');
 const User = require('../../models/User');
 
 exports.login = (req, res) => {
@@ -12,9 +13,11 @@ exports.login = (req, res) => {
 		.then( doc => {
 			if ( doc ) {
 				let user = { _id: doc._id, mail: doc.mail, privilege: doc.privilege };
-				let token = jwt.sign( user, settings.SECRET, { expiresIn: 86400 } ); // 24h
 
-  				return res.status(200).json({ success: true, message: settings.MESSAGES.SUCCESS, errors: null, result: { user: doc, token: token } });
+				auth.generateToken( user, (err, token) => {
+					if (err) throw err;
+					res.status(200).json({ success: true, message: settings.MESSAGES.SUCCESS, errors: null, result: { user: doc, token: token } });
+				});
 			} else {
 				return res.status(403).send({ success: false, message: settings.ERROR_MESSAGES.BAD_LOGIN, errors: null, result: null });
 			}

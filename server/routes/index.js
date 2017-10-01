@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const validation = require('./_validation');
-const validationResult = require('./_util/validation-result');
 
 const login = require('./api/login');
 const admin = require('./api/admin');
@@ -15,7 +14,7 @@ router.get('/', (req, res) => {
 	res.send('api works');
 });
 
-router.post('/login', validation.LOGIN, validationResult, login.login);
+router.post('/login', validation.LOGIN, validation.result, login.login);
 
 router.post('/signup', login.signup);
 
@@ -52,14 +51,14 @@ router.route('/courses/:id/suscribe')
 	.post(validation.AUTH, courses.suscribeUser)
 	.delete(validation.AUTH, courses.unsuscribeUser);
 
-router.route('/courses/:id/updategroup')
-	.post(groups.createGroup)
+router.route('/courses/:id/content')
+	.post(validation.AUTH, courses.createContent)
 
-router.route('/courses/:id/updategroup/:groupid')
-	.put(groups.updateGroup)
-	.delete(groups.deleteGroup);
+router.route('/courses/:id/group')
+	.post(validation.AUTH, groups.createGroup)
 
-router.route('/courses/:id/createcontent')
-	.post(courses.createContent)
+router.route('/courses/:id/group/:groupid')
+	.put(validation.AUTH, groups.updateGroup)
+	.delete(validation.AUTH, groups.deleteGroup);
 
 module.exports = router;
