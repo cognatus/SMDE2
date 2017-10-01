@@ -1,0 +1,139 @@
+@media screen and (min-width: 1024px) {
+	.page_container { margin-left: 56px;margin-right: 56px; }
+	.page_container .page_container_in { max-width: 1080px; }
+
+	.page_container.full { margin: 0; }
+	.page_container.full .page_container_in { max-width: 1080px; }
+
+	.page_container.full.s_t { margin: 32px;margin-top: 0; }
+
+	.page_container_in .left_grid {
+		width: 40%;
+		margin-right: 12px;
+		display: inline-block;
+		vertical-align: top;
+	}
+
+	.page_container_in .right_grid {
+		width: calc(60% - 12px);
+		display: inline-block;
+		vertical-align: top;
+	}
+
+	.h_selection .item h3 {padding: 10px 20px;min-width: 120px;}
+
+	.increment_margin { margin: 24px;margin-top: 20px; }
+
+	.login_container .inner { margin: 64px auto; }
+
+	.app_bar_back { height: 57px; }
+
+	.app_bar { height: 56px; }
+
+	.app_bar .ad_lh { line-height: 54px; }
+
+	.app_bar .app_bar_inner .logo_container { width: 56px; }
+
+	.app_bar .app_bar_inner .searchbar_container { position: relative; }
+
+	.app_bar .app_bar_inner .searchbar_container .searchbar { width: 380px; }
+
+	.app_bar .app_bar_inner .searchbar_container .searchbar .field { margin-top: 8px; }
+
+	.app_bar .app_bar_inner .hidden_block_container .hidden_block { top: 64px; }
+
+	.app_bar .app_bar_inner .hidden_block_container.notif .hidden_block { width: 460px; }
+
+	.app_bar .app_bar_inner .bar_bottom { top: -56px; }
+
+	.app_bar .app_bar_inner .bar_bottom .menu .item { width: auto; }
+
+	.app_bar .app_bar_inner .bar_bottom .menu .item .inner span.label {
+		display: inline-block;
+	}
+
+	.app_bar .app_bar_inner .action_button button i.indicator {
+		top: 6px;
+		right: 6px;
+	}
+
+	.pop_up_container .pop_up {
+		margin: 32px auto;
+	}
+
+	.pop_up_container.gallery .pop_up {
+		height: calc(100% - 64px);
+	}
+
+	.pop_up_container .pop_up .inner .padding_block {
+		padding: 40px;
+	}
+
+	.pop_up_container .pop_up .inner .col_r .col_2 {
+		display: inline-block;
+		width: calc(50% - 8px);
+	}
+
+	.page_container_in .left_grid {
+		margin-right: 24px;
+		width: 35%;
+	}
+
+	.page_container_in .right_grid {
+		width: calc(65% - 24px);
+	}
+
+	.page_container_in .right_grid .course_navigation {
+		padding-top: 0;
+	}
+	.page_container_in .right_grid .course_navigation nav {
+		padding-left: 16px;
+		padding-right: 16px;
+	}
+
+	.page_container.full .resp_title {
+		padding-left: 0;
+		padding-right: 0;
+	}
+
+	.main_action_button {
+		margin-top: 0;
+		margin-bottom: 0;
+		padding-top: 24px;
+		padding-bottom: 24px;	
+	}
+
+	.col_r .col_3 {
+		width: 33.3333333%;
+	}
+
+	.profile_display {
+		height: 374px;
+	}
+
+	.admin_container .profile_display {
+		height: 360px;
+	}
+
+	.profile_display .profile_photo .inner {
+		padding: 16px 48px 24px 48px;
+	}
+
+	.profile_display .profile_photo .img_container {
+		width: 104px;
+		height: 104px;
+	}
+
+	.messages_container {
+		top: 57px;
+		height: calc(100% - 57px);
+	}
+
+	.messages_container .left_grid {
+		width: 392px;
+	}
+
+	.messages_container .right_grid {
+		width: calc(100% - 392px);
+	}
+}

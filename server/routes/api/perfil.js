@@ -1,8 +1,9 @@
 const fs = require('fs');
 const Busboy = require('busboy');
+const path = require('path');
 const User = require('../../models/User');
 
-const _media =	'src/media/';
+const _media =	'public/media/';
 
 exports.uploadProfilePhotos = (req, res) => {
 	var busboy = new Busboy({ headers: req.headers });
@@ -18,15 +19,15 @@ exports.uploadProfilePhotos = (req, res) => {
 	let profDir = _media + userId + '/profile';
 	let flag = false;
 
-	if (!fs.existsSync(userDir)){
+	if ( !fs.existsSync(userDir) ) {
 		fs.mkdirSync(userDir);
 	}
 
-	if (!fs.existsSync(backDir)){
+	if ( !fs.existsSync(backDir) ) {
 		fs.mkdirSync(backDir);
 	}
 
-	if (!fs.existsSync(profDir)){
+	if ( !fs.existsSync(profDir) ) {
 		fs.mkdirSync(profDir);
 	}
 

@@ -1,0 +1,45 @@
+<div class="login_container">
+	<div class="inner">
+		<section class="logo_container ta_c mb_24">
+			<img src="assets/icons/logo.png" class="icon big va_m mr_16"><span class="va_m">
+				<h1 class="fc_primary title_big fw_300">SMDE</h1>
+			</span>
+		</section>
+		<article class="bg_white border b_light border_radius">
+			<div class="p_24">
+				<div class="title_container ta_c">
+					<h2 class="title_big pt_8 fc_secondary fw_300">Iniciar Sesión</h2>
+				</div>
+				<form (submit)="login()">
+					<div class="pt_32">
+						<p class="mb_16 fc_red ta_c" *ngIf="error != ''">
+							{{ error }}
+						</p>
+						<div class="icon_field">
+							<div class="field">
+								<label class="opacity fw_b fs_s">Usuario</label>
+								<img src="assets/icons/account_black.png" class="icon opacity">
+								<input type="text" [(ngModel)]="user.mail" name="user" id="user" placeholder="Usuario">
+							</div>
+							<div class="field mt_8">
+								<label class="opacity fw_b fs_s">Contraseña</label>
+								<img src="assets/icons/lock_black.png" class="icon opacity">
+								<input type="password" [(ngModel)]="user.password" name="password" id="password" placeholder="Contraseña">
+							</div>
+						</div>
+					</div>
+					<div class="pt_16">
+						<input type="submit" value="Iniciar" class="btn btn_primary btn_full">
+					</div>
+				</form>
+				<div class="pt_24 ta_r">
+					<a routerLink="/registro">
+						<button class="btn bg_trans_secondary">
+							Registrarse
+						</button>
+					</a>
+				</div>
+			</div>
+		</article>
+	</div>
+</div>

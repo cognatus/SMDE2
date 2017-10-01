@@ -1,0 +1,117 @@
+<div class="page_container">
+	<div class="pop_up_container" id="user-add">
+		<div class="pop_up_back" onclick="showPopup(false, '#user-add')"></div>
+		<div class="pop_up">
+			<div class="inner border_radius">
+				<div class="border_b b_light">
+					<div class="pop_up_title fc_opacity">
+						<h1 class="title">
+							Nuevo Usuario
+						</h1>
+						<div class="close_button">
+							<button class="btn_icon hover" onclick="showPopup(false, '#user-add')">
+								<span class="icon">
+									<i class="material-icons fc_opacity">arrow_back</i>
+								</span>
+							</button>
+						</div>
+					</div>
+				</div>
+				<form class="padding_block" autocomplete="off" (submit)="addUser()">
+					<input style="display:none" type="text" name="user"/>
+					<input style="display:none" type="password" name="password"/>
+					<div class="data_container">
+						<h2 class="title_medium mb_24 fc_secondary">Datos</h2>
+						<div class="pl_8 pr_8">
+							<div class="field_container pb_24">
+								<div class="field mt_8">
+									<label class="opacity fw_b fs_s">Nombre(s)</label>
+									<input type="text" [(ngModel)]="user.name" name="name" placeholder="Nombre(s)"/>
+								</div>
+								<div class="field mt_8">
+									<label class="opacity fw_b fs_s">Apellidos</label>
+									<input type="text" [(ngModel)]="user.lastName" name="lastName" placeholder="Apellidos"/>
+								</div>
+								<div class="field mt_8">
+									<label class="opacity fw_b fs_s">Correo</label>
+									<input type="text" [(ngModel)]="user.mail" name="mail" placeholder="Correo Electrónico"/>
+								</div>
+								<div class="field mt_8">
+									<label class="opacity fw_b fs_s">Télefono</label>
+									<input type="text" [(ngModel)]="user.phone" name="phone" placeholder="Teléfono"/>
+								</div>
+								<div class="field mt_8">
+									<label class="opacity fw_b fs_s">Fecha de Nacimiento</label>
+									<input type="text" [(ngModel)]="user.birthDay" name="birthday" placeholder="Fecha (dd/mm/yyyy)" value=""/>
+								</div>
+								<div class="field mt_8">
+									<label class="opacity fw_b fs_s">Tipo</label>
+									<select [(ngModel)]="user.privilege" name="area">
+										<option value="1" selected="selected">Alumno</option>
+										<option value="2">Profesor</option>
+										<option value="3">Administrador</option>
+									</select>
+								</div>
+								<div class="field mt_8">
+									<label class="opacity fw_b fs_s">Sexo</label>
+									<select [(ngModel)]="user.sex" name="area">
+										<option value="0" selected="selected">Hombre</option>
+										<option value="1">Mujer</option>
+										<option value="2">Otro</option>
+									</select>
+								</div>
+								<div class="field mt_8">
+									<label class="opacity fw_b fs_s">Contraseña Nueva</label>
+									<input type="password" [(ngModel)]="user.password" name="newpassword" placeholder="Contraseña Nueva" value="" />
+								</div>
+							</div>
+							<div class="ta_r">
+								<input type="submit" class="btn btn_primary" value="Agregar">
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="page_container_in">
+		<section class="list">
+			<div class="p_16 resp_title ">
+				<button class="btn btn_primary" onclick="showPopup(true, '#user-add')">
+					<span class="icon">
+						<i class="material-icons">add</i>
+					</span><span class="text">Nuevo</span>
+				</button>
+			</div>
+			<div class="p_32" *ngIf="users?.length < 1">
+				<h2 class="title_big fw_300 fc_lightgray">
+					Ningun usuario por el momento
+				</h2>
+			</div>
+			<ul class="list ml_8 mr_8">
+				<li class="list_element hover" *ngFor="let user of users;let i = index" [ngClass]="{ 'border_t b_light': i > 0 }">
+					<a routerLink="{{ user._id }}">
+						<div class="ref">
+							<div class="pt_4"></div>
+							<div class="img_container border_radius">
+								<img [src]="user.profilePhoto ? 'media/'+user._id+'/profile/'+user.profilePhoto : 'assets/icons/default_profile.png'">
+							</div>
+						</div><div class="info">
+							<div class="p_16">
+								<h3 class="fw_n">
+									{{ user.name }} {{ user.lastName }}
+								</h3>
+								<p class="pt_4 pb_4 fc_opacity">
+									<b class="fw_500">{{ user.mail }}</b>
+								</p>
+								<p class="fc_opacity">
+									<b>{{ USER_TYPES[user.privilege] }}</b>
+								</p>
+							</div>
+						</div>
+					</a>
+				</li>
+			</ul>
+		</section>
+	</div>
+</div>

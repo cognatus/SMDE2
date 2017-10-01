@@ -1,0 +1,235 @@
+<div class="pop_up_container" id="user-edit">
+	<div class="pop_up_back" onclick="showPopup(false, '#user-edit')"></div>
+	<div class="pop_up">
+		<div class="inner border_radius">
+			<div class="border_b b_light">
+				<div class="pop_up_title fc_opacity">
+					<h1 class="title">
+						Editar Usuario
+					</h1>
+					<div class="close_button">
+						<button class="btn_icon hover" onclick="showPopup(false, '#user-edit')">
+							<span class="icon">
+								<i class="material-icons fc_opacity">arrow_back</i>
+							</span>
+						</button>
+					</div>
+				</div>
+			</div>
+			<form class="padding_block" (submit)="updateUser()">
+				<div class="data_container">
+					<h2 class="title_medium mb_24 fc_secondary">Datos</h2>
+					<div class="pl_8 pr_8">
+						<div class="field_container pb_24">
+							<div class="field mt_8">
+								<label class="opacity fw_b fs_s">Nombre(s)</label>
+								<input type="text" [(ngModel)]="user.name" name="name" placeholder="Nombre(s)" />
+							</div>
+							<div class="field mt_8">
+								<label class="opacity fw_b fs_s">Apellidos</label>
+								<input type="text" [(ngModel)]="user.lastName" name="lastName" placeholder="Apellidos"/>
+							</div>
+							<div class="field mt_8">
+								<label class="opacity fw_b fs_s">Correo</label>
+								<input type="text" [(ngModel)]="user.mail" name="mail" placeholder="Correo Electrónico"/>
+							</div>
+							<div class="field mt_8">
+								<label class="opacity fw_b fs_s">Télefono</label>
+								<input type="text" [(ngModel)]="user.phone" name="phone" placeholder="Teléfono"/>
+							</div>
+							<div class="field mt_8">
+								<label class="opacity fw_b fs_s">Fecha de Nacimiento</label>
+								<input type="text" [(ngModel)]="formatedUserBirth" name="birthDay" placeholder="Fecha (dd/mm/yyyy)" />
+							</div>
+							<div class="field mt_8">
+								<label class="opacity fw_b fs_s">Tipo</label>
+								<select [(ngModel)]="user.privilege" name="area">
+									<option value="1" selected="selected">Alumno</option>
+									<option value="2">Profesor</option>
+									<option value="3">Administrador</option>
+								</select>
+							</div>
+							<div class="field mt_8">
+								<label class="opacity fw_b fs_s">Sexo</label>
+								<select [(ngModel)]="user.sex" name="area">
+									<option value="0" selected="selected">Hombre</option>
+									<option value="1">Mujer</option>
+									<option value="2">Otro</option>
+								</select>
+							</div>
+						</div>
+						<div class="ta_r">
+							<input type="submit" class="btn btn_primary" value="Guardar Cambios">
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<div class="page_container">
+	<div class="page_container_in">
+		<div class="mb_24">
+			<div class="p_16 resp_title ">
+				<a routerLink="/admin/usuarios">
+					<button class="btn btn_primary">
+						<span class="icon">
+							<i class="material-icons">arrow_back</i>
+						</span><span class="text">Atras</span>
+					</button>
+				</a>
+			</div>
+			<section class="border_radius mb_12 pos_r">
+				<div class="profile_display">
+					<div class="background bg_primarydark">
+						<div class="img_container" *ngIf="user.backPhoto != undefined && user.backPhoto != ''">
+							<img src="/media/{{ user._id }}/background/{{ user.backPhoto }}" adjustable>
+						</div>
+						<div class="bg_opacity" *ngIf="user.backPhoto != undefined && user.backPhoto != ''"></div>
+					</div>
+					<div class="profile_photo fc_white">
+						<div class="inner">
+							<div class="img_container border_radius_max shadow_flat">
+								<img [src]="user.profilePhoto && user.profilePhoto != '' ? '/media/'+user._id+'/profile/'+user.profilePhoto : 'assets/icons/default_profile.png'">
+							</div><div class="info">
+								<h3 class="title_smaller">
+									{{ user.name }} {{ user.lastName }}
+								</h3>
+								<p class="opacity mt_8">
+									<b class="fs_b fw_500">{{ user.mail }}</b>
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="ta_r p_12 pr_16">
+					<button class="btn bg_trans_secondary float_left">
+						<span class="icon small">
+							<i class="material-icons">chat</i>
+						</span><span class="text">Enviar Mensaje</span>
+					</button>
+					<button class="btn_icon hover" onclick="showPopup(true, '#user-edit')">
+						<span class="icon">
+							<i class="material-icons">mode_edit</i>
+						</span><!-- <span class="text">Editar</span> -->
+					</button>
+					<button class="btn_icon bg_trans_red" (click)="setConfirmation($event, 'deleteCourse')">
+						<span class="icon">
+							<i class="material-icons">delete</i>
+						</span><!-- <span class="text">Eliminar</span> -->
+					</button>
+				</div>
+				<div class="col_s ta_c m_8 bg_white border b_light border_radius">
+					<div class="col_3">
+						<div class="p_12">
+							<h4 class="fw_500 opacity">Tipo</h4>
+							<h2 class="fw_500 fs_b mt_4">{{ USER_TYPES[user.privilege] }}</h2>
+						</div>
+					</div><div class="col_3">
+						<div class="p_12">
+							<h4 class="fw_500 opacity">Cursos</h4>
+							<h2 class="fw_500 fs_b mt_4" *ngIf="user.courses?.length > 0">{{ user.courses?.length }}</h2>
+							<h2 class="fw_500 fs_b mt_4" *ngIf="user.courses?.length < 1 || user.courses == undefined">0</h2>
+						</div>
+					</div><div class="col_3">
+						<div class="p_12">
+							<h4 class="fw_500 opacity">Promedio</h4>
+							<h2 class="fw_500 fs_b mt_4">0.0</h2>
+						</div>
+					</div>
+				</div>
+			</section>
+			<section>
+				<div class="p_16 resp_title">
+					<h2 class="title_small fc_secondary">
+						Información
+					</h2>
+				</div>
+				<div class="m_8 bg_white border b_light border_radius">
+					<div class="p_16">
+						<div class="mb_12">
+							<p class="opacity fw_b mb_4">Clave de Usuario</p>
+							<p class="fs_b">
+								<img class="icon opacity va_m m_8" src="assets/icons/lock_black.png">
+								<span class=" va_m ml_8">
+									{{ user._id }}
+								</span>
+							</p>
+						</div>
+						<div class="mb_12">
+							<p class="opacity fw_b mb_4">Teléfono</p>
+							<p class="fs_b">
+								<img class="icon opacity va_m m_8" src="assets/icons/phone_black.png">
+								<span class=" va_m ml_8">
+									{{ user.phone }}
+								</span>
+							</p>
+						</div>
+						<div>
+							<p class="opacity fw_b mb_4">Dirección</p>
+							<p class="fs_b">
+								<img class="icon opacity va_m m_8" src="assets/icons/map-marker_black.png">
+								<span class="va_m ml_8 opacity">
+									<b>Sin dirección</b>
+								</span>
+							</p>
+						</div>
+					</div>
+				</div>
+			</section>
+			<section *ngIf="user.privilege != 0">
+				<div class="p_16 resp_title">
+					<h2 class="title_small fc_secondary">
+						Cursos
+					</h2>
+				</div>
+				<div class="p_32 ta_c" *ngIf="user.courses?.length < 1">
+					<h2 class="title_big fw_300 fc_lightgray">
+						Ningun curso por el momento
+					</h2>
+				</div>
+				<ul class="list" *ngIf="user.courses?.length > 0">
+					<li class="list_element" *ngFor="let course of user.courses">
+						<div class="ref">
+							<span class="circle">
+								<label class="title_smaller fw_l fc_white size_24">{{ (course.name).charAt(0) }}</label>
+							</span>
+						</div><div class="info">
+							<button class="options_button hover_lightgray size_32 ta_c circle">
+								<img class="icon va_m opacity" src="assets/icons/dots-vertical_black.png">
+							</button>
+							<div class="hidden_options">
+								<div class="bg_white pb_8 pt_8 shadow_flat border_radius fw_500">
+									<a>
+										<p class="p_8 pl_16 pr_16 hover fc_red">
+											Eliminar
+										</p>
+									</a>
+								</div>
+							</div>
+							<div class="p_12 pl_16 pr_16">
+								<div class="mb_8">
+									<h3 class="fw_500 mb_4">
+										{{ course.subject.name }}
+									</h3>
+									<p class="opacity">
+										<b>{{ course.group.name }}</b>
+									</p>
+									<div class="mt_8">
+										<p class="opacity">
+											Nivel Asignatura: <b>{{ course.subject.level }}</b>
+										</p>
+										<p class="opacity">
+											Nivel Grupo: <b>{{ course.group.level }}</b>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</section>
+		</div>
+	</div>
+</div>
+

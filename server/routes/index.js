@@ -1,5 +1,7 @@
 const express = require('express');
 const router = express.Router();
+const validation = require('./_validation');
+const validationResult = require('./_util/validation-result');
 
 const login = require('./api/login');
 const admin = require('./api/admin');
@@ -13,7 +15,7 @@ router.get('/', (req, res) => {
 	res.send('api works');
 });
 
-router.post('/login', login.login);
+router.post('/login', validation.LOGIN, validationResult(false), login.login);
 
 router.post('/signup', login.signup);
 

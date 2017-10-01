@@ -1,39 +1,32 @@
 const jwt = require('jsonwebtoken');
-const randtoken = require('rand-token') 
+const settings = require('../settings');
 const User = require('../../models/User');
 
-let refreshTokens = {};
-
 exports.login = (req, res) => {
-	let username = req.body.mail;
+	let username = req.body.user;
 	let password = req.body.password;
 
-	User.findOne({ mail: req.body.mail, password: req.body.password }).select('-password').exec( (err, doc) => {
-		if (err) {
-			res.send(err);
-		} else {
-			let user = {};
+	User.findOne({ mail: username, password: password })
+		.select('-password')
+		.exec()
+		.then( doc => {
+			console.log(doc);
 			if ( doc ) {
-				user = {
+				let user = {
 					_id: doc._id,
 					mail: doc.mail,
 					privilege: doc.privilege
 				};
-				
-				let token = jwt.sign(user, process.env.SECRET_KEY, { expiresIn: 400000 });
-				let refreshToken = randtoken.uid(256);
-  				refreshTokens[refreshToken] = username;
-  				res.cookie('urtoken', user);
-  				res.status(200).json({ user: doc, token: 'JWT ' + token, refreshToken: refreshToken });
+  				return res.status(200).json({ success: true, message: settings.MESSAGES.SUCCESS, errors: null, result: { user: doc } });
 			} else {
-				res.status(500).send({ message: 'Usuario y/o contraseña incorrectos' });
+				return res.status(404).send({ success: false, message: settings.ERROR_MESSAGES.BAD_LOGIN, errors: null, result: null });
 			}
-		}
-	});
+		}).catch( err => {
+			res.status(500).send({ success: false, message: settings.HTTP_ERROR_MESSAGES.INTERNAL_SERVER_ERROR, errors: null, result: null })
+		});
 };
 
 exports.logout = (req, res) => {
-	res.clearCookie('urtoken');
 	res.redirect('/');
 }
 
@@ -58,9 +51,9 @@ exports.signup = (req, res) => {
 	data.save( (err) => {
 		if (err) {
 			console.log(err);
-			res.send(err);
+			res.status(500).send({ success: false, message: settings.HTTP_ERROR_MESSAGES.INTERNAL_SERVER_ERROR, errors: err, result: null });
 		} else {
-			res.send('Usuario registrado con exito');
+			res.status(201).json({ success: true, message: settings.MESSAGES.REGISTERED_USER, errors: null, result: null });
 		}
 	});
 };

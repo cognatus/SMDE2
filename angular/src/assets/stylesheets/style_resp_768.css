@@ -1,0 +1,142 @@
+@media screen and (min-width: 768px) {
+	.page_container { margin-left: 40px;margin-right: 40px; }
+	.page_container .page_container_in { max-width: 1024px; }
+
+	.page_container.full { margin: 0; }
+	.page_container.full .page_container_in { max-width: none; }
+
+	.page_container_in.min_res .left_grid {
+		width: 35% !important;
+		margin: 0 !important;
+		display: inline-block;
+		vertical-align: top;
+	}
+
+	.page_container_in.min_res .right_grid {
+		width: 65% !important;
+		display: inline-block;
+		vertical-align: top;
+	}
+
+	.h_selection .item h3 {padding: 8px 18px;min-width: 90px;font-size: 18px;}
+
+	.increment_margin { margin: 16px; }
+
+	.login_container .inner { margin: 48px auto; }
+
+	.app_bar_back { height: 51px; }
+
+	.app_bar { height: 50px; }
+
+	.app_bar .app_bar_inner .logo_container { width: 50px; }
+
+	.app_bar .app_bar_inner .bar_top, .app_bar .app_bar_inner .bar_bottom { height: 100%; }
+
+	.app_bar .app_bar_inner .hidden_block_container.notif .hidden_block {
+		right: 0;
+		width: 430px;
+	}
+
+	.app_bar .app_bar_inner .hidden_block_container.notif .hidden_block i.mark {
+		right: 16px;
+	}
+
+	.app_bar .app_bar_inner .bar_bottom {
+		position: relative;
+		float: left;
+		top: -50px;
+		left: 64px;
+		width: auto;
+		display: inline-block;
+	}
+
+	.app_bar .app_bar_inner .bar_bottom .menu .item {
+		width: 50px;
+	}
+
+	.app_bar .app_bar_inner .bar_bottom .menu .item a {
+		padding-left: 12px;
+		padding-right: 12px;
+	}
+
+	.pop_up_container .pop_up {
+		margin: 32px auto;
+	}
+
+	.pop_up_container.big .pop_up {
+		width: calc(100% - 64px);
+	}
+
+	.pop_up_container.gallery .pop_up {
+		margin: 24px auto;
+		width: calc(100% - 64px);
+		height: calc(100% - 48px);
+		border-radius: 4px;
+	}
+
+	.pop_up_container .pop_up .inner .padding_block {
+		padding: 32px;
+	}
+
+	.pop_up_container .pop_up .inner .col_r .col_2 {
+		width: auto;
+		display: block;
+	}
+
+	.col_r .col_2, .col_r .col_3 {
+		width: 50%;
+		display: inline-block;
+		vertical-align: top;
+	}
+
+	.resp_list .resp_item {
+		margin: 8px;
+	}
+
+	.page_container .resp_title {
+		padding-left: 0;
+		padding-right: 0;
+		margin-left: 0;
+		margin-right: 0;
+	}
+
+	.page_container.full .resp_title {
+		padding: 16px;
+	}
+
+	.profile_display {
+		height: 340px;
+	}
+
+	.profile_display .profile_photo .inner {
+		padding: 16px 32px 24px 32px;
+	}
+
+	.profile_display .profile_photo .img_container {
+		width: 96px;
+		height: 96px;
+	}
+
+	.profile_display .background .editable {
+		top: 24px;
+		left: 24px;
+	}
+
+	.messages_container {
+		top: 51px;
+		height: calc(100% - 51px);
+	}
+
+	.messages_container .left_grid {
+		width: 40%;
+		display: inline-block;
+		vertical-align: top;
+	}
+
+	.messages_container .right_grid {
+		width: 60%;
+		display: inline-block;
+		vertical-align: top;
+	}
+
+}
