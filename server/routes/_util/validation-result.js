@@ -1,17 +1,12 @@
-const validationResult = require('express-validator/check').validationResult;
-const validation = require('../_validation');
+const jwt = require('jsonwebtoken');
 const settings = require('../settings');
+const validationResult = require('express-validator/check').validationResult;
 
-module.exports = function(auth) { 
-	return function(req, res, next) {
-		if ( auth && !req.headers.authorization ) {
-			return res.status(401).send({ success: false, responseMessage: settings.ERROR_MESSAGES.NO_TOKEN_PROVIDED, responseErrors: null, responseResult: null });
-		}
+module.exports = (req, res, next) => {
+	let errors = validationResult(req);
 
-		const errors = validationResult(req);
-		if ( !errors.isEmpty() ) {
-			return res.status(422).send({ success: false, responseMessage: settings.ERROR_MESSAGES.VALIDATION, responseErrors: errors.mapped(), responseResult: null });
-		}
-		next();
+	if ( !errors.isEmpty() ) {
+		return res.status(422).send({ success: false, message: settings.ERROR_MESSAGES.VALIDATION, errors: errors.mapped(), result: null });
 	}
+	next();
 }

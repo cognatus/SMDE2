@@ -15,29 +15,29 @@ router.get('/', (req, res) => {
 	res.send('api works');
 });
 
-router.post('/login', validation.LOGIN, validationResult(false), login.login);
+router.post('/login', validation.LOGIN, validationResult, login.login);
 
 router.post('/signup', login.signup);
 
 router.route('/users')
-	.get(admin.getUsers)
-	.post(admin.insertUser);
+	.get(validation.AUTH, admin.getUsers)
+	.post(validation.AUTH, admin.insertUser);
 
 router.route('/users/:id')
-	.get(admin.getUserById)
-	.put(admin.updateUser)
-	.delete(admin.deleteUser);
+	.get(validation.AUTH, admin.getUserById)
+	.put(validation.AUTH, admin.updateUser)
+	.delete(validation.AUTH, admin.deleteUser);
 
 router.route('/profile')
-	.post(profile.uploadProfilePhotos)
-	.put(profile.updatePhoto)
-	.delete(profile.deletePhoto);
+	.post(validation.AUTH, profile.uploadProfilePhotos)
+	.put(validation.AUTH, profile.updatePhoto)
+	.delete(validation.AUTH, profile.deletePhoto);
 
 router.route('/notif')
-	.get(notif.getNotifications);
+	.get(validation.AUTH, notif.getNotifications);
 
 router.route('/notif/:id')
-	.put(notif.updateNotifStatus);
+	.put(validation.AUTH, notif.updateNotifStatus);
 
 router.route('/courses')
 	.get(courses.getCourses)
@@ -45,12 +45,12 @@ router.route('/courses')
 
 router.route('/courses/:id')
 	.get(courses.getCourseById)
-	.put(courses.updateCourse)
-	.delete(courses.deleteCourse);
+	.put(validation.AUTH, courses.updateCourse)
+	.delete(validation.AUTH, courses.deleteCourse);
 
 router.route('/courses/:id/suscribe')
-	.post(courses.suscribeUser)
-	.delete(courses.unsuscribeUser);
+	.post(validation.AUTH, courses.suscribeUser)
+	.delete(validation.AUTH, courses.unsuscribeUser);
 
 router.route('/courses/:id/updategroup')
 	.post(groups.createGroup)

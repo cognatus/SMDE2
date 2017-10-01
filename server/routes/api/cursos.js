@@ -140,7 +140,7 @@ exports.suscribeUser = (req, res) => {
 };
 
 exports.unsuscribeUser = (req, res) => {
-	let userId = req.cookies.urtoken._id;
+	let userId = req.decode._id;
 	Course.update({ _id: req.params.id }, {
 		$pull: { members: { id: userId } }, $set: { updatedDate: new Date() }
 	}, (err, doc) => {

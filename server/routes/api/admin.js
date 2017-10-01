@@ -1,27 +1,29 @@
+const settings = require('../settings');
 const User = require('../../models/User');
 
 // Obtener usuarios
-exports.getUsers = (req, res) => {
-	User.find({}, (err, doc) => {
-		if (err) {
+exports.getUsers = (req, res, next) => {
+	User.find({})
+		.then( doc => {
+			return res.status(200).json({ success: true, message: settings.MESSAGES.SUCCESS, errors: null, result: { users: doc } });
+		}).catch( err => {
 			console.log(err);
-			res.status(500).send({ message: err });
-		} else {
-			res.status(200).json(doc);
-		}
-	});
+			return res.status(500).send({ success: false, message: settings.HTTP_ERROR_MESSAGES.INTERNAL_SERVER_ERROR, errors: err, result: null });
+		});
 };
 
 // Obtener usuario por id
 exports.getUserById = (req, res) => {
-	User.find({ _id: req.params.id }, (err, doc) => {
-		if (err) {
+	User.findOne({ _id: req.params.id })
+		.select('-password -notification')
+		.then( doc => {
+			if ( !doc )
+				return res.status(404).json({ success: true, message: settings.HTTP_ERROR_MESSAGES.NOT_FOUND, errors: null, result: null });
+			res.status(200).json({ success: true, message: settings.MESSAGES.SUCCESS, errors: null, result: { user: doc } });
+		}).catch( err => {
 			console.log(err);
-			res.status(500).send({ message: err });
-		} else {
-			res.status(200).json(doc[0]);
-		}
-	});
+			return res.status(500).send({ success: false, message: settings.HTTP_ERROR_MESSAGES.INTERNAL_SERVER_ERROR, errors: err, result: null });
+		});
 };
 
 // Agregar nuevo usuario (Admin, Alumno, Profesor)

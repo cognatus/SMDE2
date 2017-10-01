@@ -7,7 +7,9 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 
+const settings = require('./routes/settings');
 const index = require('./routes/index');
+
 const app = express();
 
 // view engine setup
@@ -51,6 +53,7 @@ mongoose.connect('mongodb://localhost/smde2', (err) => {
 		console.log('CONECTED TO MONGO DB');
 	}
 });
+app.set('superSecret', settings.SECRET);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

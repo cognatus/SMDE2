@@ -11,7 +11,7 @@ exports.uploadProfilePhotos = (req, res) => {
 	let date = new Date();
 	let formatedDate = date.getDate() + '' + date.getMonth() + '' + date.getFullYear() + '' + date.getHours() + '' + date.getMinutes() + '' + date.getSeconds();
 	let randomNumber = Math.floor(Math.random() * 1000) + 1
-	let userId = req.cookies.urtoken._id;
+	let userId = req.decode._id;
 	let nameImage = formatedDate.toString() + '' + randomNumber.toString();
 
 	let userDir = _media + userId;
@@ -93,7 +93,7 @@ exports.uploadProfilePhotos = (req, res) => {
 };
 
 exports.updateProfileName = (req, res) => {
-	User.findOneAndUpdate({ _id: req.cookies.urtoken._id }, { $set: {
+	User.findOneAndUpdate({ _id: req.decode._id }, { $set: {
 		name: req.body.name,
 		lastName: req.body.lastName
 	}}, {new: false}, (err, doc) => {
@@ -106,7 +106,7 @@ exports.updateProfileName = (req, res) => {
 };
 
 exports.updatePhoto = (req, res) => {
-	let userId = req.cookies.urtoken._id;
+	let userId = req.decode._id;
 	if ( req.body.album === 'background' ) {
 		User.findOneAndUpdate({ _id: userId }, { $set: {
 			backPhoto: req.body.name,
@@ -131,7 +131,7 @@ exports.updatePhoto = (req, res) => {
 };
 
 exports.deletePhoto = (req, res) => {
-	let userId = req.cookies.urtoken._id;
+	let userId = req.decode._id;
 	let fileToRemove = _media + userId + '/' + req.query.album + '/' + req.query.name
 	fs.unlink(fileToRemove, () => {
 		User.findOneAndUpdate({ _id: userId }, { $pull:

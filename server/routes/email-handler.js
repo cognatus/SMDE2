@@ -8,7 +8,7 @@ exports.sendMail = function(params, next) {
 	}
 	
 	// fromAddress, toAddress, subject, content, next
-	const IMG_HOST = 'http://192.168.100.140:3000/fintra-assets/images';
+	const IMG_HOST = 'http://localhost:3000/images';
 	const FROM_ADDRESS = 'avillarroel@e-bitware.com';
 	const TO_ADDRESS = params.toEmail;
 	const SUBJECT = 'Fintra | ' + params.subject;

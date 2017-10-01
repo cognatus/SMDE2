@@ -31,7 +31,7 @@ exports.insertNotifications = (obj, callback) => {
 // Obtener notificaciones
 exports.getNotifications = (req, res) => {
 	let offset = req.query.offset ? parseInt(req.query.offset) : 0;
-	let promise = Notification.find({ sendTo: req.cookies.urtoken._id })
+	let promise = Notification.find({ sendTo: req.decode._id })
 		.sort({'date': 'desc'}).skip(offset).limit(8)
 		.exec();
 

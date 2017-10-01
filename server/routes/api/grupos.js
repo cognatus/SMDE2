@@ -44,7 +44,7 @@ exports.createGroup = (req, res) => {
 			}
 
 			notif.insertNotifications({
-				responsibleUsers: [req.cookies.urtoken._id],
+				responsibleUsers: [req.decode._id],
 				action: {
 					status: 2,
 					substatus: 1,
@@ -57,7 +57,7 @@ exports.createGroup = (req, res) => {
 			});
 
 			notif.insertNotifications({
-				responsibleUsers: [req.cookies.urtoken._id],
+				responsibleUsers: [req.decode._id],
 				action: {
 					status: 2,
 					substatus: 0,
@@ -153,7 +153,7 @@ exports.updateGroup = (req, res) => {
 			}
 
 			notif.insertNotifications({
-				responsibleUsers: [req.cookies.urtoken._id], // Mandar a miembros viejos del grupo
+				responsibleUsers: [req.decode._id], // Mandar a miembros viejos del grupo
 				action: {
 					status: 2,
 					substatus: 2,
@@ -163,7 +163,7 @@ exports.updateGroup = (req, res) => {
 				sendTo: oldMembers
 			}, (obj) => {
 				notif.insertNotifications({
-					responsibleUsers: [req.cookies.urtoken._id], //Mandar a miembros nuevos en el grupo
+					responsibleUsers: [req.decode._id], //Mandar a miembros nuevos en el grupo
 					action: {
 						status: 2,
 						substatus: 3,
@@ -224,7 +224,7 @@ exports.deleteGroup = (req, res) => {
 				}).exec()
 		}).then( (data) => {
 			notif.insertNotifications({
-				responsibleUsers: [req.cookies.urtoken._id],
+				responsibleUsers: [req.decode._id],
 				action: {
 					status: 2,
 					substatus: 5, // grupo eliminado

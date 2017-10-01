@@ -10,25 +10,23 @@ exports.login = (req, res) => {
 		.select('-password')
 		.exec()
 		.then( doc => {
-			console.log(doc);
 			if ( doc ) {
-				let user = {
-					_id: doc._id,
-					mail: doc.mail,
-					privilege: doc.privilege
-				};
-  				return res.status(200).json({ success: true, message: settings.MESSAGES.SUCCESS, errors: null, result: { user: doc } });
+				let user = { _id: doc._id, mail: doc.mail, privilege: doc.privilege };
+				let token = jwt.sign( user, settings.SECRET, { expiresIn: 86400 } ); // 24h
+
+  				return res.status(200).json({ success: true, message: settings.MESSAGES.SUCCESS, errors: null, result: { user: doc, token: token } });
 			} else {
-				return res.status(404).send({ success: false, message: settings.ERROR_MESSAGES.BAD_LOGIN, errors: null, result: null });
+				return res.status(403).send({ success: false, message: settings.ERROR_MESSAGES.BAD_LOGIN, errors: null, result: null });
 			}
 		}).catch( err => {
-			res.status(500).send({ success: false, message: settings.HTTP_ERROR_MESSAGES.INTERNAL_SERVER_ERROR, errors: null, result: null })
+			console.log(err);
+			return res.status(500).send({ success: false, message: settings.HTTP_ERROR_MESSAGES.INTERNAL_SERVER_ERROR, errors: err, result: null });
 		});
 };
 
-exports.logout = (req, res) => {
+/*exports.logout = (req, res) => {
 	res.redirect('/');
-}
+}*/
 
 exports.signup = (req, res) => {
 	let birthDay = {
@@ -51,9 +49,9 @@ exports.signup = (req, res) => {
 	data.save( (err) => {
 		if (err) {
 			console.log(err);
-			res.status(500).send({ success: false, message: settings.HTTP_ERROR_MESSAGES.INTERNAL_SERVER_ERROR, errors: err, result: null });
+			return res.status(500).send({ success: false, message: settings.HTTP_ERROR_MESSAGES.INTERNAL_SERVER_ERROR, errors: err, result: null });
 		} else {
-			res.status(201).json({ success: true, message: settings.MESSAGES.REGISTERED_USER, errors: null, result: null });
+			return res.status(201).json({ success: true, message: settings.MESSAGES.REGISTERED_USER, errors: null, result: null });
 		}
 	});
 };
