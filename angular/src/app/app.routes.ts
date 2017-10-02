@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { AuthGuard } from './auth/auth.guard';
+import { AuthService } from './auth/auth.service';
 
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
@@ -22,7 +22,7 @@ export const routes: Routes = [
     }, { 
     	path: 'perfil', 
     	component: ProfileComponent, 
-    	canActivate: [AuthGuard] 
+    	canActivate: [AuthService] 
     }, { 
     	path: 'perfil/:id', 
     	component: ProfileComponent 

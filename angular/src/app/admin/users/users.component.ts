@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
-import { AuthGuard } from '../../auth/auth.guard';
+import { AuthService } from '../../auth/auth.service';
 import { UsersService } from './users.service';
 import { User } from '../../_models/user';
 import { Colors, USER_TYPES } from '../../app.constants';
@@ -17,7 +17,7 @@ export class UsersComponent implements OnInit {
 	users: User[];
 	USER_TYPES: string[];
 
-	constructor(private router: Router, private auth: AuthGuard, private usersService: UsersService) {
+	constructor(private router: Router, private auth: AuthService, private usersService: UsersService) {
 		this.USER_TYPES = USER_TYPES;
 	}
 

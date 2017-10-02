@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, RequestOptions } from '@angular/http';
-import { ContentHeaders } from '../../common/headers';
+import { ContentHeaders } from '../../_common/headers';
+import { AuthHttp } from '../../_common/AuthHttp';
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
@@ -11,31 +12,28 @@ import { User } from '../../_models/user';
 @Injectable()
 export class UserDetailService {
 	url = API_URL + 'users/';
-	constructor(private http: Http) {}
+	constructor(private http: Http, private authHttp: AuthHttp) {}
 
 	getUser(id): Observable<User> {
-		return this.http.get(this.url + id)
+		return this.authHttp.get(this.url + id)
 			.map(this.extractData)
 			.catch(this.handleError);
 	}
 
 	updateUser(user: User): Observable<User> {
-        let options = new RequestOptions({ headers: ContentHeaders });
-
-        return this.http.put(this.url + user._id, user, options)
+        return this.authHttp.put(this.url + user._id, user)
             .map(this.extractData)
             .catch(this.handleError);
     }
 
     deleteUser(id): Observable<User> {
-    	let options = new RequestOptions({ headers: ContentHeaders });
-        return this.http.delete(this.url + id, options)
+        return this.authHttp.delete(this.url + id)
             .map(this.extractData)
             .catch(this.handleError);
     }
 
 	private extractData(res: Response) {
-		let body = res.json();
+		let body = res.json().result;
 		return body || {};
 	}
 

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from '../auth/auth.guard';
+import { AuthService } from '../auth/auth.service';
 
 import { SharedModule } from '../shared/shared.module';
 
@@ -11,7 +11,7 @@ import { MessagesListComponent } from './messages-list/messages-list.component';
 
 const routes: Routes = [
     { 
-    	path: '', component: MessagesComponent, canActivate: [AuthGuard],
+    	path: '', component: MessagesComponent, canActivate: [AuthService],
         children: [
             {
             	path: ':id', component: MessageConversationComponent 

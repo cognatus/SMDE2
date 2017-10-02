@@ -2,6 +2,8 @@ const mongoose = require('mongoose');
 const Promise = require('bluebird');
 mongoose.Promise = Promise;
 
+const settings = require('../settings');
+
 const Course = require('../../models/Course');
 const User = require('../../models/User');
 const Notification = require('../../models/Notification');
@@ -17,12 +19,12 @@ exports.insertNotifications = (obj, callback) => {
 
 			notif.save( (err, doc) => {
 				if (err) console.log(err);
-				asyncLoop(i+1, subcallback);
+				asyncLoop(i + 1, subcallback);
 			});
 		} else {
 			subcallback(obj);
 		}
-	};
+	}
 	asyncLoop(0, (data) => {
 		callback(data);
 	});
@@ -31,7 +33,7 @@ exports.insertNotifications = (obj, callback) => {
 // Obtener notificaciones
 exports.getNotifications = (req, res) => {
 	let offset = req.query.offset ? parseInt(req.query.offset) : 0;
-	let promise = Notification.find({ sendTo: req.decode._id })
+	let promise = Notification.find({ sendTo: req.decoded._id })
 		.sort({'date': 'desc'}).skip(offset).limit(8)
 		.exec();
 
@@ -39,11 +41,11 @@ exports.getNotifications = (req, res) => {
 		return setUsers(doc);
 	}).then( (data) => {
 		setTimeout( () => {
-			res.status(200).json(data);
-		}, 1000)
+			return res.status(200).json({ success: true, message: settings.MESSAGES.SUCCESS, errors: null, result: data });
+		}, 1000);
 	}).catch( (err) => {
 		console.log(err);
-		res.status(404).send({ message: err })
+		return res.status(500).send({ success: false, message: settings.HTTP_ERROR_MESSAGES.INTERNAL_SERVER_ERROR, errors: err, result: null });
 	});
 };
 
@@ -52,13 +54,13 @@ exports.updateNotifStatus = (req, res) => {
 	let notifId = req.params.id;
 
 	Notification.findOneAndUpdate({ _id: notifId }, { 
-			$set: { read: req.body.status } 
-		}).exec()
+			$set: { read: req.body.status } })
+		.exec()
 		.then( (doc) => {
-			res.status(200).send({ message: 'Exito al cambiar status de notificación' });
+			return res.status(200).json({ success: true, message: settings.MESSAGES.SUCCESS, errors: null, result: null });
 		}).catch( (err) => {
 			console.log(err);
-			res.status(500).send({ message: err });
+			return res.status(500).send({ success: false, message: settings.HTTP_ERROR_MESSAGES.INTERNAL_SERVER_ERROR, errors: err, result: null });
 		});
 };
 
@@ -91,7 +93,7 @@ function setUsers(array) { // recive notif doc to change responsible users and g
 			} else {
 				callback(aux);
 			}
-		};
+		}
 		asyncLoop(0, (data) => {
 			if (data) resolve(data);
 			else reject('Error');

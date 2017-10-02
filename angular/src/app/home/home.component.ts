@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthGuard } from '../auth/auth.guard';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
 	selector: 'app-home',
@@ -9,7 +9,7 @@ import { AuthGuard } from '../auth/auth.guard';
 })
 export class HomeComponent implements OnInit {
 
-	constructor(private router: Router, private auth: AuthGuard) {
+	constructor(private router: Router, private auth: AuthService) {
 	}
 
 	ngOnInit() {

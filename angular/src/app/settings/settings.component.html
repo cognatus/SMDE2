@@ -1,57 +1,57 @@
-<app-confirmation [message]="" (onSelection)="doConfirmation($event)"></app-confirmation>
-<div class="page_container">
-	<div class="page_container_in min_res pt_16 pb_16">
-		<section class="left_grid">
-			<section class="border_b b_light pb_12">
-				<h2 class="title_small fc_secondary p_16">
+<app-confirmation [alert]="" (onSelection)="doConfirmation($event)"></app-confirmation>
+<div class="page-container">
+	<div class="page-container-in min-res pt-16 pb-16">
+		<section class="left-grid">
+			<section class="border-b b-light pb-12">
+				<h2 class="title-small fc-secondary p-16">
 					Cuenta
 				</h2>
-				<ul class="list fs_m">
-					<li class="p_12 pl_16 pr_16 hover">
+				<ul class="list fs-m">
+					<li class="p-12 pl-16 pr-16 hover">
 						Nombre
 					</li>
-					<li class="p_12 pl_16 pr_16 hover">
+					<li class="p-12 pl-16 pr-16 hover">
 						Correo
 					</li>
-					<li class="p_12 pl_16 pr_16 hover">
+					<li class="p-12 pl-16 pr-16 hover">
 						Teléfono
 					</li>
-					<li class="p_12 pl_16 pr_16 hover">
+					<li class="p-12 pl-16 pr-16 hover">
 						Dirección
 					</li>
 				</ul>
 			</section>
-			<section class="border_b b_light pt_4 pb_12">
-				<h2 class="title_small fc_secondary p_16">
+			<section class="border-b b-light pt-4 pb-12">
+				<h2 class="title-small fc-secondary p-16">
 					Notificaciones
 				</h2>
-				<ul class="list fs_m">
-					<li class="p_12 pl_16 pr_16 hover">
+				<ul class="list fs-m">
+					<li class="p-12 pl-16 pr-16 hover">
 						Aplicación
 					</li>
-					<li class="p_12 pl_16 pr_16 hover">
+					<li class="p-12 pl-16 pr-16 hover">
 						Correo
 					</li>
-					<li class="p_12 pl_16 pr_16 hover">
+					<li class="p-12 pl-16 pr-16 hover">
 						Sms
 					</li>
 				</ul>
 			</section>
-		</section><section class="right_grid">
-			<article class="bg_white border b_light border_radius">
+		</section><section class="right-grid">
+			<article class="bg-white border b-light border-radius">
 				<div>
-					<section class="p_24 border_b b_light">
-						<h1 class="title_medium fc_primary">Cuenta</h1>
-						<div class="p_8 mt_16">
-							<h2 class="title_smaller mb_16 fc_secondary">Nombre</h2>
+					<section class="p-24 border-b b-light">
+						<h1 class="title-medium fc-primary">Cuenta</h1>
+						<div class="p-8 mt-16">
+							<h2 class="title-smaller mb-16 fc-secondary">Nombre</h2>
 							<div class="field">
 								<input type="text" name="name" placeholder="Nombre" [(ngModel)]="user.name">
 							</div>
-							<div class="field mt_8">
+							<div class="field mt-8">
 								<input type="text" name="name" placeholder="Apellido" [(ngModel)]="user.lastName">
 							</div>
-							<div class="ta_r mt_12">
-								<input type="submit" class="btn btn_primary" value="Guardar Cambios">
+							<div class="align-right mt-12">
+								<input type="submit" class="btn btn-primary" value="Guardar Cambios">
 							</div>
 						</div>
 					</section>

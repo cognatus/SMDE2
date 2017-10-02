@@ -1,12 +1,26 @@
-<div class="pop_up_container confirmation" id="confirm-box" *ngIf="message" [@fade]>
-	<div class="pop_up_back"></div>
-	<div class="pop_up">
-		<div class="inner border_radius shadow_raised">
-			<div class="p_32">
-				<p class="title_small fc_opacity fw_n">{{ message }}</p>
-				<div class="mt_32 ta_r">
-					<button class="btn btn_cancel" (click)="cancel()">Cancelar</button>
-					<button class="btn btn_primary ml_8" (click)="accept()">Aceptar</button>
+<div class="pop-up-container confirmation" id="confirm-box">
+	<div class="pop-up-back"></div>
+	<div class="pop-up">
+		<div class="inner border-radius shadow-raised">
+			<div class="border-b b-light">
+				<div class="pop-up-title fc-opacity">
+					<h1 class="title">
+						{{ alert?.title }}
+					</h1>
+					<div class="close-button">
+						<button class="btn-icon hover" (click)="cancel()">
+							<span class="icon">
+								<i class="material-icons fc-opacity">arrow_back</i>
+							</span>
+						</button>
+					</div>
+				</div>
+			</div>
+			<div class="p-32">
+				<p class="title-small fc-opacity fw-n" [innerHTML]="alert?.body"></p>
+				<div class="mt-32 align-right">
+					<button class="btn btn-cancel" (click)="cancel()" *ngIf="alert?.cancel">Cancelar</button>
+					<button class="btn btn-primary ml-8" (click)="accept()">Aceptar</button>
 				</div>
 			</div>
 		</div>

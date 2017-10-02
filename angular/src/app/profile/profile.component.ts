@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
-import { AuthGuard } from '../auth/auth.guard';
+import { AuthService } from '../auth/auth.service';
 import { UserDetailService } from '../admin/user-detail/user-detail.service';
 import { ProfileService } from './profile.service';
 
@@ -15,7 +15,7 @@ import { Colors, USER_TYPES, formatedDate } from '../app.constants';
 	providers: [UserDetailService, ProfileService]
 })
 export class ProfileComponent implements OnInit {
-	USER_TYPES: string[] = USER_TYPES;
+	userTypes: string[] = USER_TYPES;
 	userId: string;
 	user = new User();
 	userSrc: string;
@@ -28,7 +28,7 @@ export class ProfileComponent implements OnInit {
 					 { album: 'profile', array: [], selected: '' },
 					 { album: 'other', array: [], selected: '' }];
 
-	constructor(private auth: AuthGuard, 
+	constructor(private auth: AuthService, 
 		private userDetailService: UserDetailService, 
 		private profileService: ProfileService, 
 		private location: Location, 

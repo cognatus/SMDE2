@@ -1,7 +1,7 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from '../auth/auth.guard';
+import { AuthService } from '../auth/auth.service';
 
 import { CourseDetailService } from './course-detail/course-detail.service';
 
@@ -16,11 +16,11 @@ const routes: Routes = [
     { 
     	path: '', 
     	component: CoursesComponent, 
-    	canActivate: [AuthGuard],
+    	canActivate: [AuthService],
     }, { 
     	path: ':id', 
     	component: CourseDetailComponent, 
-    	canActivate: [AuthGuard] 
+    	canActivate: [AuthService] 
     }
 ]
 

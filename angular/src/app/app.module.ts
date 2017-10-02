@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 
-import { AuthGuard } from './auth/auth.guard';
+import { AuthService } from './auth/auth.service';
 
 import { SharedModule } from './shared/shared.module';
 import { AdminModule } from './admin/admin.module';

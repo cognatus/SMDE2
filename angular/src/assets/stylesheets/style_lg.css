@@ -1,0 +1,220 @@
+@media (min-width: 992px) {
+  .col-lg {
+    -ms-flex-preferred-size: 0;
+        flex-basis: 0;
+    -ms-flex-positive: 1;
+        flex-grow: 1;
+    max-width: 100%;
+  }
+  .col-lg-auto {
+    -ms-flex: 0 0 auto;
+        flex: 0 0 auto;
+    width: auto;
+    max-width: none;
+  }
+  .col-lg-1 {
+    -ms-flex: 0 0 8.333333%;
+        flex: 0 0 8.333333%;
+    max-width: 8.333333%;
+  }
+  .col-lg-2 {
+    -ms-flex: 0 0 16.666667%;
+        flex: 0 0 16.666667%;
+    max-width: 16.666667%;
+  }
+  .col-lg-3 {
+    -ms-flex: 0 0 25%;
+        flex: 0 0 25%;
+    max-width: 25%;
+  }
+  .col-lg-4 {
+    -ms-flex: 0 0 33.333333%;
+        flex: 0 0 33.333333%;
+    max-width: 33.333333%;
+  }
+  .col-lg-5 {
+    -ms-flex: 0 0 41.666667%;
+        flex: 0 0 41.666667%;
+    max-width: 41.666667%;
+  }
+  .col-lg-6 {
+    -ms-flex: 0 0 50%;
+        flex: 0 0 50%;
+    max-width: 50%;
+  }
+  .col-lg-7 {
+    -ms-flex: 0 0 58.333333%;
+        flex: 0 0 58.333333%;
+    max-width: 58.333333%;
+  }
+  .col-lg-8 {
+    -ms-flex: 0 0 66.666667%;
+        flex: 0 0 66.666667%;
+    max-width: 66.666667%;
+  }
+  .col-lg-9 {
+    -ms-flex: 0 0 75%;
+        flex: 0 0 75%;
+    max-width: 75%;
+  }
+  .col-lg-10 {
+    -ms-flex: 0 0 83.333333%;
+        flex: 0 0 83.333333%;
+    max-width: 83.333333%;
+  }
+  .col-lg-11 {
+    -ms-flex: 0 0 91.666667%;
+        flex: 0 0 91.666667%;
+    max-width: 91.666667%;
+  }
+  .col-lg-12 {
+    -ms-flex: 0 0 100%;
+        flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
+
+@media (min-width: 992px) {
+	.page-container { margin-left: 56px;margin-right: 56px; }
+	.page-container .page-container-in { max-width: 1080px; }
+
+	.page-container.full { margin: 0; }
+	.page-container.full .page-container-in { max-width: 1080px; }
+
+	.page-container.full.s-t { margin: 32px;margin-top: 0; }
+
+	.page-container-in .left-grid {
+		width: 40%;
+		margin-right: 12px;
+		display: inline-block;
+		vertical-align: top;
+	}
+
+	.page-container-in .right-grid {
+		width: calc(60% - 12px);
+		display: inline-block;
+		vertical-align: top;
+	}
+
+	.h-selection .in.min {
+		margin-left: 0;
+		max-width: 580px;
+	}
+
+	.h-selection .item h3 {padding: 10px 14px;min-width: 132px;font-size: 19px;}
+
+	.increment-margin { margin: 24px;margin-top: 20px; }
+
+	.login-container .inner { margin: 64px auto; }
+
+	.app-bar-back { height: 57px; }
+
+	.app-bar { height: 56px; }
+
+	.app-bar .ad-lh { line-height: 54px; }
+
+	.app-bar .app-bar-inner .logo-container { width: 56px; }
+
+	.app-bar .app-bar-inner .searchbar-container { position: relative; }
+
+	.app-bar .app-bar-inner .searchbar-container .searchbar { width: 380px; }
+
+	.app-bar .app-bar-inner .searchbar-container .searchbar .field { margin-top: 8px; }
+
+	.app-bar .app-bar-inner .hidden-block-container .hidden-block { top: 64px; }
+
+	.app-bar .app-bar-inner .hidden-block-container.notif .hidden-block { width: 460px; }
+
+	.app-bar .app-bar-inner .bar-bottom { top: -56px; }
+
+	.app-bar .app-bar-inner .bar-bottom .menu .item { width: auto; }
+
+	.app-bar .app-bar-inner .bar-bottom .menu .item .inner span.label {
+		display: inline-block;
+	}
+
+	.app-bar .app-bar-inner .action-button button i.indicator {
+		top: 6px;
+		right: 6px;
+	}
+
+	.pop-up-container .pop-up {
+		margin: 32px auto;
+	}
+
+	.pop-up-container.gallery .pop-up {
+		height: calc(100% - 64px);
+	}
+
+	.pop-up-container .pop-up .inner .padding-block {
+		padding: 40px;
+	}
+
+	.pop-up-container .pop-up .inner .col-r .col-2 {
+		display: inline-block;
+		width: calc(50% - 8px);
+	}
+
+	.page-container-in .left-grid {
+		margin-right: 24px;
+		width: 35%;
+	}
+
+	.page-container-in .right-grid {
+		width: calc(65% - 24px);
+	}
+
+	.page-container-in .right-grid .course-navigation {
+		padding-top: 0;
+	}
+	.page-container-in .right-grid .course-navigation nav {
+		padding-left: 16px;
+		padding-right: 16px;
+	}
+
+	.page-container.full .resp-title {
+		padding-left: 0;
+		padding-right: 0;
+	}
+
+	.main-action-button {
+		margin-top: 0;
+		margin-bottom: 0;
+		padding-top: 24px;
+		padding-bottom: 24px;	
+	}
+
+	.col-r .col-3 {
+		width: 33.3333333%;
+	}
+
+	.profile-display {
+		height: 374px;
+	}
+
+	.admin-container .profile-display {
+		height: 360px;
+	}
+
+	.profile-display .profile-photo .inner {
+		padding: 16px 48px 24px 48px;
+	}
+
+	.profile-display .profile-photo .img-container {
+		width: 104px;
+		height: 104px;
+	}
+
+	.messages-container {
+		top: 57px;
+		height: calc(100% - 57px);
+	}
+
+	.messages-container .left-grid {
+		width: 392px;
+	}
+
+	.messages-container .right-grid {
+		width: calc(100% - 392px);
+	}
+}

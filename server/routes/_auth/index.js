@@ -11,7 +11,7 @@ exports.getAccessToken = (token, callback) => {
 	}
 }
 
-exports.generateToken = function(data, callback) {
+exports.generateToken = (data, callback) => {
 	// Use JWT for access tokens
 	var token = jwt.sign(data, settings.SECRET, {
 		expiresIn: settings.TOKEN_LIFETIME,
@@ -21,7 +21,7 @@ exports.generateToken = function(data, callback) {
 	callback(null, token);
 }
 
-exports.saveAccessToken = function (token, clientId, expires, userId, callback) {
+exports.saveAccessToken = (token, clientId, expires, userId, callback) => {
 	console.log('in saveAccessToken (token: ' + token +
 				', clientId: ' + clientId + ', userId: ' + userId.id +
 				', expires: ' + expires + ')');

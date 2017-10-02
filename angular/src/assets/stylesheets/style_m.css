@@ -1,0 +1,212 @@
+@media (min-width: 768px) {
+  .col-md {
+    -ms-flex-preferred-size: 0;
+        flex-basis: 0;
+    -ms-flex-positive: 1;
+        flex-grow: 1;
+    max-width: 100%;
+  }
+  .col-md-auto {
+    -ms-flex: 0 0 auto;
+        flex: 0 0 auto;
+    width: auto;
+    max-width: none;
+  }
+  .col-md-1 {
+    -ms-flex: 0 0 8.333333%;
+        flex: 0 0 8.333333%;
+    max-width: 8.333333%;
+  }
+  .col-md-2 {
+    -ms-flex: 0 0 16.666667%;
+        flex: 0 0 16.666667%;
+    max-width: 16.666667%;
+  }
+  .col-md-3 {
+    -ms-flex: 0 0 25%;
+        flex: 0 0 25%;
+    max-width: 25%;
+  }
+  .col-md-4 {
+    -ms-flex: 0 0 33.333333%;
+        flex: 0 0 33.333333%;
+    max-width: 33.333333%;
+  }
+  .col-md-5 {
+    -ms-flex: 0 0 41.666667%;
+        flex: 0 0 41.666667%;
+    max-width: 41.666667%;
+  }
+  .col-md-6 {
+    -ms-flex: 0 0 50%;
+        flex: 0 0 50%;
+    max-width: 50%;
+  }
+  .col-md-7 {
+    -ms-flex: 0 0 58.333333%;
+        flex: 0 0 58.333333%;
+    max-width: 58.333333%;
+  }
+  .col-md-8 {
+    -ms-flex: 0 0 66.666667%;
+        flex: 0 0 66.666667%;
+    max-width: 66.666667%;
+  }
+  .col-md-9 {
+    -ms-flex: 0 0 75%;
+        flex: 0 0 75%;
+    max-width: 75%;
+  }
+  .col-md-10 {
+    -ms-flex: 0 0 83.333333%;
+        flex: 0 0 83.333333%;
+    max-width: 83.333333%;
+  }
+  .col-md-11 {
+    -ms-flex: 0 0 91.666667%;
+        flex: 0 0 91.666667%;
+    max-width: 91.666667%;
+  }
+  .col-md-12 {
+    -ms-flex: 0 0 100%;
+        flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
+
+@media (min-width: 768px) {
+	.page-container { margin-left: 40px;margin-right: 40px; }
+	.page-container .page-container-in { max-width: 1024px; }
+
+	.page-container.full { margin: 0; }
+	.page-container.full .page-container-in { max-width: none; }
+
+	.page-container-in.min-res .left-grid {
+		width: 35% !important;
+		margin: 0 !important;
+		display: inline-block;
+		vertical-align: top;
+	}
+
+	.page-container-in.min-res .right-grid {
+		width: 65% !important;
+		display: inline-block;
+		vertical-align: top;
+	}
+
+	.increment-margin { margin: 16px; }
+
+	.login-container .inner { margin: 48px auto; }
+
+	.app-bar-back { height: 51px; }
+
+	.app-bar { height: 50px; }
+
+	.app-bar .app-bar-inner .logo-container { width: 50px; }
+
+	.app-bar .app-bar-inner .bar-top, .app-bar .app-bar-inner .bar-bottom { height: 100%; }
+
+	.app-bar .app-bar-inner .hidden-block-container.notif .hidden-block {
+		right: 0;
+		width: 430px;
+	}
+
+	.app-bar .app-bar-inner .hidden-block-container.notif .hidden-block i.mark {
+		right: 16px;
+	}
+
+	.app-bar .app-bar-inner .bar-bottom {
+		position: relative;
+		float: left;
+		top: -50px;
+		left: 64px;
+		width: auto;
+		display: inline-block;
+	}
+
+	.app-bar .app-bar-inner .bar-bottom .menu .item {
+		width: 50px;
+	}
+
+	.app-bar .app-bar-inner .bar-bottom .menu .item a {
+		padding-left: 12px;
+		padding-right: 12px;
+	}
+
+	.pop-up-container .pop-up {
+		margin: 32px auto;
+	}
+
+	.pop-up-container.big .pop-up {
+		width: calc(100% - 64px);
+	}
+
+	.pop-up-container.gallery .pop-up {
+		margin: 24px auto;
+		width: calc(100% - 64px);
+		height: calc(100% - 48px);
+		border-radius: 4px;
+	}
+
+	.pop-up-container .pop-up .inner .padding-block {
+		padding: 32px;
+	}
+
+	.pop-up-container .pop-up .inner .col-r .col-2 {
+		width: auto;
+		display: block;
+	}
+
+	.col-r .col-2, .col-r .col-3 {
+		width: 50%;
+		display: inline-block;
+		vertical-align: top;
+	}
+
+	.page-container .resp-title {
+		padding-left: 0;
+		padding-right: 0;
+		margin-left: 0;
+		margin-right: 0;
+	}
+
+	.page-container.full .resp-title {
+		padding: 16px;
+	}
+
+	.profile-display {
+		height: 340px;
+	}
+
+	.profile-display .profile-photo .inner {
+		padding: 16px 32px 24px 32px;
+	}
+
+	.profile-display .profile-photo .img-container {
+		width: 96px;
+		height: 96px;
+	}
+
+	.profile-display .background .editable {
+		top: 24px;
+		left: 24px;
+	}
+
+	.messages-container {
+		top: 51px;
+		height: calc(100% - 51px);
+	}
+
+	.messages-container .left-grid {
+		width: 40%;
+		display: inline-block;
+		vertical-align: top;
+	}
+
+	.messages-container .right-grid {
+		width: 60%;
+		display: inline-block;
+		vertical-align: top;
+	}
+
+}

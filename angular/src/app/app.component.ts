@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthGuard } from './auth/auth.guard'; 
+import { AuthService } from './auth/auth.service'; 
 
 @Component({
   selector: 'app-root',
@@ -8,5 +8,5 @@ import { AuthGuard } from './auth/auth.guard';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent { 
-	constructor(public router: Router, private auth: AuthGuard) {}
+	constructor(public router: Router, private auth: AuthService) {}
 }

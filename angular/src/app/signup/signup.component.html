@@ -1,74 +1,74 @@
-<div class="login_container max">
+<div class="login-container max">
 	<div class="inner">
-		<section class="logo_container ta_c mb_24">
-			<img src="assets/icons/logo.png" class="icon big va_m mr_16"><span class="va_m">
-				<h1 class="fc_primary title_big fw_300">SMDE</h1>
+		<section class="logo-container align-center mb-24">
+			<img src="assets/icons/logo.png" class="icon big va-m mr-16"><span class="va-m">
+				<h1 class="fc-primary title-big fw-300">SMDE</h1>
 			</span>
 		</section>
-		<article class="bg_white border b_light border_radius">
-			<div class="p_24">
-				<div class="title_container ta_c">
-					<h2 class="title_big pt_8 fc_secondary fw_300">Registrarse</h2>
+		<article class="bg-white border b-light border-radius">
+			<div class="p-24">
+				<div class="title-container align-center">
+					<h2 class="title-big pt-8 fc-secondary fw-300">Registrarse</h2>
 				</div>
 				<form (submit)="signup()">
-					<div class="pt_40">
-						<div class="icon_field">
+					<div class="pt-40">
+						<div class="icon-field">
 							<div class="field">
-								<img src="assets/icons/account_black.png" class="icon opacity">
-								<label class="opacity fw_b fs_s">Nombre(s)</label>
+								<img src="assets/icons/account-black.png" class="icon opacity">
+								<label class="opacity fw-b fs-s">Nombre(s)</label>
 								<input type="text" [(ngModel)]="user.name" name="name" placeholder="Nombre(s)">
 							</div>
-							<div class="field mt_8">
-								<img src="assets/icons/account_black.png" class="icon opacity">
-								<label class="opacity fw_b fs_s">Apellidos</label>
+							<div class="field mt-8">
+								<img src="assets/icons/account-black.png" class="icon opacity">
+								<label class="opacity fw-b fs-s">Apellidos</label>
 								<input type="text" [(ngModel)]="user.lastName" name="lastName" placeholder="Apellidos">
 							</div>
-							<div class="field mt_8">
-								<img src="assets/icons/email_black.png" class="icon opacity">
-								<label class="opacity fw_b fs_s">Correo Electrónico</label>
+							<div class="field mt-8">
+								<img src="assets/icons/email-black.png" class="icon opacity">
+								<label class="opacity fw-b fs-s">Correo Electrónico</label>
 								<input type="text" [(ngModel)]="user.mail" name="mail" placeholder="Correo Electrónico">
 							</div>
-							<div class="field mt_8">
-								<img src="assets/icons/account_black.png" class="icon opacity">
-								<label class="opacity fw_b fs_s">Nombre de usuario</label>
+							<div class="field mt-8">
+								<img src="assets/icons/account-black.png" class="icon opacity">
+								<label class="opacity fw-b fs-s">Nombre de usuario</label>
 								<input type="text" [(ngModel)]="user.nick" name="nick" placeholder="Nombre de Usuario">
 							</div>
-							<div class="field mt_8">
-								<img src="assets/icons/phone_black.png" class="icon opacity">
-								<label class="opacity fw_b fs_s">Teléfono</label>
+							<div class="field mt-8">
+								<img src="assets/icons/phone-black.png" class="icon opacity">
+								<label class="opacity fw-b fs-s">Teléfono</label>
 								<input type="text" [(ngModel)]="user.phone" name="phone" placeholder="Teléfono">
 							</div>
-							<div class="field mt_8">
-								<img src="assets/icons/calendar_black.png" class="icon opacity">
-								<label class="opacity fw_b fs_s">Fecha de nacimiento</label>
+							<div class="field mt-8">
+								<img src="assets/icons/calendar-black.png" class="icon opacity">
+								<label class="opacity fw-b fs-s">Fecha de nacimiento</label>
 								<input type="text" [(ngModel)]="user.birthDay" name="birthDay" placeholder="Fecha de nacimiento (dd/mm/yyyy)">
 							</div>
-							<div class="field mt_8">
-								<img src="assets/icons/account_black.png" class="icon opacity">
-								<label class="opacity fw_b fs_s">Tipo de Usuario</label>
+							<div class="field mt-8">
+								<img src="assets/icons/account-black.png" class="icon opacity">
+								<label class="opacity fw-b fs-s">Tipo de Usuario</label>
 								<select [(ngModel)]="user.privilege" name="userType">
-									<option *ngFor="let t of USER_TYPES; let i = index" [value]="i">{{ t }}</option>
+									<option *ngFor="let t of USER-TYPES; let i = index" [value]="i">{{ t }}</option>
 								</select>
 							</div>												
-							<div class="field mt_8">
-								<img src="assets/icons/lock_black.png" class="icon opacity">
-								<label class="opacity fw_b fs_s">Contraseña</label>
+							<div class="field mt-8">
+								<img src="assets/icons/lock-black.png" class="icon opacity">
+								<label class="opacity fw-b fs-s">Contraseña</label>
 								<input type="password" [(ngModel)]="user.password" name="password" placeholder="Contraseña">
 							</div>
-							<div class="field mt_8">
-								<img src="assets/icons/lock_black.png" class="icon opacity">
-								<label class="opacity fw_b fs_s">Confirmar Contraseña</label>
+							<div class="field mt-8">
+								<img src="assets/icons/lock-black.png" class="icon opacity">
+								<label class="opacity fw-b fs-s">Confirmar Contraseña</label>
 								<input type="password" [(ngModel)]="passwordConfirm" name="passwordConfirm" placeholder="Contraseña">
 							</div>
 						</div>
 					</div>
-					<div class="pt_16">
-						<input type="submit" value="Registrarse" class="btn btn_primary btn_full">
+					<div class="pt-16">
+						<input type="submit" value="Registrarse" class="btn btn-primary btn-full">
 					</div>
 				</form>
-				<div class="pt_24 ta_r">
+				<div class="pt-24 align-right">
 					<a routerLink="/login">
-						<button class="btn bg_trans_secondary">
+						<button class="btn bg-trans-secondary">
 							Iniciar Sesión
 						</button>
 					</a>

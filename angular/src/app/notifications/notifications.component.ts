@@ -1,11 +1,11 @@
 import { Component, OnInit, ElementRef, ViewChild, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { NotificationsService } from './notifications.service';
-import { AuthGuard } from '../auth/auth.guard';
+import { AuthService } from '../auth/auth.service';
 
 import { Notification } from '../_models/notification';
 import { User } from '../_models/user'; 
-import { Colors, NOTIFICATION_TEXTS } from '../app.constants';
+import { Colors, NOTIFICATION_TEXTS, MEDIA_HOST } from '../app.constants';
 
 import { toggleHeight } from '../_animations/toggleSize';
 
@@ -16,13 +16,14 @@ import { toggleHeight } from '../_animations/toggleSize';
 	providers: [NotificationsService]
 })
 export class NotificationsComponent implements OnInit {
+	mediaSrc = MEDIA_HOST;
 	notifications: Notification[] = [];
 	disableScrollDown: boolean = false;
 	countScroll: number = 0;
 	offset: number = 8;
 	isLoading: boolean;
 	
-	constructor(private auth: AuthGuard, 
+	constructor(private auth: AuthService, 
 		private notifService: NotificationsService,
 		private router: Router) {}
 
@@ -33,7 +34,6 @@ export class NotificationsComponent implements OnInit {
 	@HostListener('scroll', ['$event'])
 	onScroll(event: Event): void {
 		if ( this.scrolledBottom(event.target) ) {
-			this.countScroll++;
 			this.fetchNotif();
 		}
 	}
@@ -46,6 +46,7 @@ export class NotificationsComponent implements OnInit {
 		this.isLoading = true;
 		this.notifService.getNotifications(this.offset*this.countScroll)
 			.subscribe( resp => {
+				if ( resp && resp.length > 0 ) this.countScroll++;
 				for ( let notif of resp ) {
 					this.notifications.push(notif);
 				}

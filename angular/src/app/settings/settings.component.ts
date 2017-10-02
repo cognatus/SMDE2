@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthGuard } from '../auth/auth.guard';
+import { AuthService } from '../auth/auth.service';
 
 import { User } from '../_models/user'; 
 
@@ -11,7 +11,7 @@ import { User } from '../_models/user';
 export class SettingsComponent implements OnInit {
 	user: User;
 
-	constructor(private auth: AuthGuard) {
+	constructor(private auth: AuthService) {
 		this.user = this.auth.getUser();
 	}
 

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { AuthGuard } from '../../auth/auth.guard';
+import { AuthService } from '../../auth/auth.service';
 
 import { Colors } from '../../app.constants';
 
@@ -12,7 +12,7 @@ export class ContentsComponent implements OnInit {
 	colors = new Colors();
 	@Input() owner: string;
 
-	constructor(private auth: AuthGuard) {}
+	constructor(private auth: AuthService) {}
 
 	ngOnInit() {
 	}

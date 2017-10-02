@@ -1,5 +1,5 @@
-<div class="pb_16">
-	<button class="btn bg_trans_secondary">
+<div class="pb-16">
+	<button class="btn bg-green bg-trans-secondary">
 		<span class="icon">
 			<i class="material-icons">add</i>
 		</span><span class="text">Nuevo</span>
@@ -7,69 +7,69 @@
 </div>
 <div class="list">
 	<article>
-		<div class="resp_item bg_white border b_light border_radius mb_16">
-			<div class="list_element">
+		<div class="border-b border-t b-light border-radius mb-16">
+			<div class="list-element">
 				<div class="ref">
-					<span class="fc_white" [style.backgroundColor]="colors.getColor('Contenido')">
-						<label class="title_smaller size_24">C</label>
+					<span class="fc-white" [style.backgroundColor]="colors.getColor('Contenido')">
+						<label class="title-smaller size-24">C</label>
 					</span>
 				</div><div class="info">
-					<div class="p_16">
-						<h3 class="fw_n mb_4">
+					<div class="p-16">
+						<h3 class="fw-n mb-4">
 							Contenido
 						</h3>
-						<p class="fc_opacity">
-							<b class="fw_500">Creado el dd/mm/yyyy</b>
+						<p class="fc-opacity">
+							<b class="fw-500">Creado el dd/mm/yyyy</b>
 						</p>
 					</div>
 				</div>
 			</div>
-			<div class="ta_r p_12 pr_16" *ngIf="auth.getUser()._id == owner">
-				<button class="btn bg_trans_secondary float_left" onclick="showPopup(true, '#add-subcontent')">
-					<span class="icon small">
+			<div class="align-right p-12 pr-16" *ngIf="auth.getUser()._id == owner">
+				<button class="btn bg-trans-secondary float-left" onclick="showPopup(true, '#add-subcontent')">
+					<span class="icon">
 						<i class="material-icons">add</i>
 					</span><span class="text">Agregar Tema</span>
 				</button>
-				<button class="btn_icon hover" title="Editar">
+				<button class="btn-icon hover" title="Editar">
 					<span class="icon">
 						<i class="material-icons">mode_edit</i>
 					</span><!-- <span class="text">Editar</span> -->
 				</button>
-				<button class="btn_icon bg_trans_red" title="Eliminar">
+				<button class="btn-icon bg-trans-red" title="Eliminar">
 					<span class="icon">
 						<i class="material-icons">delete</i>
 					</span><!-- <span class="text">Eliminar</span> -->
 				</button>
 			</div>
-			<div class="p_24 pt_0 mt_16">
-				<p class="fs_b">Lorem ipsum</p>
+			<div class="p-24 pt-0 mt-16">
+				<p class="fs-b">Lorem ipsum</p>
 			</div>
-			<div class="pl_16">
+			<div class="pl-16">
 				<section>
-					<div class="title_smaller fc_opacity mb_4">Temas</div>
+					<div class="title-smaller fc-opacity mb-4">Temas</div>
 					<div>
-						<div class="list_element hover">
+						<div class="list-element hover">
 							<div class="ref">
-								<span class="fc_white mini" [style.backgroundColor]="colors.getColor('1')">
-									<label class="title_smaller size_24">1</label>
+								<span class="fc-white mini" [style.backgroundColor]="colors.getColor('1')">
+									<label class="title-smaller size-24">1</label>
 								</span>
 							</div><div class="info">
-								<div class="p_16">
-									<div class="col_a va_m">
-										<h3 class="fw_n mb_4">
+								<div class="p-16">
+									<div class="col-auto va-m">
+										<h3 class="fw-n mb-4">
 											Tema
 										</h3>
-										<p class="fc_opacity">
-											<b class="fw_500">Subido el dd/mm/yyyy</b>
+										<p class="fc-opacity">
+											<b class="fw-500">Subido el dd/mm/yyyy</b>
 										</p>
 									</div>
-									<div class="col_a va_m float_right" *ngIf="auth.getUser()._id == owner">
-										<button class="btn_icon hover">
+									<div class="col-auto va-m float-right" *ngIf="auth.getUser()._id == owner">
+										<button class="btn-icon hover">
 											<span class="icon small">
 												<i class="material-icons">mode_edit</i>
 											</span><!-- <span class="text">Editar</span> -->
 										</button>
-										<button class="btn_icon hover">
+										<button class="btn-icon hover">
 											<span class="icon small">
 												<i class="material-icons">delete</i>
 											</span><!-- <span class="text">Eliminar</span> -->
@@ -78,39 +78,39 @@
 								</div>
 							</div>
 						</div>
-						<div class="pl_12">
-							<div class="border_l b_gray b_2">
-								<p class="fs_m p_16">Lorem ipsum</p>
+						<div class="pl-12">
+							<div class="border-l b-gray b-2">
+								<p class="fs-m p-16">Lorem ipsum</p>
 							</div>
 						</div>
 					</div>
 				</section>
-				<section class="pt_16">
-					<div class="fs_b fc_opacity mb_4">Archivos</div>
-					<div class="list_element hover">
+				<section class="pt-16">
+					<div class="fs-b fc-opacity mb-4">Archivos</div>
+					<div class="list-element hover">
 						<div class="ref">
-							<span class="fc_white mini" [style.backgroundColor]="colors.getColor('2')">
-								<label class="title_smaller size_24">
+							<span class="fc-white mini" [style.backgroundColor]="colors.getColor('2')">
+								<label class="title-smaller size-24">
 									<i class="material-icons">insert_drive_file</i>
 								</label>
 							</span>
 						</div><div class="info">
-							<div class="p_16">
-								<div class="col_a va_m">
-									<h3 class="fw_n mb_4">
+							<div class="p-16">
+								<div class="col-auto va-m">
+									<h3 class="fw-n mb-4">
 										Documento
 									</h3>
-									<p class="fc_opacity">
-										<b class="fw_500">Creado el dd/mm/yyyy</b>
+									<p class="fc-opacity">
+										<b class="fw-500">Creado el dd/mm/yyyy</b>
 									</p>
 								</div>
-								<div class="col_a va_m float_right">
-									<button class="btn_icon hover" title="Descargar">
+								<div class="col-auto va-m float-right">
+									<button class="btn-icon hover" title="Descargar">
 										<span class="icon small">
 											<i class="material-icons">file_download</i>
 										</span><!-- <span class="text">Editar</span> -->
 									</button>
-									<button class="btn_icon hover" *ngIf="auth.getUser()._id == owner">
+									<button class="btn-icon hover" *ngIf="auth.getUser()._id == owner">
 										<span class="icon small" title="Eliminar">
 											<i class="material-icons">delete</i>
 										</span><!-- <span class="text">Eliminar</span> -->

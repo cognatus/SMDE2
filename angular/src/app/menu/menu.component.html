@@ -1,18 +1,18 @@
-<section class="app_bar_back"></section>
-<section class="app_bar border_b b_gray">
-	<div class="app_bar_inner">
-		<div class="bar_top">
-			<div class="action_button ad_lh">
+<section class="app-bar-back"></section>
+<section class="app-bar border-b b-gray">
+	<div class="app-bar-inner">
+		<div class="bar-top">
+			<div class="action-button ad-lh">
 				<a routerLink="/">
-					<div class="col_a logo_container hover">
-						<img class="icon va_m" src="assets/icons/logo.png">
+					<div class="col-auto logo-container hover">
+						<img class="icon va-m" src="assets/icons/logo.png">
 					</div>
 				</a>
 			</div>
-			<div class="float_right full_h">
-				<div class="action_button ad_lh searchbar_container">
-					<button class="btn_icon ml_4 mr_4 hover" id="search-icon" title="Buscar" onclick="showSearchBar(true)">
-						<img class="icon va_m" src="assets/icons/magnify_black.png">
+			<div class="float-right full-h">
+				<div class="action-button ad-lh searchbar-container">
+					<button class="btn-icon ml-4 mr-4 hover" id="search-icon" title="Buscar" onclick="showSearchBar(true)">
+						<img class="icon va-m" src="assets/icons/magnify_black.png">
 					</button>
 					<div class="searchbar" id="search-bar">
 						<div class="field">
@@ -25,55 +25,55 @@
 							<input id="search-bar-input" type="text" placeholder="Buscar">
 						</div>
 					</div>
-				</div><div class="action_button ad_lh">
-					<a href="/mensajes" class="va_m">
-						<button class="btn_icon ml_4 mr_4 hover" id="msm-open-button" title="Abrir Mensajes">
-							<img class="icon va_m" src="assets/icons/email_black.png">
+				</div><div class="action-button ad-lh">
+					<a href="/mensajes" class="va-m">
+						<button class="btn-icon ml-4 mr-4 hover" id="msm-open-button" title="Abrir Mensajes">
+							<img class="icon va-m" src="assets/icons/email_black.png">
 						</button>
 					</a>
-				</div><div class="action_button ad_lh hidden_block_container notif">
+				</div><div class="action-button ad-lh hidden-block-container notif">
 					<app-notifications></app-notifications>
-				</div><div class="col_a va_t hidden_block_container prof_container ad_lh pl_16 pr_16 hover" id="menu-pphoto">
-					<div class="img_container border_radius col_a size_32 va_m cursor_pointer">
-						<img [src]="user.profilePhoto ? '/media/'+user._id+'/profile/'+user.profilePhoto : 'assets/icons/default_profile.png'">
-					</div><span class="ml_8 name fw_500 va_m">{{ user.name }}</span>
-					<div class="hidden_block" id="options-mini">
-						<i class="mark bg_white"></i>
-						<div class="bg_white border b_gray shadow_raised border_radius">
-							<section class="mm_section border_b b_light pt_12 pb_12 z_2 bg_white">
-								<div class="pl_16 pr_16 fc_opacity">
-									<p class="fs_s">Iniciado con:</p>
-									<p class="fw_b mt_4">{{ user.mail }}</p>
+				</div><div class="va-t hidden-block-container prof-container ad-lh pl-16 pr-16 hover" id="menu-pphoto">
+					<div class="img-container circle size-32 va-m cursor-pointer">
+						<img [src]="user.profilePhoto ? userSrc + '/profile/'+user.profilePhoto : 'assets/icons/default-profile.png'">
+					</div><span class="ml-8 name fw-500 va-m">{{ user.name }}</span>
+					<div class="hidden-block" id="options-mini">
+						<i class="mark bg-white"></i>
+						<div class="bg-white border b-gray shadow-raised border-radius">
+							<section class="mm-section border-b b-light pt-12 pb-12 z-2 bg-white">
+								<div class="pl-16 pr-16 fc-opacity">
+									<p class="fs-s">Iniciado con:</p>
+									<p class="fw-b mt-4">{{ user.mail }}</p>
 								</div>
 							</section>
-							<section class="mm_section border_b b_light pt_8 pb_8 fw_n fc_gray">
-								<a href="/perfil" routerLinkActive="fc_primary">
-									<div class="p_8 pl_16 pr_16 hover">
-										<span class="va_m icon small">
+							<section class="mm-section border-b b-light pt-8 pb-8 fw-n fc-gray">
+								<a href="/perfil" routerLinkActive="fc-primary">
+									<div class="p-8 pl-16 pr-16 hover">
+										<span class="va-m icon small">
 											<i class="material-icons">&#xE853;</i>
-										</span><span class="va_m ml_12">Cuenta</span>
+										</span><span class="va-m ml-12">Cuenta</span>
 									</div>
 								</a>
-								<a routerLink="/ayuda" routerLinkActive="fc_blue">
-									<div class="p_8 pl_16 pr_16 hover">
-										<span class="va_m icon small">
+								<a routerLink="/ayuda" routerLinkActive="fc-blue">
+									<div class="p-8 pl-16 pr-16 hover">
+										<span class="va-m icon small">
 											<i class="material-icons">help</i>
-										</span><span class="va_m ml_12">Ayuda</span>
+										</span><span class="va-m ml-12">Ayuda</span>
 									</div>
 								</a>
-								<a href="/ajustes" routerLinkActive="fc_blue">
-									<div class="p_8 pl_16 pr_16 hover">
+								<a href="/ajustes" routerLinkActive="fc-blue">
+									<div class="p-8 pl-16 pr-16 hover">
 										<p>
-											<span class="va_m icon small">
+											<span class="va-m icon small">
 												<i class="material-icons">settings</i>
-											</span><span class="va_m ml_12">Ajustes</span>
+											</span><span class="va-m ml-12">Ajustes</span>
 										</p>
 									</div>
 								</a>
 							</section>
-							<section class="mm_section pt_4 pb_4">
-								<button class="w_100 fc_red bg_trans_red" (click)="logout()">
-									<div class="p_8 fw_b">Cerrar Sesión</div>
+							<section class="mm-section pt-4 pb-4">
+								<button class="w-100 fc-red bg-trans-red" (click)="logout()">
+									<div class="p-8 fw-b">Cerrar Sesión</div>
 								</button>
 							</section>
 						</div>
@@ -81,54 +81,54 @@
 				</div>
 			</div>
 		</div>
-		<div class="bar_bottom">
+		<div class="bar-bottom">
 			<div class="menu">
-				<nav class="item hover ad_lh" *ngIf="user.privilege != 0">
-					<a routerLink="/cursos" routerLinkActive="fc_primarydark">
+				<nav class="item hover ad-lh" *ngIf="user.privilege != 0">
+					<a routerLink="/cursos" routerLinkActive="fc-primarydark">
 						<div class="inner">
-							<span class="icon va_m">
+							<span class="icon va-m">
 								<i class="material-icons">book</i>
-							</span><span class="va_m ml_8 label">
+							</span><span class="va-m ml-8 label">
 								Cursos
 							</span>
 						</div>
 					</a>
-				</nav><nav class="item hover ad_lh" *ngIf="user.privilege == 0">
-					<a routerLink="/admin" routerLinkActive="fc_primarydark">
+				</nav><nav class="item hover ad-lh" *ngIf="user.privilege == 0">
+					<a routerLink="/admin" routerLinkActive="fc-primarydark">
 						<div class="inner">
-							<span class="icon va_m">
+							<span class="icon va-m">
 								<i class="material-icons">mode_edit</i>
-							</span><span class="va_m ml_8 label">
+							</span><span class="va-m ml-8 label">
 								Administrador
 							</span>
 						</div>
 					</a>
-				</nav><nav class="item hover ad_lh">
-					<a routerLink="/agenda" routerLinkActive="fc_primarydark">
+				</nav><nav class="item hover ad-lh">
+					<a routerLink="/agenda" routerLinkActive="fc-primarydark">
 						<div class="inner">
-							<span class="icon va_m">
+							<span class="icon va-m">
 								<i class="material-icons">event</i>
-							</span><span class="va_m ml_8 label">
+							</span><span class="va-m ml-8 label">
 								Agenda
 							</span>
 						</div>
 					</a>
-				</nav><nav class="item hover ad_lh">
-					<a routerLink="/foro" routerLinkActive="fc_primarydark">
+				</nav><nav class="item hover ad-lh">
+					<a routerLink="/foro" routerLinkActive="fc-primarydark">
 						<div class="inner">
-							<span class="icon va_m">
+							<span class="icon va-m">
 								<i class="material-icons">forum</i>
-							</span><span class="va_m ml_8 label">
+							</span><span class="va-m ml-8 label">
 								Foro
 							</span>
 						</div>
 					</a>
-				</nav><nav class="item hover ad_lh">
-					<a routerLink="/contenidos" routerLinkActive="fc_primarydark">
+				</nav><nav class="item hover ad-lh">
+					<a routerLink="/contenidos" routerLinkActive="fc-primarydark">
 						<div class="inner">
-							<span class="icon va_m">
+							<span class="icon va-m">
 								<i class="material-icons">&#xE02F;</i>
-							</span><span class="va_m ml_8 label">
+							</span><span class="va-m ml-8 label">
 								Contenidos
 							</span>
 						</div>

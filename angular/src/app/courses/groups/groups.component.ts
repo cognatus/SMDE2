@@ -1,12 +1,12 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { AuthGuard } from '../../auth/auth.guard';
+import { AuthService } from '../../auth/auth.service';
 
 import { CourseDetailComponent } from '../course-detail/course-detail.component';
 import { CourseDetailService } from '../course-detail/course-detail.service';
 
 import { Group } from '../../_models/group';
 import { User } from '../../_models/user';
-import { Colors } from '../../app.constants';
+import { MEDIA_HOST, Colors } from '../../app.constants';
 
 import { toggleSize } from '../../_animations/toggleSize';
 import { slideReverse, slide } from '../../_animations/slide';
@@ -19,11 +19,11 @@ import { fade } from '../../_animations/fade';
 	animations: [toggleSize, slide, slideReverse, fade]
 })
 export class GroupsComponent implements OnInit {
-
 	@Input() course: string;
 	@Input() groups: Group[];
 	@Input() members: any[];
 	@Output() onUpdate = new EventEmitter<boolean>();
+	mediaSrc = MEDIA_HOST;
 	colors = new Colors();
 	selectedGroup: any;
 	alertMessage: string;
@@ -34,7 +34,7 @@ export class GroupsComponent implements OnInit {
 	};
 
 	constructor(private courseDetailService: CourseDetailService, 
-		private auth: AuthGuard) {
+		private auth: AuthService) {
 	}
 
 	ngOnInit() {

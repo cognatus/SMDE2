@@ -4,7 +4,9 @@ import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
-import { AuthGuard } from '../auth/auth.guard';
+import { AuthService } from '../auth/auth.service';
+import { AuthHttp } from '../_common/AuthHttp';
+
 import { ConfirmationComponent } from '../confirmation/confirmation.component';
 import { MenuComponent } from '../menu/menu.component';
 import { NotificationsComponent } from '../notifications/notifications.component';
@@ -37,6 +39,6 @@ import { FormatDatePipe } from '../_pipes/formatdate';
 		MenuComponent,
 		NotificationsComponent
 	],
-	providers: [ AuthGuard ]
+	providers: [ AuthService, AuthHttp ]
 })
 export class SharedModule { }

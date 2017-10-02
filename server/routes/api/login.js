@@ -7,7 +7,7 @@ exports.login = (req, res) => {
 	let username = req.body.user;
 	let password = req.body.password;
 
-	User.findOne({ mail: username, password: password })
+	User.findOne({ $or:[ {'mail': username }, {'nick': username }], password: password })
 		.select('-password')
 		.exec()
 		.then( doc => {

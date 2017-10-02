@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { AuthGuard } from '../../auth/auth.guard';
+import { AuthService } from '../../auth/auth.service';
 import { UserDetailService } from './user-detail.service';
 import 'rxjs/add/operator/switchMap';
 
@@ -19,7 +19,7 @@ export class UserDetailComponent implements OnInit {
 	user= new User;
 	formatedUserBirth: string;
 
-	constructor(private router: Router, private auth: AuthGuard, private activatedRoute: ActivatedRoute, private userDetailService: UserDetailService) {
+	constructor(private router: Router, private auth: AuthService, private activatedRoute: ActivatedRoute, private userDetailService: UserDetailService) {
 		this.USER_TYPES = USER_TYPES;
 		/*this.activatedRoute.params.subscribe((params: Params) => {
         	this.userId = params['id'];

@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
-import { AuthGuard } from '../auth/auth.guard';
+import { AuthService } from '../auth/auth.service';
 import { CoursesService } from '../courses/courses.service';
 
 import { Course } from '../_models/course';
 import { User } from '../_models/user';
-import { USER_TYPES, replaceCharacters, Colors } from '../app.constants';
+import { MEDIA_HOST, USER_TYPES, replaceCharacters, Colors } from '../app.constants';
 import { toggleSize } from '../_animations/toggleSize';
 
 @Component({
@@ -17,6 +17,7 @@ import { toggleSize } from '../_animations/toggleSize';
 	animations: [toggleSize]
 })
 export class CoursesComponent implements OnInit {
+	mediaSrc = MEDIA_HOST;
 	groupActive: boolean;
 	user = new User;
 	course = new Course;
@@ -28,7 +29,7 @@ export class CoursesComponent implements OnInit {
 	error: string = '';
 	colors = new Colors;
 
-	constructor(private coursesService: CoursesService, private location: Location, private router: Router, private auth: AuthGuard) {
+	constructor(private coursesService: CoursesService, private location: Location, private router: Router, private auth: AuthService) {
 		this.course.user = this.auth.getUser();
 		this.course.tags = [];
 	}

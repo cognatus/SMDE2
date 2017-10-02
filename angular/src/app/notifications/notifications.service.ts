@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, RequestOptions } from '@angular/http';
-import { ContentHeaders } from '../common/headers';
+import { AuthHttp } from '../_common/AuthHttp';
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
@@ -11,29 +11,28 @@ import { Notification } from '../_models/notification';
 @Injectable()
 export class NotificationsService {
 	url = API_URL + 'notif';
-	constructor(private http: Http) {}
+	constructor(private authHttp: AuthHttp) {}
 
 	getNotifications(offset?: number): Observable<Notification[]> {
-		return this.http.get(this.url + '?offset=' + offset)
+		return this.authHttp.get(this.url + '?offset=' + offset)
 			.map(this.extractData)
 			.catch(this.handleError);
 	}
 
 	setRead(id: string, userId: string, status: boolean): Observable<Notification> {
-        let options = new RequestOptions({ headers: ContentHeaders });
         let data = {
         	user: userId,
         	notif: id,
         	status: status
         }
 
-        return this.http.put(this.url + '/' + id, data, options)
+        return this.authHttp.put(this.url + '/' + id, data)
             .map(this.extractData)
             .catch(this.handleError);
     }
 
 	private extractData(res: Response) {
-		let body = res.json();
+		let body = res.json().result;
 		return body || {};
 	}
 

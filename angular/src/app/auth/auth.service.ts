@@ -8,7 +8,7 @@ import { API_URL } from '../app.constants';
 import { User } from '../_models/user';
 
 @Injectable()
-export class AuthGuard implements CanActivate {
+export class AuthService implements CanActivate {
 
 	constructor(private router: Router, private http: Http) {
 		/*console.log(localStorage.getItem('currentUser'));*/

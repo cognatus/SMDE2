@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthGuard } from '../auth/auth.guard'; 
+import { AuthService } from '../auth/auth.service'; 
 
 @Component({
 	selector: 'app-messages',
@@ -9,7 +9,7 @@ import { AuthGuard } from '../auth/auth.guard';
 })
 export class MessagesComponent implements OnInit {
 
-	constructor(private auth: AuthGuard) { }
+	constructor(private auth: AuthService) { }
 
 	ngOnInit() {
 	}

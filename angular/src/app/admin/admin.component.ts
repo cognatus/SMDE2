@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
-import { AuthGuard } from '../auth/auth.guard';
+import { AuthService } from '../auth/auth.service';
 import { AdminService } from './admin.service';
 import { User } from '../_models/user';
 
@@ -15,7 +15,7 @@ export class AdminComponent implements OnInit {
 
 	location: Location;
 
-	constructor(private router: Router, private auth: AuthGuard, location: Location) {
+	constructor(private router: Router, private auth: AuthService, location: Location) {
 		this.location = location;
 	}
 

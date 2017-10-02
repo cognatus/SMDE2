@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, RequestOptions } from '@angular/http';
-import { ContentHeaders } from '../common/headers';
+import { ContentHeaders } from '../_common/headers';
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise'; 
@@ -21,7 +21,7 @@ export class LoginService {
 	}
 
 	private extractData(res: Response) {
-		let body = res.json();
+		let body = res.json().result;
         return body || {};
     }
 

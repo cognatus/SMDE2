@@ -1,7 +1,7 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from '../auth/auth.guard';
+import { AuthService } from '../auth/auth.service';
 
 import { SharedModule } from '../shared/shared.module';
 
@@ -10,11 +10,11 @@ import { UsersComponent } from './users/users.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 
 const routes: Routes = [
-    { path: '', component: AdminComponent, canActivate: [AuthGuard],
+    { path: '', component: AdminComponent, canActivate: [AuthService],
     	children: [
     		{ path: '', redirectTo: 'usuarios', pathMatch: 'full' },
-    		{ path: 'usuarios', component: UsersComponent, canActivate: [AuthGuard] },
-            { path: 'usuarios/:id', component: UserDetailComponent, canActivate: [AuthGuard] },
+    		{ path: 'usuarios', component: UsersComponent, canActivate: [AuthService] },
+            { path: 'usuarios/:id', component: UserDetailComponent, canActivate: [AuthService] },
     	]
   	},
 ]
